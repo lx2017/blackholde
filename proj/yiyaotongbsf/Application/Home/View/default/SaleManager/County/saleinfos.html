@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>业务员详情</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+	<div class="countyInfo">
+	<header class = "all_header">
+      <a class = "h_back" href="javascript:void(0)"><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+      <span class = "h_title">业务员详情</span>
+      <a class = "h_add" href="javascript:void(0)"></a>
+    </header>
+		<div class="weui-cells">
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>姓名</p>
+        </div>
+        <div class="weui-cell__ft">{$user.real_name}</div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>手机号</p>
+        </div>
+        <div class="weui-cell__ft">{$user.phone}</div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>身份证号</p>
+        </div>
+        <div class="weui-cell__ft">{$user.card_number}</div>
+      </div>
+      <div class="weui-cell weui-cell_select">
+        <div class="weui-cell__bd">
+          <p>性别</p>
+        </div>
+        <div class="weui-cell__ft">{$user.sex}</div>
+        <!-- <div class="weui-cell__bd">
+          <select class="weui-select" name="select1">
+            <option selected="" value="1">男</option>
+            <option value="2">女</option>
+          </select>
+        </div> -->
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>年龄</p>
+        </div>
+        <div class="weui-cell__ft">{$user.age}</div>
+      </div>
+     <!--  <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>所属县</p>
+        </div>
+        <div class="weui-cell__ft">{$user.manage_locations}</div>
+      </div> -->
+    </div>
+	</div>
+	<include file="./Application/Home/View/default/SaleManager/layer/popup.html"/>
+</body>
+<script>
+	$(document).on('click','.h_back',function(){
+		history.go(-1);
+	})
+</script>
+</html>

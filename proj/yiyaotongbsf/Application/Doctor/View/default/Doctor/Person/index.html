@@ -1,0 +1,25 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con">
+        <div class="personNav">
+            <ul class="main_left_right">
+                <eq name="login_type" value="1">
+                    <li><a href="{:U('info')}">个人资料<span><i>&#xe604;</i></span></a></li>
+                </eq>
+                <li><a href="{:U('main')}">我的主页<span><i>&#xe604;</i></span></a></li>
+                <li><a href="{:U('news')}">系统消息<span><i>&#xe604;</i></span></a></li>
+                <li><a href="{:U('change')}">修改密码<span><i>&#xe604;</i></span></a></li>
+                <li><a href="{:U('message')}">新消息通知<span><i>&#xe604;</i></span></a></li>
+                <!--<li><a href="javascript:void(0)">功能介绍<span><i>&#xe604;</i></span></a></li>-->
+                <!--<li><a href="javascript:void(0)">检查更新<span><i>&#xe604;</i></span></a></li>-->
+                <li><a href="{:U('feedback')}">意见反馈<span><i>&#xe604;</i></span></a></li>
+                <!--<li><a href="javascript:void(0)">去评分<span><i>&#xe604;</i></span></a></li>-->
+            </ul>
+            <div class="btn pad_l_r bBth"><a href="{:U('/Doctor/Login/Login/logout')}" onclick="callmyclient(4)">退出登录</a></div>
+        </div>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+
+</block>

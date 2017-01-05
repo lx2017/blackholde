@@ -1,0 +1,171 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <!--头部按钮-->
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+            <!--批量删除-->
+            <if condition="isset($actions['DOCTORDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" id="delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['DOCTORDELETE']['url'];echo U($str,array('key'=>$actions['DOCTORDELETE']['key']))?>">删除</a>
+                 </span>
+            </if>
+            <!--新增-->
+            <if condition="isset($actions['DOCTORADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['DOCTORADD']['url'];echo U($str,array('key'=>$actions['DOCTORADD']['key']))?>">新增</a>
+                 </span>
+            </if>
+            <!--excel导入-->
+            <if condition="isset($actions['DOCTORADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="/Uploads/Excel/doctor.xlsx">excel模板下载</a>
+                 </span>
+                <span class="l mr-10">
+                    <input type='file' id="excel_uploader" class="uploader"/>
+                 </span>
+            </if>
+        </notempty>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf" style="margin-left: 600px">
+            <div class="sleft">
+                <input type="text" name="name" id="name" value="{:I('name')}" class="search-input" placeholder="请输入医生名">&nbsp;
+                <a class="sch-btn" href="javascript:;" id="search"><i class="Hui-iconfont btn-search">&#xe665;</i></a>
+            </div>
+        </div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="mt-20">
+        <div class="data-table table-striped">
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                    <tr class="text-c">
+                        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                        <th class="">id</th>
+                        <th class="">姓名</th>
+                        <th class="">诊所</th>
+                        <th class="">评分</th>
+                        <th class="">诊断</th>
+                        <th class="">预约</th>
+                        <th class="">咨询</th>
+                        <!--<th class="">执业资质</th>-->
+                        <th class="">执业地址</th>
+                        <th class="">简介</th>
+                        <th class="">诊所id</th>
+                        <th class="">状态</th>
+                        <th class="">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <notempty name="list">
+                    <volist name="list" id="vo">
+                        <tr class="text-c">
+                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id}" data-other="{$vo.user_id}"/></td>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.clinic}</td>
+                            <td>{$vo.score}</td>
+                            <td>{$vo.theat_num}</td>
+                            <td>{$vo.appoint_num}</td>
+                            <td>{$vo.consult_num}</td>
+                            <!--<td><img src="{$vo.licence}" style="width: 60px" onerror="this.src='__IMG__/nopic.png'"></td>-->
+                            <td>{$vo.address}</td>
+                            <td>
+                                <div class="intro" style="display: none;">{$vo.intro}</div>
+                                <a class="btn btn-link view_detail">查看详情</a>
+                            </td>
+                            <td>{$vo.clinic_id}</td>
+                            <td>{$vo['status']==0?'可用':'已禁用'}</td>
+                            <td>
+                                <if condition="isset($actions['DOCTORBAN'])">
+                                    <a class="btn btn-link ban" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['DOCTORBAN']['url'];echo U($str,array('key'=>$actions['DOCTORBAN']['key'],'id'=>$vo['id']))?>">禁用</a>
+                                </if>
+                                <if condition="isset($actions['DOCTOREDIT'])">
+                                    <a class="btn btn-link" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['DOCTOREDIT']['url'];echo U($str,array('key'=>$actions['DOCTOREDIT']['key'],'id'=>$vo['id']))?>">编辑</a>
+                                </if>
+                                <if condition="isset($actions['DOCTORDELETE'])">
+                                    <a class="btn btn-link delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['DOCTORDELETE']['url'];echo U($str,array('key'=>$actions['DOCTORDELETE']['key'],'id'=>$vo['id']))?>">删除</a>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                <else/>
+                    <td colspan="14" class="text-center"> Oh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$page}
+    </div>
+</div>
+<!--引入js,css-->
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/index.js"></script>
+<script type="text/javascript">
+    var search_obj = {name:'name'};
+    var search_url = "{:U('',array('key'=>'DOCTORLIST'))}";
+    $(function () {
+        //查看详情
+        $('.view_detail').click(function(){
+            var _this = $(this);
+            layer.open({
+                type: 1,
+                title:'查看详情',
+                skin: 'layui-layer-demo',
+                area: ['420px', '240px'],
+                shadeClose: true,
+                content: _this.closest('td').find('.intro')
+            });
+        });
+        //禁用账户
+        $('.ban').click(function () {
+            var _this = this;
+            //询问框
+            layer_confirm('确定禁用吗?',{btn: ['确定','取消']},function(){
+                //提交请求
+                var url = $(_this).attr('_href');
+                $.post(url,{'value':1},function(data){
+                    if(data.code==0){
+                        layer_success('操作成功',1500,location.reload());
+                    }else{
+                        layer_error(data.msg);
+                    }
+                },'json');
+            });
+        });
+        //上传excel
+        var config = {
+            text:'excel导入',
+            multi:false,
+            size:'{$upload_conf.maxSize}B',
+            ext:'{$upload_conf.u_exts}',
+            handle:"{:U('/Admin/Common/Upload/excel')}",
+            formData:{handle1:'Doctor',handle2:'Doctor',method:'excel'}
+        };
+        handleUpload('excel_uploader',config,success_func,error_func);
+    });
+    //上传成功处理函数
+    function success_func(data) {
+        layer_success('添加成功',1500,location.reload());
+    }
+    //上传失败处理函数
+    function error_func(data){
+        if(data.code==3){
+            var html = '<div style="padding: 20px;"><span>失败数: '+data.count+'</span><br><span>下载失败文档: <a target="_blank" href="/'+data.path+'" style="color:red" onclick="layer.closeAll()">点我下载</a></span></div>';
+            layer.open({
+                type: 1,
+                area: ['300px', '200px'],
+                skin: 'layui-layer-demo',
+                shift: 2,
+                title: '上传失败说明',
+                shadeClose: true,
+                content: html
+            });
+        }else{
+            layer.alert(data.msg);
+        }
+    }
+</script>

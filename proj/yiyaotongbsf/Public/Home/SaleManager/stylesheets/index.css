@@ -1,0 +1,2090 @@
+/* line 10, ../sass/index.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 11, ../sass/index.scss */
+body, html {
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  color: #424952;
+}
+
+/* line 17, ../sass/index.scss */
+.all_header {
+  background: #6db0e4;
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  padding: 10px 15px;
+}
+/* line 23, ../sass/index.scss */
+.all_header .h_back, .all_header .h_title, .all_header .h_add {
+  flex: 1;
+}
+/* line 27, ../sass/index.scss */
+.all_header .h_back img {
+  width: 30px;
+  vertical-align: middle;
+}
+/* line 32, ../sass/index.scss */
+.all_header .h_title {
+  text-align: center;
+}
+/* line 35, ../sass/index.scss */
+.all_header .h_add {
+  color: #fff;
+  text-align: right;
+  margin-top: 3px;
+  font-size: 16px;
+}
+/* line 41, ../sass/index.scss */
+.all_header .weui-select {
+  height: 33px;
+  line-height: 1;
+  padding-left: 65px;
+  color: #fff;
+}
+
+/* line 48, ../sass/index.scss */
+.weui-cells {
+  font-size: 15px;
+}
+
+/* line 51, ../sass/index.scss */
+.weui-cell {
+  padding: 15px;
+}
+
+/* line 54, ../sass/index.scss */
+.weui-cell_access .weui-cell__ft:after {
+  width: 10px;
+  height: 10px;
+}
+
+/* line 58, ../sass/index.scss */
+.guide {
+  height: 100%;
+}
+/* line 60, ../sass/index.scss */
+.guide .guide_btn {
+  color: #6db0e4;
+  border: 1px solid #6db0e4;
+}
+
+/* line 65, ../sass/index.scss */
+.guide_img {
+  width: 100%;
+  height: 60%;
+}
+/* line 68, ../sass/index.scss */
+.guide_img img {
+  width: 100%;
+}
+
+/* line 72, ../sass/index.scss */
+.guide_info {
+  margin-bottom: 5%;
+  text-align: center;
+  font-size: 30px;
+  color: #424952;
+}
+/* line 77, ../sass/index.scss */
+.guide_info span:nth-child(1) {
+  margin-right: 20px;
+}
+
+/* line 81, ../sass/index.scss */
+.guide_dots {
+  text-align: center;
+  background: #fff;
+}
+/* line 84, ../sass/index.scss */
+.guide_dots span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+}
+/* line 91, ../sass/index.scss */
+.guide_dots span:nth-child(2) {
+  margin: 0 5px;
+}
+/* line 94, ../sass/index.scss */
+.guide_dots .dot_active {
+  background: #6db0e4;
+}
+
+/* line 98, ../sass/index.scss */
+.guide_start {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 50%;
+}
+
+/* line 108, ../sass/index.scss */
+.newMedicine {
+  background: #f8f8f8;
+  margin-bottom: 86px;
+}
+/* line 112, ../sass/index.scss */
+.newMedicine .weui-grid__icon {
+  width: 40px;
+  height: 40px;
+}
+/* line 116, ../sass/index.scss */
+.newMedicine .quit_btn {
+  background: #fb5c5c;
+  color: #fff;
+}
+/* line 120, ../sass/index.scss */
+.newMedicine .new_info {
+  position: absolute;
+  bottom: 43px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f85d60;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+}
+/* line 131, ../sass/index.scss */
+.newMedicine .info_head {
+  width: 100%;
+  height: 25%;
+  padding: 35px 0;
+  background-image: url(../images/bolang_icon.png);
+  background-repeat: no-repeat;
+  background-color: #69aee6;
+  background-position-y: 50px;
+}
+/* line 139, ../sass/index.scss */
+.newMedicine .info_head .info_name {
+  text-align: center;
+  margin-top: 15px;
+}
+/* line 143, ../sass/index.scss */
+.newMedicine .info_head .head_img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: 0 auto;
+  border: 1px solid #fff;
+}
+/* line 149, ../sass/index.scss */
+.newMedicine .info_head .head_img img {
+  width: 100%;
+}
+/* line 154, ../sass/index.scss */
+.newMedicine .work_icon, .newMedicine .work_active_icon, .newMedicine .info_icon, .newMedicine .info_active_icon, .newMedicine .person_icon, .newMedicine .person_active_icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+/* line 159, ../sass/index.scss */
+.newMedicine .work_icon {
+  background: url(../images/work_notive.png);
+  background-size: 100%;
+}
+/* line 163, ../sass/index.scss */
+.newMedicine .work_active_icon {
+  background: url(../images/work_active.png);
+  background-size: 100%;
+}
+/* line 167, ../sass/index.scss */
+.newMedicine .info_icon {
+  background: url(../images/info_icon.png);
+  background-size: 100%;
+}
+/* line 171, ../sass/index.scss */
+.newMedicine .info_active_icon {
+  background: url(../images/info_active.png);
+  background-size: 100%;
+}
+/* line 175, ../sass/index.scss */
+.newMedicine .person_icon {
+  background: url(../images/person_notive.png);
+  background-size: 100%;
+}
+/* line 179, ../sass/index.scss */
+.newMedicine .person_active_icon {
+  background: url(../images/person_active.png);
+  background-size: 100%;
+}
+/* line 183, ../sass/index.scss */
+.newMedicine .weui-bar__item_on .weui-tabbar__label {
+  color: #6db0e4;
+}
+/* line 186, ../sass/index.scss */
+.newMedicine .weui-tabbar {
+  position: fixed;
+  padding: 10px 0;
+  background: #fff;
+}
+/* line 191, ../sass/index.scss */
+.newMedicine .weui-tabbar__item {
+  padding: 0;
+}
+/* line 194, ../sass/index.scss */
+.newMedicine .infos {
+  background: #fff;
+}
+/* line 196, ../sass/index.scss */
+.newMedicine .infos .weui-grid:before {
+  top: 20%;
+  height: 60%;
+}
+/* line 202, ../sass/index.scss */
+.newMedicine .info_list .weui-cell {
+  padding: 15px 15px;
+}
+/* line 206, ../sass/index.scss */
+.newMedicine .info_nav {
+  display: none;
+}
+/* line 210, ../sass/index.scss */
+.newMedicine .nav_show {
+  display: block;
+}
+/* line 213, ../sass/index.scss */
+.newMedicine .msgs {
+  height: 100%;
+  background: #fff;
+}
+/* line 217, ../sass/index.scss */
+.newMedicine .msg_tips {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+/* line 222, ../sass/index.scss */
+.newMedicine .msg_cont {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+/* line 226, ../sass/index.scss */
+.newMedicine .msg_cont .info_num {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  display: inline-block;
+  background: #fb9a9b;
+  color: #fff;
+}
+/* line 237, ../sass/index.scss */
+.newMedicine .weui-media-box__bd:after {
+  content: " ";
+  position: absolute;
+  width: 77%;
+  right: 10px;
+  height: 1px;
+  color: #d9d9d9;
+  bottom: 0;
+  border-bottom: 1px solid #d9d9d9;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+/* line 255, ../sass/index.scss */
+.newMedicine .set_cont .weui-cell {
+  padding: 15px 15px;
+}
+/* line 258, ../sass/index.scss */
+.newMedicine .set_cont .weui-cell_access .weui-cell__ft:after {
+  width: 10px;
+  height: 10px;
+}
+
+/* line 266, ../sass/index.scss */
+.clinic .weui-panel__bd, .allClinic .weui-panel__bd, .visitClinic .weui-panel__bd {
+  position: relative;
+}
+/* line 269, ../sass/index.scss */
+.clinic .cli_times, .allClinic .cli_times, .visitClinic .cli_times {
+  color: #6db0e4;
+}
+/* line 272, ../sass/index.scss */
+.clinic .cli_w_name, .allClinic .cli_w_name, .visitClinic .cli_w_name {
+  display: flex;
+  justify-content: space-between;
+  color: #000;
+}
+/* line 277, ../sass/index.scss */
+.clinic .weui-media-box__hd, .allClinic .weui-media-box__hd, .visitClinic .weui-media-box__hd {
+  width: 120px;
+  height: 80px;
+}
+/* line 281, ../sass/index.scss */
+.clinic .cli_del, .allClinic .cli_del, .visitClinic .cli_del {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+/* line 285, ../sass/index.scss */
+.clinic .cli_del img, .allClinic .cli_del img, .visitClinic .cli_del img {
+  width: 100%;
+}
+/* line 289, ../sass/index.scss */
+.clinic .cli_w_num, .allClinic .cli_w_num, .visitClinic .cli_w_num {
+  color: #808080;
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+/* line 295, ../sass/index.scss */
+.clinic .weui-media-box__desc, .allClinic .weui-media-box__desc, .visitClinic .weui-media-box__desc {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #424952;
+}
+/* line 301, ../sass/index.scss */
+.clinic .weui-panel__bd:after, .allClinic .weui-panel__bd:after, .visitClinic .weui-panel__bd:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  border-bottom: 1px solid #E5E5E5;
+  color: #E5E5E5;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  left: 15px;
+}
+
+/* line 318, ../sass/index.scss */
+.noClinic {
+  width: 100%;
+  height: 100%;
+}
+/* line 321, ../sass/index.scss */
+.noClinic .no_img {
+  margin-top: 10%;
+  width: 100%;
+  height: 30%;
+}
+/* line 325, ../sass/index.scss */
+.noClinic .no_img img {
+  width: 100%;
+}
+/* line 329, ../sass/index.scss */
+.noClinic .no_tips {
+  margin-top: 15px;
+  font-size: 25px;
+  text-align: center;
+}
+
+/* line 336, ../sass/index.scss */
+.no_work {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+/* line 340, ../sass/index.scss */
+.no_work .no_img {
+  height: 40%;
+}
+/* line 343, ../sass/index.scss */
+.no_work .no_tips {
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* line 349, ../sass/index.scss */
+.support {
+  height: 100%;
+  width: 100%;
+  padding: 0 6%;
+  background: #f8f8f8;
+}
+/* line 354, ../sass/index.scss */
+.support .weui-cells__title {
+  margin: 0;
+  padding: 15px 0;
+}
+/* line 359, ../sass/index.scss */
+.support .weui-cell__bd {
+  position: relative;
+}
+/* line 362, ../sass/index.scss */
+.support .weui-cell {
+  background: #fff;
+}
+/* line 365, ../sass/index.scss */
+.support .weui-btn-area {
+  margin-left: 0;
+  margin-right: 0;
+}
+/* line 369, ../sass/index.scss */
+.support .showTooltips {
+  transition: .2s;
+  background: #ccc;
+  color: #fff;
+}
+/* line 374, ../sass/index.scss */
+.support .show_btn {
+  background: #6db0e4;
+}
+/* line 377, ../sass/index.scss */
+.support .tel_del, .support .name_del, .support .adress_del {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+}
+/* line 385, ../sass/index.scss */
+.support .tel_del img, .support .name_del img, .support .adress_del img {
+  width: 100%;
+}
+
+/* line 392, ../sass/index.scss */
+.clinic_home, .newAddDoctor, .newReduceDoctor, .allDoctor {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 395, ../sass/index.scss */
+.clinic_home .clinic_img, .newAddDoctor .clinic_img, .newReduceDoctor .clinic_img, .allDoctor .clinic_img {
+  height: 20%;
+}
+/* line 397, ../sass/index.scss */
+.clinic_home .clinic_img img, .newAddDoctor .clinic_img img, .newReduceDoctor .clinic_img img, .allDoctor .clinic_img img {
+  width: 100%;
+}
+/* line 401, ../sass/index.scss */
+.clinic_home .clinic_s, .newAddDoctor .clinic_s, .newReduceDoctor .clinic_s, .allDoctor .clinic_s {
+  color: #6db0e4;
+  font-size: 30px;
+}
+/* line 405, ../sass/index.scss */
+.clinic_home .weui-cell__bd, .newAddDoctor .weui-cell__bd, .newReduceDoctor .weui-cell__bd, .allDoctor .weui-cell__bd {
+  font-size: 15px;
+}
+/* line 409, ../sass/index.scss */
+.clinic_home .weui-cell__ft, .newAddDoctor .weui-cell__ft, .newReduceDoctor .weui-cell__ft, .allDoctor .weui-cell__ft {
+  font-size: 15px;
+}
+/* line 413, ../sass/index.scss */
+.clinic_home .intro_info, .newAddDoctor .intro_info, .newReduceDoctor .intro_info, .allDoctor .intro_info {
+  flex: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* line 420, ../sass/index.scss */
+.clinic_home .clinic_nature, .newAddDoctor .clinic_nature, .newReduceDoctor .clinic_nature, .allDoctor .clinic_nature {
+  flex: 1;
+}
+/* line 422, ../sass/index.scss */
+.clinic_home .clinic_nature span, .newAddDoctor .clinic_nature span, .newReduceDoctor .clinic_nature span, .allDoctor .clinic_nature span {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 10px solid #333;
+  border-bottom: 5px solid transparent;
+}
+/* line 431, ../sass/index.scss */
+.clinic_home .abstract, .newAddDoctor .abstract, .newReduceDoctor .abstract, .allDoctor .abstract {
+  position: relative;
+  padding: 10px 15px;
+  font-size: 15px;
+}
+/* line 436, ../sass/index.scss */
+.clinic_home .abstract:before, .newAddDoctor .abstract:before, .newReduceDoctor .abstract:before, .allDoctor .abstract:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid #d9d9d9;
+  color: #d9d9d9;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  left: 15px;
+}
+/* line 451, ../sass/index.scss */
+.clinic_home .summary, .newAddDoctor .summary, .newReduceDoctor .summary, .allDoctor .summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* line 457, ../sass/index.scss */
+.clinic_home .clinic_doc, .newAddDoctor .clinic_doc, .newReduceDoctor .clinic_doc, .allDoctor .clinic_doc {
+  display: flex;
+  margin-bottom: 15px;
+}
+/* line 461, ../sass/index.scss */
+.clinic_home .doc_name, .newAddDoctor .doc_name, .newReduceDoctor .doc_name, .allDoctor .doc_name {
+  display: flex;
+  flex: 2;
+}
+/* line 465, ../sass/index.scss */
+.clinic_home .doc_adress, .newAddDoctor .doc_adress, .newReduceDoctor .doc_adress, .allDoctor .doc_adress {
+  display: inline-block;
+  margin-left: 15px;
+}
+/* line 469, ../sass/index.scss */
+.clinic_home .clinic_score, .newAddDoctor .clinic_score, .newReduceDoctor .clinic_score, .allDoctor .clinic_score {
+  text-align: right;
+  flex: 1;
+  position: absolute;
+  right: 15px;
+  top: 0;
+}
+/* line 476, ../sass/index.scss */
+.clinic_home .doc_cont, .newAddDoctor .doc_cont, .newReduceDoctor .doc_cont, .allDoctor .doc_cont {
+  margin-top: 15px;
+}
+/* line 479, ../sass/index.scss */
+.clinic_home .weui-panel__bd, .newAddDoctor .weui-panel__bd, .newReduceDoctor .weui-panel__bd, .allDoctor .weui-panel__bd {
+  position: relative;
+}
+/* line 482, ../sass/index.scss */
+.clinic_home .weui-panel__bd:before, .newAddDoctor .weui-panel__bd:before, .newReduceDoctor .weui-panel__bd:before, .allDoctor .weui-panel__bd:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid #d9d9d9;
+  color: #d9d9d9;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  left: 15px;
+}
+
+/* line 500, ../sass/index.scss */
+.work_argument {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 503, ../sass/index.scss */
+.work_argument .weui-list {
+  display: none;
+}
+/* line 506, ../sass/index.scss */
+.work_argument .weui-navbar__item:after {
+  border-right: 0;
+}
+/* line 509, ../sass/index.scss */
+.work_argument .weui-navbar {
+  background: #6db0e4;
+}
+/* line 512, ../sass/index.scss */
+.work_argument .weui-navbar__item {
+  background: #6db0e4;
+  color: rgba(255, 255, 255, 0.6);
+  border-bottom: 2px solid #6db0e4;
+}
+/* line 517, ../sass/index.scss */
+.work_argument .weui-bar__item_on {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+/* line 521, ../sass/index.scss */
+.work_argument .cur_date {
+  color: #999;
+  flex: 1;
+  text-align: right;
+}
+/* line 526, ../sass/index.scss */
+.work_argument .cur_intro, .work_argument .next_intro, .work_argument .pre_intro {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* line 532, ../sass/index.scss */
+.work_argument .cur_sel_w, .work_argument .next_sel_w, .work_argument .pre_sel_w {
+  width: 100%;
+  background: #fff;
+  padding-bottom: 10px;
+  position: fixed;
+  bottom: 0;
+}
+/* line 539, ../sass/index.scss */
+.work_argument .cur_sel_date, .work_argument .next_sel_date, .work_argument .pre_sel_date {
+  padding: 10px 15px;
+  text-align: center;
+}
+/* line 542, ../sass/index.scss */
+.work_argument .cur_sel_date .sel_date, .work_argument .next_sel_date .sel_date, .work_argument .pre_sel_date .sel_date {
+  padding: 15px;
+}
+/* line 546, ../sass/index.scss */
+.work_argument .cur_add_w, .work_argument .next_add_w, .work_argument .pre_add_w {
+  padding: 0 15px;
+  margin-top: 10px;
+  display: flex;
+}
+/* line 550, ../sass/index.scss */
+.work_argument .cur_add_w .weui-cell, .work_argument .next_add_w .weui-cell, .work_argument .pre_add_w .weui-cell {
+  background: #f8f8f8;
+  flex: 8;
+}
+/* line 554, ../sass/index.scss */
+.work_argument .cur_add_w .cur_btn_w, .work_argument .cur_add_w .next_btn_w, .work_argument .cur_add_w .pre_btn_w, .work_argument .next_add_w .cur_btn_w, .work_argument .next_add_w .next_btn_w, .work_argument .next_add_w .pre_btn_w, .work_argument .pre_add_w .cur_btn_w, .work_argument .pre_add_w .next_btn_w, .work_argument .pre_add_w .pre_btn_w {
+  flex: 2;
+}
+/* line 558, ../sass/index.scss */
+.work_argument .weui-btn_primary {
+  background: #6db0e4;
+}
+
+/* line 563, ../sass/index.scss */
+.sign_w {
+  height: 100%;
+}
+/* line 565, ../sass/index.scss */
+.sign_w .weui-navbar__item {
+  background: #fff;
+  border-bottom: 2px solid #fff;
+}
+/* line 569, ../sass/index.scss */
+.sign_w .weui-media-box__desc {
+  -webkit-line-clamp: 1;
+}
+/* line 572, ../sass/index.scss */
+.sign_w .weui-bar__item_on {
+  color: #6db0e4;
+  border-bottom: 2px solid #6db0e4;
+}
+/* line 576, ../sass/index.scss */
+.sign_w .weui-media-box__hd {
+  width: 120px;
+  height: 80px;
+}
+/* line 580, ../sass/index.scss */
+.sign_w .sign_btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  padding: 5px 15px;
+  background: #6db0e4;
+  color: #fff;
+  border-radius: 5px;
+}
+/* line 589, ../sass/index.scss */
+.sign_w .sign_w_num {
+  margin-bottom: 8px;
+  margin-top: 5px;
+}
+/* line 593, ../sass/index.scss */
+.sign_w .sign_w_name {
+  display: flex;
+}
+/* line 596, ../sass/index.scss */
+.sign_w .weui-media-box__title {
+  flex: 1;
+}
+/* line 599, ../sass/index.scss */
+.sign_w .sign_list {
+  display: none;
+}
+
+/* line 605, ../sass/index.scss */
+.appliceSupport {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 608, ../sass/index.scss */
+.appliceSupport .weui-cell_select {
+  background: #fff;
+}
+/* line 611, ../sass/index.scss */
+.appliceSupport .weui-cells__title {
+  margin-top: 0;
+  padding-top: .77em;
+}
+/* line 615, ../sass/index.scss */
+.appliceSupport .weui-cell_select .weui-cell__bd:after {
+  transform: rotate(135deg);
+}
+/* line 618, ../sass/index.scss */
+.appliceSupport .appli_confirm {
+  transition: .2s;
+  background: #ccc;
+  color: #fff;
+}
+/* line 623, ../sass/index.scss */
+.appliceSupport .show_btn {
+  background: #6db0e4;
+}
+
+/* line 628, ../sass/index.scss */
+.orderMedicine {
+  height: 100%;
+  position: relative;
+  margin-bottom: 75px;
+}
+/* line 632, ../sass/index.scss */
+.orderMedicine .weui-grid {
+  padding: 10px;
+}
+/* line 635, ../sass/index.scss */
+.orderMedicine .cart_price {
+  display: flex;
+  flex: 1;
+  padding: 10px 0;
+}
+/* line 640, ../sass/index.scss */
+.orderMedicine .medicine_img {
+  width: 100%;
+}
+/* line 642, ../sass/index.scss */
+.orderMedicine .medicine_img img {
+  width: 100%;
+}
+/* line 646, ../sass/index.scss */
+.orderMedicine .meidice_price_c {
+  color: #fb9a9b;
+  font-size: 14px;
+}
+/* line 650, ../sass/index.scss */
+.orderMedicine .add_cart {
+  font-size: 12px;
+  padding: 3px 5px;
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+/* line 657, ../sass/index.scss */
+.orderMedicine .weui-grid__label {
+  text-align: left;
+}
+/* line 660, ../sass/index.scss */
+.orderMedicine .cart_w {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: #fff;
+  padding: 15px 10px;
+  display: flex;
+}
+/* line 668, ../sass/index.scss */
+.orderMedicine .balance {
+  position: absolute;
+  bottom: 10px;
+}
+/* line 671, ../sass/index.scss */
+.orderMedicine .balance img {
+  width: 40px;
+}
+/* line 675, ../sass/index.scss */
+.orderMedicine .good_num {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50%;
+  background: #f85d60;
+}
+/* line 688, ../sass/index.scss */
+.orderMedicine .cart_num {
+  margin-left: 60px;
+  color: #6db0e4;
+  font-size: 16px;
+}
+/* line 693, ../sass/index.scss */
+.orderMedicine .set_btn {
+  color: #fff;
+  background: #6db0e4;
+  padding: 10px 40px;
+  border-radius: 25px;
+}
+/* line 699, ../sass/index.scss */
+.orderMedicine .cart_modal {
+  position: fixed;
+  width: 96%;
+  left: 0;
+  bottom: 85px;
+  padding: 15px;
+  margin: 0 2%;
+  background: #fff;
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+}
+/* line 710, ../sass/index.scss */
+.orderMedicine .cart_h {
+  display: flex;
+}
+/* line 712, ../sass/index.scss */
+.orderMedicine .cart_h span {
+  flex: 1;
+  text-align: center;
+}
+/* line 717, ../sass/index.scss */
+.orderMedicine .order_medices_w {
+  padding: 5px 0;
+  display: flex;
+  border-top: 1px solid #D9D9D9;
+  border-bottom: 1px solid #D9D9D9;
+}
+/* line 722, ../sass/index.scss */
+.orderMedicine .order_medices_w div {
+  flex: 1;
+  text-align: center;
+}
+/* line 726, ../sass/index.scss */
+.orderMedicine .order_medices_w .order_reduce, .orderMedicine .order_medices_w .order_add {
+  padding: 0 5px;
+  font-size: 22px;
+  background: #f5f5f5;
+  color: #6db0e4;
+}
+/* line 732, ../sass/index.scss */
+.orderMedicine .order_medices_w .order_counts {
+  padding: 0 10px;
+}
+/* line 736, ../sass/index.scss */
+.orderMedicine .order_meidces_p_w {
+  text-align: right;
+}
+
+/* line 742, ../sass/index.scss */
+.clinicOrder {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 745, ../sass/index.scss */
+.clinicOrder .order_list {
+  display: none;
+}
+/* line 748, ../sass/index.scss */
+.clinicOrder .weui-navbar {
+  background: #6db0e4;
+}
+/* line 751, ../sass/index.scss */
+.clinicOrder .weui-navbar__item:after {
+  border-right: 0;
+}
+/* line 754, ../sass/index.scss */
+.clinicOrder .weui-navbar__item {
+  background: #6db0e4;
+  color: rgba(255, 255, 255, 0.6);
+  border-bottom: 2px solid #6db0e4;
+}
+/* line 759, ../sass/index.scss */
+.clinicOrder .weui-bar__item_on {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+/* line 763, ../sass/index.scss */
+.clinicOrder .weui_title {
+  display: flex;
+  padding: 10px 15px;
+}
+/* line 767, ../sass/index.scss */
+.clinicOrder .order_pre_status, .clinicOrder .order_next_status, .clinicOrder .order_beak_status {
+  color: #6db0e4;
+}
+/* line 770, ../sass/index.scss */
+.clinicOrder .weui-media-box__desc {
+  color: #fb9a9b;
+}
+/* line 773, ../sass/index.scss */
+.clinicOrder .weui-media-box__hd {
+  width: 120px;
+  height: 80px;
+}
+/* line 777, ../sass/index.scss */
+.clinicOrder .order_date_clinic {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+/* line 781, ../sass/index.scss */
+.clinicOrder .order_id {
+  color: #999;
+  flex: 1;
+}
+/* line 785, ../sass/index.scss */
+.clinicOrder .order_info {
+  position: relative;
+}
+/* line 788, ../sass/index.scss */
+.clinicOrder .order_info:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid #e5e5e5;
+  color: #e5e5e5;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  left: 15px;
+}
+/* line 803, ../sass/index.scss */
+.clinicOrder .order {
+  margin: 10px;
+  background: #fff;
+}
+
+/* line 809, ../sass/index.scss */
+.orderInfo, .setelOrder {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 812, ../sass/index.scss */
+.orderInfo .order, .setelOrder .order {
+  background: #fff;
+  margin-top: 10px;
+}
+/* line 816, ../sass/index.scss */
+.orderInfo .order_adress, .setelOrder .order_adress {
+  padding: 0 15px;
+}
+/* line 818, ../sass/index.scss */
+.orderInfo .order_adress .adress_icon, .setelOrder .order_adress .adress_icon {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+/* line 823, ../sass/index.scss */
+.orderInfo .order_adress .adress_icon img, .setelOrder .order_adress .adress_icon img {
+  width: 100%;
+}
+/* line 828, ../sass/index.scss */
+.orderInfo .order_del, .setelOrder .order_del {
+  color: #6db0e4;
+}
+/* line 831, ../sass/index.scss */
+.orderInfo .order_list, .setelOrder .order_list {
+  margin: 15px;
+  padding: 15px;
+  background: #f8f8f8;
+}
+/* line 836, ../sass/index.scss */
+.orderInfo .all_num, .setelOrder .all_num {
+  font-size: 20px;
+}
+/* line 839, ../sass/index.scss */
+.orderInfo .all_price_w, .setelOrder .all_price_w {
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+/* line 843, ../sass/index.scss */
+.orderInfo .order_name_w, .orderInfo .order_price_w, .orderInfo .all_price_w, .setelOrder .order_name_w, .setelOrder .order_price_w, .setelOrder .all_price_w {
+  margin-bottom: 5px;
+  display: flex;
+}
+/* line 847, ../sass/index.scss */
+.orderInfo .order_name, .orderInfo .order_w, .setelOrder .order_name, .setelOrder .order_w {
+  flex: 1;
+}
+/* line 850, ../sass/index.scss */
+.orderInfo .order_count, .setelOrder .order_count {
+  margin-bottom: 20px;
+  text-align: right;
+}
+/* line 854, ../sass/index.scss */
+.orderInfo .total_price_w, .setelOrder .total_price_w {
+  padding: 20px 15px;
+  padding-top: 0;
+  text-align: right;
+}
+/* line 858, ../sass/index.scss */
+.orderInfo .total_price_w .total_name, .setelOrder .total_price_w .total_name {
+  font-size: 18px;
+}
+/* line 861, ../sass/index.scss */
+.orderInfo .total_price_w .total_num, .setelOrder .total_price_w .total_num {
+  color: #fb9a9b;
+  font-size: 22px;
+}
+/* line 866, ../sass/index.scss */
+.orderInfo .total_btn, .setelOrder .total_btn {
+  background: #6db0e4;
+}
+
+/* line 871, ../sass/index.scss */
+.setelOrder .setel_order_w {
+  border-top: 1px solid #6db0e4;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+}
+/* line 878, ../sass/index.scss */
+.setelOrder .setel_num {
+  padding: 20px 0;
+  flex: 3;
+  text-align: center;
+  font-size: 25px;
+  color: #fb9a9b;
+  background: #fff;
+}
+/* line 886, ../sass/index.scss */
+.setelOrder .setel_btn {
+  flex: 2;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 22px;
+  color: #fff;
+  background: #6db0e4;
+}
+/* line 894, ../sass/index.scss */
+.setelOrder .weui-footer {
+  margin-top: 40px;
+}
+
+/* line 898, ../sass/index.scss */
+.medicine_info {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 901, ../sass/index.scss */
+.medicine_info .medicine {
+  margin: 15px 0;
+  background: #fff;
+}
+/* line 904, ../sass/index.scss */
+.medicine_info .medicine .weui-media-box__desc {
+  color: #fb9a9b;
+  font-size: 25px;
+  margin-top: 5px;
+}
+/* line 910, ../sass/index.scss */
+.medicine_info .weui-media-box_appmsg .weui-media-box__hd {
+  width: 80px;
+}
+/* line 913, ../sass/index.scss */
+.medicine_info .info_intro {
+  color: #999;
+}
+/* line 916, ../sass/index.scss */
+.medicine_info .medicine_info_w {
+  padding: 25px 0;
+  padding-top: 15px;
+  background: #fff;
+}
+/* line 921, ../sass/index.scss */
+.medicine_info .info_list {
+  position: relative;
+  padding: 10px 15px;
+  display: flex;
+}
+/* line 926, ../sass/index.scss */
+.medicine_info .info_name {
+  flex: 3;
+}
+/* line 928, ../sass/index.scss */
+.medicine_info .info_name .info_icon {
+  color: #6db0e4;
+  margin-right: 10px;
+}
+/* line 933, ../sass/index.scss */
+.medicine_info .info_intro {
+  flex: 8;
+}
+/* line 940, ../sass/index.scss */
+.medicine_info .info_list:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid #D9D9D9;
+  color: #D9D9D9;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  left: 15px;
+}
+/* line 955, ../sass/index.scss */
+.medicine_info .medicine_price {
+  display: flex;
+}
+/* line 957, ../sass/index.scss */
+.medicine_info .medicine_price .weui-media-box__desc {
+  flex: 1;
+}
+/* line 960, ../sass/index.scss */
+.medicine_info .medicine_price .add_cart_btn {
+  padding: 3px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #6db0e4;
+  color: #fff;
+}
+
+/* line 969, ../sass/index.scss */
+.clinicCount, .doctorCount, .applicateMeet_w {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 972, ../sass/index.scss */
+.clinicCount .clinicTitle, .doctorCount .clinicTitle, .applicateMeet_w .clinicTitle {
+  text-align: center;
+  padding: 15px 0;
+  background: #bedcf1;
+}
+/* line 977, ../sass/index.scss */
+.clinicCount .clinic_name, .clinicCount .clinic_odd, .clinicCount .clinic_even, .doctorCount .clinic_name, .doctorCount .clinic_odd, .doctorCount .clinic_even, .applicateMeet_w .clinic_name, .applicateMeet_w .clinic_odd, .applicateMeet_w .clinic_even {
+  display: flex;
+  padding: 15px;
+  text-align: center;
+}
+/* line 981, ../sass/index.scss */
+.clinicCount .clinic_name span, .clinicCount .clinic_odd span, .clinicCount .clinic_even span, .doctorCount .clinic_name span, .doctorCount .clinic_odd span, .doctorCount .clinic_even span, .applicateMeet_w .clinic_name span, .applicateMeet_w .clinic_odd span, .applicateMeet_w .clinic_even span {
+  flex: 333.33333%;
+}
+/* line 985, ../sass/index.scss */
+.clinicCount .meet_pass, .doctorCount .meet_pass, .applicateMeet_w .meet_pass {
+  color: #6db0e4;
+}
+/* line 988, ../sass/index.scss */
+.clinicCount .clinic_name, .clinicCount .clinic_even, .doctorCount .clinic_name, .doctorCount .clinic_even, .applicateMeet_w .clinic_name, .applicateMeet_w .clinic_even {
+  background: #fff;
+}
+
+/* line 995, ../sass/index.scss */
+.mySaleMan .sale_img {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+  border-radius: 50%;
+  display: block;
+  vertical-align: top;
+}
+/* line 1003, ../sass/index.scss */
+.mySaleMan .sale_man {
+  font-size: 17px;
+}
+
+/* line 1008, ../sass/index.scss */
+.personData {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1011, ../sass/index.scss */
+.personData .person_img {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  border-radius: 50%;
+  display: block;
+}
+/* line 1018, ../sass/index.scss */
+.personData .identify_w {
+  background: #fff;
+  padding: 10px 15px;
+  margin-top: 15px;
+}
+/* line 1022, ../sass/index.scss */
+.personData .identify_w .ident_head {
+  text-align: center;
+  padding-bottom: 10px;
+}
+/* line 1026, ../sass/index.scss */
+.personData .identify_w .ident_z {
+  flex: 1;
+  margin-right: 10px;
+  height: 100px;
+  background: #f8f8f8;
+}
+/* line 1032, ../sass/index.scss */
+.personData .identify_w .ident_pic_w {
+  display: flex;
+}
+/* line 1035, ../sass/index.scss */
+.personData .identify_w .ident_f {
+  flex: 1;
+  margin-left: 10px;
+  height: 100px;
+  background: #f8f8f8;
+}
+/* line 1041, ../sass/index.scss */
+.personData .identify_w .ident_info {
+  display: flex;
+}
+/* line 1043, ../sass/index.scss */
+.personData .identify_w .ident_info span {
+  text-align: center;
+}
+/* line 1048, ../sass/index.scss */
+.personData .graduate_w {
+  padding: 10px 15px;
+  margin-top: 15px;
+  background: #fff;
+}
+/* line 1052, ../sass/index.scss */
+.personData .graduate_w .gra_icon, .personData .graduate_w .certi_icon {
+  color: #6db0e4;
+}
+/* line 1055, ../sass/index.scss */
+.personData .graduate_w .graduate_img, .personData .graduate_w .certi_img {
+  width: 100%;
+  background: #f8f8f8;
+  margin-bottom: 10px;
+}
+/* line 1061, ../sass/index.scss */
+.personData .graduate_w .graduate_img img, .personData .graduate_w .certi_img img {
+  width: 100%;
+}
+/* line 1066, ../sass/index.scss */
+.personData .person_data_btn {
+  background: #6db0e4;
+}
+
+/* line 1071, ../sass/index.scss */
+.addCounty {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1074, ../sass/index.scss */
+.addCounty .weui-count {
+  background: #fff;
+}
+/* line 1077, ../sass/index.scss */
+.addCounty .add_count {
+  background: #6db0e4;
+  color: #fff;
+}
+
+/* line 1084, ../sass/index.scss */
+.countyInfo {
+  height: 100%;
+  background: #f8f8f8;
+  font-size: 15px;
+}
+/* line 1088, ../sass/index.scss */
+.countyInfo .work_list_w {
+  background: #fff;
+  padding: 10px 15px;
+}
+/* line 1092, ../sass/index.scss */
+.countyInfo .work_list {
+  padding-left: 30px;
+}
+
+/* line 1098, ../sass/index.scss */
+.changeCounty {
+  height: 100%;
+  padding-top: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: #f8f8f8;
+}
+/* line 1104, ../sass/index.scss */
+.changeCounty .change_btn {
+  color: #fff;
+  background: #6db0e4;
+}
+/* line 1108, ../sass/index.scss */
+.changeCounty .weui-btn-area {
+  margin-left: 0;
+  margin-right: 0;
+}
+/* line 1112, ../sass/index.scss */
+.changeCounty .weui-cell_select .weui-cell__bd:after {
+  transform: rotate(135deg);
+}
+
+/* line 1118, ../sass/index.scss */
+.approvalRecord, .supportRecord {
+  height: 100%;
+  background: #fff;
+}
+/* line 1122, ../sass/index.scss */
+.approvalRecord .weui-navbar:after, .supportRecord .weui-navbar:after {
+  border: 0px;
+}
+/* line 1125, ../sass/index.scss */
+.approvalRecord .support_approval, .supportRecord .support_approval {
+  padding: 5px 15px;
+  border-radius: 5px;
+  background: #6db0e4;
+  color: #fff;
+}
+/* line 1131, ../sass/index.scss */
+.approvalRecord .record_list, .supportRecord .record_list {
+  display: none;
+}
+/* line 1134, ../sass/index.scss */
+.approvalRecord .record_w, .supportRecord .record_w {
+  position: relative;
+  padding: 10px 15px;
+  display: flex;
+  background: #fff;
+}
+/* line 1140, ../sass/index.scss */
+.approvalRecord .record_people, .supportRecord .record_people {
+  color: #5c5c5c;
+  font-size: 14px;
+}
+/* line 1144, ../sass/index.scss */
+.approvalRecord .record_w:before, .supportRecord .record_w:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid #D9D9D9;
+  color: #D9D9D9;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  left: 15px;
+}
+/* line 1159, ../sass/index.scss */
+.approvalRecord .weui-navbar__item, .supportRecord .weui-navbar__item {
+  background: #bedcf1;
+}
+/* line 1162, ../sass/index.scss */
+.approvalRecord .weui-bar__item_on, .supportRecord .weui-bar__item_on {
+  background: #fff;
+}
+/* line 1165, ../sass/index.scss */
+.approvalRecord .record_l, .supportRecord .record_l {
+  color: #424952;
+  flex: 1;
+}
+/* line 1169, ../sass/index.scss */
+.approvalRecord .record_r, .supportRecord .record_r {
+  align-self: center;
+  -webkit-align-self: center;
+  font-size: 15px;
+}
+/* line 1174, ../sass/index.scss */
+.approvalRecord .next_approval, .supportRecord .next_approval {
+  color: #9ccaed;
+}
+/* line 1177, ../sass/index.scss */
+.approvalRecord .pre_approval, .supportRecord .pre_approval {
+  color: #65d89d;
+}
+/* line 1180, ../sass/index.scss */
+.approvalRecord .no_approval, .supportRecord .no_approval {
+  color: #424952;
+}
+/* line 1183, ../sass/index.scss */
+.approvalRecord .approval_date, .supportRecord .approval_date {
+  margin-left: 20px;
+}
+/* line 1186, ../sass/index.scss */
+.approvalRecord .no_img, .supportRecord .no_img {
+  padding-top: 20%;
+  height: 20%;
+}
+/* line 1189, ../sass/index.scss */
+.approvalRecord .no_img img, .supportRecord .no_img img {
+  width: 100%;
+}
+/* line 1193, ../sass/index.scss */
+.approvalRecord .no_tips, .supportRecord .no_tips {
+  text-align: center;
+  font-size: 20px;
+}
+/* line 1197, ../sass/index.scss */
+.approvalRecord .no_record, .supportRecord .no_record {
+  height: 100%;
+  width: 100%;
+}
+
+/* line 1204, ../sass/index.scss */
+.approveOpion .weui-cell:before {
+  border-top: 0;
+}
+
+/* line 1208, ../sass/index.scss */
+.approveOpion, .approveOpionOne, .approveInfo {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1211, ../sass/index.scss */
+.approveOpion .weui-panel__bd, .approveOpionOne .weui-panel__bd, .approveInfo .weui-panel__bd {
+  background: #fff;
+}
+/* line 1214, ../sass/index.scss */
+.approveOpion .weui-media-box__title, .approveOpionOne .weui-media-box__title, .approveInfo .weui-media-box__title {
+  margin-bottom: 5px;
+}
+/* line 1217, ../sass/index.scss */
+.approveOpion .weui-media-box__thumb, .approveOpionOne .weui-media-box__thumb, .approveInfo .weui-media-box__thumb {
+  border-radius: 50%;
+}
+/* line 1220, ../sass/index.scss */
+.approveOpion .next_approval, .approveOpionOne .next_approval, .approveInfo .next_approval {
+  padding: 10px 20px;
+  background: url(../images/wait_shenpi.png) no-repeat;
+  background-size: 100%;
+}
+/* line 1226, ../sass/index.scss */
+.approveOpion .next_approval span, .approveOpionOne .next_approval span, .approveInfo .next_approval span {
+  margin-left: 17px;
+}
+/* line 1230, ../sass/index.scss */
+.approveOpion .approve_opion_w, .approveOpionOne .approve_opion_w, .approveInfo .approve_opion_w {
+  padding: 10px 15px;
+  margin-top: 15px;
+  background: #fff;
+}
+/* line 1235, ../sass/index.scss */
+.approveOpion .approval_cont, .approveOpionOne .approval_cont, .approveInfo .approval_cont {
+  position: relative;
+  padding: 15px 0;
+  color: #424952;
+}
+/* line 1240, ../sass/index.scss */
+.approveOpion .weui-panel__hd, .approveOpionOne .weui-panel__hd, .approveInfo .weui-panel__hd {
+  padding: 10px 0;
+}
+/* line 1243, ../sass/index.scss */
+.approveOpion .approval_cont:after, .approveOpionOne .approval_cont:after, .approveInfo .approval_cont:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  border-bottom: 1px solid #D9D9D9;
+  color: #D9D9D9;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+/* line 1257, ../sass/index.scss */
+.approveOpion .weui-cell_select .weui-cell__bd:after, .approveOpionOne .weui-cell_select .weui-cell__bd:after, .approveInfo .weui-cell_select .weui-cell__bd:after {
+  transform: rotate(135deg);
+}
+/* line 1260, ../sass/index.scss */
+.approveOpion .approval_btn_w, .approveOpionOne .approval_btn_w, .approveInfo .approval_btn_w {
+  padding: 10px 15px;
+  display: flex;
+}
+/* line 1264, ../sass/index.scss */
+.approveOpion .weui-btn_primary, .approveOpionOne .weui-btn_primary, .approveInfo .weui-btn_primary {
+  background: #6db0e4;
+  margin-top: 15px;
+  flex: 1;
+  margin-right: 10px;
+}
+/* line 1270, ../sass/index.scss */
+.approveOpion .weui-btn_primary:active, .approveOpionOne .weui-btn_primary:active, .approveInfo .weui-btn_primary:active {
+  background: #6db0e4;
+}
+/* line 1273, ../sass/index.scss */
+.approveOpion .weui-btn_warn, .approveOpionOne .weui-btn_warn, .approveInfo .weui-btn_warn {
+  flex: 1;
+  margin-left: 10px;
+}
+/* line 1277, ../sass/index.scss */
+.approveOpion .approval_tip:after, .approveOpionOne .approval_tip:after, .approveInfo .approval_tip:after {
+  border-bottom-width: 0;
+}
+/* line 1280, ../sass/index.scss */
+.approveOpion .weui-textarea, .approveOpionOne .weui-textarea, .approveInfo .weui-textarea {
+  background: #f8f8f8;
+}
+/* line 1283, ../sass/index.scss */
+.approveOpion .approval_info, .approveOpionOne .approval_info, .approveInfo .approval_info {
+  padding: 10px;
+  background: #f8f8f8;
+  height: 150px;
+  border-radius: 5px;
+}
+/* line 1289, ../sass/index.scss */
+.approveOpion .pre_approval, .approveOpionOne .pre_approval, .approveInfo .pre_approval {
+  padding: 10px 20px;
+  background: url(../images/alread_approve.png) no-repeat;
+  background-size: 100%;
+}
+/* line 1295, ../sass/index.scss */
+.approveOpion .pre_approval span, .approveOpionOne .pre_approval span, .approveInfo .pre_approval span {
+  margin-left: 17px;
+}
+
+/* line 1301, ../sass/index.scss */
+.workAllSumary {
+  height: 100%;
+  background: #fff;
+}
+/* line 1304, ../sass/index.scss */
+.workAllSumary .work_nums {
+  margin-right: 5px;
+  color: #fb9a9b;
+}
+/* line 1308, ../sass/index.scss */
+.workAllSumary .work_tips {
+  padding: 10px 0;
+  background: #bedcf1;
+  text-align: center;
+  font-size: 15px;
+}
+/* line 1314, ../sass/index.scss */
+.workAllSumary .weui-cell__ft {
+  position: relative;
+  margin-top: -8px;
+}
+/* line 1318, ../sass/index.scss */
+.workAllSumary .weui-cell__ft:after {
+  content: " ";
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-width: 2px 2px 0 0;
+  border-color: #C8C8CD;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: relative;
+  top: -2px;
+  position: absolute;
+  top: 50%;
+  margin-top: -4px;
+  right: 2px;
+}
+/* line 1335, ../sass/index.scss */
+.workAllSumary .work_lists {
+  display: flex;
+}
+/* line 1338, ../sass/index.scss */
+.workAllSumary .work_list {
+  margin: 10px;
+  flex: 1;
+  border-radius: 5px;
+}
+/* line 1343, ../sass/index.scss */
+.workAllSumary .work_header {
+  background: #f5f5f5;
+  color: #595f67;
+  padding: 10px 30px;
+  display: flex;
+}
+/* line 1348, ../sass/index.scss */
+.workAllSumary .work_header .work_icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+/* line 1355, ../sass/index.scss */
+.workAllSumary .work_header .work_name {
+  font-size: 18px;
+}
+/* line 1359, ../sass/index.scss */
+.workAllSumary .work_odd, .workAllSumary .work_even {
+  padding: 5px 20px;
+  display: flex;
+  font-size: 14px;
+}
+/* line 1363, ../sass/index.scss */
+.workAllSumary .work_odd span:nth-child(1), .workAllSumary .work_even span:nth-child(1) {
+  flex: 1;
+}
+/* line 1367, ../sass/index.scss */
+.workAllSumary .work_odd {
+  background: #e7e7e6;
+}
+/* line 1370, ../sass/index.scss */
+.workAllSumary .work_even {
+  background: #f5f5f5;
+}
+
+/* line 1375, ../sass/index.scss */
+.order_list_w, .order_listo_w {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1378, ../sass/index.scss */
+.order_list_w .order_tips, .order_listo_w .order_tips {
+  padding: 20px 0;
+  background: #bedcf1;
+  text-align: center;
+  font-size: 18px;
+}
+/* line 1383, ../sass/index.scss */
+.order_list_w .order_tips .order_num, .order_listo_w .order_tips .order_num {
+  color: #fb9a9b;
+}
+/* line 1387, ../sass/index.scss */
+.order_list_w .weui-panel, .order_listo_w .weui-panel {
+  margin-bottom: 15px;
+}
+/* line 1390, ../sass/index.scss */
+.order_list_w .weui-panel__hd, .order_listo_w .weui-panel__hd {
+  display: flex;
+}
+/* line 1393, ../sass/index.scss */
+.order_list_w .order_num_c, .order_listo_w .order_num_c {
+  flex: 1;
+}
+/* line 1396, ../sass/index.scss */
+.order_list_w .order_status, .order_listo_w .order_status {
+  color: #6db0e4;
+}
+/* line 1399, ../sass/index.scss */
+.order_list_w .weui-media-box__title, .order_listo_w .weui-media-box__title {
+  margin-bottom: 10px;
+}
+/* line 1402, ../sass/index.scss */
+.order_list_w .order_name, .order_listo_w .order_name {
+  margin: 0;
+}
+/* line 1405, ../sass/index.scss */
+.order_list_w .weui-media-box__desc, .order_listo_w .weui-media-box__desc {
+  display: flex;
+}
+/* line 1408, ../sass/index.scss */
+.order_list_w .order_price_c, .order_listo_w .order_price_c {
+  color: #fb9a9b;
+}
+/* line 1411, ../sass/index.scss */
+.order_list_w .order_date, .order_listo_w .order_date {
+  flex: 1;
+}
+
+/* line 1416, ../sass/index.scss */
+.order_count_w {
+  text-align: center;
+  font-size: 18px;
+  padding-top: 25px;
+}
+/* line 1420, ../sass/index.scss */
+.order_count_w .order_num, .order_count_w .order_price {
+  color: #fb9a9b;
+}
+
+/* line 1425, ../sass/index.scss */
+.work_plan_w {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1428, ../sass/index.scss */
+.work_plan_w .weui-cells__title {
+  margin-top: 0;
+  padding-top: .77em;
+}
+
+/* line 1435, ../sass/index.scss */
+.targetClinic_w .cli_w_name {
+  display: flex;
+}
+/* line 1438, ../sass/index.scss */
+.targetClinic_w .weui-media-box__title {
+  flex: 1;
+}
+/* line 1441, ../sass/index.scss */
+.targetClinic_w .weui-media-box__hd {
+  width: 120px;
+  height: 80px;
+}
+/* line 1445, ../sass/index.scss */
+.targetClinic_w .cli_w_num {
+  color: #999;
+}
+/* line 1448, ../sass/index.scss */
+.targetClinic_w .cli_w_tel {
+  display: flex;
+}
+/* line 1451, ../sass/index.scss */
+.targetClinic_w .weui-media-box__desc {
+  display: flex;
+}
+/* line 1453, ../sass/index.scss */
+.targetClinic_w .weui-media-box__desc .cli_w_num {
+  flex: 1;
+  margin-top: 12px;
+}
+/* line 1458, ../sass/index.scss */
+.targetClinic_w .weui-cell__ft {
+  margin-left: 5px;
+}
+/* line 1461, ../sass/index.scss */
+.targetClinic_w .clinic_del {
+  color: #6db0e4;
+}
+
+/* line 1467, ../sass/index.scss */
+.addTargetClinic_w {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1470, ../sass/index.scss */
+.addTargetClinic_w .add_btn {
+  background: #6db0e4;
+  color: #fff;
+}
+
+/* line 1476, ../sass/index.scss */
+.workSummary {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1479, ../sass/index.scss */
+.workSummary .work_num {
+  color: #fb9a9b;
+}
+
+/* line 1485, ../sass/index.scss */
+.saleSumary_w .weui-media-box__hd {
+  width: 80px;
+  height: 60px;
+}
+/* line 1489, ../sass/index.scss */
+.saleSumary_w .weui-media-box__title {
+  margin-bottom: 17px;
+}
+/* line 1492, ../sass/index.scss */
+.saleSumary_w .sale_sumary {
+  display: flex;
+}
+/* line 1496, ../sass/index.scss */
+.saleSumary_w .sale_order, .saleSumary_w .sale_num {
+  color: #fb9a9b;
+}
+
+/* line 1500, ../sass/index.scss */
+.visitDetial_w {
+  font-size: 20px;
+}
+/* line 1502, ../sass/index.scss */
+.visitDetial_w .visit_tips {
+  padding: 20px 0;
+  background: #bedcf1;
+  text-align: center;
+  font-size: 18px;
+}
+/* line 1508, ../sass/index.scss */
+.visitDetial_w .visit_head {
+  display: flex;
+}
+/* line 1510, ../sass/index.scss */
+.visitDetial_w .visit_head span {
+  text-align: center;
+  flex: 1;
+}
+/* line 1516, ../sass/index.scss */
+.visitDetial_w .visit_cont .visit_c {
+  display: flex;
+}
+/* line 1518, ../sass/index.scss */
+.visitDetial_w .visit_cont .visit_c span {
+  text-align: center;
+  width: 13.28573%;
+  margin: 2px;
+  padding: 2% 0;
+  background: #f8f8f8;
+}
+/* line 1525, ../sass/index.scss */
+.visitDetial_w .visit_cont .visit_c .active_num {
+  color: #fff;
+  background: #6db0e4;
+}
+
+/* line 1533, ../sass/index.scss */
+.applicateMeet_w .applicate_head {
+  position: relative;
+  padding: 20px 0;
+  background: #bedcf1;
+  text-align: center;
+  font-size: 18px;
+}
+/* line 1540, ../sass/index.scss */
+.applicateMeet_w .weui-cell__ft {
+  position: relative;
+}
+/* line 1543, ../sass/index.scss */
+.applicateMeet_w .weui-cell__ft:after {
+  content: " ";
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-width: 2px 2px 0 0;
+  border-color: #333;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: rotate(135deg);
+  position: relative;
+  top: -2px;
+  position: absolute;
+  top: 27%;
+  margin-top: -4px;
+  right: -20px;
+}
+/* line 1561, ../sass/index.scss */
+.applicateMeet_w .other_meet {
+  display: none;
+  width: 100%;
+  position: absolute;
+  top: 48px;
+}
+/* line 1566, ../sass/index.scss */
+.applicateMeet_w .other_meet .meet_opt {
+  text-align: center;
+  color: #999;
+  background: #bedcf1;
+}
+
+/* line 1574, ../sass/index.scss */
+.login_w {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1577, ../sass/index.scss */
+.login_w .login_icon_w {
+  padding: 100px 0 20px 0;
+  text-align: center;
+  background: #fff;
+}
+/* line 1581, ../sass/index.scss */
+.login_w .login_icon_w img {
+  width: 50%;
+}
+/* line 1585, ../sass/index.scss */
+.login_w .login_c {
+  background: #fff;
+}
+/* line 1588, ../sass/index.scss */
+.login_w .weui-cell {
+  margin-left: 25px;
+  padding: 15px;
+}
+/* line 1592, ../sass/index.scss */
+.login_w .weui-cell:before {
+  border-top: 0;
+}
+/* line 1595, ../sass/index.scss */
+.login_w .weui-cells {
+  margin: 0 15px 0 15px;
+}
+/* line 1598, ../sass/index.scss */
+.login_w .weui-cells:before {
+  border-top: 0;
+}
+/* line 1601, ../sass/index.scss */
+.login_w .tel_c, .login_w .pas_c, .login_w .pas_show {
+  position: absolute;
+  top: 12px;
+  width: 30px;
+  height: 30px;
+}
+/* line 1607, ../sass/index.scss */
+.login_w .tel_c {
+  background: url(../images/tel_icon.png) no-repeat;
+  background-size: 100%;
+}
+/* line 1611, ../sass/index.scss */
+.login_w .pas_c {
+  background: url(../images/password_icon.png) no-repeat;
+  background-size: 100%;
+}
+/* line 1615, ../sass/index.scss */
+.login_w .pas_show {
+  background: url(../images/showpassword_icon.png) no-repeat;
+  background-size: 100%;
+  right: 0;
+}
+/* line 1620, ../sass/index.scss */
+.login_w .login_btn_w {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+/* line 1625, ../sass/index.scss */
+.login_w .login_btn {
+  background: #6db0e4;
+  color: #fff;
+}
+/* line 1629, ../sass/index.scss */
+.login_w .forget_pas {
+  margin: 10px 0;
+  text-align: right;
+}
+/* line 1633, ../sass/index.scss */
+.login_w .forget_pas a {
+  color: #6db0e4;
+}
+
+/* line 1639, ../sass/index.scss */
+.findPassWord_w {
+  padding: 15px;
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1643, ../sass/index.scss */
+.findPassWord_w .find_tel_w, .findPassWord_w .find_password_c {
+  background: #fff;
+  position: relative;
+}
+/* line 1647, ../sass/index.scss */
+.findPassWord_w .find_code_w {
+  position: relative;
+  margin: 10px 0;
+  display: flex;
+}
+/* line 1651, ../sass/index.scss */
+.findPassWord_w .find_code_w .weui-cell {
+  background: #fff;
+  flex: 3;
+}
+/* line 1655, ../sass/index.scss */
+.findPassWord_w .find_code_w .sendCode_btn {
+  margin-left: 15px;
+  flex: 2;
+  padding: 10px  0;
+  text-align: center;
+  border: 1px solid #6db0e4;
+  border-radius: 5px;
+  background: #fff;
+  color: #6db0e4;
+}
+/* line 1666, ../sass/index.scss */
+.findPassWord_w .weui-cell:before {
+  border-top: 0;
+}
+/* line 1669, ../sass/index.scss */
+.findPassWord_w .num_w {
+  padding: 10px 15px;
+}
+/* line 1672, ../sass/index.scss */
+.findPassWord_w .tel_icon, .findPassWord_w .code_icon, .findPassWord_w .password_icon {
+  position: absolute;
+  top: 7px;
+  width: 30px;
+  height: 30px;
+}
+/* line 1678, ../sass/index.scss */
+.findPassWord_w .tel_icon {
+  background: url(../images/tel_icon.png) no-repeat;
+  background-size: 100%;
+}
+/* line 1682, ../sass/index.scss */
+.findPassWord_w .code_icon {
+  background: url(../images/yanzhengma_icon.png) no-repeat;
+  background-size: 100%;
+  z-index: 5;
+}
+/* line 1687, ../sass/index.scss */
+.findPassWord_w .password_icon {
+  background: url(../images/password_icon.png) no-repeat;
+  background-size: 100%;
+  z-index: 5;
+}
+/* line 1692, ../sass/index.scss */
+.findPassWord_w .modify_btn {
+  margin-top: 25px;
+  background: #6db0e4;
+}
+
+/* line 1699, ../sass/index.scss */
+.modifyPassword_w {
+  height: 100%;
+  background: #f8f8f8;
+}
+/* line 1702, ../sass/index.scss */
+.modifyPassword_w .modify_btn_w {
+  margin: 0 auto;
+  width: 90%;
+  margin-top: 20px;
+  background: #6db0e4;
+  border-radius: 5px;
+}
+/* line 1710, ../sass/index.scss */
+.modifyPassword_w .weui-cell {
+  padding: 15px;
+}
+
+/* line 1717, ../sass/index.scss */
+.clinicSum .work_tips {
+  padding: 20px 0;
+  background: #bedcf1;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* line 1725, ../sass/index.scss */
+.pushHistory {
+  background: #f8f8f8;
+  height: 100%;
+}
+/* line 1728, ../sass/index.scss */
+.pushHistory .push_list {
+  display: none;
+}
+/* line 1731, ../sass/index.scss */
+.pushHistory .weui-cell {
+  padding: 0;
+}
+/* line 1734, ../sass/index.scss */
+.pushHistory .weui-cell_select .weui-cell__bd:after {
+  transform: rotate(135deg);
+  width: 10px;
+  height: 10px;
+  top: 40%;
+}
+/* line 1740, ../sass/index.scss */
+.pushHistory .push_btn {
+  background: #6db0e4;
+}
+/* line 1744, ../sass/index.scss */
+.pushHistory .push_list .weui-media-box__title {
+  display: flex;
+  font-size: 15px;
+}
+/* line 1748, ../sass/index.scss */
+.pushHistory .push_list .nav_btn {
+  flex: 1;
+  text-align: right;
+  color: #6db0e4;
+}
+/* line 1753, ../sass/index.scss */
+.pushHistory .push_list .all_user {
+  background: #6db0e4;
+  color: #fff;
+  padding: 2px 4px;
+  margin-right: 5px;
+}
+/* line 1759, ../sass/index.scss */
+.pushHistory .push_list .infos {
+  background: #fd8824;
+  color: #fff;
+  padding: 2px 4px;
+}
+/* line 1765, ../sass/index.scss */
+.pushHistory .push_date_w {
+  display: flex;
+  margin-top: 10px;
+}
+/* line 1768, ../sass/index.scss */
+.pushHistory .push_date_w .push_state {
+  flex: 1;
+  text-align: right;
+}

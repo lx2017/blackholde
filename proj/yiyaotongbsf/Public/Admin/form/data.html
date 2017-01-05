@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/index.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<title>数据</title>
+</head>
+<body>
+<!---头部---->
+<div class="pub_head">
+	<div class="pub_top">
+		<img class="pub_img1" src="images/logo.png"/>
+		<div class="pub_left">
+			<span>猿码头</span>
+			<p>助力于中小企业的发展</p>
+		</div>
+		<div class="pub_right">
+			<a href="" class="pub_name">hi,猿码头<i></i></a>
+			<a href=""><img class="pub_img2" src="images/pho.png"/></a>
+		</div>
+	</div>
+</div>
+<!------end-------->
+<div class="pub_mid">
+	<div class="pub_md">
+		<a href="javascript:;" class="data cur">编辑</a>
+		<a href="javascript:;" class="data">设置</a>
+		<a href="javascript:;" class="data">发布</a>
+		<a href="javascript:;" class="data">数据</a>
+		<a href="javascript:;" class="data_fb">一键发布</a>
+	</div>
+</div>
+<div class="pub_bottom">
+	<div class="pub_bot">
+		<div class="pub_kk">
+			<div class="bot_top">猿码头问卷调查</div>
+		</div>
+		<div class="da_top">
+			<a href="" class="da_back"></a>
+			<a href="" class="da_close"></a>
+			<a href="" class="da_delt">删除</a>
+			<div class="da_text">
+				<input type="text"/>
+				<i></i>
+			</div>
+			<div class="da_dc">
+				<span class="da_too">导出到Excel<i></i></span>
+				<div class="da_fc">
+				   <a href="">导出所有列</a>
+				   <a href="">仅导出显示列</a>
+				</div>
+			</div>
+		</div>
+	<table border="1">
+		<tr class="da_m1">
+		<th width="50"><input type="checkbox" class="da_ck"/></th>
+		<th width="110"><div class="da_title">序号</div><div class="da_sj"><span class="da_s"></span><span class="da_x"></span></div></th>
+		<th width="220"><div class="da_title">你对我们的服务满意么?</div><div class="da_sj"><span class="da_s"></span><span class="da_x"></span></div></th>
+		<th width="220"><div class="da_title">有什么改进的地方?</div><div class="da_sj"><span class="da_s"></span><span class="da_x"></span></div></th>
+		<th width="600"></th>
+		</tr>
+		<tr class="da_m2">
+		<td><input type="checkbox" class="da_ck"/></td>
+		<td>2</td>
+		<td>1</td>
+		<td>2</td>
+		<td>1</td>
+		</tr>
+		<tr class="da_m1">
+		<td><input type="checkbox" class="da_ck"/></td>
+		<td>2</td>
+		<td>1</td>
+		<td>2</td>
+		<td>1</td>
+		</tr>
+	</table>
+	</div>
+</div>
+<!-----底部------->
+<div class="clear5"></div>
+<div class="con_bottom">
+	<div class="con_hed">
+		<img class="pub_img1" src="images/logo.png"/>
+		<div class="pub_left">
+			<a href="javascript:;" class="bum">首页</a>
+			<a href="javascript:;" class="bum">产品中心</a>
+			<a href="javascript:;" class="bum">发布需求</a>
+			<a href="javascript:;" class="bum">开发者入口</a>
+			<a href="javascript:;" class="bum">成功案例</a>
+			<a href="javascript:;" class="bum">关于我们</a>
+			<p class="con_bb">Copyright © 京ICP备14013455号-</p>
+		</div>
+	</div>
+</div>
+<!------end------>
+<script>
+	$(".pub_md .data").click(function(){
+		$(".pub_md .data").removeClass("cur");
+		$(this).addClass("cur");
+	})
+	
+	$(".da_dc").mouseover(function(){
+		$(".da_fc").show();
+	})
+	$(".da_dc").mouseout(function(){
+		$(".da_fc").hide();
+	})
+	$(".da_fc").mouseout(function(){
+		$(".da_fc").hide();
+	})
+	$(".da_fc").mouseout(function(){
+		$(".da_fc").hide();
+	})
+</script>
+</body>

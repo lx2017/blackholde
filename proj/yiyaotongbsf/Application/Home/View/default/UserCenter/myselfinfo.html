@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="zh-CN" http-equiv="Content-Language" />
+    <title>个人中心</title>
+    <meta content="mbaobao.com" name="Copyright" />
+    <meta content="关键字" name="Keywords" />
+    <meta content="描述" name="Description" />
+    <meta content="1GdE-bOwtaftzUH2-g1IcuNL7VYPf7t0qkI0vSpSPo0" name="google-site-verification" />
+    <meta property="qc:admins" content="1041326176652172176375" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/UserCenter/member.css" media="all" />
+    <link  type="text/css" href="__CSS__/UpImage/cropper.min.css" rel="stylesheet">
+    <link  type="text/css" href="__CSS__/UpImage/main.css" rel="stylesheet">
+</head>
+<script src="__JS__/jquery-2.0.0/jquery.min.js"></script>
+<script class="resources library" src="__JS__/area.js" type="text/javascript"></script><!--三级联动插件-->
+<script type="text/javascript" src="__JS__/UpImage/webuploader.html5only.min.js"></script>
+<script type="text/javascript" src="__JS__/UpImage/uploadImg.js"></script>
+<script type="text/javascript" src="__JS__/UpImage/diyUpload.js"></script>
+<script type="text/javascript" src="__JS__/layer/layer.js"></script>
+<script  type="text/javascript" src="__JS__/UpImage/bootstrap.min.js"></script>
+<script  type="text/javascript" src="__JS__/UpImage/cropper.min.js"></script>
+<script  type="text/javascript" src="__JS__/UpImage/main.js"></script>
+<script type="text/javascript">
+    var Gid  = document.getElementById ;
+    var showArea = function(){
+        Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+        Gid('s_city').value + " - 县/区" +
+        Gid('s_county').value + "</h3>"
+    };
+    Gid('s_county').setAttribute('onchange','showArea()');
+</script>
+<body class="register-box myself-box">
+<!-- 头部 -->
+<include file="UserCenter/header"/>
+<!-- 头部 -->
+<!-- 账户安全 -->
+<div class="wrap mysel-middle-wwap myself-infos" style="padding-bottom:93px;">
+    <ul class="middle-nav">
+        <li class="use-info on"><a href="javascript:void(0);"><i class="middle-logo"></i>个人信息</a></li>
+        <li class="use-security"><a href="{:U('/Home/UserCenter/UserCenter/Personal')}"><i class="middle-logo"></i>账户安全</a></li>
+    </ul>
+    <div class="middle-contnet infos-wrap">
+
+        <form id ="myform" action="/Home/UserCenter/UserCenter/BaseInfo" method="post" class="drive-form">
+            <div class="info-content bm10 header-pic-wrap">
+                <h6 class="info-title">头像:</h6>
+                <div class="info-main">
+                    <div class="pic-wrap">
+                        <div class="imgdiv">
+                            <a href="javascript:" class="showUploadTx">
+                                <if condition="$userinfo.headpic neq '' || $userinfo.headpic neq NULL">
+                                    <img src="{$userinfo.headpic}"  id="head_img" style="width:150px;">
+                                <else/>
+                                    <img src="__IMG__/UserCenter/userlogo.jpg"  id="head_img" style="width:150px;">
+                                </if>
+                                <span>点击修改头像</span>
+                            </a>
+                        </div>
+                        <input type="text" name ="up" value="" id="up">
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-content bm10">
+                <h6 class="info-title">昵称:</h6>
+                <div class="info-main">
+                    <input type="text" maxlength="100" name="usename" id="usename" value="<if condition="$userinfo.nickname ">{$userinfo.nickname}</if>" class="txt usename" tabindex="1" autocomplete="off" autofill="off" placeholder="请输入您的常用名称,20个字符以内">
+                </div>
+            </div>
+            <div class="info-content bm10 i-date">
+                <h6 class="info-title">生日:</h6>
+                <div class="info-main">
+                    <div class="select-wrap">
+                        <select name="daty-1" id="daty-1">
+                            <volist name="years" id="vo">
+                                <option value="{$vo}" <if condition ="$userinfo.nowyear eq $vo"> selected="selected"</if> > {$vo}年</option>
+                            </volist>
+                        </select>
+                        <select name="daty-2" id="daty-2">
+                            <volist name="month" id="m">
+                                <option value="{$m}" <if condition ="$userinfo.nowmon eq $m"> selected="selected"</if>> {$m}月</option>
+                            </volist>
+                        </select>
+                        <select name="daty-3" id="daty-3">
+                            <volist name="days" id="d">
+                                <option value="{$d}" <if condition ="$userinfo.nowday eq $d"> selected="selected"</if>> {$d}日</option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="info-content bm10 i-ms">
+                <h6 class="info-title">性别:</h6>
+                <div class="info-main">
+                    <div class="radio-wrap">
+                        <div class="ui-radiobtn box-1">
+                            <label class="ui-radio">
+                                <input type="radio" name="radio" value="保密" <if condition ="$userinfo.sex eq '保密'"> checked="checked"</if>>
+                            </label>
+                            <p>保密</p>
+                        </div>
+                        <div class="ui-radiobtn box-2">
+                            <label class="ui-radio">
+                                <input type="radio" name="radio" value="男" <if condition ="$userinfo.sex eq '男'"> checked="checked"</if>>
+                            </label>
+                            <p>男</p>
+                        </div>
+                        <div class="ui-radiobtn box-2">
+                            <label class="ui-radio">
+                                <input type="radio" name="radio" value="女" <if condition ="$userinfo.sex eq '女'"> checked="checked"</if>>
+                            </label>
+                            <p>女</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-content bm10 i-address">
+                <h6 class="info-title">地址:</h6>
+                <div class="info-main">
+                    <div class="select">
+                        <!-- 这里放省市区联动插件 -->
+
+
+                    <select id="s_province" name="s_province"></select>  
+                    <select id="s_city" name="s_city" ></select>  
+                    <select id="s_county" name="s_county"></select>
+                    <script type="text/javascript">_init_area();</script>
+                    <div id="show"></div>
+
+
+                        <!-- 这里放省市区联动插件 -->
+                    </div>
+                    <div class="txt-input">
+                        <textarea id="address-info" name ="address_detail" class="address-info" resize="none" value="" placeholder="输入详细地址"><if condition ="$userinfo.address_detail">{$userinfo.address_detail}</if></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="info-content i-qm">
+                <h6 class="info-title">个性签名:</h6>
+                <div class="info-main">
+                    <textarea id="qm-info" name ="signature" class="qm-info" resize="none" value="" placeholder="50个字符以内"><if condition ="$userinfo.signature">{$userinfo.signature}</if></textarea>
+                </div>
+            </div>
+            <div class="info-content save-go">
+                <input type="button" onclick="getvalue();" class="go-submit" value="保存">
+            </div>
+        </form>
+    </div>
+</div>
+<div id="UploadTxBox" style="display: none;">
+    <div class="container" id="crop-avatar">
+        <!-- Cropping modal -->
+        <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog"
+             tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form class="avatar-form" action="/Home/UserCenter/Imgcrop/crop" enctype="multipart/form-data" method="post">
+                        <div class="UploadTxBox-modal-body">
+                            <div class="avatar-body">
+                                <!-- Upload image and data -->
+                                <div class="avatar-upload">
+                                    <input class="avatar-src" name="avatar_src" type="hidden">
+                                    <input class="avatar-data" name="avatar_data" type="hidden">
+
+                                    <p><label for="avatarInput" class="btn btn-red avatar-uploadbtn">选择本地图片<input
+                                            class="avatar-input" id="avatarInput" name="avatar_file"
+                                            type="file"></label></p>
+
+                                    <p class="mt20 grey">支持JPG、JPEG、PNG格式、且大小不要超过2M</p>
+                                    <input class="x" name="x" type="hidden">
+                                    <input class="y" name="y" type="hidden">
+                                    <input class="width" name="width" type="hidden">
+                                    <input class="height" name="height" type="hidden">
+                                </div>
+
+                                <!-- Crop and preview -->
+                                <div class="UploadTxBox-view">
+                                    <div class="UploadTxBox-left">
+                                        <div class="avatar-wrapper"></div>
+                                    </div>
+                                    <div class="UploadTxBox-right">
+                                        <div class="avatar-preview preview-lg"></div>
+                                        <div class="avatar-preview preview-md"></div>
+                                    </div>
+                                </div>
+                                <div class="UploadTxBox-btnbox">
+                                    <button class="btn btn-red"  type="submit" id="submit_crop">提交</button>
+                                    <button class="btn btn-white mlt10 closeDialogbtn" type="button">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+</div>
+
+<!-- 账户安全 -->
+<!-- 底部公用模块 -->
+<include file="UserCenter/booter" />
+<!-- 底部公用模块 -->
+</body>
+<script>
+    $(function () {
+        //上传头像
+        $(".showUploadTx").click(function () {
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-yuan', //样式类名
+                closeBtn: 1, //不显示关闭按钮
+                shadeClose: true, //开启遮罩关闭
+                shade: [0.5],
+                area: '680px',
+                title: "上传头像",
+                content: $('#UploadTxBox')
+            });
+        });
+        $(".closeDialogbtn").click(function () {
+            layer.closeAll();
+        })
+    });
+    function getvalue(){
+        var img=$("#head_img").attr('img_src');
+        $("#up").val(img);
+        $("#myform").submit();
+    }
+
+</script>
+</html>

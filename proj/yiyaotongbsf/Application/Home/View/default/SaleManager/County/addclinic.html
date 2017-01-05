@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>添加诊所</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+<header class = "all_header">
+			<a class = "h_back" href="javascript:void(0)"><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+			<span class = "h_title">添加诊所</span>
+			<a class = "h_add" href="javascript:void(0)"></a>
+		</header>
+	<div class="support">
+		
+		<div class="weui-cells__title">诊所负责人手机号</div>
+		<div class="weui-cell">
+      <div class="weui-cell__bd">
+        <input class="weui-input lead_tel" type="number" pattern="[0-9]*" placeholder="请输入号码">
+        <a class = "tel_del" href="javascript:void(0)"><img src="__SaleManager__/images/del_icon.png" alt=""></a>
+      </div>
+	  </div>
+
+	  <div class="weui-cells__title">诊所负责人</div>
+		<div class="weui-cell">
+      <div class="weui-cell__bd">
+        <input class="weui-input lead_name" type="text" placeholder="请输入姓名">
+      	<a class = "name_del" href="javascript:void(0)"><img src="__SaleManager__/images/del_icon.png" alt=""></a>
+      </div>
+	  </div>
+
+	  <div class="weui-cells__title">诊所地址</div>
+		<div class="weui-cell">
+      <div class="weui-cell__bd">
+        <input class="weui-input lead_adress" type="text" placeholder="请输入地址">
+      	<a class = "adress_del" href="javascript:void(0)"><img src="__SaleManager__/images/del_icon.png" alt=""></a>
+      </div>
+	  </div>
+
+	  <div class="weui-btn-area">
+      <a class="weui-btn weui-btn_plain-disabled showTooltips" href="javascript:">确定</a>
+    </div>
+	</div>
+	<script src = "__SaleManager__/js/index.js"></script>
+</body>
+</html>

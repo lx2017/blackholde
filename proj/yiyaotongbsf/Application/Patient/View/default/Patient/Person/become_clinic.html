@@ -1,0 +1,102 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-margin-b-15">
+        <form id="myForm">
+        <ul class="aui-list">
+             <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                     <div class="aui-row person-item">
+                        <div class="aui-col-xs-5">姓名</div>
+                        <div class="aui-col-xs-7">
+                            <input style=" width:78%;float:right;" id="apply_name" type="text" name="apply_name" placeholder="请输入您的真实姓名"></div>
+                    </div>
+                </div>
+            </li>
+             <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                     <div class="aui-row person-item">
+                        <div class="aui-col-xs-5">手机号</div>
+                        <div class="aui-col-xs-7"><input style="width:70%;
+    float:right;" name="apply_mobile" id="apply_mobile" type="text" placeholder="用户客服人员联系"></div>
+                    </div>
+                </div>
+            </li>
+             <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                     <div class="aui-row person-item">
+                        <div class="aui-col-xs-5">诊所名称</div>
+                        <div class="aui-col-xs-7"><input  style="width:70%; float:right;"ype="text" id="apply_clinic" name="clinic_name" placeholder="诊所名称"></div>
+                    </div>
+                </div>
+            </li>
+             <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                     <div class="aui-row person-item">
+                        <div class="aui-col-xs-5">地址</div>
+                        <div class="aui-col-xs-7"><input style="width:70%; float:right;" id="apply_address" type="text" name="clinic_address" placeholder="诊所地址"></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+            </form>
+    </div>
+    <div class="me-bc-cl">
+    	<button class="aui-btn aui-btn-primary " id="add">提交申请</button>
+    </div>
+    </block>
+<block name="js">
+    <!--引入js,css-->
+    <script src="__STATIC__/form/jquery.validate.min.js"></script>
+    <script src="__STATIC__/form/localization/messages_zh.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/js/user.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var issend = false;
+            //保存事件
+            $('#add').click(function(){
+                if(issend) return false;
+                issend = true;
+                //验证手机
+                var mobile = $.trim($('#apply_mobile').val());
+                if(check_mobile(mobile)==false){
+                    layer_msg('请输入正确的手机号');
+                    issend = false;
+                    return false;
+                }
+                //验证名字.诊所名称和地址
+                var name = $.trim($('#apply_name').val());
+                if(!name){
+                    layer_msg('请输入名字');
+                    issend = false;
+                    return false;
+                }
+                var clinic = $.trim($('#apply_clinic').val());
+                if(!clinic){
+                    layer_msg('请输入诊所名称');
+                    issend = false;
+                    return false;
+                }
+                var address = $.trim($('#apply_address').val());
+                if(!address){
+                    layer_msg('请输入地址');
+                    issend = false;
+                    return false;
+                }
+                //提交数据
+                var mydata = $('#myForm').serialize();
+                $.post(location.href,mydata,function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('申请成为诊所成功，待审核',2,function(){
+                            location.href='{:U("mine")}';
+                        });
+                    }
+                    else{
+                        layer_msg('保存失败，请稍候再试！');
+                    }
+                },'json');
+            });
+        });
+
+    </script>
+    </block>

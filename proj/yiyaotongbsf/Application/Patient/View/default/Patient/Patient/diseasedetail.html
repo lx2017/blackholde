@@ -1,0 +1,40 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+    	<div class="index-iseaedetail">
+    		<div class="dise-detail">
+				<img src="__IMG__/green.png">
+				<span>概述</span>
+			</div>
+            <p class="index-desde-up"><img src="__IMG__/up.png" style="width:30%;"></p>
+    		<p>{$info.summary|default='无'}</p>
+    	</div>
+    	<div>
+    		<ul class="index-diseas-content">
+    			<li class="index-disea-li">病因<img src="__IMG__/down.png">
+                    <p>{$info.disease_reason|default='无'}</p>
+                </li>
+    			<li class="index-disea-li">临床表现<img src="__IMG__/down.png">
+					<p>{$info.clinical_manifestations|default='无'}</p>
+				</li>
+				<li class="index-disea-li">并发症<img src="__IMG__/down.png">
+					<p>{$info.complication|default='无'}</p>
+				</li>
+    			<li class="index-disea-li">实验室检查<img src="__IMG__/down.png">
+					<p>{$info.laboratory_check|default='无'}</p>
+				</li>
+    			<li class="index-disea-li">诊断<img src="__IMG__/down.png">
+					<p>{$info.diagnosis|default='无'}</p>
+				</li>
+    			<li class="index-disea-li">治疗<img src="__IMG__/down.png">
+					<p>{$info.treatment|default='无'}</p>
+				</li>
+    			<li class="index-disea-li">预防<img src="__IMG__/down.png">
+					<p>{$info.prophylaxis|default='无'}</p>
+				</li>
+    		</ul>
+    	</div>
+	</div>
+</block>
+<block name="js">
+</block>

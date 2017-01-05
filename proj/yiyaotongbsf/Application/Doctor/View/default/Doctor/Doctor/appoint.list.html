@@ -1,0 +1,65 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con Mypatient patientMag myOrder no_pad divRBox myListshow">
+        <ul id="mycontain">
+            <volist name="list" id="vo">
+            <li data-status="{$vo.status}"  data-id="{$vo.id}" data-pid="{$vo.hx_name}"  data-name="{$vo.name}">
+                <div class="person">
+                    <span class="c_icon span1 headSpan"><img src="{$vo.p_image}"  onerror="this.src='__IMG__/head1.png'"></span>
+                    <span class="c_333 span2">{$doctor}</span>
+                </div>
+                <div class="time">
+                    <span class="c_icon span1"><i class="c_orange">&#xe661;</i></span>
+                    <span class="span2">{$vo.time}</span>
+                </div>
+                <ol>
+                    <li>
+                        <em>预约患者</em><span>{$vo.name}</span>
+                    </li>
+                    <li>
+                        <em>预约时间</em><span>{$vo.time}</span>
+                    </li>
+                </ol>
+                <p class="singleLine">
+                    <b class="right c_blue myconsult">沟通</b>
+                </p>
+                <div class="divR">
+                    <eq name="vo.status" value="1">
+                        <a href="javascript:;" class="a2 bg_blue myconsult">未读</a>
+                    <else />
+                        <a href="javascript:;" class="a2 bg_gray myconsult">已读</a>
+                    </eq>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('appointlist_more')}",
+            obj:'mycontain'
+        };
+        $(function(){
+           //咨询按钮事件
+            $('#mycontain').on('click','.myconsult',function(){
+                var myli = $(this).closest('li');
+                //调用客户端
+                var my_id = myli.data('id');
+                var pid = myli.data('pid');
+                var name = myli.data('name');
+                var status = myli.data('status');
+                if(status==1){
+                    $.post("{:U('/Doctor/Doctor/Api/changeConsultStatus')}",{id:my_id,type:2},function(){});//修改咨询状态
+                }
+                callmyclient(2,pid,name);
+            });
+        });
+    </script>
+</block>

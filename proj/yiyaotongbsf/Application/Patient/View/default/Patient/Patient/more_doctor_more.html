@@ -1,0 +1,15 @@
+<volist name="list" id="vo">
+    <div class="aui-row me-mydoc-bo">
+        <div class="aui-col-xs-2">
+            <img src="{$vo.image}" onerror="this.src='__IMG__/head.png'" class="me-mydoc-img">
+        </div>
+        <div class="aui-col-xs-10  me-mydoc-left">
+            <div class="aui-row">
+                <div class="aui-col-xs-8"><span class="me-mydoc-p">{$vo.name}</span><span class="me-star"><img src="__IMG__/starclick.png"></span><span class="me-fenshu"><span class="me-mydoc-p">{$vo.score}</span></span></div>
+                <div class="aui-col-xs-4"><span class="index-neardc">{$vo.distance}km</span></div>
+            </div>
+            <p class="me-mydoc-sep">{$vo.clinic}</p>
+            <p class="me-mydoc-sep">擅长：{$vo.good}</p>
+        </div>
+    </div>
+</volist>

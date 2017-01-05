@@ -1,0 +1,13 @@
+<volist name="list" id="vo">
+<div class="cd-cob">
+    <p>{$vo.disease}<span class="cd-cob-right">
+               <eq name="vo.score" value="1"><img src="__IMG__/starclick.png"></eq>
+                <eq name="vo.score" value="2"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"></eq>
+                <eq name="vo.score" value="3"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"></eq>
+                <eq name="vo.score" value="4"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"></eq>
+                <eq name="vo.score" value="5"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"></eq>
+       </span></p>
+    <p>{$vo.intro}</p>
+    <p>{$vo.name}<span class="cd-lp-b"></span><span class="cd-cob-right">{$vo.date}</span></p>
+</div>
+</volist>

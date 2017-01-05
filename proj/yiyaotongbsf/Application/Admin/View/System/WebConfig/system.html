@@ -1,0 +1,72 @@
+<include file="Public/base"/>
+
+<div class="pd-20">
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <li><a href="{$url}">基本设置</a></li>
+            <li class="current">
+                <a href="javascript:;">系统设置</a>
+            </li>
+
+        </ul>
+        <div class="tab-content">
+            <form action="{:U('',array('key'=>I('key')))}" method="post" class="form form-horizontal"
+                  id="saveBaseConfigForm" enctype="multipart/form-data">
+                <volist name="list" id="config">
+                    <div class="row cl">
+                        <label class="form-label col-3">{$config.title}</label>
+
+                        <div class="formControls col-5">
+                            <switch name="config.type">
+                                <case value="0">
+                                    <input type="text" class="input-text" name="config[{$config.name}]"
+                                           value="{$config.value}" maxlength="2000">
+                                </case>
+                                <case value="1">
+                                    <input type="text" class="input-text" name="config[{$config.name}]"
+                                           value="{$config.value}" maxlength="2000">
+                                </case>
+                                <case value="2">
+                                    <textarea name="config[{$config.name}]" class="textarea" maxlength="2000">{$config.value}</textarea>
+                                </case>
+                                <case value="3">
+                                    <textarea name="config[{$config.name}]" class="textarea" maxlength="2000">{$config.value}</textarea>
+                                </case>
+                                <case value="4">
+                                    <select name="config[{$config.name}]">
+                                        <volist name=":parse_config_attr($config['extra'])" id="vo">
+                                            <option value="{$key}"
+                                            <eq name="config.value" value="$key">selected</eq>
+                                            >{$vo}</option>
+                                        </volist>
+                                    </select>
+                                </case>
+                                <case value="5">
+                                    <span class="btn-upload form-group">
+                                         <input class="input-text upload-url" type="text"  style="width:200px" value="{$config.value}">
+                                         <a href="javascript:;" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i>
+                                            上传开机启动图片</a>
+                                        <input type="file"  name="{$config.name}" class="input-file">
+                                    </span>
+                                </case>
+                            </switch>
+
+                        </div>
+                        <div class="col-4">({$config.remark})</div>
+
+                    </div>
+                </volist>
+                <div class="row cl">
+                    <div class="col-9 col-offset-3">
+                        <input type="submit" class="btn btn-primary radius" value="确 定"/>
+                        <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回
+                        </button>
+                    </div>
+                </div>
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="__CSS__/tab.css" media="all">
+<script type="application/javascript" src="__JS__/System/system.js"></script>

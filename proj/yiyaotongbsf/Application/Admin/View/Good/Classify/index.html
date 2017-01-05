@@ -1,0 +1,154 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+
+            <if condition="isset($actions['CLASSIFYADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius"
+                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYADD']['url'];echo U($str,array('key'=>$actions['CLASSIFYADD']['key']))?>">新增分类</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['CLASSIFYDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-danger radius" href="javascript:"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYDELETE']['url'];echo U($str,array('key'=>$actions['CLASSIFYDELETE']['key']))?>"
+                       id="classifyDeleteBtn">批量删除</a>
+                 </span>
+            </if>
+            
+
+        </notempty>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="nickname" class="search-input" value="{:I('nickname')}"
+                       placeholder="请输入用户昵称或者ID">
+                <a class="sch-btn" href="javascript:" id="search"
+                   url="<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Employee/User/index',array('key'=>$key));?>"><i
+                        class="Hui-iconfont btn-search">&#xe665;</i></a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 数据列表 -->
+
+    <div class="mt-20">
+        <div class="data-table table-striped">
+
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">一级分类</th>
+                    <th class="">二级分类</th>
+                    <th class="">三级分类</th>
+                    <th class="">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo">
+                    	<if condition="$vo['children']">
+                    		<volist  name="vo.children" id="k">
+                    			<if condition="$k['children']">
+                    				<volist  name="k.children" id="kk">
+                    					<tr class="text-c">
+				                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id_3rd}"/></td>
+				                            <td>{$vo.classify}</td>
+				                            <td>{$k.classify}</td>
+				                            <td>{$kk.classify}</td>
+				                            <td>
+				                                <if condition="isset($actions['CLASSIFYEDIT'])">
+				                                    <a class="ajaxget fontblue" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYEDIT']['url'];echo U($str,array('key'=>$actions['CLASSIFYEDIT']['key'],'id'=>$kk['id']))?>">编辑</a>
+				                                </if>
+				                                <if condition="isset($actions['CLASSIFYDELETE'])">
+				                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+				                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYDELETE']['url'];echo U($str,array('key'=>$actions['CLASSIFYDELETE']['key'],'id'=>$kk['id']))?>">删除</a>
+				                                </if>
+				
+				                            </td>
+				                        </tr>
+                    				</volist>
+                    			<else />
+                    				<tr class="text-c">
+			                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id_3rd}"/></td>
+			                            <td>{$vo.classify}</td>
+			                            <td>{$k.classify}</td>
+			                            <td></td>
+			                            <td>
+			                                <if condition="isset($actions['CLASSIFYEDIT'])">
+			                                    <a class="ajaxget fontblue" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYEDIT']['url'];echo U($str,array('key'=>$actions['CLASSIFYEDIT']['key'],'id'=>$k['id']))?>">编辑</a>
+			                                </if>
+			                                <if condition="isset($actions['CLASSIFYDELETE'])">
+			                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+			                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYDELETE']['url'];echo U($str,array('key'=>$actions['CLASSIFYDELETE']['key'],'id'=>$k['id']))?>">删除</a>
+			                                </if>
+			
+			                            </td>
+			                        </tr>
+                    			</if>
+                    		</volist>
+                    		
+                    	<else />
+                    	
+                    	<tr class="text-c">
+                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id}"/></td>
+                            <td>{$vo.classify}</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <if condition="isset($actions['CLASSIFYEDIT'])">
+                                    <a class="ajaxget fontblue" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYEDIT']['url'];echo U($str,array('key'=>$actions['CLASSIFYEDIT']['key'],'id'=>$vo['id']))?>">编辑</a>
+                                </if>
+                                <if condition="isset($actions['CLASSIFYDELETE'])">
+                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYDELETE']['url'];echo U($str,array('key'=>$actions['CLASSIFYDELETE']['key'],'id'=>$vo['id']))?>">删除</a>
+                                </if>
+
+                            </td>
+                        </tr>
+                    	</if>
+                    	
+                      
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="text-center"> aOh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <link href="__CSS__/employee/employee.css" rel="stylesheet" type="text/css"/>
+
+    <script src="__JS__/Good/classify.js"></script>
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function () {
+            var url = $(this).attr('url');
+            var query = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+            query = query.replace(/^&/g, '');
+            if (url.indexOf('?') > 0) {
+                url += '&' + query;
+            } else {
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function (e) {
+            if (e.keyCode === 13) {
+                $("#search").click();
+                return false;
+            }
+        });
+
+    </script>
+</div>

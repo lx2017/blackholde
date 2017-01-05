@@ -1,0 +1,31 @@
+<extend name="Public/base"/>
+
+<block name="header">
+    <li><a href="javascript:">环境检测</a></li>
+    <li><a href="javascript:">创建数据库</a></li>
+    <li class="active"><a href="javascript:">安装</a></li>
+    <li><a href="javascript:">完成</a></li>
+</block>
+
+<block name="body">
+    <h1>安装</h1>
+    <ul class="list-group">
+    </ul>
+    <script type="text/javascript">
+        function showmsg(msg, classname) {
+            var html = '<li class="list-group-item">';
+            if (classname) {
+                html += '<span class="glyphicon glyphicon-ok fontgreen" aria-hidden="true">' + msg + '</span>'
+            } else {
+                html += '<span class="glyphicon glyphicon-remove fontred" aria-hidden="true">' + msg + '</span>'
+            }
+            html += '</li>';
+            $(".list-group").appendChild(html);
+            document.scrollTop += 30;
+        }
+    </script>
+</block>
+
+<block name="footer">
+    <button class="btn btn-warning btn-large disabled">正在安装，请稍后...</button>
+</block>

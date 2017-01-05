@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>用户注册</title>
+
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="__CSS__/LoginAndRegister/zc.css">
+<script src="__JS__/jquery-2.0.0/jquery.min.js"></script>
+<script src="__JS__/UserCenter/zepto.min.js"></script>
+<script src="__JS__/UserCenter/zc.js"></script>
+<article class="M_main">
+    <header>
+        <div class="tou">
+            <a href="javascript:history.go(-1);" class="goback"><i class="iconfont1">&#xe606;</i></a>
+            <p>注册</p>
+        </div>
+    </header>
+    <div class="content">
+        <form action="{:U('/Home/LoginAndRegister/Register/InsertsInfo',array('x'=>'nosecret','f'=>'nojson','t'=>'wap'))}" method="post" onsubmit="return msg()">
+            <!-- 密码输入 -->
+            <section>
+                <div class="password">
+                    <i class="iconfont2">&#xe603;</i>
+                    <input type="password" name="password" maxlength="20" placeholder="请输入6-20的字母和数字组合密码"/>
+                </div>
+            </section>
+            <!-- 密码输入 -->
+
+            <!-- 完成注册按钮 -->
+            <section>
+
+                <input type="submit" value="完成注册" class="wc-en" onsubmit="return false;">
+            </section>
+            <!-- 完成注册按钮 -->
+            <input type="hidden" name="mobile" value="{$mobile}">
+        </form>
+    </div>
+</article>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+/*70px 2.1875rem border-bottom:0.03125rem solid #ebebeb;
+padding:0 0.9375rem;
+border-radius:0.15625rem; 0.09375-3px 0.15625-5px
+height:2.1875rem; line-height: 2.1875rem; color:#999;
+line-height:1.25rem; 多行
+*/
+/*上传图片 begin*/
+.uploadPhoto{ background:none; position:relative;}
+.uploadPhoto span{ display:block; width:100%; height:100%; border:0.03125rem dashed #999; box-sizing:border-box; border-radius:0.15625rem; text-align:center; line-height:2.6875rem; }
+.uploadPhoto span i{ color:#999; font-size:2rem;}
+.uploadPhoto input{ display:block; width:100%; height:100%; position:absolute; left:0; top:0; z-index:99; cursor:pointer; opacity:0;}
+/*上传图片 end*/
+
+/*搜索框 begin*/
+.searchBox{ background:#fff; height:1.65625rem; line-height:1.65625rem; border-radius:0.3rem; margin-bottom:0.9375rem;}
+.searchBox span{ width:15%; height:100%; text-align:center;}
+.searchBox span i{ color:#b4b4b4;}
+.searchBox span.zoom{ height:1rem; line-height:1rem; margin-top:0.32rem; border-right:0.03125rem solid #ebebeb; box-sizing:border-box;}
+.searchBox span.zoom i{ color:#000;}
+.searchBox input{ width:70%; border:none; background:#fff; height:100%; color:#333; padding:0 0.32rem; box-sizing:border-box;}
+/*搜索框 end*/
+
+/*性别单选 begin*/
+ul.main_left_right li.sex span{ width:3.3125rem; height:1.3125rem; line-height:1.3125rem; background:#f2f2f2; border-radius:20px; margin-top:0.4375rem;}
+ul.main_left_right li.sex span em{ float:left; width:50%; height:100%; text-align:center; color:#969696;border-radius:20px; }
+ul.main_left_right li.sex span em.current{ background:#28a0d4; color:#fff;}
+/*性别单选 end*/
+
+/*mfyf*/
+.mfyf{ color:#333;}
+.mfyf ul li{ height:2.1875rem; line-height: 2.1875rem;border-bottom:0.03125rem solid #ebebeb;}
+.mfyf ul li a span{ color:#999;}
+
+/*mfyfDet*/
+.mfyfDet h5{ font-size:1rem;}
+.mfyfDet .det{ line-height:1.5rem; }
+
+/*myPatientNo*/
+.myPatientNo  ul li{ position:relative;}
+.myPatientNo .divR{ position:absolute; right:0; padding-top:0.9375rem; top:0.64rem;}
+.myPatientNo .divR a{ display:block; width:4.375rem; height:1.5625rem; text-align:center; line-height:1.5625rem; color:#fff; border-radius:0.3125rem; border:0.03125rem solid #db9600; background:#f8aa02;margin-bottom:0.9375rem;}
+.myPatientNo .divR a.a2{ border:0.03125rem solid #1390c6; background:#28a0d4; }
+
+/*cureRecord*/
+.cureRecord .tit{ height:1.5rem; line-height:1.5rem; padding:0 0.9375rem;}
+.cureRecord .dlBox{ padding-top:0.625rem; border-bottom:0.03125rem solid #ebebeb;}
+.cureRecord .dlBox dl{ float:left; width:33.33333%; }
+.cureRecord .dlBox dl dt{ color:#27a0d4; height:1.25rem; line-height:1.25rem;}
+.cureRecord .dlBox dl dd{ height:1.25rem; line-height:1.25rem;}
+.cureRecord ul.recordLists{ padding:0.64rem 0 0 0.64rem;}
+.cureRecord ul.recordLists>li{overflow:hidden; border-bottom:0.03125rem solid #27a0d4; line-height:1.4rem; }
+.cureRecord ul.recordLists>li .time{ height:8rem; padding-top:0.5rem; width:15%; text-align:center; line-height:1.40625rem; border-right:0.03125rem solid #27a0d4; box-sizing:border-box;}
+.cureRecord ul.recordLists>li .info{ width:82%; padding-left:3%; padding-top:0.5rem;}
+.cureRecord ul.recordLists>li .span1{ width:2rem; float:left;}
+.cureRecord ul.recordLists>li .span2{ width:8rem; float:left;}
+.cureRecord ul.recordLists>li .span3{ width:8rem; float:right; text-align:right;}
+.cureRecord ul.recordLists>li ol li span{ color:#333; margin-left:0.64rem;}
+
+/*myOrder*/
+.divRBox.myOrder .divR a.bg_gray{ background:#b4b4b4; border:0.03125rem solid #a8a8a8;} 
+
+/*doctor*/
+.doctor .title{ background:#28a0d4 url("../img/doctorBg.png") no-repeat center bottom; padding:0.64rem 0 1.25rem; background-size:100% auto;}
+.doctor .title .pic{ width:3.75rem; height:3.75rem; border:0.0625rem solid #fff; border-radius:50%; margin:0 auto;}
+.doctor .title .pic img{ display:block; width:100%; height:100%; border-radius:50%;}
+.doctor .title .name{ height:2.0625rem; line-height:2.0625rem; font-size:1rem; color:#fff; text-align:center;}
+.doctor .nav{ overflow: hidden; margin-bottom:0.3rem;}
+.doctor .nav dl{ float:left; width:33.33333%; padding-top:0.9375rem;}
+.doctor .nav dl dt{ height:1.5625rem; line-height:1.5625rem; width:1.5625rem; margin:0 auto; position:relative;}
+.doctor .nav dl dt i{ font-size:1.1rem;}
+.doctor .nav dl dt em{ position:absolute; right:-0.45rem; top:-0.45rem; width:0.9375rem; height:0.9375rem; background:#f13838; border-radius:50%; text-align:center; line-height:0.9375rem; color:#fff;}
+.doctor .nav dl dd{ height:1.25rem; line-height:1.25rem; color:#333;}
+.doctor .main_left_right{ margin-bottom:0.3rem;}
+.doctor .main_left_right li{ border-bottom:0;}
+.doctor .main_left_right li em{ height:100%; display:inline-block; width:1.875rem; font-size:1.1rem;}
+.doctor .main_left_right li em{ color:#27a0d4;}
+
+/*homePageDc*/
+.homePageDc .top{ padding-top:1.25rem; background:#28a0d4; border-top:0.03125rem solid #ebebeb; }
+.homePageDc .top .info{ padding:0 0.9375rem; overflow:hidden;}
+.homePageDc .top .info dt{ float:left; width:2.8125rem; height:2.8125rem; border-radius:50%; }
+.homePageDc .top .info dt img{ display:block; width:100%; height:100%; border-radius:50%; }
+.homePageDc .top .info dd{ padding-left:4.0625rem; line-height:1.25rem; color:#fff;}
+.homePageDc .top .dlBox{ overflow: hidden; padding-top:0.9375rem; text-align:center; color:#fff; padding-bottom:0.3rem;}
+.homePageDc .top .dlBox dl{ float:left; width:33.33333%; }
+.homePageDc .top .dlBox dt,.homePageDc .top .dlBox dd{ height:1.25rem; line-height:1.25rem;}
+.homePageDc .main_left_right{ margin-bottom:0.625rem;}
+.homePageDc .textareaBox p{height:1.8rem; line-height:1.8rem;}
+
+/*zizhi*/
+.zizhi p{height:1.8rem; line-height:1.8rem;}
+.zizhi ul{ overflow:hidden;}
+.zizhi ul li{ width:4.0625rem; height:4.0625rem; border-radius:0.15625rem; margin:0 0.3125rem 0.3125rem 0; float:left;}
+.zizhi ul li img{ display:block; width:100%; height:100%;border-radius:0.15625rem;} 
+
+/*doctorInfo*/
+.doctorInfo  ul li.headPic{ height:2.8125rem; padding:0.32rem 0;}
+.doctorInfo .pic{ width:2.8125rem; height:2.8125rem; border-radius:50%;}
+.doctorInfo .pic img{ display:block; width:100%; height:100%; border-radius:50%;}
+
+/*myPatientNo*/
+.myPatientNo .noPatient{padding:3.4375rem 0;}
+.myPatientNo .P_main .pic{ width:8.03125rem; height:9.875rem; margin:0 auto;}
+.myPatientNo .P_main .pic img{ display:block; width:100%; height:100%;}
+.myPatientNo .P_main  p{ font-size:1rem; text-align:center;}
+
+/*addPatient*/
+ul.main_left_right.nobdLi li{ border-bottom:none;}
+ul.main_left_right.nobdLi li span{ width:13.125rem; border-bottom:0.03125rem solid #ebebeb; box-sizing:border-box;}
+ul.main_left_right.nobdLi li span input{ display:block; width:100%; height:100%;}
+ul.main_left_right.nobdLi li .txt_r{ text-align:right;}
+.P_fixFoot{width:20rem;  height:2.1875rem; line-height:2.1875rem; position:fixed; background:#28a0d4; text-align:center; left:0; bottom:0;}
+.P_fixFoot a{ display:block; width:50%; height:100%; color:#fff; float:left;} 
+.P_fixFoot a:nth-of-type(1){ background:#11c8d8;}
+
+/*myAsking*/
+.myAsking ul li{ background:#fff; padding:0 0.9375rem; margin-bottom:0.9375rem;}
+.myAsking ul li i{ display:inline;}
+.myAsking ul li .reply{ width:3.34375rem; height:1.5625rem; line-height:1.5625rem; border-radius:0.25625rem;  text-align:center; color:#999; margin-top:0.3rem; }
+.myAsking ul li .reply.bg_blue{ background:#28a0d4; color:#fff;}
+
+.divRBox  ul li{ position:relative;}
+.divRBox .divR{ position:absolute; right:0; padding-top:0.9375rem; top:0.64rem;}
+.divRBox .divR a{ display:block; width:4.375rem; height:1.5625rem; text-align:center; line-height:1.5625rem; color:#fff; border-radius:0.3125rem; border:0.03125rem solid #db9600; background:#f8aa02;margin-bottom:0.9375rem;}
+.divRBox .divR a.a2{ border:0.03125rem solid #1390c6; background:#28a0d4; }
+
+/*database*/
+.dataHead h2 a{ float:left; width:5.5rem; height:1.625rem; line-height:1.625rem; text-align:center; color:#fff; border:0.03125rem solid #ebebeb; margin-top:0.5625rem;} 
+.dataHead h2 a.current{ background:#69bde1;}
+.dataHead h2 .a1{ border-right:0; border-top-left-radius:0.15625rem; border-bottom-left-radius:0.15625rem; margin-left:0.5rem;}
+.dataHead h2 .a2{ border-left:0; border-top-right-radius:0.15625rem; border-bottom-right-radius:0.15625rem;}
+.database .classLeft{ width:50%; height:100%; }
+.database .classLeft ul li{ height:2.6875rem; background:#f8f8f8; line-height:2.6875rem; padding-left:0.9375rem; border-left:0.15625rem solid #f8f8f8; border-right:0.3125rem solid #f2f2f2; color:#333;}
+.database .classLeft ul li.current{ background:#fff; border-left:0.15625rem solid #28a0d4; border-right:0.3125rem solid #fff; padding-left:1.875rem;}
+.database .classLeft ul li p em{ display:inline-block; width:2.03125rem; height:100%; }
+.database .classLeft ul li dl{ display:none; position:absolute; top:3.6875rem; left:50%; width:50%;}
+.database .classLeft ul li.current dl{ display:block; }
+.database .classLeft ul li dl dd{ height:2.6875rem; line-height:2.6875rem; background:#fff; border-bottom:0.03125rem solid #ebebeb; color:#999; box-sizing:border-box; padding-left:0.9375rem;}
+.database .classLeft ul li dl dd.current{ color:#28a0d4;}
+
+/*dataDet*/
+.dataDet ul li i{ display:inline-block; }
+.dataDet ul.main_left_right{ background:none; padding:0;}
+.dataDet ul.main_left_right li{ overflow:hidden; padding:0 0.9375rem; color:#999;}
+.dataDet ul.main_left_right li em{display:inline-block; width:1.1875rem; height:1.1875rem; line-height:1.1875rem; text-align:center; border-radius:50%; background:#d0d0d0; margin-right:0.625rem; }
+.dataDet ul.main_left_right li em i{color:#fff;}
+.dataDet ul.main_left_right li.current{ height:auto; background:#fff; color:#666;}
+.dataDet ul.main_left_right li.current em{ background:#11c8d8;}
+.dataDet ul.main_left_right li .word{ padding-left:1.8125rem; line-height:1.25rem; color:#999;}

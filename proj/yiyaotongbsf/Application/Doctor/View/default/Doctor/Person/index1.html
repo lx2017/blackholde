@@ -1,0 +1,72 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con no_pad homePageDc">
+        <div class="top">
+            <dl class="info">
+                <dt><img src="{$userinfo.image}" onerror="this.src='__IMG__/head1.png'" /></dt>
+                <dd>{$userinfo.name}</dd>
+                <dd>{$userinfo.clinic}</dd>
+            </dl>
+            <div class="dlBox">
+                <dl>
+                    <dt>{$userinfo.score}</dt>
+                    <dd>评分</dd>
+                </dl>
+                <dl>
+                    <dt>{$userinfo.theat_num}</dt>
+                    <dd>诊断</dd>
+                </dl>
+                <dl>
+                    <dt>{$userinfo.consult_num}</dt>
+                    <dd>咨询</dd>
+                </dl>
+            </div>
+        </div>
+        <ul class="main_left_right bg_f pad_l_r no_pad">
+            <li><a href="{:U('/Doctor/Doctor/Person/permit')}">执业资质：<span><i>&#xe604;</i></span><span>{$userinfo.permit}</span></a></li>
+            <li><a href="javascript:void(0)">执业地址：<span>{$userinfo.address}</span></a></li>
+        </ul>
+        <div class="bg_f pad_l_r textareaBox">
+            <p>擅长</p>
+            <textarea name="good" id="good" >{$userinfo.good}</textarea>
+            <p>简介</p>
+            <textarea name="intro" id="intro" >{$userinfo.intro}</textarea>
+            <div class="bBth blue"><a href="javascript:void(0)" id="save">保存</a></div>
+        </div>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //保存事件
+            var issend = false;
+            $('#save').click(function(){
+                if(issend) return false;
+                issend = true;
+                var good = $.trim($('#good').val());
+                var intro = $.trim($('#intro').val());
+                if(!good){
+                    layer_msg('请输入擅长信息');
+                    issend = false;
+                    return false;
+                }
+                if(!intro){
+                    layer_msg('请输入简介信息');
+                    issend = false;
+                    return false;
+                }
+                $.post(location.href,{good:good,intro:intro},function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('保存信息成功',1,function(){
+                            location.reload();
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

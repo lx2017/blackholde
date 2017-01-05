@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>订货统计</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/dropload.css">
+</head>
+<body>
+<div class='dorp_down_fororder'>
+	<div class="order_list_w">
+    <header class = "all_header">
+      <a class = "h_back_1 orderlistfor" href="javascript:void(0)" data-role-id='{$myself.role_id}'><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+      <span class = "h_title">订货统计</span>
+      <a class = "h_add" href="javascript:void(0)"></a>
+    </header>
+    <div class = "order_tips">共发出<span class = "order_num">{$total}</span>个订单，总金额<span class = "order_num">{$toralprice}</span>元</div>
+    <volist name='lists' id='v'>
+    <div class="weui-panel weui-panel_access">
+      <div class="weui-panel__hd">
+      	<div class="order_num_c">
+      		<span>订单号</span>
+      		<span>{$v.oid}</span>
+      	</div>
+      	<div class="order_status">
+      		{$v.status}
+      	</div>
+      </div>
+      <div class="weui-panel__bd">
+        <a href="/Home/SaleManager/County/orderInfo/oid/{$v.osid}/status/{$v.status}.html" class="weui-media-box weui-media-box_appmsg">
+          <div class="weui-media-box__hd">
+            <img class="weui-media-box__thumb" src="__SaleManager__/images/clinic.png" alt="">
+          </div>
+          <div class="weui-media-box__bd">
+              <h4 class="weui-media-box__title"><span>{$v.real_name}</span><span>{$v.role_name}</span></h4>
+              <div class="weui-media-box__desc">
+              	<div class = "order_date">{$v.add_date}</div>
+              	<div class = "order_price_c">
+	              	<span class = "order_p_n">总价：</span>
+	              	<span class = "order_price">{$v.total_price}</span>
+              	</div>
+              </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    </volist>
+	</div>
+</div>
+	<script src = "__SaleManager__/js/index.js"></script>
+	<script src = "__SaleManager__/js/Common.js"></script>
+	<script src = "__SaleManager__/js/dropload.min.js"></script>
+</body>
+<script>
+
+
+//下拉刷新
+var LoadEnd = false;
+// 每页展示10个
+var counter = 0;
+var num = 10;
+	var pageStart = 0;
+var dropload =$('.dorp_down_fororder').dropload({
+	scrollArea : window,
+	loadDownFn : function(me){
+		if(counter==0){
+			counter++;
+			 pageStart = counter*num;
+             me.resetload();
+			return false;
+		}
+		// 锁定
+        me.lock();
+        $.ajax({
+            type: 'GET',
+            url: '',
+            data:{'pageStart':pageStart},
+            dataType: 'json',
+            success: function(data){
+            		var vhtml='';
+            		counter++;
+                pageStart = counter*num;
+            	 	LoadEnd=true;
+            	 	if(data.data==null ||data.data=='undefined'){
+            	 		 me.noData();
+            	 		 me.unlock()
+		                // 代码执行后必须重置
+		                 me.resetload();
+            	 		 return false;
+            	 	}
+            	 	$(data.data).each(function(i,val) { 
+            	 		vhtml+='<div class="weui-panel weui-panel_access"><div class="weui-panel__hd"><div class="order_num_c">';
+            	 		vhtml+='<span>订单号</span><span>'+val.oid+'</span></div><div class="order_status">'+val.status+'</div>';
+            	 		vhtml+='</div> <div class="weui-panel__bd">';
+            	 		vhtml+=' <a href="/Home/SaleManager/County/orderInfo/oid/'+val.osid+'/status/'+val.status+'.html" class="weui-media-box weui-media-box_appmsg">';
+            	 		vhtml+='<div class="weui-media-box__hd">';
+            	 		if(val.head_img!=null &&val.head_img!=''){
+            	 			vhtml+='<img class="weui-media-box__thumb" src="'+val.head_img+'" alt="">';
+            	 		}else{
+            	 			vhtml+='<img class="weui-media-box__thumb" src="/Public/Home/SaleManager/images/clinic.png" alt="">';
+            	 		}
+            	 		vhtml+='</div><div class="weui-media-box__bd"><h4 class="weui-media-box__title"><span>'+val.real_name+'</span><span>'+val.role_name+'</span></h4>';	
+            	 		vhtml+='<div class="weui-media-box__desc">';  
+            	 		vhtml+='<div class="order_date">'+val.add_date+'</div>'; 	
+            	 		vhtml+='<div class="order_price_c"><span class="order_p_n">总价：</span><span class="order_price">'+val.total_price+'</span>';  		
+            	 		vhtml+='	</div></div> </div></a> </div> </div>';  		  
+				}); 
+            	 	if(vhtml!=''){
+            	 		$('.order_list_w').append(vhtml);
+            	 	}else{
+            	 		// 无数据
+                     me.noData();
+            	 	}
+            		me.unlock()
+                // 代码执行后必须重置
+                me.resetload();
+            },
+            error: function(xhr, type){
+            		me.unlock()
+                // 无数据
+                me.noData();
+                me.resetload();
+            }
+        });
+    }
+});
+</script>
+</html>

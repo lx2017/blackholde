@@ -1,0 +1,49 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content mes-mes" id="mycontain">
+        <volist name="list" id="vo">
+		<div class="aui-row myconsult" data-pid="{$vo.hx_name}" data-name="{$vo.name}">
+            <div class="aui-col-xs-2"><img src="__IMG__/zixun3.png"></div>
+            <div class="aui-col-xs-7">
+                <notempty name="vo['no_read_num']">
+                <div style="left:4.3rem;top:0;" class="aui-badge">{:$vo['now']==1?'':$vo['no_read_num']}</div>
+                </notempty>
+            	<p class="mes-mes-fp">咨询提醒</p>
+                <p class="mes-mes-sp">{$vo.name}医生回复了你</p>
+            </div>
+             <div class="aui-col-xs-3 mes-mes-date">{$vo.date2|strstr=###,' ',true}
+                 <eq name="vo.status" value="3">
+                 已评价
+                 <else/>
+                 <a href="{:U('assess',array('id'=>$vo['id'],'did'=>$vo['doctor_id']))}">去评价</a>
+                 </eq>
+             </div>
+		</div>
+        </volist>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('message_more')}",
+            obj:'mycontain'
+        };
+        $(function(){
+            //咨询按钮事件
+            $('#mycontain').on('click','.myconsult',function(e){
+                if(e.target.nodeName.toLowerCase()=='a'){ //a标签不触发
+                    return;
+                }
+                var myli = $(this);
+                //调用客户端
+                var pid = myli.data('pid');
+                var name = myli.data('name');
+                callmyclient(2,pid,name);
+            });
+        });
+    </script>
+</block>

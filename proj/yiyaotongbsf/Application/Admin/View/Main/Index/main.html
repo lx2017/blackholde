@@ -1,0 +1,141 @@
+<include file="Public/base"/>
+<header class="Hui-header cl"><a class="Hui-logo l" href="/">组件后台</a> <a class="Hui-logo-m l"></a>
+    <span class="Hui-subtitle l">V1.0</span>
+    <nav class="mainnav cl" id="Hui-nav">
+        <!--<ul>-->
+        <!--<volist name="__MENU__.main" id="menu">-->
+        <!--<li class="{$menu.class|default=''}"><a href="{$menu.url|U}">{$menu.title}</a></li>-->
+        <!--</volist>-->
+
+        <!--</ul>-->
+    </nav>
+    <ul class="Hui-userbar">
+        <li></li>
+        <li><a href="javascript:;" id="search_layer">搜索</a></li>
+
+        <li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">{:session('user_auth.username')} <i class="Hui-iconfont"> &#xe6d5;</i></a>
+            <ul class="dropDown-menu radius box-shadow">
+                <!--                <li><a href="#">切换账户</a></li>-->
+
+                <!--<li><a href="{:U($Think.ADMIN_PATH_NAME.'Login/Public/logout/')}">退出</a></li>-->
+                <li><a href="{:U($Think.ADMIN_PATH_NAME.'Login/Public/logout/')}">退出</a></li>
+            </ul>
+        </li>
+
+    </ul>
+    <a aria-hidden="false" class="Hui-nav-toggle" href="#"></a></header>
+<aside class="Hui-aside">
+    <input runat="server" id="divScrollValue" type="hidden" value=""/>
+
+    <div class="menu_dropdown bk_2">
+
+        <notempty name="_extra_menu">
+            {// 动态扩展菜单 //}
+            {:extra_menu($_extra_menu,$__MENU__)}
+        </notempty>
+        <volist name="__MENU__" id="menu">
+            <!-- 子导航 -->
+            <notempty name="menu">
+                <if condition="$menu['title'] eq '数据库管理'">
+				    <dl id="menu-product" style='display:none'>
+						<dt><i class="Hui-iconfont">&#xe687;</i> {$menu.title}<i class="Hui-iconfont menu_dropdown-arrow">
+							&#xe6d5;</i></dt>
+						<dd>
+							<ul>
+								<volist name="menu.childs" id="child">
+									<li>
+										<a _href="<?php $str = $Think.ADMIN_PATH_NAME.$child['url'];echo U($str,array('key'=>$child['key']))?>"
+										   href="javascript:void(0)">{$child.title}</a>
+									</li>
+								</volist>
+							</ul>
+						</dd>
+					</dl>
+				<else />
+					<dl id="menu-product">
+						<dt><i class="Hui-iconfont">&#xe687;</i> {$menu.title}<i class="Hui-iconfont menu_dropdown-arrow">
+							&#xe6d5;</i></dt>
+						<dd>
+							<ul>
+								<volist name="menu.childs" id="child">
+									<li>
+										<a _href="<?php $str = $Think.ADMIN_PATH_NAME.$child['url'];echo U($str,array('key'=>$child['key']))?>"
+										   href="javascript:void(0)">{$child.title}</a>
+									</li>
+								</volist>
+							</ul>
+						</dd>
+					</dl>
+				</if>
+            </notempty>
+            <!-- /子导航 -->
+        </volist>
+    </div>
+</aside>
+<div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<section class="Hui-article-box">
+    <div id="Hui-tabNav" class="Hui-tabNav">
+        <div class="Hui-tabNav-wp">
+            <ul id="min_title_list" class="acrossTab cl">
+                <li class="active"><span title="我的桌面" data-href="welcome.html">我的桌面</span><em></em></li>
+            </ul>
+        </div>
+        <div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S"
+                                                  href="javascript:"><i class="Hui-iconfont">&#xe6d4;</i></a><a
+                id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:"><i class="Hui-iconfont">
+            &#xe6d7;</i></a></div>
+    </div>
+    <div id="iframe_box" class="Hui-article">
+        <div class="show_iframe">
+            <div style="display:none" class="loading"></div>
+            <iframe scrolling="yes" frameborder="0" src="{:U($Think.ADMIN_PATH_NAME.'Login/Public/windows')}"></iframe>
+        </div>
+    </div>
+
+
+</section>
+
+<script type="text/javascript">
+    /*资讯-添加*/
+    function article_add(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+    }
+    /*图片-添加*/
+    function picture_add(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+    }
+    /*产品-添加*/
+    function product_add(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+    }
+    /*用户-添加*/
+    function member_add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
+</script>
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s)
+    })();
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
+</script>

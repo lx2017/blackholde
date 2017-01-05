@@ -1,0 +1,30 @@
+<volist name="list" id="vo">
+    <li data-status="{$vo.status}"  data-id="{$vo.id}" data-pid="{$vo.hx_name}" data-name="{$vo.name}">
+        <div class="person">
+            <span class="c_icon span1 headSpan"><img src="{$vo.p_image}"  onerror="this.src='__IMG__/head1.png'"></span>
+            <span class="c_333 span2">{$doctor}</span>
+        </div>
+        <div class="time">
+            <span class="c_icon span1"><i class="c_orange">&#xe661;</i></span>
+            <span class="span2">{$vo.time}</span>
+        </div>
+        <ol>
+            <li>
+                <em>预约患者</em><span>{$vo.name}</span>
+            </li>
+            <li>
+                <em>预约时间</em><span>{$vo.time}</span>
+            </li>
+        </ol>
+        <p class="singleLine">
+            <b class="right c_blue myconsult">沟通</b>
+        </p>
+        <div class="divR">
+            <eq name="vo.status" value="1">
+                <a href="javascript:;" class="a2 bg_blue myconsult">未读</a>
+                <else />
+                <a href="javascript:;" class="a2 bg_gray myconsult">已读</a>
+            </eq>
+        </div>
+    </li>
+</volist>

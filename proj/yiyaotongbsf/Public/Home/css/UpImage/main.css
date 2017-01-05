@@ -1,0 +1,128 @@
+
+
+.avatar-view {
+  display: block;
+  margin: 15% auto 5%;
+  height: 220px;
+  width: 220px;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.avatar-view img {
+  width: 100%;
+}
+
+.avatar-body {
+  padding-right: 15px;
+  padding-left: 15px; position:relative; padding-top:25px;
+}
+.avatar-body.selectedimg{ padding-top:45px;}
+.avatar-body.selectedimg .avatar-upload{ padding-top:0px; top:4px;}
+.avatar-body.selectedimg .avatar-upload .btn{ line-height:18px; font-size:12px;}
+.avatar-upload {
+  overflow: hidden; padding:10px; position:absolute; width:360px; text-align:center; left:10px; cursor:pointer; padding-top:150px;
+}
+
+.avatar-input{ position:absolute; width:100%; height:100%; left:0px; top:0px; bottom:0px; opacity:0;cursor:pointer;}
+
+.avatar-upload label {
+  display: block; margin:0 auto;
+  clear: both;
+  width: 100px;
+}
+
+.avatar-upload input {
+  display: block;
+  margin-left: 110px;
+}
+
+.avater-alert {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.UploadTxBox-left{ border:1px dashed #b5c9d8; padding:6px; box-sizing:border-box;}
+
+.avatar-wrapper {
+  height: 364px; width:364px;
+  width: 100%;
+  background-color: #e9f3f8; border:1px solid #dce9ef; box-sizing:border-box;
+  overflow: hidden;
+}
+
+.avatar-wrapper img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.avatar-preview {
+  float: left;
+  margin-top:20px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+
+
+.avatar-preview img {
+  width: 100%;
+}
+
+.preview-lg {
+  height: 200px;
+  width: 200px;
+  margin-top:10px;
+}
+
+.preview-md {
+  height: 130px;
+  width: 130px;
+}
+
+.preview-sm {
+  height: 50px;
+  width: 50px;
+}
+
+@media (min-width: 992px) {
+  .avatar-preview {
+    float: none;
+  }
+}
+
+.avatar-btns {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.avatar-btns .btn-group {
+  margin-right: 5px;
+}
+
+.loading {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff url("../img/loading.gif") no-repeat center center;
+  opacity: .75;
+  filter: alpha(opacity=75);
+  z-index: 20140628;
+}
+
+.UploadTxBox-left{ width:368px; float:left;}
+.UploadTxBox-right{ width:210px; float:right; overflow:hidden;}
+.avatar-preview{ background:#e9f3f8; border:1px solid #cccccc}
+.UploadTxBox-view{ overflow:hidden;}
+.UploadTxBox-modal-body{ padding:10px 20px;}
+.UploadTxBox-btnbox{ padding:25px 0 20px;}

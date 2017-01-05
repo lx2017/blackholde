@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>销售部</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+	<div class="newMedicine">
+		<div class="info_nav nav_show">
+			<div class="info_head">
+				<div class="head_img">
+				 <if condition="!empty($myself['head_img'])"><img src="{$myself.head_img}" alt="暂无" style="width:70px;height:70px;border-radius:50%">
+					  <else /> <img src="__SaleManager__/images/people.png" alt="">
+				</if>
+				</div>
+				<div class = "info_name">{$myself.real_name}</div>
+			</div>
+			<div class="infos">
+			</div>
+			<div class="info_list">
+				<div class="weui-cells" style = "margin-top: 0">
+	       
+	       
+            <a class="weui-cell weui-cell_access" href="/Home/SaleManager/County/orderlist">
+            <div class="weui-cell__hd"><img src="__SaleManager__/images/clinic_order.png" alt="" style="width:35px;margin-right:10px;display:block"></div>
+            <div class="weui-cell__bd">
+                <p>省总订单</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </a>
+	        <a class="weui-cell weui-cell_access" href="/Home/WorkSummary/SaleSummary/index/saleId/{$myself.id}">
+	          <div class="weui-cell__hd"><img src="__SaleManager__/images/work_all.png" alt="" style="width:35px;margin-right:10px;display:block"></div>
+	          <div class="weui-cell__bd">
+	              <p>工作汇总</p>
+	          </div>
+	          <div class="weui-cell__ft"></div>
+	        </a>
+	      </div>
+			</div>
+		</div>
+		<!-- 消息 -->
+		<div class="info_nav msgs">
+      <header class = "all_header">
+        <a class = "h_back" href="javascript:void(0)"><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+        <span class = "h_title">消息</span>
+        <a class = "h_add" href="javascript:void(0)"></a>
+      </header>
+			<div class="weui-panel__bd">
+        <a href="/Home/SaleManager/County/infoList/tag/upinfo.html" class="weui-media-box weui-media-box_appmsg">
+          <div class="weui-media-box__hd">
+            <img class="weui-media-box__thumb" src="__SaleManager__/images/upInfo.png" alt="">
+          </div>
+          <div class="weui-media-box__bd">
+          	<div class = "msg_tips">
+            	<h4 class="weui-media-box__title">上级通知</h4>
+            	<span>{$supertime}</span>
+            </div>
+            <div class="msg_cont">
+            	<p class="weui-media-box__desc">{$lastupinfo}给您发了一条消息</p>
+            	<span class = "info_num">{$supercount}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="weui-panel__bd">
+        <a href="/Home/SaleManager/County/infoList/tag/downinfo.html" class="weui-media-box weui-media-box_appmsg">
+          <div class="weui-media-box__hd">
+            <img class="weui-media-box__thumb" src="__SaleManager__/images/downInfo.png" alt="">
+          </div>
+          <div class="weui-media-box__bd">
+          	<div class = "msg_tips">
+            	<h4 class="weui-media-box__title">下级通知</h4>
+            	<span>{$lowertime}</span>
+            </div>
+            <div class="msg_cont">
+            	<p class="weui-media-box__desc">{$lastdowninfo}给您发了一条消息</p>
+            	<span class = "info_num">{$lowercount}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+     <!--  <div class="weui-panel__bd">
+        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+          <div class="weui-media-box__hd">
+            <img class="weui-media-box__thumb" src="__SaleManager__/images/xitongInfo.png" alt="">
+          </div>
+          <div class="weui-media-box__bd">
+          	<div class = "msg_tips">
+            	<h4 class="weui-media-box__title">系统消息</h4>
+            	<span>昨天</span>
+            </div>
+            <div class="msg_cont">
+            	<p class="weui-media-box__desc">系统升级到了1.12</p>
+            	<span class = "info_num">1</span>
+            </div>
+          </div>
+        </a>
+      </div> -->
+		</div>
+		<!-- 个人 -->
+		<div class="info_nav set_cont">
+      <header class = "all_header">
+        <a class = "h_back" href="javascript:void(0)"><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+        <span class = "h_title">个人</span>
+        <a class = "h_add" href="javascript:void(0)"></a>
+      </header>
+			<div class="weui-cells">
+        <a class="weui-cell weui-cell_access" href="/Home/SaleManager/County/personData/userId/{$myself.id}/x/nosecret/f/page.html">
+          <div class="weui-cell__bd">
+              <p>个人设置</p>
+          </div>
+          <div class="weui-cell__ft">
+          </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="/Home/SaleManager/Login/changePassword">
+          <div class="weui-cell__bd">
+              <p>修改密码</p>
+          </div>
+          <div class="weui-cell__ft">
+          </div>
+        </a>
+       <!--  <a class="weui-cell weui-cell_access" href="javascript:void(0);">
+          <div class="weui-cell__bd">
+              <p>系统消息</p>
+          </div>
+          <div class="weui-cell__ft">
+          </div>
+        </a> -->
+        <a class="weui-cell weui-cell_access" href="javascript:void(0);">
+          <div class="weui-cell__bd">
+              <p>新消息通知</p>
+          </div>
+          <div class="weui-cell__ft">
+          </div>
+        </a>
+      </div>
+
+      <div class="weui-cells">
+       
+        <a class="weui-cell weui-cell_access" href="javascript:void(0);">
+          <div class="weui-cell__bd">
+              <p>意见反馈</p>
+          </div>
+          <div class="weui-cell__ft">
+          </div>
+        </a>
+      <!--   <a class="weui-cell weui-cell_access" href="javascript:void(0);">
+          <div class="weui-cell__bd">
+              <p>去评分</p>
+          </div>
+          <div class="weui-cell__ft">
+          </div>
+        </a> -->
+      </div>
+		</div>
+		<div class="weui-btn-area loginout" style='display:none'>
+                    <a class="weui-btn quit_btn" href="javascript:">退出登录</a>
+                </div>
+		<div class="weui-tabbar">
+	    <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
+        <span class = "work_active_icon common_icon"></span>
+	      <!-- <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon"> -->
+	      <p class="weui-tabbar__label">工作</p>
+	    </a>
+	    <a href="javascript:;" class="weui-tabbar__item">
+        <span class = "info_icon common_icon"></span>
+	      <!-- <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon"> -->
+	      <p class="weui-tabbar__label">消息<span class="new_info">{$total}</span></p>
+	    </a>
+	    <a href="javascript:;" class="weui-tabbar__item">
+        <span class = "person_icon common_icon"></span>
+	      <!-- <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon"> -->
+	      <p class="weui-tabbar__label">个人</p>
+	    </a>
+	  </div>
+	</div>
+	<script src = "__SaleManager__/js/index.js"></script>
+</body>
+</html>

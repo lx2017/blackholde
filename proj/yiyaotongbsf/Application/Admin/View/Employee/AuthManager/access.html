@@ -1,0 +1,91 @@
+<!-- 管理员用户组新增和编辑页面 -->
+<include file="Public/base"/>
+<div class="pd-20">
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <li class="current"><a href="javascript:">访问授权</a></li>
+            <!--<if condition="isset($actions['AUTHCATEGORY'])">-->
+            <!--<li>-->
+            <!--<a href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHCATEGORY']['url'];echo U($str,array('key'=>$actions['AUTHCATEGORY']['key'],'group_name'=>I('group_name'),'group_id'=>I('group_id'))) ?>">分类授权</a>-->
+            <!--</li>-->
+            <!--</if>-->
+            <if condition="isset($actions['AUTHEMPLOYEE'])">
+                <li>
+                    <a href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHEMPLOYEE']['url'];echo U($str,array('key'=>$actions['AUTHEMPLOYEE']['key'],'group_name'=>I('group_name'),'group_id'=>I('group_id'))) ?>">成员授权</a>
+                </li>
+            </if>
+            <noempty name="authGroups">
+                <li class="fr">
+                    <select name="group">
+                        <volist name="authGroups" id="vo">
+                            <option value="{:U('',array('key'=>I('key'),'group_id'=>$vo['id']))}"
+                            <if condition="$vo['id'] eq (int)I('group_id')">selected</if>
+                            >{$vo.title}
+                            </option>
+                        </volist>
+                    </select>
+                </li>
+            </noempty>
+
+        </ul>
+        <div class="tab-content">
+            <!-- 访问授权 -->
+            <div class="tab-pane in">
+                <form action="{:U('',array('key'=>I('key'),'group_id'=>I('group_id')))}" method="POST"
+                      class="form-horizontal auth-form" id="authGroupModuleForm">
+                    <volist name="node_list" id="node">
+                        <dl class="checkmod">
+                            <dt class="hd">
+                                <label class="checkbox"><input class="auth_rules rules_all" type="checkbox"
+                                                               name="rules[]"
+                                                               value="{$node.key}" {$node.checked}>{$node.title}</label>
+                            </dt>
+                            <dd class="bd">
+                                <present name="node['child']">
+                                    <volist name="node['child']" id="child">
+                                        <div class="rule_check">
+                                            <div>
+                                                <label class="checkbox"
+                                                <notempty name="child['tip']">title='{$child.tip}'</notempty>
+                                                >
+                                                <input class="auth_rules rules_row" type="checkbox" name="rules[]"
+                                                       value="{$child.key}" {$child.checked}/>{$child.title}
+                                                </label>
+                                            </div>
+                                            <notempty name="child['child']">
+                                                <span class="divsion">&nbsp;</span>
+                                                <span class="child_row">
+                                                <volist name="child['child']" id="op">
+                                                    <label class="checkbox"
+                                                    <notempty name="op['tip']">title='{$op.tip}'</notempty>
+                                                    >
+                                                    <input class="auth_rules rules_op" type="checkbox" name="rules[]"
+                                                           value="{$op.key}" {$op.checked}/>{$op.title}
+                                                    </label>
+                                                </volist>
+                                                </span>
+                                            </notempty>
+                                        </div>
+                                    </volist>
+                                </present>
+                            </dd>
+                        </dl>
+                    </volist>
+                    <button type="button" class="btn btn-primary radius" id="editAuthGroupModuleBtn">确 定</button>
+                    <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回
+                    </button>
+                </form>
+            </div>
+
+            <!-- 成员授权 -->
+            <div class="tab-pane"></div>
+
+            <!-- 分类 -->
+            <div class="tab-pane"></div>
+        </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="__CSS__/tab.css" media="all">
+    <script type="application/javascript" src="__STATIC__/qtip/jquery.qtip.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/qtip/jquery.qtip.min.css" media="all">
+    <script type="application/javascript" src="__JS__/Employee/auth.js"></script>
+</div>

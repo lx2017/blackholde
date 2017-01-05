@@ -1,0 +1,321 @@
+<include file="Public/base"/>
+<link rel="stylesheet" href="__STATIC__/ztree/css/demo.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="__STATIC__/ztree/css/zTreeStyle/ali-ztree.css" type="text/css">
+
+<script type="text/javascript" src="__STATIC__/ztree/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="__STATIC__/ztree/js/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="__STATIC__/ztree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="__STATIC__/ztree/js/jquery.ztree.exedit.js"></script>
+<script type="text/javascript" src="__STATIC__/ztree/js/jquery.ztree.exhide.js"></script>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+
+<style>
+	/*.ztree li span.button.edit {
+		display:block;
+	}*/
+</style>
+<script type="text/javascript">
+	//点击x删除图片
+	$('.del-img').live('click',function(){
+		var liObj = $(this).parents('li');
+		//找到父级li里面的地址
+		var path = liObj.attr('path');
+		var thumb = liObj.attr('thumb');
+		//发异步到服务器删除
+		$.ajax({
+			type:"post",
+			url:$("#hiddenajax").val(),
+			data:{path:path,thumb:thumb},
+			success:function(data){
+				//移除图片
+				liObj.remove();
+			}
+			
+		});
+	})
+</script>
+
+<SCRIPT type="text/javascript">
+	var setting = {
+		
+		edit: {
+			enable: true,
+			showRenameBtn:false,
+			showRemoveBtn:true
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			onRemove : zTreeOnRemove ,
+			onClick: zTreeOnClick
+			//onRename: zTreeOnRename
+		}
+	};
+		
+	var zNodes ={$data};
+	var i=1;
+	
+	function zTreeOnClick(event, treeId, treeNode) {
+		$("div#add").remove();
+		i++;
+		if(i%2==0){
+			$("#right").show();
+			var html='';
+			$.ajax({
+				type:"post",
+				url: $("#edit").val(),
+				dataType:"json",
+				data:{column_id:treeNode.id,column_pid:treeNode.pId},
+				
+				success:function(pp){
+					html='<div id="add" class="ali-ztree-add">';
+					html+='<form  id="editGroupForm" method="post" action="" enctype="multipart/form-data" >';
+					html+='<p><label for="auth-title" class="form-label col-3">文章所属栏目</label>';
+					html+='<select class="input" id="auth-title" class="ali-select" name="column_pid" class="input-text" value="{$auth_group.title}" required minlength="0" maxlength="20">';
+					$.each(pp.column,function(k,v){
+						html+='<option value="'+v.column_id+'" <if condition="'+v.column_id+' eq '+pp.column_pid+'" > selected </if> >';
+						html+=v.column_title;
+						html+='</option>';
+					});	
+					html+='</select></p>';
+					
+					html+='<p style="margin-bottom:15px;"><label for="auth-title" class="form-label col-3">栏目名称</label>';
+					html+='<input class="input" type="text" name="column_title" value="'+pp.column_title+'" /></p>'
+					html+='<input class="input" type="hidden" name="column_id" value="'+pp.column_id+'" />';
+					html+='<p style="margin-bottom:15px;"><label class="form-label col-3">颜色</label>';
+					html+='<input class="input" type="text" name="app_color_style" value="'+pp.app_color_style+'" /></p>';
+					html+='<p style="margin-bottom:15px;"><label class="form-label col-3">排序第几位</label>';
+					html+='<input class="input" type="text" name="sort" value="'+pp.sort+'" /></p>';
+					html+='<p style="margin-bottom:15px;"><label class="form-label col-3">Logo原图</label>';
+					html+='<input class="input" type="text" name="app_icon_url" value="'+pp.app_icon_url+'" /></p>';
+					html+='<p><label class="form-label col-3">更换Logo</label>';
+					html+='<img width=130 height=50 src="'+pp.app_icon_url+'" /></p>';
+					html+='<input class="btn btn-primary radius" type="submit" value="确定"> ';
+					html+='<input type="hidden" name="app_icon_url" value="'+pp.app_icon_url+'"/>';
+					html+='</form>';
+					html+='</div>';
+					
+					$("#right").prepend(html);	
+				},
+				
+				error:function(){
+				}
+			});
+		}else{
+			$("#right").hide();
+		}
+	};
+	function zTreeOnRemove(event, treeId, treeNode) {
+		
+		$.ajax({
+			type:"get",
+			url: $("#del").val(),
+			dataType:"json",
+			data:{id:treeNode.id},
+			
+			success:function(pp){
+				
+				
+			},
+			error:function(){
+				
+			}
+		});
+		
+	}
+	function zTreeOnRename(event, treeId, treeNode, isCancel) {
+
+			$.ajax({
+				type:"post",
+				url: $("#edit").val(),
+				dataType:"json",
+				data:{column_id:treeNode.id,column_title:treeNode.name,column_pid:treeNode.pId},
+				
+				success:function(pp){
+					//TODO
+				},
+				error:function(){
+					//TODO
+				}
+			});
+	}
+	function setEdit() {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+		remove = $("#remove").attr("checked");
+		rename = $("#rename").attr("checked");
+		removeTitle = $.trim($("#removeTitle").get(0).value);
+		renameTitle = $.trim($("#renameTitle").get(0).value);
+		zTree.setting.edit.showRemoveBtn = remove;
+		zTree.setting.edit.showRenameBtn = rename;
+		zTree.setting.edit.removeTitle = removeTitle;
+		zTree.setting.edit.renameTitle = renameTitle;
+		showCode(['setting.edit.showRemoveBtn = ' + remove, 'setting.edit.showRenameBtn = ' + rename,
+			'setting.edit.removeTitle = "' + removeTitle +'"', 'setting.edit.renameTitle = "' + renameTitle + '"']);
+	}
+	function showCode(str) {
+		var code = $("#code");
+		code.empty();
+		for (var i=0, l=str.length; i<l; i++) {
+			code.append("<li>"+str[i]+"</li>");
+		}
+	}
+	//是否显示编辑按钮
+	function  showRenameBtn(treeId, treeNode){
+		//获取节点所配置的noEditBtn属性值
+		if(treeNode.noEditBtn != undefined && treeNode.noEditBtn){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	//是否显示删除按钮
+	function showRemoveBtn(treeId, treeNode){
+		//获取节点所配置的noRemoveBtn属性值
+		if(treeNode.noRemoveBtn != undefined && treeNode.noRemoveBtn){
+			return false;
+		}else{
+			return true;
+		}
+	}
+		
+	$(document).ready(function(){
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		setEdit();
+		setting.edit.showRemoveBtn = remove;
+		setting.edit.showRenameBtn = rename;
+		$("#remove").bind("change", setEdit);
+		$("#rename").bind("change", setEdit);
+		$("#removeTitle").bind("propertychange", setEdit).bind("input", setEdit);
+		$("#renameTitle").bind("propertychange", setEdit).bind("input", setEdit);
+	
+		$("span#treeDemo_12_edit").show();
+	});
+</SCRIPT>
+	
+<if condition="isset($actions['COLUMNDEL'])">
+<input style="width:500px;" type="hidden" id='del' value="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNDEL']['url'];echo U($str,array('key'=>$actions['COLUMNDEL']['key'],'id'=>$vo['column_id']))?>" />
+</if>
+<if condition="isset($actions['COLUMNEDIT'])">
+<input style="width:500px;" type="hidden" id='edit' value="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNEDIT']['url'];echo U($str,array('key'=>$actions['COLUMNEDIT']['key'],'id'=>$vo['column_id']))?>" />
+</if>
+
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <div class="search-form fr cf">
+            <div class="sleft">栏目列表</div>
+        </div>
+    </div>
+    
+    <!-- 数据列表 -->
+
+    <div class="mt-20 mt-20-ali">
+        <div id="leftdiv" class="data-table ali-left">
+                <notempty name="data">
+                	<div class="zTreeDemoBackground ali-left" style="overflow:hidden" >
+						<ul id="treeDemo" class="ztree ali-ztree" style="">
+							
+						</ul>
+                	</div>
+					
+					<div id="right" class='ali-right'>
+				    <div class="formControls ali-col-5">
+						<!--上传开始 start-->
+						<div lab="uploadFile" class='ali-uploadFile'>
+							<input type="hidden" id="hiddenajax" value="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNLISTIMG']['url'];echo U($str,array('key'=>$actions['COLUMNLISTIMG']['key']))?>"  />
+							<input type="hidden" id="hidden" value="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNLISTUPLOADIFY']['url'];echo U($str,array('key'=>$actions['COLUMNLISTUPLOADIFY']['key']))?>"  />
+							<input id="file" type="file" multiple="true" name='app_icon_url'>
+							<span>类型: *.jpg,*.png 大小: 2000KB 数量: 1</span>
+							
+							<script type="text/javascript">
+								$('#file').uploadify({
+									'formData'    : {'session_id':'<?php echo session_id();?>'},
+									'fileTypeDesc' : '上传文件',//上传描述
+									'fileTypeExts' : '*.jpg;*.png',
+									'swf'      : '__STATIC__/uploadify/uploadify.swf',
+									'uploader' :$("#hidden").val(),
+									'buttonText':'选择文件',
+									'fileSizeLimit' : '2000KB',
+									'uploadLimit' : 11,//上传文件数
+									'width':65,
+									'height':25,
+									'successTimeout':10,//等待服务器响应时间
+									'removeTimeout' : 2,//成功显示时间
+									'onUploadSuccess' : function(file, data, response) {
+										data=$.parseJSON(data);
+										var imageUrl = data.name?data.url:'__STATIC__/uploadify/uploadify-cancel.png';
+										var li="<li thumb='"+data.thumb+"' path='"+data.savepath+"' url='"+data.url+"'><img src='"+imageUrl+"' style='width:100px;heigth:100px;'/><a href='javascript:;' style='color:red' class='del-img'>X</a>";
+										//把地址放到隐藏域，这样可以提交到服务器了
+										li += '</li>';
+										$("#uploadList ul").prepend(li);
+									}
+								});
+							</script>
+							<div id="uploadList">
+								<ul>
+				 
+								</ul>
+							</div>
+						</div>
+						<!--上传结束 end-->
+					</div>
+                </notempty>
+				
+                <empty name="data">
+                	<td colspan="9" class="text-center"> aOh! 暂时还没有内容!</td>
+                </empty>
+        </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <script type="application/javascript" src="__JS__/Employee/auth.js"></script>
+
+    <link href="__CSS__/employee/employee.css" rel="stylesheet" type="text/css"/>
+    <script src="__JS__/Employee/user.js"></script>
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+    <script type="text/javascript">
+    $(function(){
+    	var del="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNDEL']['url'];echo U($str,array('key'=>$actions['COLUMNDEL']['key'],'id'=>$vo['column_id']))?>";
+		//所有子集都隐藏
+      	$("tr[pid!=0]").hide();
+      	
+      	$("a.click-btn1").toggle(function(){
+      		//点击成为减号--展开
+      		$(this).removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      		//展开
+      		var cid=$(this).parents("tr").attr("cid");
+      		if($('tr[pid='+cid+']').length==0){
+      			alert("没有子分类");
+      		}else{
+      			$('tr[pid='+cid+']').show();
+      		}
+      		
+      	},function(){
+			//点击成为加号--收缩
+			$(this).removeClass('glyphicon-minus').addClass('glyphicon-plus');
+			var cid = $(this).parents('tr').attr('cid');
+			//下一级子集收缩
+			$('tr[pid='+cid+']').hide();
+			
+			//发送异步
+			$.ajax({
+				type:"get",
+				url: $(this).parents('tr.toptr').attr('_href'),
+				dataType:"json",
+				data:{id:cid},
+				success:function(pp){
+					//循环php返回来的子集cid
+					$.each(pp,function(k,v){
+						$("tr[cid="+v.column_id+"]").hide();
+					});
+					
+				}
+			});
+      	})
+    })
+    </script>
+</div>
+

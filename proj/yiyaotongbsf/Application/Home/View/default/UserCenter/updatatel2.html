@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="zh-CN" http-equiv="Content-Language" />
+    <title>修改手机号</title>
+    <meta content="mbaobao.com" name="Copyright" />
+    <meta content="关键字" name="Keywords" />
+    <meta content="描述" name="Description" />
+    <meta content="1GdE-bOwtaftzUH2-g1IcuNL7VYPf7t0qkI0vSpSPo0" name="google-site-verification" />
+    <meta property="qc:admins" content="1041326176652172176375" />
+
+
+    <link rel="stylesheet" type="text/css" href="__CSS__/UserCenter/member.css" media="all" />
+
+</head>
+<body class="register-box">
+<!-- 头部 -->
+<include file ="UserCenter/header"/>
+<!-- 头部 -->
+<!-- 注册模块 -->
+<h6 class="wrap findpassword-title">
+    修改手机号
+</h6>
+<div class="step-wrap wrap">
+    <ul>
+        <li>1.短信验证</li>
+        <li class="borderclear on">2.修改</li>
+        <li class="borderclear">3.完成</li>
+    </ul>
+</div>
+<div class="findpassword-wrap step-tel-1 step-tel-2 wrap">
+    <h6 class="title">你正在修改手机</h6>
+    <div class="input-wrap">
+        <div class="content-main">
+            <form name="form_tel" action="{:U('/Home/UserCenter/UserCenter/FinishSetMobile',array('x'=>'secrect','f'=>'json','t'=>'pc','mobile'=>$mobile))}" method="post" id="form_tel" class="form-wrap">
+                <div class="form-input other-wrap">
+                    <span class="userlogo"><img src="__IMG__/UserCenter/uselogo3.jpg" width="94" height="94"></span>
+                    <span class="show-txt">您的验证已经成功通过，请立即修订你绑定的新手机</span>
+                </div>
+                <div class="form-input tel-yz tel-yz2">
+                    <label class="label-titlex" for="newtel">新手机号码:</label>
+                    <input id="newtel" type="text" name="newtel" value="" placeholder="请填写您的新手机号码">
+                    <a href="javascript:" class="get-code" id="get-code3" _href="{:U('/Home/LoginAndRegister/Register/SendYzm',array('x'=>'nosecret','f'=>'json','t'=>'pc'))}">获取验证码</a>
+                    <span class="post_error"></span>
+                </div>
+                <div class="form-input bm10">
+                    <label class="label-titlex" for="telcode">短信验证码:</label>
+                    <input id="telcode" _href ="{:U('/Home/LoginAndRegister/Register/CheckYzm',array('x'=>'nosecret','f'=>'json','t'=>'pc'))}" type="text" name="telcode" value="" placeholder="请填写您的手机验证码">
+                    <span class="post_error"></span>
+                </div>
+
+                <div class="form-input">
+                    <input type="submit" class="submit-btn tel-step1" value="下一步" id="tel-step1">
+                 <!--   <a class="back-prev" href="#">上一步</a>-->
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- 注册模块 -->
+<!-- 底部公用模块 -->
+<include file="UserCenter/booter" />
+<!-- 底部公用模块 -->
+<script src="__JS__/jquery-2.0.0/jquery.min.js"></script>
+<script src="__JS__/UserCenter/updatatel.js"></script>
+</body>
+
+
+</html>

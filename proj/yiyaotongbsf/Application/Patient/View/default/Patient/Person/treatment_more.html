@@ -1,0 +1,17 @@
+<volist name="list" id="vo">
+	<div class="dr-content myconsult" data-id="{$vo.id}">
+		<img src="__IMG__/y.png">
+		<p>
+			{$vo.treat_time}
+			<span>
+				<eq name="vo['status']" value="1">
+					<a  href="javascript:;" class="go_assess" _href="{:U('/Patient/Patient/Patient/assess',array('id'=>$vo['id'],'did'=>$vo['doctor_id'],'pid'=>$vo['patient_id'],'type'=>2))}">去评价</a>
+				</eq>
+			</span>
+		</p>
+		<p>{$vo.symptom}</p>
+		<p><span>病情症状</span><span class="dr-span-left">{$vo.symptom}</span></p>
+		<p><span>诊断结果</span><span class="dr-span-left">{$vo.treatment}</span></p>
+		<p>{$vo.clinic}<span class="dr-spans">{$vo.doctor}</span><span class="dr-span-right">医生</span></p>
+	</div>
+</volist>

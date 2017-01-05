@@ -1,0 +1,139 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+
+            <if condition="isset($actions['EMPLOYEEADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius"
+                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEADD']['url'];echo U($str,array('key'=>$actions['EMPLOYEEADD']['key']))?>">新增</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['EMPLOYEERESUME'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius ajax-post " href="javascript:" id="enableAdminBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEERESUME']['url'];echo U($str,array('key'=>$actions['EMPLOYEERESUME']['key']))?>"
+                            >启用</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['EMPLOYEEFORBID'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius " href="javascript:" id="disableAdminBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEFORBID']['url'];echo U($str,array('key'=>$actions['EMPLOYEEFORBID']['key']))?>"
+                            >禁用</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['EMPLOYEEDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="javascript:"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEDELETE']['url'];echo U($str,array('key'=>$actions['EMPLOYEEDELETE']['key']))?>"
+                       id="deleteAdminBtn">删除</a>
+                 </span>
+            </if>
+
+        </notempty>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="nickname" class="search-input" value="{:I('nickname')}"
+                       placeholder="请输入用户昵称或者ID">
+                <a class="sch-btn" href="javascript:" id="search"
+                   url="<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Employee/User/index',array('key'=>$key));?>"><i
+                        class="Hui-iconfont btn-search">&#xe665;</i></a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 数据列表 -->
+
+    <div class="mt-20">
+        <div class="data-table table-striped">
+
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">UID</th>
+                    <th class="">昵称</th>
+                    <th class="">积分</th>
+                    <th class="">登录次数</th>
+                    <th class="">最后登录时间</th>
+                    <th class="">最后登录IP</th>
+                    <th class="">状态</th>
+                    <th class="">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo">
+                        <tr class="text-c">
+                            <td><input class="ids" type="checkbox" name="id" value="{$vo.uid}"/></td>
+                            <td>{$vo.uid}</td>
+                            <td>{$vo.nickname}</td>
+                            <td>{$vo.score}</td>
+                            <td>{$vo.login}</td>
+                            <td><span>
+                <if condition="$vo.last_login_time gt 0">
+                    {$vo.last_login_time|time_format}
+                    <else/>
+                    未登录
+                </if></span></td>
+                            <td><span>{:long2ip($vo['last_login_ip'])}</span></td>
+                            <td>{$vo.status_text}</td>
+                            <td>
+                                <if condition="isset($actions['EMPLOYEERESUME']) AND $vo['status'] eq 0">
+                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEERESUME']['url'];echo U($str,array('key'=>$actions['EMPLOYEERESUME']['key'],'id'=>$vo['uid']))?>">启用</a>
+                                </if>
+                                <if condition="isset($actions['EMPLOYEEFORBID']) AND $vo['status'] eq 1">
+                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEFORBID']['url'];echo U($str,array('key'=>$actions['EMPLOYEEFORBID']['key'],'id'=>$vo['uid']))?>">禁用</a>
+                                </if>
+                                <if condition="isset($actions['EMPLOYEEDELETE'])">
+                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEDELETE']['url'];echo U($str,array('key'=>$actions['EMPLOYEEDELETE']['key'],'id'=>$vo['uid']))?>">删除</a>
+                                </if>
+
+                            </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="text-center"> aOh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <link href="__CSS__/employee/employee.css" rel="stylesheet" type="text/css"/>
+
+    <script src="__JS__/Employee/user.js"></script>
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function () {
+            var url = $(this).attr('url');
+            var query = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+            query = query.replace(/^&/g, '');
+            if (url.indexOf('?') > 0) {
+                url += '&' + query;
+            } else {
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function (e) {
+            if (e.keyCode === 13) {
+                $("#search").click();
+                return false;
+            }
+        });
+
+    </script>
+</div>

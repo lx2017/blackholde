@@ -1,0 +1,43 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="aui-content">
+        <div class="index-noresult-head">
+            <div class="aui-row index-search-list">
+                <div class="aui-col-xs-10 index-no-select">
+                    <div class="aui-row">
+                        <!--<div class="aui-col-xs-3 index-col-4">
+                            <span>全部</span>
+                            <span><img class="index-select-png"src="__IMG__/select.png"></span>
+                        </div>-->
+                        <div class="aui-col-xs-9 index-select-input">
+                            <input type="text" id="name" value="{$name}" placeholder="搜索疾病">
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-col-xs-2 index-select-cancel mysearch">搜索</div>
+            </div>
+        </div>
+    </div>
+    <div class="me-wrap-click"  id="mycontain">
+        <volist name="list" id="vo">
+            <span class="me-pa-click me-noclick"  onclick="location.href='{:U('diseasedetail',array('id'=>$vo['id']))}'">{$vo.disease_name}</span>
+        </volist>
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //搜索
+        $('.mysearch').click(function () {
+            var name = $('#name').val();
+            location.href = ('{:U("more_disease")}'+'?name='+name);
+        });
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('more_disease_more',array('name'=>$name))}",
+            obj:'mycontain'
+        };
+    </script>
+</block>

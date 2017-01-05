@@ -1,0 +1,9 @@
+<volist name="list" id="vo">
+    <div class="aui-row me-moactiv-bo">
+        <div class="aui-col-xs-3"><img src="{$vo.image}"></div>
+        <div class="aui-col-xs-9 me-moreactivi-left">
+            <span class="me-mydoc-p"><a href="{:U('info_detail',array('id'=>$vo['id']))}">{$vo.title}</a></span>
+            <p class="index-mo-info">{$vo.content|msubstr=0,20}}</p>
+        </div>
+    </div>
+</volist>

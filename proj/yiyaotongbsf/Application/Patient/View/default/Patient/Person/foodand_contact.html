@@ -1,0 +1,57 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+		<div class="me-comment">
+    		<img src="__IMG__/green.png"><span class="me-com-com">食物和接触过敏</span>
+		</div>
+		<div class="me-wrap-click contact">
+            <span class="me-pa-click <if condition="$contact eq '无'">  me-click <else />me-noclick </if>">无</span>
+            <span class="me-pa-click <if condition="$contact eq '化妆品'">  me-click <else />me-noclick </if>">化妆品</span>
+            <span class="me-pa-click <if condition="$contact eq '海鲜'">  me-click <else />me-noclick </if>">海鲜</span>
+            <span class="me-pa-click <if condition="$contact eq '花粉'">  me-click <else />me-noclick </if>">花粉</span>
+            <span class="me-pa-click <if condition="$contact eq '笋'">  me-click <else />me-noclick </if>">笋</span>
+            <span class="me-pa-click <if condition="$contact eq '香菇'">  me-click <else />me-noclick </if>">香菇</span>
+            <span class="me-pa-click <if condition="$contact eq '皮毛'">  me-click <else />me-noclick </if>">皮毛</span>
+            <span class="me-pa-click <if condition="$contact eq '西瓜'">  me-click <else />me-noclick </if>">西瓜</span>
+		</div>
+		<div class="me-peac-text">
+     		<textarea rows="4" cols="50" name="other" id="other" placeholder="可补充您的食物和接触过敏">{$other}</textarea>
+		</div>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(".me-pa-click").click(function(){
+            $(this).addClass("me-click");
+            $(this).siblings().removeClass("me-click");
+            $(this).siblings().addClass("me-noclick");
+        })
+
+        $(function(){
+            //保存事件
+            var issend = false;
+            $('#add').click(function(){
+                if(issend) return false;
+                issend = true;
+                var contact =$(".contact .me-click").text()
+                var other=$('#other').val();
+                if(other){
+                    var contact_allergy =contact+'、'+other;
+                }else{
+                    var contact_allergy =contact;
+                }
+
+                $.post(location.href,{contact_allergy:contact_allergy},function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('保存信息成功',1,function(){
+                            location.href='{:U("person_info",array("id"=>I("id")))}';
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

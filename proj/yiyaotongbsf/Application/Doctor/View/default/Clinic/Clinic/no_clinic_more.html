@@ -1,0 +1,19 @@
+<volist name="list" id="vo">
+<li>
+    <div class="pic"><img src="{$vo.p_image}"  onerror="this.src='__IMG__/head1.png'"></div>
+    <p><span class="name">{$vo.name}</span><em>{$vo.date}</em></p>
+    <div class="starBox ov_h">
+        <div class="left">
+            <a href="javascript:void(0)">{$vo.disease}</a>
+        </div>
+        <div class="right">
+            <for start="0" end="$vo['score']">
+            <span class="star"></span>
+            </for>
+        </div>
+    </div>
+    <div class="word">
+        {$vo.intro}
+    </div>
+</li>
+</volist>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/index.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<title>发布表单</title>
+</head>
+<body>
+<!---头部---->
+<div class="pub_head">
+	<div class="pub_top">
+		<img class="pub_img1" src="images/logo.png"/>
+		<div class="pub_left">
+			<span>猿码头</span>
+			<p>助力于中小企业的发展</p>
+		</div>
+		<div class="pub_right">
+			<a href="" class="pub_name">hi,猿码头<i></i></a>
+			<a href=""><img class="pub_img2" src="images/pho.png"/></a>
+		</div>
+	</div>
+</div>
+<!------end-------->
+<div class="pub_mid">
+	<div class="pub_md">
+		<a href="javascript:;" class="cur">编辑</a>
+		<a href="javascript:;">设置</a>
+		<a href="javascript:;">发布</a>
+		<a href="javascript:;">数据</a>
+	</div>
+</div>
+<div class="pub_bottom">
+	<div class="pub_bot">
+		<div class="pub_kk">
+			<div class="bot_top">猿码头问卷调查</div>
+			<div class="bot_cen">
+				<span class="bot_name">直接访问网址</span>
+				<div class="clear1"></div>
+				<input type="text" placeholder="http://www.yuanmt.cn" class="bot_input"/>
+				<span class="bot_two"><img src="images/wm.png"/></span>
+				<a href="">复制网址</a>
+				<a href="">直接打开</a>
+			</div>
+			<div class="bot_xx">
+				<span class="bot_name">分享到微信</span>
+				<div class="clear1"></div>
+				<img src="images/au_21.png"/>
+				<span class="bot_name">扫描二维码分享至微信</span>
+			</div>
+			<div class="bot_xc">
+				<span class="bot_name">打印表单</span>
+				<div class="clear1"></div>
+				<p class="bot_bm">如果你想让用户在纸上填写,可以放心把表单打印出来.我们为表单字段专门优化了打印的效果.</p>
+				<a class="bot_dy" href="">打印表单</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-----底部------->
+<div class="clear5"></div>
+<div class="con_bottom">
+	<div class="con_hed">
+		<img class="pub_img1" src="images/logo.png"/>
+		<div class="pub_left">
+			<a href="javascript:;" class="bum">首页</a>
+			<a href="javascript:;" class="bum">产品中心</a>
+			<a href="javascript:;" class="bum">发布需求</a>
+			<a href="javascript:;" class="bum">开发者入口</a>
+			<a href="javascript:;" class="bum">成功案例</a>
+			<a href="javascript:;" class="bum">关于我们</a>
+			<p class="con_bb">Copyright © 京ICP备14013455号-</p>
+		</div>
+	</div>
+</div>
+<!------end------>
+<script>
+	$(".pub_md a").click(function(){
+		$(".pub_md a").removeClass("cur");
+		$(this).addClass("cur");
+	})
+</script>
+</body>

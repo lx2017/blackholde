@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>更换业务员</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+<form action='' name='changsale'id='changsale' method='post'>
+
+<header class = "all_header">
+			<a class = "h_back" href="javascript:void(0)"><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+			<span class = "h_title">更换业务员</span>
+			<a class = "h_add" href="javascript:void(0)"></a>
+		</header>
+	<div class="changeCounty">
+		
+		<div class="weui-cells">
+	    <div class="weui-cell weui-cell_select" style = "padding: 0 15px;">
+	      <input type='hidden' name='origin_user' id='origin_user' value='{$userid}'>
+	      <div class="weui-cell__bd">
+	          <select class="weui-select" name="select1">
+	          <volist name='lists' id="v">
+	           <if condition="$v.id neq $userid">
+	          	 <option selected="" value="{$v.id}">{$v.real_name} {$v.phone}</option>
+			   </if>
+	          	
+	         </volist>
+	          </select>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="weui-btn-area">
+	    <a class="weui-btn change_btn" href="javascript:">确定</a>
+	  </div>
+  </div>
+  </form>
+</body>
+</html>
+<script>
+	$(document).on('click','.change_btn',function(){
+		$('#changsale').submit();
+	})
+	//返回
+	$(document).on('click','.h_back',function(){
+		history.go(-1);
+	})
+</script>

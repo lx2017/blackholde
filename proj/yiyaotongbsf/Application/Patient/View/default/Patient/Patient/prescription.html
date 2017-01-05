@@ -1,0 +1,43 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div>
+		<div class="mingfang-head">
+			<span><img src="__IMG__/seach-i.png" class="mysearch"></span>
+			<input type="text" class="left" id="name" value="{$name}" placeholder="搜索名方验方">
+		</div>
+		<div class="index-debase-zhenshi">
+            <volist name="list" id="vo">
+                <if condition="!$name || $vo['children']">
+                <div class="index-mingfang-list <eq name='i' value='1'> index-mingfang-click </eq>">
+                    <img src="__IMG__/green.png">
+                    <span class="<eq name='i' value='1'>index-mingfang-left</eq>">{$vo.prescription_type_name}</span>
+                    <div  <if condition="$vo['children']">class="index-mingfang-select"</if>>
+                        <volist name="vo['children']" id="voo">
+                        <div class="mingfang-select-top" onclick="location.href='{:U('receip_detail',array('id'=>$voo['id']))}'">
+                            <span >{$voo.prescription_name}</span>
+                            <span></span>
+                        </div>
+                       </volist>
+                    </div>
+                </div>
+                </if>
+            </volist>
+            </div>
+		</div>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //打开第一个
+            if($('.index-mingfang-list').length){
+                $('.index-mingfang-list').eq(0).click();
+            }
+            //搜索
+            $('.mysearch').click(function () {
+                var name = $('#name').val();
+                location.href = ('{:U("prescription")}'+'?name='+name);
+            });
+        });
+    </script>
+</block>

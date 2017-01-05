@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="zh-CN" http-equiv="Content-Language" />
+    <title>账户管理</title>
+    <meta content="mbaobao.com" name="Copyright" />
+    <meta content="关键字" name="Keywords" />
+    <meta content="描述" name="Description" />
+    <meta content="1GdE-bOwtaftzUH2-g1IcuNL7VYPf7t0qkI0vSpSPo0" name="google-site-verification" />
+    <meta property="qc:admins" content="1461364427635331446727" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/UserCenter/member1.css" media="all" />
+
+</head>
+<body class="register-box">
+<!-- 头部 -->
+<include file="UserCenter/header"/>
+<!-- 头部 -->
+<!-- 账户安全 -->
+<div class="wrap mysel-middle-wwap">
+    <ul class="middle-nav">
+        <li class="use-info"><a href="/Home/UserCenter/UserCenter/MyselfInfo"><i class="middle-logo"></i>个人信息</a></li>
+        <li class="use-security on"><a href="#"><i class="middle-logo"></i>账户安全</a></li>
+    </ul>
+    <div class="middle-contnet">
+        <h6 class="group-title">账户管理</h6>
+        <div class="group-list">
+            <ul>
+                <li>
+                    <div class="group-pic"><img src="__IMG__/UserCenter/m_01.jpg" width="109" height="109" /></div>
+                    <if condition="$userinfo.mobile neq ''">
+                    <p class="m-tel"> {$userinfo.mobile} </p>
+                    <a href="{:U('/Home/UserCenter/UserCenter/ResetMobile',array('x'=>'secrect','f'=>'json','t'=>'pc','mobile'=>$mobile))}" class="updata-b">修改</a>
+                    <else/>
+                        <p class="m-tel"> 暂无手机号 </p>
+                        <a href="{:U('/Home/UserCenter/UserCenter/AddMobile',array('x'=>'secrect','f'=>'json','t'=>'pc','mobile'=>$mobile))}" class="updata-b">绑定</a>
+                    </if>
+                </li>
+                <li>
+                    <div class="group-pic"><img src="__IMG__/UserCenter/m_02.jpg" width="109" height="109" /></div>
+                    <if condition="$userinfo.email neq ''">
+                        <p class="m-tel">{$userinfo.email}</p>
+                        <a href="{:U('/Home/UserCenter/UserCenter/ResetEmail',array('x'=>'secrect','f'=>'json','t'=>'pc','mobile'=>$mobile))}" class="updata-b">修改</a>
+                    <else/>
+                        <p class="m-tel">暂无绑定</p>
+                        <a href="{:U('/Home/UserCenter/UserCenter/AddEmail',array('x'=>'nosecrect','f'=>'json','t'=>'pc','mobile'=>$mobile))}" class="updata-b">绑定邮箱</a>
+                    </if>
+                </li>
+                <li>
+                    <div class="group-pic"><img src="__IMG__/UserCenter/m_03.jpg" width="109" height="109" /></div>
+                    <p class="m-tel">*********</p>
+                    <a href="{:U('/Home/UserCenter/UserCenter/UpUserPassword',array('x'=>'secrect','f'=>'json','t'=>'pc','mobile'=>$mobile))}" class="updata-b">修改</a>
+                </li>
+            </ul>
+        </div>
+        <h6 class="group-title">第三方管理</h6>
+        <div class="group-list three-save">
+            <ul>
+                <li>
+                    <div class="group-pic"><img src="__IMG__/UserCenter/m_04.jpg" width="98" height="98" /></div>
+                    <if condition="$userinfo.third_name eq ''">
+                        <a href="#" class="updata-b">绑定</a>
+                    <else/>
+                        <a href="{:U('/Home/UserCenter/UserCenter/Delthirdname',array('x'=>'secrect','f'=>'json','t'=>'pc','mobile'=>$mobile))}" class="updata-b">解绑</a>
+                    </if>
+                </li>
+                <li>
+                    <div class="group-pic"><img src="__IMG__/UserCenter/m_05.jpg" width="98" height="98" /></div>
+                    <if condition="$userinfo.third_name eq ''">
+                        <a href="#" class="updata-b">绑定</a>
+                    <else/>
+                        <a href="{:U('/Home/UserCenter/UserCenter/Delthirdname',array('x'=>'nosecrect','f'=>'nojson','t'=>'pc','third'=>$third_name))}" class="updata-b">解绑</a>
+                    </if>
+                </li>
+                <li>
+                    <div class="group-pic"><img src="__IMG__/UserCenter/m_06.jpg" width="98" height="98" /></div>
+                    <if condition="$userinfo.third_name eq ''">
+                        <a href="javascript:void(0);" onclick ="toQzoneLogin()" class="updata-b">绑定</a>
+                    <else/>
+                        <a href="{:U('/Home/UserCenter/UserCenter/Delthirdname',array('x'=>'nosecrect','f'=>'nojson','t'=>'pc','third'=>$third_name))}" class="updata-b">解绑</a>
+                    </if>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 账户安全 -->
+<!-- 底部公用模块 -->
+<include file="UserCenter/footer"/>
+<!-- 底部公用模块 -->
+
+</body>
+<script type="text/javascript">
+    var childWindow;
+    function toQzoneLogin()
+    {
+        childWindow = window.open("{:U('/Home/LoginAndRegister/Login/Qq_Login')}","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+    }
+    function closeChildWindow()
+    {
+        childWindow.close();
+    }
+</script>
+
+</html>

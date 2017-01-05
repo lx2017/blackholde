@@ -1,0 +1,65 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con dataDet">
+        <ul class="main_left_right" id="myurl">
+            <li class="current">
+                <p><em><i>&#xe606;</i></em>概述<span><i>&#xe620;</i></span><p>
+                <p class="word">
+                {$info.summary}
+                </p>
+            </li>
+            <li>
+                <p><em><i>&#xe606;</i></em>病因<span><i>&#xe620;</i></span></p>
+                <p class="word">
+                {$info.disease_reason}
+                </p>
+            </li>
+            <li>
+                <p><em><i>&#xe606;</i></em>临床表现<span><i>&#xe620;</i></span></p>
+                <p class="word">
+                {$info.clinical_manifestations}
+                </p>
+            </li>
+            <li>
+                <p><em><i>&#xe606;</i></em>并发症<span><i>&#xe620;</i></span></p>
+                <p class="word">
+                {$info.complication}
+                </p>
+            </li>
+            <li>
+                <p><em><i>&#xe606;</i></em>实验室检查<span><i>&#xe620;</i></span></p>
+                <p class="word">
+                {$info.laboratory_check}
+                </p>
+            </li>
+            <li>
+                <p><em><i>&#xe606;</i></em>诊断<span><i>&#xe620;</i></span></p>
+                <p class="word">
+                {$info.diagnosis}
+                </p>
+            </li>
+            <li>
+                <p><em><i>&#xe606;</i></em>治疗<span><i>&#xe620;</i></span></p>
+                <p class="word">
+                {$info.treatment}
+                </p>
+            </li>
+            <li>
+                <p><em><i>&#xe606;</i></em>预防<span><i>&#xe620;</i></span></p>
+                <p class="word">
+                {$info.prophylaxis}
+                </p>
+            </li>
+        </ul>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            $("#myurl>li").click(function(){
+                $(this).addClass("current").siblings().removeClass("current");
+            })
+        })
+    </script>
+</block>

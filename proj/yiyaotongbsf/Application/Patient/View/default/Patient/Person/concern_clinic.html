@@ -1,0 +1,23 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content" id="mycontain">
+	<div class="me-concen">
+			<span><span class="me-concern-dc"><a href="{:U('/Patient/Patient/Person/concern_doctor')}" style="color:#000">关注的医生</a></span><span class="me-concern-dc  me-click">关注的诊所</span></span>
+		</div>
+        <volist name="list" id="vo">
+		<div class="aui-row me-mydoc-bo">
+			<div class="aui-col-xs-3"><img class="me-mydoc-img" src="{$vo.clinic_pic}" onerror="this.src='__IMG__/clinic.png'"></div>
+			<div class="aui-col-xs-9 me-myclinic-left">
+    			<p class="me-mydoc-p">{$vo.clinic}</p>
+    			<p><span class="me-stars"><img src="__IMG__/starclick.png"></span><span class="me-fenshu"><span class="me-mydoc-p">{$vo.clinic_score}</span></span><span class="me-myclinic-sep me-conclinc-left">诊断量</span><span class="me-myclinic-sep me-conclinc-leftlitt">{$vo.clinic_treatment_volume}</span></p>
+    			<p class="me-myclinic-sep">地址：{$vo.clinic_address}</p>
+			</div>
+		</div>
+        </volist>
+		</div>
+
+    </block>
+
+<block name="js">
+
+</block>

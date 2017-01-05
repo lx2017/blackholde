@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>我的省总</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/dropload.css">
+</head>
+<body>
+<div class='dorp_down_fororder'>
+	<div class="mySaleMan">
+		<header class = "all_header">
+            <a class = "h_back_1" style='flex: 1;' href="/Home/SaleManager/Salemanager/index"><img src="__SaleManager__/images/back_icon.png" alt="" style="width:30px;vertical-align: middle;"></a>
+            <span class = "h_title">我的省总</span>
+            <a class = "h_add" href="./addSaleman.html">添加省总</a>
+        </header>
+		<div class="weui-cells">
+		<!-- 我的业务员列表 -->
+		<!-- <div class="weui-cell">
+		        <div class="weui-cell__hd sale_imgs" data-uid='{$myself.id}' data-role-id='{$v.role_id}'>
+		       	 <if condition="$myself.head_img neq ''"><img class = "sale_img" src="{$myself.head_img}" alt="暂无">
+					  <else /> <img class = "sale_img" src="__SaleManager__/images/people.png" alt="暂无">
+				</if>
+		       	 <img class = "sale_img" src="{$v.head_img}" alt="暂无">
+		        </div>
+		        <div class="weui-cell__bd">
+		          <p class = "sale_man">{$myself.real_name}</p>
+		        </div>
+		        <div class="weui-cell__ft">
+		        	<span class = "change_saleman" data-userid='{$myself.id}'>更换</span>｜
+		        	<span class = "sale_del" data-userid='{$myself.id}'>删除</span>
+		        </div>
+	    		</div> -->
+		<volist name="lists" id="v">
+			 <div class="weui-cell">
+		        <div class="weui-cell__hd sale_imgs" data-uid='{$v.id}' data-role-id='{$v.role_id}'>
+		       	 <if condition="$v.head_img neq ''"><img class = "sale_img" src="{$v.head_img}" alt="暂无">
+					  <else /> <img class = "sale_img" src="__SaleManager__/images/people.png" alt="暂无">
+				</if>
+		       	 <!-- <img class = "sale_img" src="{$v.head_img}" alt="暂无"> -->
+		        </div>
+		        <div class="weui-cell__bd">
+		          <p class = "sale_man">{$v.real_name}</p>
+		        </div>
+		        <div class="weui-cell__ft">
+		        	<span class = "change_saleman" data-userid='{$v.id}' data-role-id='{$v.role_id}'>更换</span>｜
+		        	<span class = "sale_del" data-userid='{$v.id}' data-role-id='{$v.role_id}'>删除</span>
+		        </div>
+	    		</div>
+		</volist>
+		<include file="./Application/Home/View/default/SaleManager/layer/popup.html"/>
+    </div>
+	</div>
+	</div>
+	<script src = "__SaleManager__/js/index.js"></script>
+	<script src = "__SaleManager__/js/dropload.min.js"></script>
+	<script>
+		var sessioncode;
+		var nosesstion_url;
+		var myself = '{$myself.id}';
+		var targetUserId ;
+		var saleClass;
+	 	//删除事件
+	 	$(document).on('click','.change_saleman',function(){
+	 		if($(this).attr('data-userid').trim()==myself){
+				$('.weui-dialog__bd').html("不能更换自己");
+	     		$('#confirm_dialog').css('display','block');
+	     		return false;
+			}
+	 	})
+		$(document).on("click",".sale_del",function(){
+			saleClass = $(this);
+			targetUserId=$(this).attr('data-userid').trim();
+			if($(this).attr('data-userid').trim()==myself){
+				$('.weui-dialog__bd').html("不能删除自己");
+	     		$('#confirm_dialog').css('display','block');
+	     		return false;
+			}
+			$.ajax({
+                url: "delSaleMan",
+                type: 'POST',
+                data: {'userid':$(this).attr('data-userid')},
+                async: false,
+                cache: false,
+               	dataType:"json",
+                success: function (returndata) {
+                	//session失效
+                	// 我的业务员
+					saleClass.parents(".weui-cell").remove();
+					
+               	 	if(returndata.code==2028){
+               	 		sessioncode=2028;
+               	 		nosesstion_url=returndata.data;
+	        	       	 	$('.weui-dialog__bd').html(returndata.msg);
+	        	     		$('#confirm_dialog').css('display','block');
+               	 	}else{
+	               	 	$('.weui-dialog__bd').html('删除成功');
+	             		$('#confirm_dialog').css('display','block');
+               	 	}
+                		
+                },
+                error: function (returndata) {
+                		$('.weui-dialog__bd').html("未知错误");
+             		$('#confirm_dialog').css('display','block');
+                }
+            });
+		})
+		$(document).on('click','.weui-dialog__btn_primary',function(){
+			if(sessioncode==2028){
+				window.location.href=nosesstion_url;
+			}
+			if(targetUserId == myself){
+				return false;
+			}
+		})
+		//下拉刷新
+		var LoadEnd = false;
+	 // 每页展示10个
+		var counter = 0;
+		var num = 10;
+    		var pageStart = 0;
+		var dropload =$('.mySaleMan').dropload({
+			scrollArea : window,
+			loadDownFn : function(me){
+				
+				if(counter==0){
+					counter++;
+					 pageStart = counter*num;
+                     me.resetload();
+					return false;
+				}
+				// 锁定
+                me.lock();
+		        $.ajax({
+		            type: 'GET',
+		            url: '',
+		            data:{'pageStart':pageStart},
+		            dataType: 'json',
+		            success: function(data){
+		            		var vhtml='';
+		            		counter++;
+                        pageStart = counter*num+1;
+	                	 	LoadEnd=true;
+	                	 	if(data.data==null ||data.data=='undefined'){
+	                	 		 me.noData();
+	                	 		 me.unlock()
+	    		                // 代码执行后必须重置
+	    		                 me.resetload();
+	                	 		 return false;
+	                	 	}
+	                	 	$(data.data).each(function(i,val) { 
+	                	 		vhtml+='<div class="weui-cell">';
+	                	 		vhtml+='<div class="weui-cell__hd sale_imgs" data-uid='+val.id+' data-role-id='+val.role_id+'>';
+	                	 		if(val.head_img!=''){
+	                	 			vhtml+='<img class="sale_img" src="'+val.head_img+'" alt="暂无">';
+	                	 		}else{
+	                	 			vhtml+='<img class="sale_img" src="/Public/Home/SaleManager/images/people.png" alt="暂无">';
+	                	 		}
+	                	 		vhtml+='</div>';
+	                	 		vhtml+='<div class="weui-cell__bd">';
+	                	 		vhtml+='<p class="sale_man">'+val.real_name+'</p> </div>';
+	                	 		vhtml+='<div class="weui-cell__ft">';
+	                	 		vhtml+='<span class="change_saleman" data-userid="'+val.id+'" data-role-id="'+val.role_id+'">更换</span>｜';
+	                	 		vhtml+='<span class="sale_del" data-userid="'+val.id+'" data-role-id="'+val.role_id+'">删除</span>';
+							vhtml+='</div></div>'; 
+						}); 
+	                	 	if(vhtml!=''){
+	                	 		$('.weui-cells').append(vhtml);
+	                	 	}else{
+	                	 		// 无数据
+	                         me.noData();
+	                	 	}
+	                		me.unlock()
+		                // 代码执行后必须重置
+		                me.resetload();
+		            },
+		            error: function(xhr, type){
+		            		me.unlock()
+                        // 无数据
+                        me.noData();
+		                me.resetload();
+		            }
+		        });
+		    }
+		});
+	</script>
+</body>
+</html>

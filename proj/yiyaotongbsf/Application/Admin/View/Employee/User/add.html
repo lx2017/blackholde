@@ -1,0 +1,47 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <form action="{$url}" method="post" class="form form-horizontal" id="addAdminForm">
+        <div class="row cl">
+            <label class="form-label col-3">登录名</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="username" value="" required minlength="2" maxlength="16"
+                       id="login_name" _target="{:U($Think.ADMIN_PATH_NAME.'Employee/NREmployee/checkLoginName')}">
+            </div>
+            <div class="col-4">（登录名会作为默认的昵称）</div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">密码</label>
+
+            <div class="formControls col-5">
+                <input type="password" class="input-text" name="password" value="" required minlength="6"
+                       maxlength="20" id="pass">
+            </div>
+            <div class="col-4">（登录密码密码不能少于6位）</div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">确认密码</label>
+
+            <div class="formControls col-5">
+                <input type="password" class="input-text" name="repassword" value="" equalTo="#pass">
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">邮箱</label>
+
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="email" value="" email="true"
+                       _target="{:U($Think.ADMIN_PATH_NAME.'Employee/NREmployee/checkEmail')}" id="email" required>
+            </div>
+            <div class="col-4">（员工邮箱，用于找回密码等安全操作）</div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <button class="btn btn-primary radius" id="submit" type="submit">确 定
+                </button>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__JS__/Employee/user.js"></script>

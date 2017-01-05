@@ -1,0 +1,74 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con homePageDc doctorPage no_pad">
+        <div class="floor1 bg_f">
+            <div class="P_main">
+                <div class="headLogo">
+                    <img src="{$doctor.image}" onerror="this.src='__IMG__/head1.png'" />
+                    <span>已认证</span>
+                </div>
+                <p class="doctor c_333">{$doctor.name}</p>
+                <p class="hospital c_666">{$userinfo['clinic_name']}</p>
+                <p class="tel c_blue">{$doctor.mobile}</p>
+                <p class="address c_999"><i class="c_blue">&#xe647;</i>&nbsp;&nbsp;{$userinfo['clinic_address']}</p>
+                <div class="dlBox">
+                    <dl>
+                        <dt class="c_333">{$doctor.score}</dt>
+                        <dd>评价</dd>
+                    </dl>
+                    <dl>
+                        <dt class="c_333">{$doctor.theat_num}</dt>
+                        <dd>诊断</dd>
+                    </dl>
+                    <dl>
+                        <dt class="c_333">{$doctor.consult_num}</dt>
+                        <dd>咨询</dd>
+                    </dl>
+                </div>
+                <p class="singleLine">身份证号&nbsp;&nbsp;&nbsp;&nbsp;<span class="c_333">{$doctor.idcard}</span></p>
+                <div class="photo ov_h">
+                    <span class="left">身份证照片</span>
+                    <span class="left mar_l_20">
+                        <volist name="doctor.imgs" id="img">
+                        <em><img src="{$img}"></em>
+                        </volist>
+                    </span>
+                </div>
+                <div class="introduce">
+                    <p>擅长</p>
+                    <div class="c_333 shanchang">{$doctor.good}</div>
+                    <p>简介</p>
+                    <div class="c_333">{$doctor.intro}</div>
+                </div>
+            </div>
+        </div>
+        <div class="floor2 bg_f">
+            <div class="P_main">
+                <h4>患者评价</h4>
+                <ul id="mycontain">
+                    <volist name="list" id="vo">
+                    <li>
+                        <div class="pic"><img src="{$vo.p_image}"  onerror="this.src='__IMG__/head1.png'"></div>
+                        <p><span class="name">{$vo.name}</span><em>{$vo.date}</em></p>
+                        <div class="word">{$vo.intro}</div>
+                    </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/swiper.min.js"></script>
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('view_doctor_more',array('id'=>$doctor['id']))}",
+            obj:'mycontain'
+        };
+    </script>
+</block>

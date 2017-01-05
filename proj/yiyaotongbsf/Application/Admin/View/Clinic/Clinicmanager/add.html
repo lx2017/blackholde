@@ -1,0 +1,42 @@
+<include file="Public/base"/>
+<!--表单-->
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="submitForm">
+        <div class="row cl">
+            <label class="form-label col-3">负责人名</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="name" value="{$name}" required id="name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">负责人手机</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="mobile" value="{$mobile}" required id="mobile">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">诊所id</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="clinic_id" value="{$clinic_id}" required id="clinic_id">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input type="hidden" name="id" id="id" value="{$id}">
+                <button class="btn btn-primary radius" id="submit" type="submit">确 定</button>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--引入js,css-->
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/add.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/laydate/laydate.js"></script>
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+    //验证相关
+    var validate_rules = {};
+    var validate_messages = {};
+</script>

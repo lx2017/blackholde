@@ -1,0 +1,94 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="aui-content mes-dc">
+        <div class="aui-row mes-de-bor">
+            <div class="aui-col-xs-3">满意度</div>
+            <div class="aui-col-xs-9">
+                <img class="mystart my_in" src="__IMG__/starclick.png">
+                <img class="mystart my_in" src="__IMG__/starclick.png">
+                <img class="mystart my_in" src="__IMG__/starclick.png">
+                <img class="mystart my_in" src="__IMG__/starclick.png">
+                <img class="mystart my_in" src="__IMG__/starclick.png">
+            </div>
+            <input type="hidden" name="score" id="socre" value="5">
+        </div>
+        <div class="aui-row mes-de-bor">
+            <div class="aui-col-xs-3">病名</div>
+            <div class="aui-col-xs-9"><input type="text" name="disease" id="disease" placeholder="请输入生病名称">
+            </div>
+        </div>
+        <div class="aui-row mes-de-bor">
+            <textarea rows="5" cols="50" name="intro" id="intro" placeholder="对医生的详细评价描述"></textarea>
+        </div>
+        <div class="mes-dc-btn">
+            <button class="aui-btn aui-btn-primary" id="sub">提交</button>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //点击分数
+            $('.mystart').click(function(){
+                var index = $(this).hasClass('my_in');
+                var obj = null;
+                var value = parseInt($('#socre').val());
+                if(index)
+                {
+                    //换掉最后一个的心
+                    obj = $('.mystart+.my_in');
+                    if(obj.length){
+                        obj.last().removeClass('my_in').attr('src','__IMG__/starnoclick.png');
+                        value = value-1;
+                    }
+                }
+                else
+                {
+                    //加第一个心
+                    obj = $('.mystart').not('.my_in');
+                    if(obj.length){
+                        obj.first().addClass('my_in').attr('src','__IMG__/starclick.png');
+                        value = value+1;
+                    }
+                }
+                $('#socre').val(value);
+            });
+            //保存数据
+            var issend = false;
+            $('#sub').click(function(){
+                if(issend) return false;
+                issend = true;
+                var url = '{$myurl}';
+                var score = $('#socre').val();
+                var disease = $.trim($('#disease').val());
+                var intro = $.trim($('#intro').val());
+                if(!disease){
+                    issend = false;
+                    layer_msg('请填写病名');
+                    return false;
+                }
+                if(disease.length>50){
+                    issend = false;
+                    layer_msg('病名太长了');
+                    return false;
+                }
+                if(!intro){
+                    issend = false;
+                    layer_msg('请填写评价描述');
+                    return false;
+                }
+                //提交数据
+                $.post(location.href,{disease:disease,score:score,intro:intro,url:url},function(data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('评价成功',2,function(){
+                            location.href = data.url;
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

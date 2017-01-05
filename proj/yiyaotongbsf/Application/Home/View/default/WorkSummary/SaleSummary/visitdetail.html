@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>拜访详情</title>
+	<script src="__PUBLIC__/Home/SaleManager/js/zepto.min.js"></script>
+	<link href="__PUBLIC__/Home/SaleManager/css/stylesheets/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__PUBLIC__/Home/SaleManager/css/stylesheets/index.css">
+</head>
+<body>
+	<div class="visitDetial_w">
+		<header class = "all_header">
+			<a class = "h_back" href="javascript:history.back();"><img src="__PUBLIC__/Home/SaleManager/images/back_icon.png" alt=""></a>
+			<span class = "h_title">拜访详情</span>
+			<a class = "h_add" href="javascript:void(0)"></a>
+		</header>
+		<div class = "visit_tips"><span>{$year}</span>年<span>{$month}</span>月拜访情况</div>
+		<div class="visit_head">
+			<span>日</span>
+			<span>一</span>
+			<span>二</span>
+			<span>三</span>
+			<span>四</span>
+			<span>五</span>
+			<span>六</span>
+		</div>
+		<div class="visit_cont">
+			<section class = "visit_c">
+				<span <if condition="$data[1]">class = "active_num"</if>>1</span>
+				<span <if condition="$data[2]">class = "active_num"</if>>2</span>
+				<span <if condition="$data[3]">class = "active_num"</if>>3</span>
+				<span <if condition="$data[4]">class = "active_num"</if>>4</span>
+				<span <if condition="$data[5]">class = "active_num"</if>>5</span>
+				<span <if condition="$data[6]">class = "active_num"</if>>6</span>
+				<span <if condition="$data[7]">class = "active_num"</if>>7</span>
+			</section>
+			<section class = "visit_c">
+				<span <if condition="$data[8]">class = "active_num"</if>>8</span>
+				<span <if condition="$data[9]">class = "active_num"</if>>9</span>
+				<span <if condition="$data[10]">class = "active_num"</if>>10</span>
+				<span <if condition="$data[11]">class = "active_num"</if>>11</span>
+				<span <if condition="$data[12]">class = "active_num"</if>>12</span>
+				<span <if condition="$data[13]">class = "active_num"</if>>13</span>
+				<span <if condition="$data[14]">class = "active_num"</if>>14</span>
+			</section>
+			<section class = "visit_c">
+				<span <if condition="$data[15]">class = "active_num"</if>>15</span>
+				<span <if condition="$data[16]">class = "active_num"</if>>16</span>
+				<span <if condition="$data[17]">class = "active_num"</if>>17</span>
+				<span <if condition="$data[18]">class = "active_num"</if>>18</span>
+				<span <if condition="$data[19]">class = "active_num"</if>>19</span>
+				<span <if condition="$data[20]">class = "active_num"</if>>20</span>
+				<span <if condition="$data[21]">class = "active_num"</if>>21</span>
+			</section>
+			<section class = "visit_c">
+				<span <if condition="$data[22]">class = "active_num"</if>>22</span>
+				<span <if condition="$data[23]">class = "active_num"</if>>23</span>
+				<span <if condition="$data[24]">class = "active_num"</if>>24</span>
+				<span <if condition="$data[25]">class = "active_num"</if>>25</span>
+				<span <if condition="$data[26]">class = "active_num"</if>>26</span>
+				<span <if condition="$data[27]">class = "active_num"</if>>27</span>
+				<span <if condition="$data[28]">class = "active_num"</if>>28</span>
+			</section>
+			<section class = "visit_c">
+				<span <if condition="$data[29]">class = "active_num"</if>>29</span>
+				<span <if condition="$data[30]">class = "active_num"</if>>30</span>
+				<span <if condition="$data[31]">class = "active_num"</if>>31</span>
+			</section>
+		</div>
+	</div>
+</body>
+</html>

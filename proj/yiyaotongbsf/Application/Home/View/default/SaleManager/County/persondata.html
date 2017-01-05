@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>个人资料</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+	<form action="" method="post" name="persondata" id="persondata" enctype="multipart/form-data">
+	<input type='hidden' name='userid' id='userid' value={$user.id}>
+	<div class="personData">
+		<header class = "all_header">
+	      <a class = "h_back infos" href="javascript:void(0)" data-role-id='{$myself.role_id}'><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+	      <span class = "h_title">个人资料</span>
+	      <a class = "h_add" href="javascript:void(0)"></a>
+	    </header>
+		<div class="weui-cells">
+      <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd head_img">
+        <input type="file" name="head_img" id="head_img" onchange=preview(this) style="visibility:hidden;position:absolute;top:0px;width:0px"/>
+         <if condition="!empty($user.head_img)"><img class = "person_img" src="{$user.head_img}" alt="暂无" id='file_click_5'>
+			  <else />  <img class = "person_img" src="__SaleManager__/images/people.png" alt="" id='file_click_5'>
+		</if>
+        </div>
+        <div class="weui-cell__ft">更换头像</div>
+      </a>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>姓名</p>
+        </div>
+        <div class="weui-cell__ft" >{$user.real_name}<input type='hidden' name='real_name' value='{$user.real_name}'></div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>手机号</p>
+        </div>
+        <div class="weui-cell__ft" >{$user.phone}<input type='hidden' name='phone' value='{$user.phone}'></div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>身份证号</p>
+        </div>
+        <div class="weui-cell__ft" >{$user.card_number}<input type='hidden' name='card_number' value='{$user.card_number}'></div>
+      </div>
+      <div class="weui-cell weui-cell_select">
+        <div class="weui-cell__bd">
+          <p style = "padding-left: 15px;">性别</p>
+        </div>
+        <div class="weui-cell__bd">
+          <select class="weui-select" name='sex'>
+           <if condition="$user.sex eq '男'">
+           		<option selected="selected" value="1">男</option>
+            		<option value="2">女</option>
+           <else />
+           		<option value="1">男</option>
+            		<option selected="selected"  value="2">女</option>
+           </if>
+          </select>
+        </div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>年龄</p>
+        </div>
+        <div class="weui-cell__ft">{$user.age}<input type='hidden' name='age' value='{$user.age}'></div>
+      </div>
+    </div>
+    <div class="identify_w">
+    	<div class="ident_head">身份证</div>
+    	<div class="ident_pic_w">
+    	<input type="file" name="card_front_img" id="card_front_img" onchange=preview(this) style="visibility:hidden;position:absolute;top:0px;width:0px"/>
+    	<if condition="!empty($user['card_front_img'])"><img  class = "ident_z" src="{$user.card_front_img}" alt="" id='file_click_4'>
+			  <else /> <img class = "ident_z" src="__SaleManager__/images/idetify.png" alt="" id='file_click_4'>
+	</if>
+	<p >
+	<input type="file" name="card_back_img" id="card_back_img" onchange=preview(this) style="visibility:hidden;position:absolute;top:0px;width:0px"/>
+    	<if condition="!empty($user['card_back_img'])"><img  class = "ident_f" src="{$user.card_back_img}" alt="" id='file_click_3'>
+			  <else /> <img class = "ident_f" src="__SaleManager__/images/idetify.png" alt="" id='file_click_3'>
+	</if>
+    </p>
+    	</div>
+    	<div class="ident_info">
+    		<span style = "flex:1">身份证正面</span>
+    		<span style = "flex:1">身份证反面</span>
+    	</div>
+    </div>
+    <div class="graduate_w">
+    	<div class="graduate_h">
+    		<span class = "gra_icon">|</span>
+    		<span>毕业证书</span>
+    	</div>
+    	<div class="graduate_img">
+    	<input type="file" name="graduate_img" id="graduate_img" onchange=preview(this) style="visibility:hidden;position:absolute;top:0px;width:0px"/>
+    	<if condition="!empty($user['graduate_img'])"><img src="{$user.graduate_img}" alt="" id='file_click_2'>
+			  <else /> <img  src="__SaleManager__/images/idetify.png" alt="" id='file_click_2'>
+	</if>
+    	</div>
+	  	<div class="certi_degree_h">
+	  		<span class = "certi_icon">|</span>
+	  		<span>学位证书</span>
+	  	</div>
+	  	<div class="certi_img">
+	  	<input type="file" name="diploma_img" id="diploma_img" onchange=preview(this) style="visibility:hidden;position:absolute;top:0px;width:0px"/>
+	  	  	<if condition="!empty($user['diploma_img'])"><img src="{$user.diploma_img}" alt="" id='file_click_1'>
+			  <else /> <img  src="__SaleManager__/images/idetify.png" alt="" id='file_click_1'>
+			</if>
+	  
+	  	</div>
+	  </div>
+	  <div class="weui-btn-area">
+      <a class="weui-btn person_data_btn" href="javascript:">确定</a>
+    </div>
+	</div>
+<!-- 	<div class="js_dialog" id="confirm_dialog" style="display: none;">
+      <div class="weui-mask"></div>
+      <div class="weui-dialog">
+        <div class="weui-dialog__bd"></div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确 定</a>
+        </div>
+      </div>
+    </div> -->
+    <include file="./Application/Home/View/default/SaleManager/layer/popup.html"/>
+	</form>
+</body>
+<script src = "__SaleManager__/js/Common.js"></script>
+ <script type="text/javascript">
+         //图片点击事件，目的触发文件标签
+         $(document).on('click',"[id^='file_click_']",function(){
+         		this.parentElement.firstElementChild.click();
+         });
+        //实现图片本地预览
+        function preview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                	input.nextElementSibling.src=e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        //提交事件
+        $(document).on('click','.person_data_btn',function(){
+        		$('#persondata').submit();
+        })
+        
+</script>
+</html>

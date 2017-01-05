@@ -1,0 +1,190 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con personInfo clinicInfo">
+        <div class="P_main bg_f">
+            <form id="myForm">
+            <ul class="main_left_right">
+                <li class="uploadPhoto">
+                    <em class="left">诊所照片</em>
+                    <dl class="left">
+                        <volist name="userinfo['imgs']" id="vo">
+                            <dt>
+                                <img src="{$vo}" class="myimg">
+                                <input type="hidden" name="imgs[]" value="{$vo}">
+                            </dt>
+                        </volist>
+                        <dt class="myupload img_1">
+                            <span id="myupload"><i>&#xe600;</i></span>
+                        <div id="uploader" style="display: none"></div>
+                        </dt>
+                    </dl>
+                </li>
+                <li><a href="{:U('manager')}">诊所负责人<span><i>&#xe604;</i></span><span>{$userinfo.manager_name}</span></a></li>
+                <li><a href="javascript:void(0)">诊所名称<span>{$userinfo.clinic_address}</span></a></li>
+                <li><a href="javascript:void(0)">手机号码<span></span><span>{$userinfo.manager_mobile}</span></a></li>
+                <li class="no_border">
+                    <p>擅长</p>
+                    <textarea name="clinic_specialty">{$userinfo.clinic_specialty}</textarea>
+                </li>
+                <li class="uploadPhoto">
+                    <em class="left">诊所资质</em>
+                    <dl class="left">
+                        <volist name="userinfo['licence']" id="vo">
+                            <dt>
+                                <img src="{$vo}" class="myimg">
+                                <input type="hidden" name="licences[]" value="{$vo}">
+                            </dt>
+                        </volist>
+                        <dt class="myupload img_2">
+                            <span id="mylicence"><i>&#xe600;</i></span>
+                        <div id="licence" style="display: none"></div>
+                        </dt>
+                    </dl>
+                </li>
+                <li>
+                    联系电话<input type="text" class="editInput"  name="clinic_phone" value="{$userinfo.clinic_phone}" placeholder="输入联系电话"/>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" onclick="callmyclient(3,'{$userinfo.clinic_address}','back_addr')">地址<span><i>&#xe604;</i></span><span id="now_address">{:mbSub($userinfo['clinic_address'],0,17)}</span></a>
+                </li>
+                <li class="no_border">
+                    <p>简介</p>
+                    <textarea name="clinic_introduction">{$userinfo.clinic_introduction}</textarea>
+                </li>
+            </ul>
+            </form>
+            <div class="bBth blue" style="margin-top:3.5rem;"><a href="javascript:void(0)" id="sub">确定</a></div>
+        </div>
+    </div>
+</block>
+<block name="css">
+    <link type="text/css" href="__STATIC__/common/js/webuploader/webuploader.css" rel="stylesheet"/>
+    <style type="text/css">
+        .personInfo dl dt img{ display:block; width:100%; height:100%;}
+    </style>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__STATIC__/common/js/webuploader/webuploader.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var issend = false;
+            //保存信息
+            $('#sub').click(function(){
+                if(issend) return false;
+                issend = true;
+                var mydata = $('#myForm').serialize();
+                //提交数据
+                $.post(location.href,mydata,function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('保存成功',2,function(){
+                            location.href = data.url;
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+
+            //长按删除
+            $('.uploadPhoto').on('longPress','.myimg',function(){
+                //删除该元素
+                $(this).closest('dt').remove();
+            });
+
+            //上传诊所照片
+            var myuploader = WebUploader.create({
+                auto: false,
+                swf: '__STATIC__/common/js/webuploader/Uploader.swf',
+                server: "{:U('/Doctor/Doctor/Upload/image')}",
+                pick: {id:'#uploader',multiple:false},
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,png',
+                    mimeTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+                },
+                fileNumLimit: 9,
+                fileSizeLimit: 45 * 1024 * 1024,
+                fileSingleSizeLimit: 6 * 1024 * 1024
+            });
+            // 文件上传成功
+            myuploader.on( 'uploadSuccess', function( file,data ) {
+                if(data.code==0){
+                    //追加到图片节点中
+                    var html = '<dt><img src="{:UPLOADIFY_TEMP}'+data.msg+'" class="myimg"><input type="hidden" name="imgs[]" value="'+data.msg+'"></dt>';
+                    $('.img_1').before(html);
+                }
+            });
+            // 文件上传失败
+            myuploader.on( 'uploadError', function( file ) {
+                layer_msg('上传错误,请稍后再试');
+            });
+            // 文件过大,过多,或类型不对
+            myuploader.on( 'error', function( type  ) {
+                layer_msg(getUploadError(type,9,6));
+            });
+            //加入队列时--检测数量
+            myuploader.on('fileQueued',function(file){
+                if($('.img_1').siblings().length<9){
+                    myuploader.upload();
+                }else{
+                    layer_msg('最多上传9张');
+                }
+            });
+            //触发上传
+            $('#myupload').click(function(){
+                $('#uploader label').click();
+            });
+
+            //上传诊所资质
+            var myuploader2 = WebUploader.create({
+                auto: false,
+                swf: '__STATIC__/common/js/webuploader/Uploader.swf',
+                server: "{:U('/Doctor/Doctor/Upload/image')}",
+                pick: {id:'#licence',multiple:false},
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,png',
+                    mimeTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+                },
+                fileNumLimit: 9,
+                fileSizeLimit: 45 * 1024 * 1024,
+                fileSingleSizeLimit: 6 * 1024 * 1024
+            });
+            // 文件上传成功
+            myuploader2.on( 'uploadSuccess', function( file,data ) {
+                if(data.code==0){
+                    //追加到图片节点中
+                    var html = '<dt><img src="{:UPLOADIFY_TEMP}'+data.msg+'" class="myimg"><input type="hidden" name="licences[]" value="'+data.msg+'"></dt>';
+                    $('.img_2').before(html);
+                }
+            });
+            // 文件上传失败
+            myuploader2.on( 'uploadError', function( file ) {
+                layer_msg('上传错误,请稍后再试');
+            });
+            // 文件过大,过多,或类型不对
+            myuploader2.on( 'error', function( type  ) {
+                layer_msg(getUploadError(type,9,6));
+            });
+            //加入队列时--检测数量
+            myuploader2.on('fileQueued',function(file){
+                if($('.img_2').siblings().length<9){
+                    myuploader.upload();
+                }else{
+                    layer_msg('最多上传9张');
+                }
+            });
+            //触发上传
+            $('#mylicence').click(function(){
+                $('#licence label').click();
+            });
+        });
+        //回显地址
+        function back_addr(addr){
+            $('#now_address').text(addr);
+        }
+    </script>
+</block>

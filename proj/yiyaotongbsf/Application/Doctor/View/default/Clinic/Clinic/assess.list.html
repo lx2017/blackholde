@@ -1,0 +1,47 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con patientSay no_pad">
+        <ul class="orderNav pad_l_r bg_f ov_h">
+            <li <eq name="score" value="0">class="current"</eq>><a href="{:U('assess',array('score'=>0))}">全部评价</a></li>
+            <li <eq name="score" value="5">class="current"</eq>><a href="{:U('assess',array('score'=>5))}">五星</a></li>
+            <li <eq name="score" value="4">class="current"</eq>><a href="{:U('assess',array('score'=>4))}">四星</a></li>
+            <li <eq name="score" value="3">class="current"</eq>><a href="{:U('assess',array('score'=>3))}">三星</a></li>
+            <li <eq name="score" value="2">class="current"</eq>><a href="{:U('assess',array('score'=>2))}">二星</a></li>
+            <li <eq name="score" value="1">class="current"</eq>><a href="{:U('assess',array('score'=>1))}">一星</a></li>
+        </ul>
+        <ul class="floor3 bg_f pad_l_r" id="mycontain">
+            <volist name="list" id="vo">
+                <li>
+                    <div class="pic"><img src="{$vo.p_image}"  onerror="this.src='__IMG__/head1.png'"></div>
+                    <p><span class="name">{$vo.name}</span><em>{$vo.date}</em></p>
+                    <div class="starBox ov_h">
+                        <div class="left">
+                            <a href="javascript:void(0)" class="orange">{$vo.doctor}</a>
+                        </div>
+                        <div class="right">
+                            <for start="0" end="$vo['score']">
+                                <span class="star"></span>
+                            </for>
+                        </div>
+                    </div>
+                    <div class="word">
+                        {$vo.intro}
+                    </div>
+                </li>
+            </volist>
+        </ul>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('assess_more')}",
+            obj:'mycontain'
+        };
+    </script>
+</block>

@@ -1,0 +1,34 @@
+<div class="js_dialog" id="confirm_dialog" style="display: none;">
+      <div class="weui-mask"></div>
+      <div class="weui-dialog">
+        <div class="weui-dialog__bd"></div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确 定</a>
+        </div>
+      </div>
+    </div>
+  <script type="text/javascript">
+	var saleManagerStatus; //操作返回状态
+	$(document).ready(function() { 
+		saleManagerStatus='';
+		saleManagerStatus ='{$status}';  //success,成功；error,错误
+		msg ='{$msg}';
+		if(saleManagerStatus=='success'||saleManagerStatus=='validatefail'){
+			$('.weui-dialog__bd').html(msg);
+     		$('#confirm_dialog').css('display','block');
+     		//saleManagerStatus='formSubmitTrue';
+		}
+		if(saleManagerStatus=='error'){ 
+			$('.weui-dialog__bd').html(msg);
+     		$('#confirm_dialog').css('display','block');
+     		//saleManagerStatus='formSubmitTrue';
+		}
+	}); 
+	//关闭弹出框
+	$(document).on('click','.weui-dialog__btn_primary',function(){
+		$('#confirm_dialog').css('display','none');
+		if(saleManagerStatus=='error'){
+			history.go(-1);
+		}
+	}); 
+  </script>

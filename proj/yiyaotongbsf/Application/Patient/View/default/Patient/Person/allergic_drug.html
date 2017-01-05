@@ -1,0 +1,57 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+		<div class="me-comment">
+    		<img src="__IMG__/green.png"><span class="me-com-com">过敏药物</span>
+		</div>
+		<div class="me-wrap-click drug">
+            <span class="me-pa-click <if condition="$drug eq '无'">  me-click <else />me-noclick </if>">无</span>
+            <span class="me-pa-click <if condition="$drug eq '青霉素'">  me-click <else />me-noclick </if>">青霉素</span>
+            <span class="me-pa-click <if condition="$drug eq '地卡因'">  me-click <else />me-noclick </if>">地卡因</span>
+            <span class="me-pa-click <if condition="$drug eq '破伤风抗霉素(TAT)'">  me-click <else />me-noclick </if>">破伤风抗霉素(TAT)</span>
+            <span class="me-pa-click <if condition="$drug eq '阿司匹林'">  me-click <else />me-noclick </if>">阿司匹林</span>
+            <span class="me-pa-click <if condition="$drug eq '维生素B1'">  me-click <else />me-noclick </if>">维生素B1</span>
+            <span class="me-pa-click <if condition="$drug eq '泛影葡胺'">  me-click <else />me-noclick </if>">泛影葡胺</span>
+            <span class="me-pa-click <if condition="$drug eq '头孢类抗生素'">  me-click <else />me-noclick </if>">头孢类抗生素</span>
+            <span class="me-pa-click <if condition="$drug eq '盐酸布比卡因'">  me-click <else />me-noclick </if>">盐酸布比卡因</span>
+		</div>
+		<div class="me-peac-text">
+     		<textarea rows="4" cols="50" name="other" id="other" placeholder="可补充您的过敏药物">{$other}</textarea>
+		</div>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(".me-pa-click").click(function(){
+            $(this).addClass("me-click");
+            $(this).siblings().removeClass("me-click");
+            $(this).siblings().addClass("me-noclick");
+        })
+
+        $(function(){
+            //保存事件
+            var issend = false;
+            $('#add').click(function(){
+                if(issend) return false;
+                issend = true;
+                var drug =$(".drug .me-click").text()
+                var other=$('#other').val();
+                if(other){
+                    var drug_allergy =drug+'、'+other;
+                }else{
+                    var drug_allergy =drug;
+                }
+                $.post(location.href,{drug_allergy:drug_allergy},function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('保存信息成功',1,function(){
+                            location.href='{:U("person_info",array("id"=>I("id")))}';
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

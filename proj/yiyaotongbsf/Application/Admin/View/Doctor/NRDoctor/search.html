@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport"
+              content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+        <meta http-equiv="Cache-Control" content="no-siteapp"/>
+        <LINK rel="Bookmark" href="/favicon.ico">
+        <LINK rel="Shortcut Icon" href="/favicon.ico"/>
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="__STATIC__/html5.js"></script>
+        <script type="text/javascript" src="__STATIC__/respond.min.js"></script>
+        <script type="text/javascript" src="__JS__/PIE_IE678.js"></script>
+        <![endif]-->
+        <link href="__CSS__/manager/H-ui.min.css" rel="stylesheet" type="text/css"/>
+        <link href="__CSS__/manager/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+        <link href="__CSS__/skin/default/skin.css" rel="stylesheet" type="text/css"/>
+        <link href="__CSS__/manager/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css"/>
+        <link href="__CSS__/common.css" rel="stylesheet" type="text/css"/>
+        <link href="__CSS__/application.css" rel="stylesheet" type="text/css"/>
+        <title>后台</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <script type="text/javascript" src="__STATIC__/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="__STATIC__/layer/layer.js"></script>
+        <script type="application/javascript" src="__STATIC__/form/jquery.validate.min.js"></script>
+        <script type="application/javascript" src="__STATIC__/form/localization/messages_zh.min.js"></script>
+        <script type="text/javascript" src="__JS__/H-ui.js"></script>
+        <script type="text/javascript" src="__JS__/H-ui.admin.js"></script>
+        <script type="text/javascript" src="__JS__/common.js"></script>
+        <script type="text/javascript" src="__JS__/jquery.raty.min.js"></script>
+        <script type="text/javascript" src="__JS__/timer.js"></script>
+    </head>
+    <body>
+        <div class="clearfix" style="margin-top: 15px">
+            <form id="myForm">
+                <span class="select-box" style="width: 20%;margin: 10px 10px">
+                  <select name="type" class="select" size="1">
+                    <option value="1" selected>医生</option>
+                    <option value="2">诊所</option>
+                    <option value="3">患者</option>
+                  </select>
+                </span>
+                <input type="text" placeholder="请输入搜索关键字" class="input-text ac_input" name="name" value="" id="search_text" autocomplete="off" style="width:300px"><button type="button" class="btn btn-success radius" id="search_button">搜索</button>
+            </form>
+        </div>
+        <div class="panel panel-default mt-20" style="display: none" id="mydiv">
+            <div class="panel-header">搜索结果</div>
+            <div class="panel-body">
+                <table class="table table-border table-bg">
+                    <tr>
+                        <th width="20%">id</th>
+                        <th>名称</th>
+                    </tr>
+                    <tbody id="mybody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        $('#search_button').click(function () {
+            var name = $('#search_text').val();
+            if(!name){
+                layer.tips('请输入搜索关键字', '#search_text',{
+                    tips: [1, '#78BA32']
+                });
+                return false;
+            }
+            //搜索结果
+            $('#mydiv').hide();
+            $('#mybody').empty();
+            layer.load();
+            var data = $('#myForm').serialize();
+            $.post(location.href,data,function (data) {
+                layer.closeAll('loading');
+                if(data.code==0){
+                    var mydata = data.data;
+                    var html = '';
+                    if(mydata){
+                        $.each(mydata,function (i,n) {
+                            html += '<tr>\
+                            <th>'+n.id+'</th>\
+                            <th>'+n.name+'</th>\
+                            </tr>';
+                        });
+                    }else{
+                        html = '<tr><th></th><th>无对应结果</th></tr>';
+                    }
+                    $('#mybody').append(html);
+                    $('#mydiv').show();
+                }else{
+                    layer.msg('搜索出现问题了, 请稍后再试')
+                }
+            },'json')
+        });
+    </script>
+</html>

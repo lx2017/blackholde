@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>{$h_title}</title>
+    <link rel="stylesheet" type="text/css" href="__AUI__/css/aui.2.0.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/style.css">
+    <script type="text/javascript" src="__JS__/jquery.js"></script>
+    <script type="text/javascript" src="__JS__/style.js"></script>
+    <script type="text/javascript" src="__JS__/layer_mobile/layer.js"></script>
+</head>
+<body <notempty name="body_style">style="{$body_style}"</notempty> <notempty name="class">class="{$class}"</notempty>>
+<input type="hidden" id="my_hide_back" data-value="{$back}">
+<input type="hidden" id="uid" value="{$uid}">
+<if condition="$header">
+<header class="aui-bar aui-bar-nav aui-bar-light">
+    <if condition="$header2">
+    <a class="aui-pull-left aui-btn" href="javascript:;"  id="my_back_btn">
+        <span class="aui-iconfont aui-icon-left"></span>
+    </a>
+     </if>
+    <a class="aui-pull-right aui-btn">
+        <if condition="$header3">
+            <span class="leftlogo lit-tit" id="{$header5}">{$header3}</span>
+        </if>
+    </a>
+    <div class="aui-title">{$header1}</div>
+</header>
+ </if>
+<block name="main"><!--页面主体位置--></block>
+<!--尾部-->
+<if condition="$footer">
+    <footer class="aui-bar aui-bar-tab" id="footer">
+        <div class="aui-bar-tab-item" tapmode>
+            <i class="aui-iconfont"><a href="{:U('/Patient/Patient/Patient/index')}">
+            <eq name="footer1" value="patient">
+                <img src="__IMG__/xungreen.png"></a></i>
+                <div class="aui-bar-tab-label aui-active">
+                <else/>
+                    <img src="__IMG__/xunyi.png"></a></i>
+                    <div class="aui-bar-tab-label">
+            </eq>
+           寻医</div>
+        </div>
+        <div class="aui-bar-tab-item" tapmode>
+            <i class="aui-iconfont"><a href="{:U('/Patient/Patient/Patient/message')}">
+                <eq name="footer1" value="message">
+                    <img src="__IMG__/megreen.png"></a></i>
+            <div class="aui-bar-tab-label aui-active">
+                <else/>
+                <img src="__IMG__/me.png"></a></i>
+                <div class="aui-bar-tab-label">
+                    </eq>
+          消息</div>
+        </div>
+        <div class="aui-bar-tab-item" tapmode>
+            <i class="aui-iconfont"><a href="{:U('/Patient/Patient/Person/mine')}">
+            <eq name="footer1" value="person">
+                <img src="__IMG__/megreen.png"></a></i>
+                <div class="aui-bar-tab-label aui-active">
+                    <else/>
+                    <img src="__IMG__/me.png"></a></i>
+                    <div class="aui-bar-tab-label">
+            </eq>我的</div>
+        </div>
+    </footer>
+    </if>
+<script type="text/javascript">
+    $(function(){
+        //调用登录--延迟2s
+        setTimeout(function(){
+            var myid=$('#uid').val();
+            if(myid){
+                callmyclient(1,myid);
+            }
+        },2000);
+        //输入框遮挡问题
+        $('input:text').bind('click',function(e){
+            var $this = $(this);
+            e.preventDefault();
+            setTimeout(function(){
+                $(window).scrollTop($this.offset().top - 10);
+            },200)
+        });
+        //点击返回
+        $('#my_back_btn').click(function(){
+            var my_back_value = $('#my_hide_back').data('value');
+            click_back(my_back_value);
+        });
+    });
+    //返回键动作
+    function click_back(info){
+        if(info=='-1'){
+            window.history.go(-1);
+//                window.location.reload();
+        }else if(info==0){
+            layer_confirm('您确定退出客户端吗',function(){callmyclient(5)});
+        }else{
+            location.href=info;
+        }
+    }
+    //返回键回调
+    function back_callback(){
+        var my_back_value = $('#my_hide_back').data('value');
+        click_back(my_back_value);
+    }
+    //统一的layer提示弹层
+    function layer_msg(msg,time,func){
+        if(typeof time == 'undefined') time=2;
+        if(typeof func != 'function') func=function(){};
+        layer.open({
+            content: msg
+            ,skin: 'msg'
+            ,time: time
+            ,end: func()
+        });
+    }
+    function layer_confirm(msg,func,func2){
+        if(typeof func != 'function') func=function(){};
+        if(typeof func2 != 'function') func2=function(){};
+        layer.open({
+            content: msg
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                func();
+                layer.close(index);}
+            ,no: function(index){
+                func2();
+                layer.close(index);
+            }
+        });
+    }
+    //长按事件
+    $.fn.longPress = function(fn) {
+        var timeout = undefined;
+        var $this = this;
+        for(var i = 0;i<$this.length;i++){
+            $this[i].addEventListener('touchstart', function(event) {
+                timeout = setTimeout(fn, 800);  //长按时间超过800ms，则执行传入的方法
+            }, false);
+            $this[i].addEventListener('touchend', function(event) {
+                clearTimeout(timeout);  //长按时间少于800ms，不会执行传入的方法
+            }, false);
+        }
+    };
+    //调用客户端事件
+    function callmyclient(type,p1,p2,p3){
+        if(typeof type == 'undefined') type=1;
+        if(typeof p2 == 'undefined') p2='';
+        if(typeof p3 == 'undefined') p3='';
+        type = parseInt(type);
+        var key = '';
+        switch(type){
+            case 1:
+                key = "登录#"+p1;
+                window.BSFWebView.showInfoFromJs(key);//调用登录
+                break;
+            case 2:
+                key = "咨询#"+p1+'#'+p2;
+                window.BSFWebView.showInfoFromJs(key);//调用咨询框
+                break;
+            case 3:
+                key = "咨询#"+p1;
+                window.BSFWebView.showInfoFromJs(key);//调用定位
+                break;
+            case 4:
+                key = "咨询#"+p1;
+                window.BSFWebView.showInfoFromJs(key);//调用定位
+                break;
+            case 5:
+                key = "退出2";
+                window.BSFWebView.showInfoFromJs(key);//退出客户端
+                break;
+            default:
+                    window.BSFWebView.replyForPaitient(p1,p2,p3);//调用咨询框
+        }
+    }
+    /**
+     * 文件上传的错误提示
+     * @param errstr
+     * @param num
+     * @param num2
+     * @returns {*}
+     */
+    function getUploadError(errstr,num,num2){
+        switch (errstr){
+            case 'Q_EXCEED_NUM_LIMIT':
+                return '最多上传'+num+'张';break;
+            case 'Q_EXCEED_SIZE_LIMIT':
+                return '文件不能大于'+num2+'M';break;
+            case 'Q_TYPE_DENIED':
+                return '文件类型错误';break;
+            case 'F_DUPLICATE':
+                return '文件已存在';break;
+            default:
+                return '未知错误!';break;
+        }
+    }
+    //获取消息数
+    function getMsgNum(){
+        $.getJSON("{:U('/Patient/Patient/Patient/getNonReadNum')}",'',function(data){
+           if(data.code==0 && data.data!=0){
+               //显示消息数
+               //todo
+           }
+        });
+    }
+</script>
+<block name="js"><!--为以后的子模板预留js的位置--></block>
+<block name="css"><!--为以后的子模板预留js的位置--></block>
+</body>
+</html>

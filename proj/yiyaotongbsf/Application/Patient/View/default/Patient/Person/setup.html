@@ -1,0 +1,38 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list">
+            <li class="aui-list-item aui-list-item-middle">
+                <div class="aui-list-item-inner aui-list-item-arrow setupleft" onclick="location.href='{:U('notice')}'">
+                    新消息通知
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow setupleft" onclick="location.href='{:U('modify')}'">
+                    修改密码
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow setupleft" onclick="location.href='{:U('feed_back')}'">
+                    意见反馈
+
+                </div>
+            </li>
+             <!--<li class="aui-list-item">-->
+                <!--<div class="aui-list-item-inner aui-list-item-arrow setupleft">-->
+                    <!--去评分-->
+                <!--</div>-->
+            <!--</li>-->
+        </ul>
+    </div>
+    <div class="set-up-btn">
+        <p><a onclick="sendInfoJava()" href="{:U('/Patient/LoginAndRegister/Login/logout')}">退出登录</a></p>
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        function sendInfoJava(){
+            window.BSFWebView.showInfoFromJs("退出");
+        }
+    </script>
+    </block>

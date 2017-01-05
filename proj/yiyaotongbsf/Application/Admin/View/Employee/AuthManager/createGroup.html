@@ -1,0 +1,31 @@
+<include file="Public/base"/>
+<!-- 管理员用户组新增和编辑页面 -->
+<div class="pd-20">
+    <form action="{$url}" method="post" class="form form-horizontal" id="addRoleForm">
+        <div class="row cl">
+            <label for="auth-title" class="form-label col-3">员工组</label>
+
+            <div class="formControls col-5">
+                <input id="auth-title" type="text" name="title" class="input-text" value="" required minlength="2"
+                       maxlength="20"/>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">描述</label>
+
+            <div class="formControls col-5">
+                <textarea class="textarea" name="description" maxlength="200"></textarea>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="确定">
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+
+            </div>
+        </div>
+    </form>
+</div>
+<script type="application/javascript" src="__JS__/Employee/auth.js"></script>

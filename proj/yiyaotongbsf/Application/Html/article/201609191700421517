@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <LINK rel="Bookmark" href="/favicon.ico">
+    <LINK rel="Shortcut Icon" href="/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/ali/Public/static/html5.js"></script>
+    <script type="text/javascript" src="/ali/Public/static/respond.min.js"></script>
+    <script type="text/javascript" src="/ali/Public/Admin/js/PIE_IE678.js"></script>
+    <![endif]-->
+    <link href="/ali/Public/Admin/css/manager/H-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/ali/Public/Admin/css/manager/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+    <link href="/ali/Public/Admin/css/skin/default/skin.css" rel="stylesheet" type="text/css"/>
+    <link href="/ali/Public/Admin/css/manager/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="/ali/Public/Admin/css/common.css" rel="stylesheet" type="text/css"/>
+    <title>后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script type="text/javascript" src="/ali/Public/static/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/ali/Public/static/layer/layer.js"></script>
+    <script type="application/javascript" src="/ali/Public/static/form/jquery.validate.min.js"></script>
+    <script type="application/javascript" src="/ali/Public/static/form/localization/messages_zh.min.js"></script>
+    <script type="text/javascript" src="/ali/Public/Admin/js/H-ui.js"></script>
+    <script type="text/javascript" src="/ali/Public/Admin/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="/ali/Public/Admin/js/common.js"></script>
+
+<script type="text/javascript" src="/ali/Public/Admin/js/timer.js"></script>
+
+
+
+
+ 
+</head>
+
+
+
+
+
+	
+<!-- 文章新增和编辑页面 -->
+
+<div class="pd-20">
+    <form action="" method="POST"   class="form form-horizontal"
+          id="editGroupForm">
+        <div class="row cl">
+            <label for="auth-title" class="form-label col-3">文章所属栏目：</label>
+							
+            
+            <div class="col-4">bri</div>
+        </div>
+        <div class="row cl">
+            <label for="auth-title" class="form-label col-3">文章标题：</label>
+
+            <div class="formControls col-5">编辑                
+            </div>
+            <div class="col-4"></div>
+        </div>
+         <div class="row cl">
+            <label for="auth-title" class="form-label col-3">作者：</label>
+
+            <div class="formControls col-5">阿里                
+            </div>
+            <div class="col-4"></div>
+        </div>
+        
+        <div class="row cl">
+            <label class="form-label col-3">文章摘要：</label>
+            <div class="formControls col-5">ali testing               </div>
+            <div class="col-4"></div>
+        </div>
+        
+        <div class="row cl">
+            <label class="form-label col-3">缩略图：</label>
+            <div class="formControls col-5">
+                <img src="" alt="" />   
+	        </div>
+        
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">文章内容：</label>
+
+            <div class="formControls col-5">
+            	                
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <input type="hidden" name='id' value="132" />
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+               <!-- <input class="btn btn-primary radius" type="submit" value="确定">-->
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+
+            </div>
+        </div>
+    </form>
+</div>
+<script type="application/javascript" src="/ali/Public/Admin/js/Employee/auth.js"></script>
+<!--<script>
+	$(".btn-primary").click(function(){
+		alert( $("#editGroupForm").serialize());
+	})
+</script>-->

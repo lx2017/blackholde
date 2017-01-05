@@ -1,0 +1,321 @@
+<include file="Public/base"/>
+<link rel="stylesheet" href="__JS__/ztree/css/demo.css" type="text/css">
+  <link rel="stylesheet" href="__JS__/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <script type="text/javascript" src="__JS__/ztree/js/jquery-1.4.4.min.js"></script>
+  <script type="text/javascript" src="__JS__/ztree/js/jquery.ztree.core.min.js"></script>
+  <script type="text/javascript" src="__JS__/ztree/js/jquery.ztree.excheck.js"></script>
+  <script type="text/javascript" src="__JS__/ztree/js/jquery.ztree.exedit.js"></script>
+<script type="text/javascript" src="__JS__/ztree/js/jquery.ztree.exhide.js"></script>
+   
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+
+            <if condition="isset($actions['CLASSIFYADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius"
+                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYADD']['url'];echo U($str,array('key'=>$actions['CLASSIFYADD']['key']))?>">新增分类</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['CLASSIFYDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-danger radius" href="javascript:"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYDELETE']['url'];echo U($str,array('key'=>$actions['CLASSIFYDELETE']['key']))?>"
+                       id="classifyDeleteBtn">批量删除</a>
+                 </span>
+            </if>
+<SCRIPT type="text/javascript">
+		
+		var setting = {
+			
+			edit: {
+				enable: true,
+				showRenameBtn:false,
+				showRemoveBtn:true
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onRemove : zTreeOnRemove ,
+				onClick: zTreeOnClick
+				//onRename: zTreeOnRename
+			}
+		};
+		
+		var zNodes ={$data};
+		var i=1;
+		function zTreeOnClick(event, treeId, treeNode) {
+			//alert($("#edit").val());
+		    alert(treeNode.tId + ", " + treeNode.classify+ ", " +treeNode.pId+ ", " +treeNode.id);
+		    //$("#right").show();
+		    $("div#add").remove();
+		    i++;
+		    if(i%2==0){
+		    	 $("#right").show();
+		    	 //var url="{$Think.session.iconPic}";
+		    	// alert(url);
+		    	 //发送异步
+		    	 var html='';
+    			$.ajax({
+    				type:"post",
+    				url: $("#edit").val(),
+    				dataType:"json",
+    				data:{column_id:treeNode.id,column_pid:treeNode.pId},
+    				
+    				success:function(pp){
+    					//$("#uploadList").html(pp.column_pid);
+    					html='<div id="add">';
+    					html+='<form  id="editGroupForm" method="post" action="" enctype="multipart/form-data" >';
+    					html+='<p><label for="auth-title" class="form-label col-3">文章所属栏目</label>';
+    				
+    					html+='<select  id="auth-title" style="width:300px;" type="text" name="pid" class="input-text" value="{$auth_group.title}" required minlength="0" maxlength="20">';
+    				
+    				$.each(pp.classes,function(k,v){
+    					//alert(v.column_id);
+    					html+='<option value="'+v.id+'" <if condition="'+v.id+' eq '+pp.pid+'" > selected </if> >';
+    					html+=v.classify;
+    					html+='</option>';
+    				});	
+    				
+    					html+='</select>';
+    					
+    					html+='<p style="margin-bottom:15px;"><label for="auth-title" class="form-label col-3">分类名称</label>';
+    					html+='<input type="text" name="classify" value="'+pp.classify+'" /></p>'
+    					html+='<input type="hidden" name="id" value="'+pp.id+'" />';
+    					//html+='<p style="margin-bottom:15px;"><label class="form-label col-3">颜色</label>';
+    					//html+='<input type="text" name="app_color_style" value="'+pp.app_color_style+'" /></p>';
+    					//html+='<input type="text" name="sort" value="'+pp.sort+'" /></p>';
+    					//html+='<p style="margin-bottom:15px;"><label class="form-label col-3">Logo原图</label>';
+    					//html+='<input type="text" name="app_icon_url" value="'+pp.app_icon_url+'" /></p>';
+    					//html+='<img width=130 height=50 src="'+pp.app_icon_url+'" /> </p>';
+    					//html+='<p><label class="form-label col-3">更换Logo</label></p>';
+    					
+    					html+='<input class="btn btn-primary radius" type="submit" value="确定"> ';
+    					//html+='<input type="hidden" name="app_icon_url" value="'+url+'"/>';
+    					html+='</form>';
+    					html+='</div>';
+    					
+    				$("#right").prepend(html);	
+    				
+    				},
+    				error:function(){
+    				}
+    			});
+		    	 
+		    	 
+		    	 
+		    }else{
+		    	$("#right").hide();
+		    }
+		};
+		function zTreeOnRemove(event, treeId, treeNode) {
+			//alert(treeNode.pId + ", " + treeNode.id);
+			//$("#del").val();
+				//发送异步
+    			$.ajax({
+    				type:"get",
+    				url: $("#del").val(),
+    				dataType:"json",
+    				data:{id:treeNode.id},
+    				
+    				success:function(pp){
+    					
+    					
+    				},
+    				error:function(){
+    					
+    				}
+    			});
+			
+		}
+		function zTreeOnRename(event, treeId, treeNode, isCancel) {
+			//return false;
+						//alert(treeNode.pId + ", " + treeNode.id);
+					//treeNode.pId=treeNode.pId?treeNode.pId:0;
+						//发送异步
+    			$.ajax({
+    				type:"post",
+    				url: $("#edit").val(),
+    				dataType:"json",
+    				data:{column_id:treeNode.id,column_title:treeNode.name,column_pid:treeNode.pId},
+    				
+    				success:function(pp){
+    					
+    				},
+    				error:function(){
+    				}
+    			});
+		}
+		//alert($("#removeTitle").eq(0).value);
+		function setEdit() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			remove = $("#remove").attr("checked");
+			rename = $("#rename").attr("checked");
+			removeTitle = $.trim($("#removeTitle").get(0).value);
+			renameTitle = $.trim($("#renameTitle").get(0).value);
+			zTree.setting.edit.showRemoveBtn = remove;
+			zTree.setting.edit.showRenameBtn = rename;
+			zTree.setting.edit.removeTitle = removeTitle;
+			zTree.setting.edit.renameTitle = renameTitle;
+			showCode(['setting.edit.showRemoveBtn = ' + remove, 'setting.edit.showRenameBtn = ' + rename,
+				'setting.edit.removeTitle = "' + removeTitle +'"', 'setting.edit.renameTitle = "' + renameTitle + '"']);
+		}
+		function showCode(str) {
+			var code = $("#code");
+			code.empty();
+			for (var i=0, l=str.length; i<l; i++) {
+				code.append("<li>"+str[i]+"</li>");
+			}
+		}
+		//是否显示编辑按钮
+		function  showRenameBtn(treeId, treeNode){
+			//获取节点所配置的noEditBtn属性值
+			if(treeNode.noEditBtn != undefined && treeNode.noEditBtn){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		//是否显示删除按钮
+		function showRemoveBtn(treeId, treeNode){
+			//获取节点所配置的noRemoveBtn属性值
+			if(treeNode.noRemoveBtn != undefined && treeNode.noRemoveBtn){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+		$(document).ready(function(){
+			//alert(zNodes);
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			
+			setEdit();
+			setting.edit.showRemoveBtn = remove;
+			setting.edit.showRenameBtn = rename;
+			$("#remove").bind("change", setEdit);
+			$("#rename").bind("change", setEdit);
+			$("#removeTitle").bind("propertychange", setEdit).bind("input", setEdit);
+			$("#renameTitle").bind("propertychange", setEdit).bind("input", setEdit);
+		
+			$("span#treeDemo_12_edit").show();
+		});
+		//-->
+	</SCRIPT>            
+<if condition="isset($actions['CLASSIFYDELETE'])">
+<input style="width:500px;" type="hidden" id='del' value="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYDELETE']['url'];echo U($str,array('key'=>$actions['CLASSIFYDELETE']['key'],'id'=>$vo['id']))?>" />
+</if>
+<if condition="isset($actions['CLASSIFYEDIT'])">
+<input style="width:500px;" type="hidden" id='edit' value="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYEDIT']['url'];echo U($str,array('key'=>$actions['CLASSIFYEDIT']['key'],'id'=>$vo['id']))?>" />
+</if>
+
+        </notempty>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="nickname" class="search-input" value="{:I('nickname')}"
+                       placeholder="请输入用户昵称或者ID">
+                <a class="sch-btn" href="javascript:" id="search"
+                   url="<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Employee/User/index',array('key'=>$key));?>"><i
+                        class="Hui-iconfont btn-search">&#xe665;</i></a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 数据列表 -->
+
+    <div class="mt-20">
+        <div class="data-table table-striped">
+
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <!--<tr class="text-c">
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">一级分类</th>
+                    <th class="">二级分类</th>
+                    <th class="">三级分类</th>
+                    <th class="">操作</th>
+                </tr>-->
+                </thead>
+                <tbody>
+                <!--<notempty name="_list">
+                    <volist name="_list" id="vo">
+                        <tr class="text-c">
+                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id_3rd}"/></td>
+                            <td>{$vo.classify}</td>
+                            <td>{$vo.classify_2nd}</td>
+                            <td>{$vo.classify_3rd}</td>
+                            <td>
+                                <if condition="isset($actions['CLASSIFYEDIT'])">
+                                    <a class="ajaxget fontblue" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYEDIT']['url'];echo U($str,array('key'=>$actions['CLASSIFYEDIT']['key'],'id'=>$vo['id_3rd']))?>">编辑</a>
+                                </if>
+                                <if condition="isset($actions['CLASSIFYDELETE'])">
+                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYDELETE']['url'];echo U($str,array('key'=>$actions['CLASSIFYDELETE']['key'],'id'=>$vo['id_3rd']))?>">删除</a>
+                                </if>
+
+                            </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="text-center"> aOh! 暂时还没有内容!</td>
+                </notempty>-->
+                <notempty name="data">
+                	<div class="zTreeDemoBackground left" style="display:block;height:400px;width:400px;float:left;" >
+										<ul id="treeDemo" class="ztree" style="height:390px;width:400px;">
+											
+										</ul>
+                	</div>
+					<div id="right" style="display:none;height:400px;width:620px;background: pink;float:left;">
+								 
+								<div class="formControls col-5">
+              
+								 
+								</div>
+			
+                    
+                </notempty>
+                <empty name="data">
+                	<td colspan="9" class="text-center"> aOh! 暂时还没有内容!</td>
+                
+                </empty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <link href="__CSS__/employee/employee.css" rel="stylesheet" type="text/css"/>
+
+    <script src="__JS__/Good/classify.js"></script>
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function () {
+            var url = $(this).attr('url');
+            var query = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+            query = query.replace(/^&/g, '');
+            if (url.indexOf('?') > 0) {
+                url += '&' + query;
+            } else {
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function (e) {
+            if (e.keyCode === 13) {
+                $("#search").click();
+                return false;
+            }
+        });
+
+    </script>
+</div>

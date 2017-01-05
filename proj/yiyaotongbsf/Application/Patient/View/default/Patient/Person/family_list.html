@@ -1,0 +1,42 @@
+<extend name="Common/common"/>
+<block name="main">
+<div class="aui-content">
+    <volist name="family" id="vo">
+        <div class="aui-row me-family long_delete" data-id="{$vo['id']}">
+            <div class="aui-col-xs-2"><img src="{$vo.image}" style="width:100%;" onerror="this.src='__IMG__/head1.png'" /></div>
+            <div class="aui-col-xs-4 me-family-tle">
+                <p>{$vo.name}</p>
+                <p><span class="index-addphoto-span">{$vo['sex']==0?'女':'男'}</span>
+                    <span class="index-addphoto-span me-family-left"><if condition="$vo['age']">{$vo.age}岁</if></span></p>
+            </div>
+            <div class="aui-col-xs-6 me-family-pabod">
+
+                <span class="me-family-border"><a href="{:U('person_info',array('id'=>$vo['id']))}">个人档案</a></span>
+                <span class="me-family-border"><a href="{:U('treatment',array('id'=>$vo['id']))}">诊疗记录</a></span>
+            </div>
+        </div>
+    </volist>
+</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //添加
+            $('#add').click(function () {
+                location.href = ('{:U("add_file")}');
+            });
+            //长按删除
+            $('.long_delete').longPress(function(){
+                var id=$(this).data('id');
+                var _this = this;
+                $.post("{:U('deletePatient')}",{id:id},function(data){
+                    if(data.code==0){
+                        $(_this).remove();
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

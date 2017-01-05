@@ -1,0 +1,56 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con clinicHome no_pad">
+        <div class="floor1 bg_f">
+            <div class="P_main">
+                <div class="ov_h">
+                    <a href="{:U('info')}">
+                        <div class="pic left"><img src="{$userinfo.image}" onerror="this.src='__IMG__/clinic.png'" /></div>
+                        <div class="info">
+                            <p class="c_333">{$userinfo.clinic_name}</p>
+                            <div class="starBox">
+                                <for start="0" end="floor($userinfo['clinic_score']/2)">
+                                    <span class="star"></span>
+                                </for>
+                                <em class="c_red">{$userinfo.clinic_score}</em>
+                            </div>
+                            <p class="p1">擅长：{$userinfo.clinic_specialty}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="dlBox">
+                    <a href="{:U('doctor')}">
+                        <dl>
+                            <dt><i class="c_blue">&#xe6c3;</i></dt>
+                            <dd>医生管理</dd>
+                        </dl>
+                    </a>
+                    <a href="{:U('patient')}">
+                        <dl>
+                            <dt class="c_green"><i>&#xe695;</i></dt>
+                            <dd>患者管理</dd>
+                        </dl>
+                    </a>
+                    <a href="{:U('info')}">
+                        <dl>
+                            <dt class="c_orange"><i>&#xe617;</i></dt>
+                            <dd>资料编辑</dd>
+                        </dl>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="floor2 bg_f no_pad">
+            <div class="">
+                <ul class="main_left_right">
+                    <li><a href="{:U('assess')}"><i class="c_blue">&#xe67e;</i>&nbsp;&nbsp;患者评价<span><i>&#xe604;</i></span></a></li>
+                    <li><a href="{:U('treatment')}"><i class="c_orange">&#xe624;</i>&nbsp;&nbsp;诊疗记录<span><i>&#xe604;</i></span></a></li>
+                    <li><a href="{:U('order')}"><i class="c_blue">&#xe636;</i>&nbsp;&nbsp;药品订购<span><i>&#xe604;</i></span></a></li>
+                    <li><a href="javascript:void(0)"><i class="c_blue">&#xecfa;</i>&nbsp;&nbsp;消息推送<span><i>&#xe604;</i></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js"></block>

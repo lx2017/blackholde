@@ -1,0 +1,18 @@
+<div class="vw-header">
+    <div class="vw-wrap">
+        <h1 class="logo"><img src="__STATIC__/newlib/src/img/logo.jpg" width="330" height="50" /></h1>
+        <dl class="use-panel">
+            <dd class="panel">
+                您好<span class="user-name"><if condition="$userinfo.nickname neq ''">{$userinfo.nickname}<else/>{$userinfo.mobile}</if></span>
+            </dd>
+            <!-- <dd class="link">|</dd>
+             <dd class="panel">
+                <a href="{:U('/Home/UserCenter/UserCenter/UpUserPassword')}">修改密码</a>
+            </dd> -->
+            <dd class="link">|</dd>
+            <dd class="panel">
+                <a href="{:U('/Home/UserCenter/UserCenter/exitlogin')}">退出</a>
+            </dd>
+        </dl>
+    </div>
+</div>

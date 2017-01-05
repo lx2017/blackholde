@@ -1,0 +1,49 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div>
+		<div class="index-debase-head">
+			<span class="index-debase-bo">
+                <span onclick="location.href='{:U('disease_database',array('type'=>1))}'" <eq name='type' value='1'> class="me-click"</eq>>科室分类</span>
+                <span onclick="location.href='{:U('disease_database',array('type'=>2))}'" <eq name='type' value='2'> class="me-click"</eq> >典型人群</span>
+            </span>
+		</div>
+		<div  class="index-debase-zhenshi">
+            <eq name="type" value="1">
+            <div class="index-mingfang-list <eq name='i' value='1'>index-mingfang-click</eq> ">
+                <img src="__IMG__/green.png">
+                <span class="<eq name='i' value='1'>index-mingfang-left</eq>">综合</span>
+                <div class="index-mingfang-select none">
+                    <volist name="all" id="voo">
+                        <div>
+                            <span onclick="location.href='{:U('diseasedetail',array('id'=>$voo['id']))}'">{$voo.disease_name}</span>
+                        </div>
+                    </volist>
+                </div>
+            </div>
+            </eq>
+            <volist name="list" id="vo">
+			    <div class="index-mingfang-list <eq name='i' value='1'>index-mingfang-click</eq> ">
+                    <img src="__IMG__/green.png">
+                    <span class="<eq name='i' value='1'>index-mingfang-left</eq>">{$vo.type_name}</span>
+                    <div <if condition="$vo['children']"> class="index-mingfang-select"</if> >
+                        <volist name="vo['children']" id="voo">
+                            <div>
+                                <span onclick="location.href='{:U('diseasedetail',array('id'=>$voo['id']))}'">{$voo.disease_name}</span>
+                            </div>
+                        </volist>
+                    </div>
+                </div>
+            </volist>
+		</div>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //打开第一个
+            if($('.index-mingfang-list').length){
+                $('.index-mingfang-list').eq(0).click();
+            }
+        });
+    </script>
+</block>

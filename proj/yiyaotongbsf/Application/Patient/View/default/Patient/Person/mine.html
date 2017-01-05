@@ -1,0 +1,119 @@
+<extend name="Common/common"/>
+<block name="main">
+        <!--<div class="zhezhao"></div>
+        <div class="alert">
+            <p class="alert-shangchuan">上传照片</p>
+            <p><button>拍照</button></p>
+            <p><button>从本地相册上传照片</button></p>
+            <p><button class="alert-lastbtn">取消</button></p>
+        </div>-->
+    <div id="headimg" style="display: none"></div>
+    <div class="me-me-head">
+    	<img id="myhead" src="{$userinfo.image}" onerror="this.src='__IMG__/head1.png'" />
+    	<p>{$userinfo['name']}</p>
+    </div>
+    <div class="aui-content aui-margin-b-15 me-me-span">
+        <ul class="aui-list">
+            <li class="aui-list-item aui-list-item-middle">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <span><img src="__IMG__/4.png"><span class="me-span"><a href="{:U('family_list')}" style="color:#000;">家庭健康档案</a></span></span>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <span><img src="__IMG__/10.png"><span class="me-span"><a href="{:U('/Patient/Patient/Person/person_info')}" style="color:#000;">个人资料</a></span></span>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                 <span> <img src="__IMG__/2.png"><span class="me-span"><a href="{:U('/Patient/Patient/Person/my_doctor')}" style="color:#000;">我的医生({$doctor_num})</a></span></span>
+
+                </div>
+            </li>
+             <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                  <span> <img src="__IMG__/7.png"><span class="me-span"><a href="{:U('/Patient/Patient/Person/concern_doctor')}" style="color:#000;">我的关注({$attention_num})</a></span></span>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                  <span>  <img src="__IMG__/9.png"><span class="me-span"><a href="{:U('/Patient/Patient/Person/my_advice')}" style="color:#000;">我的咨询({$consult_num})</a></span></span>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                <span>  <img src="__IMG__/8.png"><span class="me-span"><a href="{:U('/Patient/Patient/Person/my_appointment')}" style="color:#000;">我的预约</a></span></span>
+
+                </div>
+            </li>
+             <!--<li class="aui-list-item">-->
+                <!--<div class="aui-list-item-inner aui-list-item-arrow">-->
+                  <!--<span> <img src="__IMG__/3.png"><span class="me-span"><a href="{:U('/Patient/Patient/Person/my_coupon')}" style="color:#000;">我的优惠券</a></span></span>-->
+                <!--</div>-->
+            <!--</li>-->
+             <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                 <span> <img src="__IMG__/1.png"><span class="me-span"><a href="{:U('/Patient/Patient/Person/become_doctor')}" style="color:#000;">成为医生</a></span></span>
+
+                </div>
+            </li>
+             <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                  <span> <img src="__IMG__/5.png"><span class="me-span"><a href="{:U('/Patient/Patient/Person/become_clinic')}" style="color:#000;">成为诊所</a></span></span>
+                </div>
+            </li>
+             <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                  <span> <img src="__IMG__/6.png"><span class="me-span"><a href="{:U('/Patient/Patient/Person/setup')}" style="color:#000">设置</a></span></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</block>
+<block name="css">
+    <link type="text/css" href="__STATIC__/common/js/webuploader/webuploader.css" rel="stylesheet"/>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__STATIC__/common/js/webuploader/webuploader.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //上传头像
+            var myuploader2 = WebUploader.create({
+                auto: true,
+                swf: '__STATIC__/common/js/webuploader/Uploader.swf',
+                server: "{:U('/Patient/Patient/Upload/image')}",
+                pick: {id:'#headimg',multiple:false},
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,png',
+                    mimeTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+                },
+                fileNumLimit: 1,
+                fileSingleSizeLimit: 6 * 1024 * 1024
+            });
+            // 文件上传成功
+            myuploader2.on( 'uploadSuccess', function( file,data ) {
+                if(data.code==0){
+                    //显示图片
+                    $('#myhead').attr('src','{:UPLOADIFY_TEMP}'+data.msg);
+                    //保存图片
+                    $.post('{:U("set_head")}',{path:data.msg},function(ddd){
+
+                    },'json');
+                }
+            });
+            // 文件上传失败
+            myuploader2.on( 'uploadError', function( file ) {
+                layer_msg('上传错误,请稍后再试');
+            });
+            // 文件过大,过多,或类型不对
+            myuploader2.on( 'error', function( type  ) {
+                layer_msg(getUploadError(type,1,6));
+            });
+            //触发上传
+            $('#myhead').click(function(){
+                $('#headimg label').click();
+            });
+        });
+    </script>
+</block>

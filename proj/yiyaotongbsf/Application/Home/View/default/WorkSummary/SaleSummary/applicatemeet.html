@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>申请统计</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__PUBLIC__/Home/SaleManager/css/stylesheets/index.css">
+</head>
+<body>
+	<div class="applicateMeet_w">
+		<header class = "all_header">
+			<a class = "h_back" href="javascript:history.back();"><img src="__PUBLIC__/Home/SaleManager/images/back_icon.png" alt=""></a>
+			<span class = "h_title">申请统计</span>
+			<a class = "h_add" href="javascript:void(0)"></a>
+		</header>
+		<form id="form">
+		<div class="applicate_head" style = "padding: 0;">
+			<select class="weui-select" name="type" style = "padding-left: 42%;" onchange="getLists(this)">
+				<option value="1" <if condition="$type == 1">selected</if>>圆桌会议</option>
+				<option value="2" <if condition="$type == 2">selected</if>>普通会议</option>
+				<option value="3" <if condition="$type == 3">selected</if>>讲坛会议</option>
+				<option value="4" <if condition="$type == 4">selected</if>>培训会议</option>
+				<option value="5" <if condition="$type == 5">selected</if>>群英会议</option>
+			</select>
+			<span class="weui-cell__ft" style = "position: absolute;right: 8%;top: 15px;"></span>
+		</div>
+		</form>
+		<div class="clinic_name">
+			<span>申请类别</span>｜
+			<span>申请日期</span>|
+			<span>申请状态</span>
+		</div>
+		<if condition="$lists">
+			<volist name="lists" id="list">
+			<div class="clinic_odd">
+				<span>{$list.type}</span>
+				<span>{$list.apply_time|date="Y-m-d H:i:s",###}</span>
+				<span class = "meet_pass">{$list.reply_status}</span>
+			</div>
+			</volist>
+		<else />
+			<div class="clinic_odd">
+				<div style="margin:auto">
+					无
+				</div>
+			</div>
+		</if>
+	</div>
+	<script src = "__PUBLIC__/Home/SaleManager/js/index.js"></script>
+	<script>
+		function getLists(obj)
+		{
+			var val = $(obj).val();
+			$("#form").submit();
+		}
+	</script>
+</body>
+</html>

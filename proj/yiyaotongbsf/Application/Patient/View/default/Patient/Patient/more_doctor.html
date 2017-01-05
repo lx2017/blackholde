@@ -1,0 +1,55 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="aui-content">
+        <div class="index-noresult-head">
+            <div class="aui-row index-search-list">
+                <div class="aui-col-xs-10 index-no-select">
+                    <div class="aui-row">
+                        <!--<div class="aui-col-xs-3 index-col-4">
+                            <span>全部</span>
+                            <span><img class="index-select-png"src="__IMG__/select.png"></span>
+                        </div>-->
+                        <div class="aui-col-xs-9 index-select-input">
+                            <input type="text" id="name" value="{$name}" placeholder="搜索附近医生">
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-col-xs-2 index-select-cancel mysearch">搜索</div>
+            </div>
+        </div>
+    </div>
+    <div class="aui-content" id="mycontain">
+        <volist name="list" id="vo">
+            <div class="aui-row me-mydoc-bo">
+                <div class="aui-col-xs-2">
+                    <img src="{$vo.image}" onerror="this.src='__IMG__/head.png'" class="me-mydoc-img">
+                </div>
+                <div class="aui-col-xs-10  me-mydoc-left">
+                    <div class="aui-row">
+                        <div class="aui-col-xs-8"><span class="me-mydoc-p">{$vo.name}</span><span class="me-star"><img src="__IMG__/starclick.png"></span><span class="me-fenshu"><span class="me-mydoc-p">{$vo.score}</span></span></div>
+                        <div class="aui-col-xs-4"><span class="index-neardc">{$vo.distance}km</span></div>
+                    </div>
+                    <p class="me-mydoc-sep">{$vo.clinic}</p>
+                    <p class="me-mydoc-sep">擅长：{$vo.good}</p>
+                </div>
+            </div>
+        </volist>
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //搜索
+        $('.mysearch').click(function () {
+            var name = $('#name').val();
+            location.href = ('{:U("more_doctor")}'+'?name='+name);
+        });
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('more_doctor_more',array('name'=>$name))}",
+            obj:'mycontain'
+        };
+    </script>
+</block>

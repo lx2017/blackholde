@@ -1,0 +1,100 @@
+html,body,div,span,h1,h2,h3,h4,h5,h6,p,pre,a,code,em,img,small,strong,sub,sup,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label{
+	margin:0; 
+	padding:0; 
+	border:0; 
+}
+body{
+	margin:0; 
+	padding:0;
+	background-color:#e9e9e9;
+	font-family:"Helvetica Neue",Helvetica,Tahoma,sans-serif;
+}
+a{
+	text-decoration:none;
+}
+.cl{
+	clear:both;
+}
+.header{
+	display:block;
+	position:relative;
+	text-align:center;
+	height:.88rem;
+	line-height:.88rem;
+	background-color:white;
+	color:#333333;
+	font-size:.35rem;
+	margin:0 auto;
+}
+.goback{
+	width:.25rem;
+	height:.44rem;
+	position:absolute;
+	left:.3rem;
+	top:.22rem;
+	background-image:url(/Public/Home/images/LoginAndRegister/arrow.png);
+	background-repeat:no-repeat;
+	background-size:.25rem .44rem;
+	cursor:pointer;
+}
+#register_container_3{
+	overflow:hidden;
+	margin:0 auto;
+	margin-top:.34rem;
+	max-width:7.5rem;
+}
+.inner_box{
+	position:relative;
+	overflow:hidden;
+	height:.97rem;
+	width:6.9rem;
+	margin:0 auto;
+	background-color:white;
+	border-radius:.25rem;
+	-webkit-border-radius:.25rem;
+}
+.img_one{
+	display:block;
+	height:.42rem;
+	width:.34rem;
+	float:left;
+	margin:.28rem 0 0 0.13rem;
+}
+
+.code_wrapper{
+	overflow:hidden;
+	margin:0 .4rem 0 0.75rem;
+	height:.97rem;
+}
+#set_code{
+	display:block;
+	height:.97rem;
+	line-height:.97rem;
+	width:100%;
+	border:none;
+	font-size:.3rem;
+	outline:none;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-rtl-ordering:logical;
+    -webkit-user-select:text;
+	-webkit-appearance:none;
+}
+#complete{
+	appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+	display:block;
+	border:none;
+	color:white;
+	font-size:.33rem;
+	width:6.9rem;
+	height:0.92rem;
+	background-color:#15b227;
+	margin:0 auto;
+	margin-top:0.66rem;
+	padding:0;
+	border-radius:0.08rem;
+	-webkit-border-radius:0.08rem;
+	-moz-border-radius:0.08rem;
+	cursor:pointer;
+}

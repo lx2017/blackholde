@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <script type="text/javascript" src="__JS__/rem.js"></script>
+    <script type="text/javascript" src="__JS__/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="__JS__/layer_mobile/layer.js"></script>
+    <link type="text/css" rel="stylesheet" href="__CSS__/public.css" />
+    <link type="text/css" rel="stylesheet" href="__CSS__/doctor.css" />
+    <link type="text/css" rel="stylesheet" href="__CSS__/clinic.css" />
+    <link type="text/css" rel="stylesheet" href="__CSS__/person.css" />
+    <block name="css"><!--为以后的子模板预留css的位置--></block>
+    <title>{$h_title}</title>
+</head>
+<body <notempty name="body_style">style="{$body_style}"</notempty>>
+<input type="hidden" id="my_hide_back" data-value="{$back}">
+    <!--头部-->
+    <if condition="$header">
+    <div class="P_Header">
+        <div class="P_main">
+            <if condition="$header1">
+            <h2 class="P_title">{$header1}</h2>
+            </if>
+            <if condition="$header2">
+            <span class="P_goBack"><a href="javascript:;" id="my_back_btn"><i>&#xe616;</i></a></span>
+            </if>
+            <if condition="$header3">
+            <span class="P_Header_info"><a href="{$header4}" id="{$header5}">{$header3}</a></span>
+            </if>
+        </div>
+    </div>
+    </if>
+    <block name="main"><!--页面主体位置--></block>
+    <!--尾部-->
+    <if condition="$footer">
+    <div class="P_Footer">
+        <div class="P_main">
+            <a href="{:U('/Doctor/Doctor/Doctor/index')}" <eq name="footer1" value="doctor">class="current"</eq>><dl><dt><i>&#xe6c3;</i></dt><dd>医生</dd></dl></a>
+            <a href="{:U('/Doctor/Clinic/Clinic/index')}" <eq name="footer1" value="clinic">class="current"</eq>><dl><dt><i>&#xe62b;</i></dt><dd>诊所</dd></dl></a>
+            <a href="{:U('/Doctor/Doctor/Person/index')}" <eq name="footer1" value="person">class="current"</eq>><dl><dt><i>&#xe65e;</i></dt><dd>个人</dd></dl></a>
+        </div>
+    </div>
+    </if>
+    <script type="text/javascript">
+        $(function(){
+            //输入框遮挡问题
+            $('input:text').bind('click',function(e){
+                var $this = $(this);
+                e.preventDefault();
+                setTimeout(function(){
+                    $(window).scrollTop($this.offset().top - 100);
+                },200)
+            });
+            //点击返回
+            $('#my_back_btn').click(function(){
+                var my_back_value = $('#my_hide_back').data('value');
+                click_back(my_back_value);
+            });
+        });
+        //返回键动作
+        function click_back(info){
+            if(info=='-1'){
+                window.history.go(-1);
+//                window.location.reload();
+            }else if(info==0){
+                layer_confirm('您确定退出客户端吗',function(){callmyclient(5)});
+            }else{
+                location.href=info;
+            }
+        }
+        //返回键回调
+        function back_callback(){
+            var my_back_value = $('#my_hide_back').data('value');
+            click_back(my_back_value);
+        }
+        //统一的layer提示弹层
+        function layer_msg(msg,time,func){
+            if(typeof time == 'undefined') time=2;
+            if(typeof func != 'function') func=function(){};
+            layer.open({
+                content: msg
+                ,anim: false
+                ,skin: 'msg'
+                ,time: time
+                ,end: func()
+            });
+        }
+        function layer_confirm(msg,func,func2){
+            if(typeof func != 'function') func=function(){};
+            if(typeof func2 != 'function') func2=function(){};
+            layer.open({
+                content: msg
+                ,btn: ['确定', '取消']
+                ,yes: function(index){
+                    func();
+                    layer.close(index);}
+                ,no: function(index){
+                    func2();
+                    layer.close(index);
+                }
+            });
+        }
+        //长按事件
+        $.fn.longPress = function(fn) {
+            var timeout = undefined;
+            var $this = this;
+            for(var i = 0;i<$this.length;i++){
+                $this[i].addEventListener('touchstart', function(event) {
+                    timeout = setTimeout(fn, 800);  //长按时间超过800ms，则执行传入的方法
+                }, false);
+                $this[i].addEventListener('touchend', function(event) {
+                    clearTimeout(timeout);  //长按时间少于800ms，不会执行传入的方法
+                }, false);
+            }
+        };
+        //调用客户端事件
+        function callmyclient(type,p1,p2,p3){
+            if(typeof type == 'undefined') type=1;
+            if(typeof p1 == 'undefined') p1='';
+            if(typeof p2 == 'undefined') p2='';
+            if(typeof p3 == 'undefined') p3='';
+            type = parseInt(type);
+            var key = '';
+            switch(type){
+                case 1:
+                    key = "登录#"+p1;
+                    window.BSFWebView.showInfoFromJs(key);//调用登录
+                    break;
+                case 2:
+                    key = "咨询#"+p1+'#'+p2;;
+                    window.BSFWebView.showInfoFromJs(key);//调用咨询框
+                    break;
+                case 3:
+                    key = "定位#"+p2+'#'+p1;
+                    window.BSFWebView.showInfoFromJs(key);//调用定位
+                    break;
+                case 4:
+                    key = "退出";
+                    window.BSFWebView.showInfoFromJs(key);//退出登录
+                    break;
+                case 5:
+                    key = "退出2";
+                    window.BSFWebView.showInfoFromJs(key);//退出客户端
+                    break;
+                default:
+                    key = "登录#"+p1;
+                    window.BSFWebView.showInfoFromJs(key);//调用登录
+                    break;
+            }
+        }
+
+        /**
+         * 文件上传的错误提示
+         * @param errstr
+         * @param num
+         * @param num2
+         * @returns {*}
+         */
+        function getUploadError(errstr,num,num2){
+            switch (errstr){
+                case 'Q_EXCEED_NUM_LIMIT':
+                    return '最多上传'+num+'张';break;
+                case 'Q_EXCEED_SIZE_LIMIT':
+                    return '文件不能大于'+num2+'M';break;
+                case 'Q_TYPE_DENIED':
+                    return '文件类型错误';break;
+                case 'F_DUPLICATE':
+                    return '文件已存在';break;
+                default:
+                    return '未知错误!';break;
+            }
+        }
+    </script>
+    <block name="js"><!--为以后的子模板预留js的位置--></block>
+</body>
+</html>

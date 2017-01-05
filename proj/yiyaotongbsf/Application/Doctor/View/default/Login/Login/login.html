@@ -1,0 +1,51 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="loginBody">
+        <div class="P_main">
+            <h1><img src="__IMG__/appLogo.png"></h1>
+            <form id="myForm" method="post">
+                <ul>
+                    <li class="tel">
+                        <span></span>
+                        <input type="text" name="mobile" placeholder="请输入手机号"/>
+                    </li>
+                    <li class="psd">
+                        <span></span>
+                        <input type="password" name="password" id="password" placeholder="密码为6-12位数字或字母"/>
+                        <em id="view_password"></em>
+                    </li>                    
+                </ul>
+                <div class="bBth blue"  id="submit"><input type="button" value="登录" /></div>
+                <p class="forget"><a href="{:U('forget')}" class="c_blue">忘记密码？</a></p>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="css"><link type="text/css" rel="stylesheet" href="__CSS__/login.css" /></block>
+<block name="js">
+    <script type="text/javascript" src="__STATIC__/common/js/user.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var issend = false;
+        //保存事件
+        $('#submit').click(function(){
+            if(issend) return false;
+            issend = true;
+            var mydata = $('#myForm').serialize();
+            $.post(location.href,mydata,function (data){
+                issend = false;
+                if(data.code==0){
+                    location.href = data.url;
+                }else{
+                    layer_msg(data.msg);
+                }
+            },'json');
+        });
+        //查看密码
+        $('#view_password').click(function(){
+            var obj = $('#password');
+            password_view(obj);
+        });
+    });
+</script>
+</block>

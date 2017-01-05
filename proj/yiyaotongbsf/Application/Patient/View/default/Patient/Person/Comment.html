@@ -1,0 +1,35 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+		<div class="me-comment">
+    		<img src="__IMG__/green.png"><span class="me-com-com">备注</span>
+		</div>
+		<div>
+     		<textarea class="me-com-text"rows="4" cols="50" name="remark" id="remark"  placeholder="可输入备注信息">{$remark}</textarea>
+		</div>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+
+        $(function(){
+            //保存事件
+            var issend = false;
+            $('#add').click(function(){
+                if(issend) return false;
+                issend = true;
+                var remark=$('#remark').val();
+                $.post(location.href,{remark:remark},function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('保存信息成功',1,function(){
+                            location.href='{:U("person_info",array("id"=>I("id")))}';
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

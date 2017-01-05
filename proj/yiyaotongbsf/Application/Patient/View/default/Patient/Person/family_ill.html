@@ -1,0 +1,61 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+		<div class="me-comment">
+    		<img src="__IMG__/green.png"><span class="me-com-com">家族病史</span>
+		</div>
+		<div class="me-wrap-click hurt">
+            <span class="me-pa-click <if condition="$hurt eq '无'">  me-click <else />me-noclick </if>">无</span>
+            <span class="me-pa-click <if condition="$hurt eq '高血压'">  me-click <else />me-noclick </if>">高血压</span>
+            <span class="me-pa-click <if condition="$hurt eq '糖尿病'">  me-click <else />me-noclick </if>">糖尿病</span>
+            <span class="me-pa-click <if condition="$hurt eq '心脏病'">  me-click <else />me-noclick </if>">心脏病</span>
+            <span class="me-pa-click <if condition="$hurt eq '脑血栓'">  me-click <else />me-noclick </if>">脑血栓</span>
+            <span class="me-pa-click <if condition="$hurt eq '脑出血'">  me-click <else />me-noclick </if>">脑出血</span>
+            <span class="me-pa-click <if condition="$hurt eq '白癜风'">  me-click <else />me-noclick </if>">白癜风</span>
+            <span class="me-pa-click <if condition="$hurt eq '癫痫病'">  me-click <else />me-noclick </if>">癫痫病</span>
+            <span class="me-pa-click <if condition="$hurt eq '癌症'">  me-click <else />me-noclick </if>">癌症</span>
+            <span class="me-pa-click <if condition="$hurt eq '哮喘'">  me-click <else />me-noclick </if>">哮喘</span>
+            <span class="me-pa-click <if condition="$hurt eq '近视'">  me-click <else />me-noclick </if>">近视</span>
+            <span class="me-pa-click <if condition="$hurt eq '过敏性疾病'">  me-click <else />me-noclick </if>">过敏性疾病</span>
+		</div>
+		<div class="me-peac-text">
+     		<textarea rows="4" cols="50" name="history" id="history"  placeholder="可补充您的家族病史">{$history}</textarea>
+		</div>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(".me-pa-click").click(function(){
+            $(this).addClass("me-click");
+            $(this).siblings().removeClass("me-click");
+            $(this).siblings().addClass("me-noclick");
+        })
+
+        $(function(){
+            //保存事件
+            var issend = false;
+            $('#add').click(function(){
+                if(issend) return false;
+                issend = true;
+                var hurt =$(".hurt .me-click").text()
+                var history=$('#history').val();
+                if(history){
+                    var family_history =hurt+'、'+history;
+                }else{
+                    var family_history =hurt;
+                }
+
+                $.post(location.href,{family_history:family_history},function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('保存信息成功',1,function(){
+                            location.href='{:U("person_info",array("id"=>I("id")))}';
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

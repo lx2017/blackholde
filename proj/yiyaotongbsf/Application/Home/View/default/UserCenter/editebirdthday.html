@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>生日</title>
+    <link rel="stylesheet" href="__CSS__/UserCenter/mydate.css">
+    <script src="__JS__/jquery-2.0.0/jquery.min.js"></script>
+    <script src="__JS__/UserCenter/jquery.mobile-1.3.0.min.js"></script>
+    <link href="__CSS__/UserCenter/mobile-custom.css" rel="stylesheet" type="text/css" />
+    <script src="__JS__/UserCenter/mobiscroll.js" type="text/javascript"></script>
+    <script src="__JS__/UserCenter/mybsd.js" type="text/javascript"></script>
+</head>
+<body class="mybsd-body-edit">
+<!-- 个人中心详情页 -->
+<div class="mydata-wrap">
+    <form data-ajax="false" class="m-user-edit" action="{:U('/Home/UserCenter/UserCenter/Upbirdthday',array('x'=>'nosecrect','f'=>'nojson','t'=>'wap'))}" method="post" id="form_bsd" novalidate="novalidate">
+        <!-- top -->
+        <header class="g-header">
+            <a class="Header-back" href="javascript:history.go(-1);"><i class="ico-back"></i></a><h1>生日</h1>
+            <input class="w-button" type="button" id="btn_save_bsd" value="保存">
+        </header>
+        <!-- top -->
+
+        <div class="m-user-inputBar">
+            <div class="m-bar">
+                <div class="w-bar-control">
+                    <input id="date" name="date"  type="text" placeholder="请输入你的生日"/>
+                </div>
+                <div class="show-warning"  id="dom_error_wrap"></div>
+            </div>
+        </div>
+        <input type="hidden" name="userid" value="{$userid}">
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+
+            <if condition="isset($actions['GOODADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius"
+                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODADD']['url'];echo U($str,array('key'=>$actions['GOODADD']['key']))?>">新增</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['CHANGECLASSIFY'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius ajax-post " href="javascript:;" id="enableAdminBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CHANGECLASSIFY']['url'];echo U($str,array('key'=>$actions['CHANGECLASSIFY']['key']))?>"
+                            >更改分类</a>
+                 </span>
+            </if>
+            <script>	
+                 	$(function(){
+                 		$("#enableAdminBtn").click(function(){
+                 			//alert($("input.ids:checked").val());
+                 			var id=$("input.ids:checked").val();
+                 			if(!id){
+                 				alert("请选择商品");
+                 				return false;
+                 			}
+                 			window.location.href=$(this).attr('_href')+'&id='+id;
+                 			
+                 		})
+                 	})
+                 </script>
+            <if condition="isset($actions['CHANGELABLE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius " href="javascript:;"  id="disableAdminBtn"
+                        _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CHANGELABLE']['url'];echo U($str,array('key'=>$actions['CHANGELABLE']['key']))?>">
+                       	更改标签</a>
+                 </span>
+                 <script>	
+                 	$(function(){
+                 		$("#disableAdminBtn").click(function(){
+                 			//alert($("input.ids:checked").val());
+                 			var id=$("input.ids:checked").val();
+                 			if(!id){
+                 				alert("请选择商品");
+                 				return false;
+                 			}
+                 			window.location.href=$(this).attr('_href')+'&id='+id;
+                 			/*$.ajax(function(){
+                 				type:'get',
+                 				data:{id:id},
+                 				url:$(this).attr('_href');
+                 			})*/
+                 		})
+                 	})
+                 </script>
+            </if>
+            <if condition="isset($actions['GOODON'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="javascript:" id="goodOnBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODON']['url'];echo U($str,array('key'=>$actions['GOODON']['key']))?>"
+                       >批量上架</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['GOODOFF'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="javascript:" id="goodOffBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODOFF']['url'];echo U($str,array('key'=>$actions['GOODOFF']['key']))?>"
+                       >批量下架</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['GOODDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-danger radius" href="javascript:"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODDELETE']['url'];echo U($str,array('key'=>$actions['GOODDELETE']['key']))?>"
+                       id="goodDeleteBtn">批量删除</a>
+                 </span>
+            </if>
+            
+
+        </notempty>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="nickname" class="search-input" value="{:I('nickname')}"
+                       placeholder="请输入用户昵称或者ID">
+                <a class="sch-btn" href="javascript:" id="search"
+                   url="<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Employee/User/index',array('key'=>$key));?>"><i
+                        class="Hui-iconfont btn-search">&#xe665;</i></a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 数据列表 -->
+
+    <div class="mt-20">
+        <div class="data-table table-striped">
+
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">商品编号</th>
+                    <th class="">缩略图</th>
+                    <th class="">商品名称</th>
+                    <th class="">商品价格</th>
+                    <th class="">商品标签</th>
+                    <th class="">商品类别</th>
+                    <th class="">商品状态</th>
+                    <th class="">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo">
+                        <tr class="text-c">
+                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id}"/></td>
+                            <td>{$vo.gid}</td>
+                            <td><img src="{$vo.pic}" alt="" /></td>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.price}</td>
+                            <td>{$vo.lable}</td>
+                            <td>{$vo.classify}</td>
+                            <td>
+                                <if condition="(int)$vo.state eq 1">
+                                    已发布
+                                <else />
+                                    已下架
+                                </if>
+                            </td>
+                            <td>
+                                <if condition="isset($actions['GOODON']) AND (int)$vo.state eq -1">
+                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODON']['url'];echo U($str,array('key'=>$actions['GOODON']['key'],'id'=>$vo['id']))?>">上架</a>
+                                </if>
+                                <if condition="isset($actions['GOODOFF']) AND (int)$vo.state eq 1">
+                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODOFF']['url'];echo U($str,array('key'=>$actions['GOODOFF']['key'],'id'=>$vo['id']))?>">下架</a>
+                                </if>
+                                <if condition="isset($actions['GOODEDIT'])">
+                                    <a class="ajaxget fontblue" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODEDIT']['url'];echo U($str,array('key'=>$actions['GOODEDIT']['key'],'id'=>$vo['id']))?>">编辑</a>
+                                </if>
+                                <if condition="isset($actions['GOODDELETE'])">
+                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODDELETE']['url'];echo U($str,array('key'=>$actions['GOODDELETE']['key'],'id'=>$vo['id']))?>">删除</a>
+                                </if>
+
+                            </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="text-center"> aOh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <link href="__CSS__/employee/employee.css" rel="stylesheet" type="text/css"/>
+
+    <script src="__JS__/Good/good.js"></script>
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function () {
+            var url = $(this).attr('url');
+            var query = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+            query = query.replace(/^&/g, '');
+            if (url.indexOf('?') > 0) {
+                url += '&' + query;
+            } else {
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function (e) {
+            if (e.keyCode === 13) {
+                $("#search").click();
+                return false;
+            }
+        });
+
+    </script>
+</div>

@@ -1,0 +1,69 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <!--头部按钮-->
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+            <!--批量删除-->
+            <if condition="isset($actions['DISEASEGATEGARYDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" id="delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['DISEASEGATEGARYDELETE']['url'];echo U($str,array('key'=>$actions['DISEASEGATEGARYDELETE']['key']))?>">删除</a>
+                 </span>
+            </if>
+            <!--新增-->
+            <if condition="isset($actions['DISEASEGATEGARYADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['DISEASEGATEGARYADD']['url'];echo U($str,array('key'=>$actions['DISEASEGATEGARYADD']['key']))?>">新增</a>
+                 </span>
+            </if>
+        </notempty>
+    <!-- 数据列表 -->
+    <div class="mt-20">
+        <div class="data-table table-striped">
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                    <tr class="text-c">
+                        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                        <th class="">疾病分类名称</th>
+                        <th class="">类别</th>
+                        <th class="">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <notempty name="list">
+                    <volist name="list" id="vo">
+                        <tr class="text-c">
+                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id}" data-other="{$vo.user_id}"/></td>
+                            <td>{$vo.type_name}</td>
+                            <td>{$vo['category']==0?'科室分类':'人群分类'}</td>
+                            <td>
+                                <if condition="isset($actions['DISEASEGATEGARYDIT'])">
+                                    <a class="btn btn-link" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['DISEASEGATEGARYDIT']['url'];echo U($str,array('key'=>$actions['DISEASEGATEGARYDIT']['key'],'id'=>$vo['id']))?>">编辑</a>
+                                </if>
+                                <if condition="isset($actions['DISEASEGATEGARYDELETE'])">
+                                    <a class="btn btn-link delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['DISEASEGATEGARYDELETE']['url'];echo U($str,array('key'=>$actions['DISEASEGATEGARYDELETE']['key'],'id'=>$vo['id']))?>">删除</a>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                <else/>
+                    <td colspan="14" class="text-center"> Oh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$page}
+    </div>
+</div>
+<!--引入js,css-->
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/index.js"></script>
+<script type="text/javascript">
+    //上传成功处理函数
+    function success_func() {
+        layer_success('添加成功',1500,location.reload());
+    }
+</script>

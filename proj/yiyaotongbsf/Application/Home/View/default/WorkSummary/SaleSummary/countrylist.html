@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>工作汇总</title>
+	<script src="__PUBLIC__/Home/SaleManager/js/zepto.min.js"></script>
+	<link href="__PUBLIC__/Home/SaleManager/css/stylesheets/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__PUBLIC__/Home/SaleManager/css/stylesheets/index.css">
+</head>
+<body>
+	<div class="workAllSumary">
+	  <header class = "all_header">
+			<a class = "h_back" href="javascript:history.back();"><img src="__PUBLIC__/Home/SaleManager/images/back_icon.png" alt=""></a>
+			<span class = "h_title">工作汇总</span>
+			<a class = "h_add" href="javascript:void(0)"></a>
+		</header>
+		<div class = "work_tips">共<span>{$count}</span>位</div>
+		<volist name="countrylists" id="country">
+		<div class="work_lists">
+			<div class="work_list">
+				<div class="work_header">
+					<div style = "flex: 1;">
+						<img class = 'work_icon' src="__PUBLIC__/Home/SaleManager/images/people.png" alt="">
+						<span class = "work_name">{$country.real_name}</span>
+					</div>
+					<span class="weui-cell__ft"></span>
+				</div>
+				<div class="work_odd">
+					<span>业务员数量</span>
+					<span><span class = "work_nums">{$country.salemanNum}</span>个</span>
+				</div>
+				<div class="work_even">
+					<span>目标诊所</span>
+					<span><span class = "work_nums">{$country.clinicSumNum}</span>个</span>
+				</div>
+				<div class="work_odd">
+					<span>诊所数量</span>
+					<span><span class = "work_nums">{$country.clinicNum}</span>个</span>
+				</div>
+				<div class="work_even">
+					<span>医生数量</span>
+					<span><span class = "work_nums">{$country.doctorNum}</span>个</span>
+				</div>
+				<div class="work_odd">
+					<span>拜访次数</span>
+					<span><span class = "work_nums">{$country.salmanVisitNum}</span>次</span>
+				</div>
+				<div class="work_even">
+					<span>申请统计</span>
+					<span><span class = "work_nums">{$country.salemanApplyNum}</span>次</span>
+				</div>
+				<div class="work_odd">
+					<span>销售统计</span>
+					<span><span class = "work_nums">{$country.salemanOrderNum}</span>元</span>
+				</div>
+				<div class="work_even">
+					<span>订货统计</span>
+					<span><span class = "work_nums">{$country.salemanPrice}</span>元</span>
+				</div>
+				<div class="work_odd">
+					<span>退货统计</span>
+					<span><span class = "work_nums">{$country.quitePrice}</span>元</span>
+				</div>
+			</div>
+		</div>
+		</volist>
+	</div>
+	<script src = "__PUBLIC__/Home/SaleManager/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<extend name="Common/common"/>
+<block name="main">
+    <notempty name="list">
+        <div class="P_main P_con">
+            <div class="searchBox" style="margin-bottom:0;">
+                <span class="zoom left mysearch"><i>&#xe605;</i></span>
+                <input type="tel" class="left" value="{$mobile}" placeholder="输入患者手机号"/>
+                <span class="cancel left mycancel"><i>&#xe61f;</i></span>
+            </div>
+        </div>
+        <div class="myPatient patientMag no_pad cureRecord myListshow">
+            <ul id="mycontain">
+                <volist name="list" id="vo">
+                <li>
+                    <a href="{:U('viewpatient',array('id'=>$vo['patient_id']))}">
+                    <div class="person">
+                        <span class="c_icon span1 headSpan"><img src="{$vo.p_image}"  onerror="this.src='__IMG__/head1.png'"></span>
+                        <span class="c_333 span2">{$vo.name}</span>
+                    </div>
+                    <div class="time">
+                        <span class="c_icon span1"><i class="c_orange">&#xe661;</i></span>
+                        <span class="span2">{$vo.treat_time}</span>
+                    </div>
+                    </a>
+                </li>
+                </volist>
+            </ul>
+        </div>
+    <else/>
+        <div class="P_con myPatientNo">
+            <div class="P_main">
+                <div class="searchBox">
+                    <span class="zoom left mysearch"><i>&#xe605;</i></span>
+                    <input type="text" value="{$mobile}" class="left" placeholder="输入患者手机号"/>
+                    <span class="cancel left mycancel"><i>&#xe61f;</i></span>
+                </div>
+            </div>
+            <div class="P_main bg_f noPatient">
+                <div class="pic"><img src="__IMG__/noPatient.png"></div>
+                <p class="singleLine"><a href="{:U('addpatient')}" class="c_blue">添加患者</a></p>
+            </div>
+        </div>
+    </notempty>
+</block>
+<block name="css">
+    <style type="text/css">
+        .patientMag ul > li{ padding-bottom:2.2rem;}
+    </style>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('patientlist_more',array('mobile',$mobile))}",
+            obj:'mycontain'
+        };
+        //搜索患者
+        $('.mysearch').click(function () {
+            var mobile = $(this).siblings('input').val();
+            location.href = ('{:U("patientlist")}'+'?mobile='+mobile);
+        });
+        $('.mycancel').click(function () {
+            $(this).siblings('input').val('');
+        });
+    </script>
+</block>

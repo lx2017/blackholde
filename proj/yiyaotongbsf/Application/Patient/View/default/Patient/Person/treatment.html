@@ -1,0 +1,67 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+		<div class="me-direc-bg">
+			<div class="direcord-tit">
+    			<img src="__IMG__/green.png"><span class="me-record-lp">档案详情</span>
+    		</div>
+    		<div class="record-leftp">
+    			<p>
+					<span class="ds-ming">{$patient.name}</span><span class="ds-bie">{$patient['sex']==0?'女':'男'}</span><span class="ds-bie">{$patient.age}岁</span>
+				</p>
+    			<p>{$patient.remark}</p>
+    		</div>
+		</div>
+		<div class="drecord-main">
+			<div class="direcord-tit">
+    			<img src="__IMG__/green.png"><span class="me-record-lp">诊疗记录</span>
+    		</div>
+    		<div class="drecord-main-list" id="mycontain">
+				<volist name="list" id="vo">
+        		<div class="dr-content myconsult" data-id="{$vo.id}">
+        			<img src="__IMG__/y.png">
+        			<p>
+						{$vo.treat_time}
+						<span>
+							<eq name="vo['status']" value="1">
+								<a  href="javascript:;" class="go_assess" _href="{:U('/Patient/Patient/Patient/assess',array('id'=>$vo['id'],'did'=>$vo['doctor_id'],'pid'=>$vo['patient_id'],'type'=>2))}">去评价</a>
+							</eq>
+						</span>
+					</p>
+        			<p>{$vo.symptom}</p>
+        			<p><span>病情症状</span><span class="dr-span-left">{$vo.symptom}</span></p>
+        			<p><span>诊断结果</span><span class="dr-span-left">{$vo.treatment}</span></p>
+        			<p>{$vo.clinic}<span class="dr-spans">{$vo.doctor}</span><span class="dr-span-right">医生</span></p>
+        		</div>
+				</volist>
+    		</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript" src="__JS__/getmore.js"></script>
+	<script type="text/javascript">
+		//设置分页信息
+		myobj = {
+			total:'{$count}',
+			step:'{$size}',
+			url:"{:U('treatment_more',array('id'=>$id))}",
+			obj:'mycontain'
+		};
+		$(function(){
+			var base_url = "{:U('diagnosis_detail')}";
+			var patient_id = "{$id}";
+			//查看详情
+			$('#mycontain').on('click','.myconsult',function(){
+				var id = $(this).data('id');
+				location.href = base_url+'?pid='+patient_id+'&id='+id;
+			});
+			//评价
+			$('#mycontain').on('click','.go_assess',function(){
+				var myurl = $(this).attr('_href');
+				location.href = myurl;
+				return false;
+			});
+		});
+	</script>
+</block>

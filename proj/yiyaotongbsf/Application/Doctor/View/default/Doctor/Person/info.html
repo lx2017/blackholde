@@ -1,0 +1,173 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con personInfo">
+        <div class="P_main bg_f">
+            <form id="myForm">
+            <div class="personLogo">
+                <a href="javascript:void(0)" id="myhead"><img src="{$userinfo.image}" onerror="this.src='__IMG__/head1.png'"></a>
+                <div id="headimg" style="display: none"></div>
+                <input type="hidden" name="image" class="myimage" value="{$userinfo.image}">
+            </div>
+            <ul class="main_left_right">
+                <li>
+                    姓名<span>{$userinfo['name']}</span>
+                </li>
+                <li class="sex">
+                    <input type="hidden" name="sex" value="{$userinfo.sex}" class="mysex">
+                    <a href="javascript:void(0)">性别
+                        <span>
+                            <em data-sex="1" <eq name="userinfo['sex']" value="1">class="current"</eq>>男</em>
+                            <em data-sex="0" <eq name="userinfo['sex']" value="0">class="current"</eq>>女</em>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    年龄<input type="text" class="editInput" name="age" value="{$userinfo.age}" placeholder="输入年龄"/>
+                </li>
+                <li>
+                    手机号码<span>{$userinfo.mobile}</span>
+                </li>
+                <li>
+                    身份证号码<input type="text" class="editInput"  name="idcard" value="{$userinfo.idcard}" placeholder="输入身份证号码"/>
+                </li>
+                <li class="uploadPhoto">
+                    <em class="left">上传身份证照片</em>
+                    <dl class="left">
+                        <volist name="userinfo['imgs']" id="vo">
+                        <dt>
+                            <img src="{$vo}" class="myimg">
+                            <input type="hidden" name="imgs[]" value="{$vo}">
+                        </dt>
+                        </volist>
+                        <dt class="myupload">
+                            <span id="myupload"><i>&#xe600;</i></span>
+                            <div id="uploader" style="display: none"></div>
+                        </dt>
+                    </dl>
+                </li>
+            </ul>
+            </form>
+            <div class="bBth blue"><a href="javascript:void(0)" id="save">确定</a></div>
+        </div>
+    </div>
+</block>
+<block name="css">
+    <link type="text/css" href="__STATIC__/common/js/webuploader/webuploader.css" rel="stylesheet"/>
+    <style type="text/css">
+        .personInfo dl dt img{ display:block; width:100%; height:100%;}
+    </style>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__STATIC__/common/js/webuploader/webuploader.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //性别切换
+            $(".sex em").on('click',function(){
+                //切换效果
+                $(this).addClass('current').siblings().removeClass('current');
+                //设置隐藏域的值
+                var index = $(this).data('sex');
+                $('.mysex').val(index);
+            });
+            var issend = false;
+            //保存事件
+            $('#save').click(function(){
+                if(issend) return false;
+                issend = true;
+                var mydata = $('#myForm').serialize();
+                $.post(location.href,mydata,function (data){
+                    issend = false;
+                    if(data.code==0){
+                        location.href='{:U("index")}';
+                    }
+                },'json');
+            });
+            //长按删除
+            $('.uploadPhoto').on('longPress','.myimg',function(){
+                //删除该元素
+                $(this).closest('dt').remove();
+            });
+            //上传身份证
+            var myuploader = WebUploader.create({
+                auto: false,
+                swf: '__STATIC__/common/js/webuploader/Uploader.swf',
+                server: "{:U('/Doctor/Doctor/Upload/image')}",
+                pick: {id:'#uploader',multiple:false},
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,png',
+                    mimeTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+                },
+                fileNumLimit: 2,
+                fileSizeLimit: 30 * 1024 * 1024,
+                fileSingleSizeLimit: 6 * 1024 * 1024
+            });
+            // 文件上传成功
+            myuploader.on( 'uploadSuccess', function( file,data ) {
+                if(data.code==0){
+                    //追加到图片节点中
+                    var html = '<dt><img src="{:UPLOADIFY_TEMP}'+data.msg+'" class="myimg"><input type="hidden" name="imgs[]" value="'+data.msg+'"></dt>';
+                    $('.myupload').before(html);
+                }
+            });
+            // 文件上传失败
+            myuploader.on( 'uploadError', function( file ) {
+                layer_msg('上传错误,请稍后再试');
+            });
+            // 文件过大,过多,或类型不对
+            myuploader.on( 'error', function( type  ) {
+                layer_msg(getUploadError(type,2,6));
+            });
+            //加入队列时--检测数量
+            myuploader.on('fileQueued',function(file){
+                if($('.myupload').siblings().length<2){
+                    myuploader.upload();
+                }else{
+                    layer_msg('最多上传2张');
+                }
+            });
+            //触发上传
+            $('#myupload').click(function(){
+                $('#uploader label').click();
+            });
+
+
+            //上传头像
+            var myuploader2 = WebUploader.create({
+                auto: true,
+                swf: '__STATIC__/common/js/webuploader/Uploader.swf',
+                server: "{:U('/Doctor/Doctor/Upload/image')}",
+                pick: {id:'#headimg',multiple:false},
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,png',
+                    mimeTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+                },
+                fileNumLimit: 1,
+                fileSingleSizeLimit: 6 * 1024 * 1024
+            });
+            // 文件上传成功
+            myuploader2.on( 'uploadSuccess', function( file,data ) {
+                if(data.code==0){
+                    //显示图片并设置隐藏域
+                    $('#myhead img').attr('src','{:UPLOADIFY_TEMP}'+data.msg);
+                    $('.myimage').val(data.msg);
+                }
+            });
+            // 文件上传失败
+            myuploader2.on( 'uploadError', function( file ) {
+                layer_msg('上传错误,请稍后再试');
+            });
+            // 文件过大,过多,或类型不对
+            myuploader2.on( 'error', function( type  ) {
+                layer_msg(getUploadError(type,1,6));
+            });
+            //触发上传
+            $('#myhead').click(function(){
+                $('#headimg label').click();
+            });
+        });
+    </script>
+</block>

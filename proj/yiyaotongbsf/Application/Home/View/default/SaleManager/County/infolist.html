@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>消息列表</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+	<div class="mySaleMan">
+    <header class = "all_header">
+      <a class = "h_back" href="javascript:void(0)"><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+      <span class = "h_title">消息列表</span>
+      <a class = "h_add" href="javascript:void(0)"></a>
+    </header>
+    <div class="weui-cells">
+    <volist name="info" id="v">
+	    <div class="weui-cell saleSingle">
+	    <if condition="$v.head_img neq ''"> <div class="weui-cell__hd"><img class = "sale_img" src="{$v.head_img}" alt=""></div>
+	   		 <else/> <div class="weui-cell__hd"><img class = "sale_img" src="__SaleManager__/images/people.png" alt=""></div>
+	    </if>
+       
+        <div class="weui-cell__bd">
+          <p class = "sale_man">{$v.send_name}</p>
+        </div>
+        <div class="weui-cell__ft">
+          <span>{$v.send_time_data}</span>
+        </div>
+	    </div>
+	   </volist>
+    </div>
+	</div>
+	<script src = "__SaleManager__/js/index.js"></script>
+</body>
+</html>

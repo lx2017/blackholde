@@ -1,0 +1,161 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <!--头部按钮-->
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+            <!--批量删除-->
+            <if condition="isset($actions['PATIENTDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" id="delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['PATIENTDELETE']['url'];echo U($str,array('key'=>$actions['PATIENTDELETE']['key']))?>">删除</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['PATIENTADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['PATIENTADD']['url'];echo U($str,array('key'=>$actions['PATIENTADD']['key']))?>">新增</a>
+                 </span>
+            </if>
+            <!--excel导入-->
+            <if condition="isset($actions['PATIENTADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="/Uploads/Excel/patient.xlsx">excel模板下载</a>
+                 </span>
+                <span class="l mr-10">
+                    <input type='file' id="excel_uploader" class="uploader"/>
+                 </span>
+            </if>
+        </notempty>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf" style="margin-left: 600px">
+            <div class="sleft">
+                <input type="text" name="name" id="name" value="{:I('name')}" class="search-input" placeholder="请输入患者名">&nbsp;
+                <a class="sch-btn" href="javascript:;" id="search"><i class="Hui-iconfont btn-search">&#xe665;</i></a>
+            </div>
+        </div>
+    </div>
+    <!-- 数据列表 -->
+
+    <div class="mt-20">
+        <div class="data-table table-striped">
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">ID</th>
+                    <th class="">头像</th>
+                    <th class="">姓名</th>
+                    <th class="">身份证号</th>
+                    <th class="">性别</th>
+                    <th class="">年龄</th>
+                    <th class="">地址</th>
+                    <th class="">手机号码</th>
+                    <th class="">婚育史</th>
+                    <th class="">手术和外伤</th>
+                    <th class="">家族病史</th>
+                    <th class="">药物过敏</th>
+                    <th class="">食物和接触物过敏</th>
+                    <th class="">个人习惯</th>
+                    <th class="">备注</th>
+                    <th class="">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo">
+                        <tr class="text-c">
+                            <td>
+                                <input class="ids" type="checkbox" name="id" value="{$vo.id}" data-other="{$vo.id}" />
+                                </td>
+                            <td>{$vo.id}</td>
+                            <td><img src="{$vo.image}" style="width: 60px" onerror="this.src='__IMG__/nopic.png'"></td>
+                            <td>{$vo.name}</td>
+                            <td>{$vo.idcard}</td>
+                            <td>{$vo['sex']==0?'女':'男'}</td>
+                            <td>{$vo.age}</td>
+                            <td>{$vo.address}</td>
+                            <td>{$vo.mobile}</td>
+                            <td>{$vo.obsterical_history}</td>
+                            <td>{$vo.operation_trauma}</td>
+                            <td>{$vo.family_history}</td>
+                            <td>{$vo.drug_allergy}</td>
+                            <td>{$vo.contact_allergy}</td>
+                            <td>{$vo.habit}</td>
+                            <td>{$vo.remark}</td>
+                           <td>
+                                 <a class="btn btn-link" id="family">家庭档案</a>
+                               <input name="family_id" type="hidden"  value="{$vo.family_id}">
+                                   <if condition="isset($actions['PATIENTDIT'])">
+                                   <a class="btn btn-link" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['PATIENTDIT']['url'];echo U($str,array('key'=>$actions['PATIENTDIT']['key'],'id'=>$vo['id']))?>">编辑</a>
+                               </if>
+                               <if condition="isset($actions['PATIENTDELETE'])">
+                                   <a class="btn btn-link delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['PATIENTDELETE']['url'];echo U($str,array('key'=>$actions['PATIENTDELETE']['key'],'id'=>$vo['id']))?>">删除</a>
+                               </if>
+                           </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="text-center"> aOh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+
+</div>
+<!--引入js,css-->
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/index.js"></script>
+<script type="text/javascript">
+    var search_obj = {name:'name'};
+
+    var search_url = "{:U('',array('key'=>'PATIENTLIST'))}";
+
+    //家庭档案查询
+    $("#family").click(function(){
+        var family= $(this).find("input[type='hidden']");
+
+      var family_id={family_id:family};
+        alert(family_id);
+        var url = "{:U('',array('key'=>'PATIENTLIST'))}";
+        //提交请求
+        location.href = handleSearch(family_id,url);
+    });
+    $(function () {
+        //上传excel
+        var config = {
+            text:'excel导入',
+            multi:false,
+            size:'{$upload_conf.maxSize}B',
+            ext:'{$upload_conf.u_exts}',
+            handle:"{:U('/Admin/Common/Upload/excel')}",
+            formData:{handle1:'Patient',handle2:'Patient',method:'excel'}
+        };
+        handleUpload('excel_uploader',config,success_func,error_func);
+    });
+
+    //上传成功处理函数
+    function success_func(data) {
+        layer_success('添加成功',1500,location.reload());
+    }
+    //上传失败处理函数
+    function error_func(data){
+        if(data.code==3){
+            var html = '<div style="padding: 20px;"><span>失败数: '+data.count+'</span><br><span>下载失败文档: <a target="_blank" href="/'+data.path+'" style="color:red" onclick="layer.closeAll()">点我下载</a></span></div>';
+            layer.open({
+                type: 1,
+                area: ['300px', '200px'],
+                skin: 'layui-layer-demo',
+                shift: 2,
+                title: '上传失败说明',
+                shadeClose: true,
+                content: html
+            });
+        }else{
+            layer.alert(data.msg);
+        }
+    }
+</script>

@@ -1,0 +1,239 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <div class="cf">
+            <a class="btn btn-primary radius" id="moreback"  _href="{:U('/Admin/Usercenter/Usercenter/delmorebackname',array('key'=>'DELMOREBACKNAME'))}" onclick="morebackname()">移出黑名单</a>
+            <a class="btn btn-primary radius" id="moretags" _href="{:U('/Admin/Usercenter/Usercenter/moretags',array('key'=>'ADDBACKMORETAGS'))}" onclick="moretags()">添加标签</a>
+            <input type="text" id="seach" name="seach"  ><input id="shousuo" type="button" value="搜索">
+        </div>
+    </div>
+
+    <!-- 数据列表 -->
+    <div class="mt-20">
+        <div class="data-table table-striped">
+            <div class="data-table table-striped">
+                <table class="table table-border table-bordered table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <th><input type="checkbox" name="check" id="check" onclick="allcheck();"></th>
+                        <th>用户昵称</th>
+                        <th>手机号</th>
+                        <th>注册时间</th>
+                        <th>出生日期</th>
+                        <th>标签</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="userlist" id="vo">
+                        <tr class="text-c">
+                            <td><input type="checkbox" name="tg" id="{$vo.id}" value="{$vo.id}"></td>
+                            <td>{$vo.nickname}</td>
+                            <td>{$vo.mobile}</td>
+                            <td >{$vo.register_time}</td>
+                            <td >{$vo.birthday}</td>
+                            <td >vip会员</td>
+                            <td>
+                                <a class="confirm ajaxget fontblue" onclick ="addbackname({$vo.id})" title="移出黑名单" href="javascript:" refresh="true">移出黑名单</a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 分页 -->
+            <div class="page">
+                {$_page}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="showdiv" _href="{:U('/Admin/Usercenter/Usercenter/resetpassword',array('key'=>'BACKRESETPASSWORD'))}"  style="display:none; height:300px;text-align:center;">
+    <input type="password" name="password" id="password">
+    <input type="hidden" name="userid" id="userid" value="">
+    <div class="UploadTxBox-btnbox">
+        <button class="btn btn-red"  type="button" id="submit_crop">提交</button>
+        <button class="btn btn-white mlt10 closeDialogbtn" type="button">取消</button>
+    </div>
+</div>
+
+<div id="backdiv" _href="{:U('/Admin/Usercenter/Usercenter/delbackname',array('key'=>'DELBACKNAME'))}"  style="display:none; height:100px;text-align:center;">
+    <input type="hidden" name="usersid" id="usersid" value="">
+    <div class="UploadTxBox-btnbox">
+        <button class="btn btn-red"  type="button" id="submit_back">是</button>
+        <button class="btn btn-white mlt10 closeDialogbtn" type="button">否</button>
+    </div>
+</div>
+
+<div id="tagsdiv" _href="{:U('/Admin/Usercenter/Usercenter/addtags',array('key'=>'BACKADDUSERTAGS'))}"  style="display:none; height:200px;text-align:center;">
+    <div class="UploadTxBox-btnbox tags">
+        <volist name="alltags" id="p">
+            {$p.id}<input type="checkbox" name="tags" id ="{$p.id}" value="{$p.id}">
+            {$p.name}</br>
+        </volist>
+        <button class="btn btn-red"  type="button" id="submit_tags">确定</button>
+        <button class="btn btn-white mlt10 closeDialogbtn" type="button">取消</button>
+    </div>
+</div>
+
+<input type="hidden" name="id" id="id" value="">
+<script>
+    $(".closeDialogbtn").click(function () {
+        layer.closeAll();
+    });
+
+    function addbackname(id){
+        if(window.confirm('确定一处黑名单吗？')){
+            $.ajax({
+                type: 'post',
+                data: {"userid":id},
+                url: $("#backdiv").attr('_href'),
+                dataType: 'text',
+                success: function (data) {
+                    if(data=='ok'){
+                        alert('移出成功');
+                    }else{
+                        alert('移出失败');
+                    }
+                }
+            })
+        }
+    }
+
+    /*打标签*/
+    function tags(id){
+        $("#id").val(id);
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-yuan', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            shadeClose: true, //开启遮罩关闭
+            shade: [0.5],
+            area: '180px',
+            title: "添加标签",
+            content: $('#tagsdiv')
+        });
+        $("#submit_tags").click(function () {
+            var usersid = $("#id").val();
+            $('input:checkbox[name=tags]:checked').each(function(i){
+                if(0==i){
+                    spCodesTemp = $(this).val();
+                }else{
+                    spCodesTemp += (","+$(this).val());
+                }
+            });
+            $.ajax({
+                type: 'post',
+                data: {"userid":usersid,"tags":spCodesTemp},
+                url: $("#tagsdiv").attr('_href'),
+                dataType: 'text',
+                success: function (data) {
+                    if(data=='ok'){
+                        alert('添加成功');
+                        layer.closeAll();
+                    }else{
+                        alert('添加失败');
+                        layer.closeAll();
+                    }
+                }
+            })
+        })
+    }
+    function allcheck(){
+        $('table input:checkbox').each(function() {
+            $(this).attr('checked', true);
+        });
+    }
+    /*添加多个黑名单*/
+    function morebackname(){
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-yuan', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            shadeClose: true, //开启遮罩关闭
+            shade: [0.5],
+            area: '180px',
+            title: "加入黑名单",
+            content: $('#backdiv')
+        });
+        $('table input:checkbox[name=tg]:checked').each(function(i){
+            if(0==i){
+                spCodesTemp = $(this).val();
+            }else{
+                spCodesTemp += (","+$(this).val());
+            }
+        });
+        $.ajax({
+            type: 'post',
+            data: {"userid":spCodesTemp},
+            url: $("#moreback").attr('_href'),
+            dataType: 'text',
+            success: function (data) {
+                alert(data);
+                if(data=='ok'){
+                    alert('添加成功');
+                    layer.closeAll();
+                }else{
+                    alert('添加失败');
+                    layer.closeAll();
+                }
+            }
+        })
+
+    }
+    function moretags(){
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-yuan', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            shadeClose: true, //开启遮罩关闭
+            shade: [0.5],
+            area: '180px',
+            title: "添加标签",
+            content: $('#tagsdiv')
+        });
+        $("#submit_tags").click(function () {
+            $('table input:checkbox[name=tg]:checked').each(function(i){
+                if(0==i){
+                    spCodesTemp = $(this).val();
+                }else{
+                    spCodesTemp += (","+$(this).val());
+                }
+            });
+            $('input:checkbox[name=tags]:checked').each(function(j){
+                if(0==j){
+                    t = $(this).val();
+                }else{
+                    t += (","+$(this).val());
+                }
+            });
+
+            $.ajax({
+                type: 'post',
+                data: {"userid":spCodesTemp,"tag":t},
+                url: $("#moretags").attr('_href'),
+                dataType: 'text',
+                success: function (data) {
+                    if(data=='ok'){
+                        alert('添加成功');
+                        layer.closeAll();
+                    }else{
+                        alert('添加失败');
+                        layer.closeAll();
+                    }
+                }
+            })
+        });
+
+    }
+
+    /*搜索*/
+    $("#shousuo").click(function(){
+        var value =$("#seach").val();
+        var url ="{:U('/Admin/Usercenter/Usercenter/listbackname',array('key'=>'BACKSEARCH','value'=>'seachs'))}";
+        var url =  url.replace("seachs",value);
+        window.location.href=url;
+    });
+
+</script>

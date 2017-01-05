@@ -1,0 +1,54 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content me-marriage">
+		<div class="me-comment">
+    		<img src="__IMG__/green.png"><span class="me-com-com">婚姻状况</span>
+		</div>
+		<div class="me-wrap-click marriage">
+        <span class="me-pa-click
+        <if condition="$marriage eq '已婚'">  me-click <else />me-noclick </if> ">已婚</span>
+            <span class="me-pa-click  <if condition="$marriage eq '未婚' ">  me-click <else />me-noclick </if>
+            ">未婚</span>
+		</div>
+		<div class="me-comment me-comment-se">
+    		<img src="__IMG__/green.png"><span class="me-com-com">生育状况</span>
+		</div>
+		<div class="me-wrap-click bear">
+        <span class="me-pa-click <if condition="$bear eq '未生育'">  me-click <else />me-noclick </if> ">未生育</span>
+        <span class="me-pa-click <if condition="$bear eq '备孕期'">  me-click <else />me-noclick </if> ">备孕期</span>
+        <span class="me-pa-click <if condition="$bear eq '怀孕期'">  me-click <else />me-noclick </if>">怀孕期</span>
+        <span class="me-pa-click <if condition="$bear eq '已生育'">  me-click <else />me-noclick </if>">已生育</span>
+		</div>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+    $(".me-pa-click").click(function(){
+    $(this).addClass("me-click");
+    $(this).siblings().removeClass("me-click");
+    $(this).siblings().addClass("me-noclick");
+    })
+
+    $(function(){
+    //保存事件
+    var issend = false;
+    $('#add').click(function(){
+        if(issend) return false;
+        issend = true;
+        var marriage =$(".marriage .me-click").text()
+        var bear = $(".bear .me-click").text()
+        var obsterical_history =marriage+'、'+bear;
+        $.post(location.href,{obsterical_history:obsterical_history},function (data){
+            issend = false;
+            if(data.code==0){
+                layer_msg('保存信息成功',1,function(){
+                    location.href='{:U("person_info",array("id"=>I("id")))}';
+                });
+            }else{
+                layer_msg(data.msg);
+            }
+        },'json');
+    });
+    });
+    </script>
+   </block>

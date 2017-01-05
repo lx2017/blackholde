@@ -1,0 +1,97 @@
+<include file="Public/base"/>
+<body>
+    <div class="page-container">
+        <form action="" method="post" class="form form-horizontal" id="commentFrom">
+            <input type="hidden" name="type" value="excel">
+            <input type="hidden" name="order_id" value="{$order_id}">
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                    <p>
+                        导入您需要的Excel表，如果不清楚EXCEL模板格式，请查看<a href="/Uploads/Excel/saleman.xlsx">下载Excel导入模板</a>
+                    </p>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">附件：</label>
+                <div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+                        <input class="input-text upload-url" type="text" name="uploadfile" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
+                        <a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+                        <input type="file" multiple name="excel" class="input-file">
+                    </span> </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                    <button onClick="sub_save();" class="btn btn-secondary radius" type="button"> 提交</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        function sub_save()
+        {
+            var formData = new FormData($("#commentFrom")[0]);
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (result) {
+                    var msg = result['msg'];
+                    if (result['code'] != 1) {
+                        iHtml = '';
+                        var data = result['data'];
+                        iHtml += '<table class="table table-border table-bordered table-bg">';
+                        iHtml += '<thead>';
+                        iHtml += '<tr>';
+                        iHtml += '<th width="80">行数</th>';
+                        iHtml += '<th width="600">描述</th>';
+                        iHtml += '</tr>';
+                        iHtml += '</thead>';
+                        iHtml += '<tbody>';
+                        if (data[0]) {
+                            iHtml += '<tr class="text-c">';
+                            iHtml += '<td>无法具体计算行数</td>';
+                            iHtml += '<td>' + data[0]['msg'] + '</td>';
+                            iHtml += '</tr>';
+                        } else {
+
+                            $.each(data, function (k, v) {
+                                var row = parseInt(k) + 1;
+                                iHtml += '<tr class="text-c">';
+                                iHtml += '<td>'+row+'</td>';
+                                iHtml += '<td>' + data[k]['msg'] + '</td>';
+                                iHtml += '</tr>';
+                            });
+                        }
+                        iHtml += '</tbody>';
+                        iHtml += '</table>';
+                        layer.open({
+                            type: 1,
+                            title: msg,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['700px', '240px'], //宽高
+                            content: iHtml
+                        });
+                        return;
+                    }
+
+                    layer.msg(msg);
+                },
+                error: function (returndata) {
+                    alert(returndata);
+                }
+            });
+        }
+
+        function backlist() {
+            layer.close();
+        }
+
+    </script>
+</body>
+</html>

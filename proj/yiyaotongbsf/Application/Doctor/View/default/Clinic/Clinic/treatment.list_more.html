@@ -1,0 +1,15 @@
+<volist name="list" id="vo">
+    <li>
+        <a href="{:U('/Doctor/Doctor/Doctor/viewpatient',array('id'=>$vo['patient_id']))}">
+            <div class="person">
+                <span class="c_icon span1 headSpan"><img src="{$vo.p_image}"  onerror="this.src='__IMG__/head1.png'"></span>
+                <span class="c_333 span2">{$vo.name}</span>
+            </div>
+            <div class="time">
+                <span class="c_icon span1"><i class="c_orange">&#xe661;</i></span>
+                <span class="span2">{$vo.treat_time}</span>
+            </div>
+            <span class="doctor">医生：<em class="c_orange">{$vo.doctor}</em></span>
+        </a>
+    </li>
+</volist>

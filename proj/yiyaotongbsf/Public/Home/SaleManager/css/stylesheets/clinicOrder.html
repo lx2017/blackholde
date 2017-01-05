@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>诊所订单</title>
+	
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../stylesheets/index.css">
+	<link rel="stylesheet" href="../stylesheets/dropload.css">
+</head>
+<body>
+	<div class="clinicOrder">
+		<header class = "all_header">
+			<a class = "h_back" href="javascript:void(0)"><img src="../images/back_icon.png" alt=""></a>
+			<span class = "h_title">诊所订单</span>
+			<a class = "h_add" href="javascript:void(0)"></a>
+		</header>
+		<div class="weui-tab">
+      <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on">
+            全部
+        </div>
+        <div class="weui-navbar__item">
+            未完成
+        </div>
+        <div class="weui-navbar__item">
+            已完成
+        </div>
+        <div class="weui-navbar__item">
+            退货
+        </div>
+      </div>
+      <div class="weui-tab__panel">
+				<div class="order_list" style = "display: block;">
+					<div class="order">
+						<div class="weui_title">
+							<div class="order_id">
+								<span>订单号：</span>
+								<span>123456789</span>
+							</div>
+							<div class="order_pre_status">
+								已发货
+							</div>
+						</div>
+						<div class="order_info">
+							<a href="./orderInfo.html" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                  <img class="weui-media-box__thumb" src="../images/demo.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title">广州第一诊所</h4>
+                  <p class = "order_date_clinic">2016-9-23</p>
+                  <p class="weui-media-box__desc"><span>总价：</span><span>490</span>元</p>
+                </div>
+              </a>
+						</div>
+					</div>
+					<div class="order">
+						<div class="weui_title">
+							<div class="order_id">
+								<span>订单号：</span>
+								<span>123456789</span>
+							</div>
+							<div class="order_next_status">
+								未发货
+							</div>
+						</div>
+						<div class="order_info">
+							<a href="./orderInfo.html" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                  <img class="weui-media-box__thumb" src="../images/demo.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title">广州第一诊所</h4>
+                  <p class = "order_date_clinic">2016-9-23</p>
+                  <p class="weui-media-box__desc"><span>总价：</span><span>490</span>元</p>
+                </div>
+              </a>
+						</div>
+					</div>
+					<div class="order">
+						<div class="weui_title">
+							<div class="order_id">
+								<span>订单号：</span>
+								<span>123456789</span>
+							</div>
+							<div class="order_beak_status">
+								退货
+							</div>
+						</div>
+						<div class="order_info">
+							<a href="./orderInfo.html" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                  <img class="weui-media-box__thumb" src="../images/demo.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title">广州第一诊所</h4>
+                  <p class = "order_date_clinic">2016-9-23</p>
+                  <p class="weui-media-box__desc"><span>总价：</span><span>490</span>元</p>
+                </div>
+              </a>
+						</div>
+					</div>
+				</div>
+				<div class="order_list">
+					<div class="order">
+						<div class="weui_title">
+							<div class="order_id">
+								<span>订单号：</span>
+								<span>123456789</span>
+							</div>
+							<div class="order_next_status">
+								未发货
+							</div>
+						</div>
+						<div class="order_info">
+							<a href="./orderInfo.html" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                  <img class="weui-media-box__thumb" src="../images/demo.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title">广州第一诊所</h4>
+                  <p class = "order_date_clinic">2016-9-23</p>
+                  <p class="weui-media-box__desc"><span>总价：</span><span>490</span>元</p>
+                </div>
+              </a>
+						</div>
+					</div>
+				</div>
+				<div class="order_list">
+					<div class="order">
+						<div class="weui_title">
+							<div class="order_id">
+								<span>订单号：</span>
+								<span>123456789</span>
+							</div>
+							<div class="order_pre_status">
+								已发货
+							</div>
+						</div>
+						<div class="order_info">
+							<a href="./orderInfo.html" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                  <img class="weui-media-box__thumb" src="../images/demo.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title">广州第一诊所</h4>
+                  <p class = "order_date_clinic">2016-9-23</p>
+                  <p class="weui-media-box__desc"><span>总价：</span><span>490</span>元</p>
+                </div>
+              </a>
+						</div>
+					</div>
+				</div>
+				<div class="order_list">
+					<div class="order">
+						<div class="weui_title">
+							<div class="order_id">
+								<span>订单号：</span>
+								<span>123456789</span>
+							</div>
+							<div class="order_beak_status">
+								退货
+							</div>
+						</div>
+						<div class="order_info">
+							<a href="./orderInfo.html" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                  <img class="weui-media-box__thumb" src="../images/demo.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title">广州第一诊所</h4>
+                  <p class = "order_date_clinic">2016-9-23</p>
+                  <p class="weui-media-box__desc"><span>总价：</span><span>490</span>元</p>
+                </div>
+              </a>
+						</div>
+					</div>
+				</div>
+      </div>
+    </div>
+	</div>
+	<script src="../js/zepto.min.js"></script>
+	<script src = "../js/index.js"></script>
+	<script src = "../js/dropload.min.js"></script>
+	<script>
+		$(function () {
+			var itemIndex = 0;
+	    var tab1LoadEnd = false;
+	    var tab2LoadEnd = false;
+	    var tab3LoadEnd = false;
+	    var tab4LoadEnd = false;
+			
+			// 每页展示10个
+			var counter = 0;
+	    var num = 10;
+	    var pageStart = 0,pageEnd = 0;
+				// dropload
+	    var dropload = $('.weui-tab__panel').dropload({
+	        scrollArea : window,
+	        loadDownFn : function(me){
+	            // 加载菜单一的数据
+	            if(itemIndex == '0'){
+	                $.ajax({
+	                    type: 'GET',
+	                    url: '',
+	                    dataType: 'json',
+	                    success: function(data){
+
+	                        var result = '<div class="order">\
+														<div class="weui_title">\
+															<div class="order_id">\
+																<span>订单号：</span>\
+																<span>123456789</span>\
+															</div>\
+															<div class="order_pre_status">\
+																已发货\
+															</div>\
+														</div>\
+														<div class="order_info">\
+															<a href="./orderInfo.html" class="weui-media-box weui-media-box_appmsg">\
+								                <div class="weui-media-box__hd">\
+								                  <img class="weui-media-box__thumb" src="../images/demo.png" alt="">\
+								                </div>\
+								                <div class="weui-media-box__bd">\
+								                  <h4 class="weui-media-box__title">广州第一诊所</h4>\
+								                  <p class="order_date_clinic">2016-9-23</p>\
+								                  <p class="weui-media-box__desc"><span>总价：</span><span>490</span>元</p>\
+								                </div>\
+								              </a>\
+														</div>\
+													</div>';
+	                        counter++;
+	                        pageEnd = num * counter;
+	                        pageStart = pageEnd - num;
+
+	                        if(pageStart <= data.lists.length){
+	                            for(var i = pageStart; i < pageEnd; i++){
+	                                result +=   '';
+	                                if((i + 1) >= data.lists.length){
+	                                    // 数据加载完
+	                                    tab1LoadEnd = true;
+	                                    // 锁定
+	                                    me.lock();
+	                                    // 无数据
+	                                    me.noData();
+	                                    break;
+	                                }
+	                            }
+	                            // 为了测试，延迟1秒加载
+	                            setTimeout(function(){
+	                                $('.lists').eq(itemIndex).append(result);
+	                                // 每次数据加载完，必须重置
+	                                me.resetload();
+	                            },1000);
+	                        }
+	                    },
+	                    error: function(xhr, type){
+	                        alert('Ajax error!');
+	                        // 即使加载出错，也得重置
+	                        me.resetload();
+	                    }
+	                });
+	            // 加载菜单二的数据
+	            }else if(itemIndex == '1'){
+	                $.ajax({
+	                    type: 'GET',
+	                    url: 'json/update.json',
+	                    dataType: 'json',
+	                    success: function(data){
+	                        var result = '';
+	                        for(var i = 0; i < data.lists.length; i++){
+	                            result +=   '<div class="order">\
+														<div class="weui_title">\
+															<div class="order_id">\
+																<span>订单号：</span>\
+																<span>123456789</span>\
+															</div>\
+															<div class="order_pre_status">\
+																已发货\
+															</div>\
+														</div>\
+														<div class="order_info">\
+															<a href="./orderInfo.html" class="weui-media-box weui-media-box_appmsg">\
+								                <div class="weui-media-box__hd">\
+								                  <img class="weui-media-box__thumb" src="../images/demo.png" alt="">\
+								                </div>\
+								                <div class="weui-media-box__bd">\
+								                  <h4 class="weui-media-box__title">广州第一诊所</h4>\
+								                  <p class="order_date_clinic">2016-9-23</p>\
+								                  <p class="weui-media-box__desc"><span>总价：</span><span>490</span>元</p>\
+								                </div>\
+								              </a>\
+														</div>\
+													</div>';
+	                        }
+	                        // 为了测试，延迟1秒加载
+	                        setTimeout(function(){
+	                            $('.lists').eq(itemIndex).append(result);
+	                            // 每次数据加载完，必须重置
+	                            me.resetload();
+	                        },1000);
+	                    },
+	                    error: function(xhr, type){
+	                        alert('Ajax error!');
+	                        // 即使加载出错，也得重置
+	                        me.resetload();
+	                    }
+	                });
+	            } else if (itemIndex == '2') {
+
+	            } else if (itemIndex == '2') {
+
+	            }
+	        }
+	    });
+			console.log(dropload);
+			$(".weui-navbar__item").on("click",function () {
+				var $this = $(this);
+	      itemIndex = $this.index();
+	      // 如果选中菜单一
+	        if(itemIndex == '0'){
+	            // 如果数据没有加载完
+	            if(!tab1LoadEnd){
+	                // 解锁
+	                dropload.unlock();
+	                dropload.noData(false);
+	            }else{
+	                // 锁定
+	                dropload.lock('down');
+	                dropload.noData();
+	            }
+	        // 如果选中菜单二
+	        }else if(itemIndex == '1'){
+	            if(!tab2LoadEnd){
+	                // 解锁
+	                dropload.unlock();
+	                dropload.noData(false);
+	            }else{
+	                // 锁定
+	                dropload.lock('down');
+	                dropload.noData();
+	            }
+	        } else if (itemIndex == '2') {
+	        	if(!tab3LoadEnd){
+	                // 解锁
+	                dropload.unlock();
+	                dropload.noData(false);
+	            }else{
+	                // 锁定
+	                dropload.lock('down');
+	                dropload.noData();
+	            }
+	        } else if (itemIndex == '3') {
+	        	if(!tab4LoadEnd){
+	                // 解锁
+	                dropload.unlock();
+	                dropload.noData(false);
+	            }else{
+	                // 锁定
+	                dropload.lock('down');
+	                dropload.noData();
+	            }
+	        }
+	        // 重置
+	        dropload.resetload();
+			});
+		})
+	</script>
+</body>
+</html>

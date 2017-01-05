@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>订单详情</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+	<div class="orderInfo">
+		<header class = "all_header">
+			<a class = "h_back" href="javascript:void(0)"><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+			<span class = "h_title">订单详情</span>
+			<a class = "h_add" href="javascript:void(0)"></a>
+		</header>
+		<div class="order">
+			<div class="order_adress">
+				<a class = "adress_icon" href="javascript:void(0)"><img src="__SaleManager__/images/order_adress.png" alt=""></a>
+				<span>广州市XX区XX路XX号，广州市第一诊所</span>
+			</div>
+			<volist name='info' id='v'>
+			<div class="order_list">
+				<div class="order_name_w">
+					<span class = "order_name">{$v.drugs_name}</span>
+					<!-- <span class = "order_del">删除</span> -->
+				</div>
+				<div class="order_price_w">
+					<span class = "order_w">单价</span>
+					<span>¥{$v.price}</span>
+				</div>
+				<div class="order_count">X{$v.num}</div>
+				<div class="all_price_w">
+					<span class = "order_w">总价</span>
+					<span>¥<span class = "all_num">{$v.total_price}</span></span>
+				</div>
+			</div>
+			</volist>
+			<div class="total_price_w">
+				<span class = "total_name">商品总额：</span>
+				<span><span class = "total_num">¥{$total}</span></span>
+			</div>
+		</div>
+		<input type='hidden' name='oid' id='oid' value={$oid}>
+		<input type='hidden' name='status' id='status' value={$status}>
+		<if condition="$status neq '已完成'">
+			<div class="weui-btn-area">
+     			 <a class="weui-btn total_btn" href="javascript:">完成</a>
+    			</div>
+		</if>
+		<include file="./Application/Home/View/default/SaleManager/layer/popup.html"/>
+	</div>
+	<script src = "__SaleManager__/js/index.js"></script>
+	<script src = "__SaleManager__/js/Common.js"></script>
+</body>
+<script>
+var sessionStatus;
+var sessionUrl;
+$(document).on('click','.total_btn',function(){
+	$id = $(this).attr('data-clinicid');
+	//删除事件
+		$.ajax({
+            url: "/Home/SaleManager/County/completOrder",
+            type: 'POST',
+            data: {'oid':$('#oid').val()},
+            async: false,
+            cache: false,
+           dataType:"json",
+            success: function (returndata) {
+            		sessionStatus=returndata.code;
+            		sessionUrl=returndata.data;
+          		　$('.weui-dialog__bd').html(returndata.msg);
+           		  $('#confirm_dialog').css('display','block');
+            },
+            error: function (returndata) {
+            	　	$('.weui-dialog__bd').html("操作失败");
+          		 $('#confirm_dialog').css('display','block');
+            }
+        });
+	})
+	$(document).on('click','.weui-dialog__btn_primary',function(){
+		if(sessionStatus==2028){
+			window.location.href=sessionUrl;
+		}else{
+			window.location.href='/Home/SaleManager/County/orderlist';
+		}
+			
+	})
+</script>
+</html>

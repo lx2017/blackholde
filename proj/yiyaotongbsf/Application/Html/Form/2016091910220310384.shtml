@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <LINK rel="Bookmark" href="/favicon.ico">
+    <LINK rel="Shortcut Icon" href="/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/project/Public/static/html5.js"></script>
+    <script type="text/javascript" src="/project/Public/static/respond.min.js"></script>
+    <script type="text/javascript" src="/project/Public/Admin/js/PIE_IE678.js"></script>
+    <![endif]-->
+    <link href="/project/Public/Admin/css/manager/H-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/project/Public/Admin/css/manager/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+    <link href="/project/Public/Admin/css/skin/default/skin.css" rel="stylesheet" type="text/css"/>
+    <link href="/project/Public/Admin/css/manager/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="/project/Public/Admin/css/common.css" rel="stylesheet" type="text/css"/>
+    <title>后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script type="text/javascript" src="/project/Public/static/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/project/Public/static/layer/layer.js"></script>
+    <script type="application/javascript" src="/project/Public/static/form/jquery.validate.min.js"></script>
+    <script type="application/javascript" src="/project/Public/static/form/localization/messages_zh.min.js"></script>
+    <script type="text/javascript" src="/project/Public/Admin/js/H-ui.js"></script>
+    <script type="text/javascript" src="/project/Public/Admin/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="/project/Public/Admin/js/common.js"></script>
+
+<script type="text/javascript" src="/project/Public/Admin/js/timer.js"></script>
+
+
+
+
+ 
+</head>
+
+
+
+<link rel="stylesheet" href="/project/Public/Admin/form/css/index.css" type="text/css" />
+<script type="text/javascript" src="/project/Public/Admin/form/js/jquery-1.7.2.min.js"></script>
+
+<body>
+<!---头部---->
+<div class="pub_head">
+	<div class="pub_top">
+		<img class="pub_img1" src="/project/Public/Admin/form/images/logo.png"/>
+		<div class="pub_left">
+			<span>猿码头</span>
+			<p>助力于中小企业的发展</p>
+		</div>
+		<div class="pub_right">
+			<a href="" class="pub_name">hi,猿码头<i></i></a>
+			<a href=""><img class="pub_img2" src="/project/Public/Admin/form/images/pho.png"/></a>
+		</div>
+	</div>
+</div>
+<!------end-------->
+<div class="pub_bottom">
+	<div class="pre_all">
+		<div class="pre_mid">
+			<span class="pre_title">猿码头用户调查问卷</span>
+			<span class="pre_bt">亲,请留下您宝贵的意见,我们会认真对待你的任何反馈.</span>
+			
+						
+			
+			<div class="clear2"></div>
+			<a class="pre_sub" href="">提交</a>
+		</div>
+		<div class="pre_rifg">
+			<div class="pre_phone">
+						<div class="pre_mid ip_all">
+							<span class="ip_title">猿码头用户调查问卷</span>
+							<span class="ip_bt">亲,请留下您宝贵的意见,我们会认真对待你的任何反馈.</span>
+							
+							<div class="ip_ser">
+								<span class="pre_cv">你对我们的服务满意么?</span>
+								<div class="pre_li">
+									<input type="radio" name="cm2"/>非常满意
+								</div>
+								<div class="pre_li">
+									<input type="radio" name="cm2"/>满意
+								</div>
+								<div class="pre_li">
+									<input type="radio" name="cm2"/>一般
+								</div>
+								<div class="pre_li">
+									<input type="radio" name="cm2"/>不满意
+								</div>
+								<div class="pre_li">
+									<input type="radio" name="cm2"/>非常不满意
+								</div>
+							</div>
+							
+							<div class="ip_ser">
+								<span class="pre_cv">您最喜欢的部分是?</span>
+								<div class="pre_li">
+									<input type="checkbox"/>非常满意
+								</div>
+								<div class="pre_li">
+									<input type="checkbox"/>满意
+								</div>
+								<div class="pre_li">
+									<input type="checkbox"/>一般
+								</div>
+							</div>
+							
+							<div class="clear3"></div>
+							<a class="ip_sub" href="">提交</a>
+						</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-----底部------->
+<div class="clear5"></div>
+<div class="con_bottom">
+	<div class="con_hed">
+		<img class="pub_img1" src="/project/Public/Admin/form/images/logo.png"/>
+		<div class="pub_left">
+			<a href="javascript:;" class="bum">首页</a>
+			<a href="javascript:;" class="bum">产品中心</a>
+			<a href="javascript:;" class="bum">发布需求</a>
+			<a href="javascript:;" class="bum">开发者入口</a>
+			<a href="javascript:;" class="bum">成功案例</a>
+			<a href="javascript:;" class="bum">关于我们</a>
+			<p class="con_bb">Copyright © 京ICP备14013455号-</p>
+		</div>
+	</div>
+</div>
+<!------end------>
+</body>

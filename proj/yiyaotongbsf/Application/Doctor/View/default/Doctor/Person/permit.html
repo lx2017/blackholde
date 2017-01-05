@@ -1,0 +1,96 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con no_pad zizhi">
+        <div class="bg_f pad_l_r textareaBox">
+            <form id="myForm">
+                <p>你的执业资质</p>
+                <textarea name="permit" id="permit">{$permit}</textarea>
+                <p>上传执业资质图片</p>
+                <ul id="myul">
+                    <volist name="imgs" id="vo">
+                    <li>
+                        <img src="{$vo}" class="myimg">
+                        <input type="hidden" name="imgs[]" value="{$vo}">
+                    </li>
+                    </volist>
+                    <li class="uploadPhoto">
+                        <span id="myuploader"><i>&#xe600;</i></span>
+                    </li>
+                </ul>
+                <div id="uploader" style="display: none"></div>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="css">
+    <link type="text/css" href="__STATIC__/common/js/webuploader/webuploader.css" rel="stylesheet"/>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__STATIC__/common/js/webuploader/webuploader.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var issend = false;
+           //保存事件
+            $('#sava').click(function(){
+                if(issend) return false;
+                issend = true;
+                var mydata = $('#myForm').serialize();
+                $.post(location.href,mydata,function (data){
+                    issend = false;
+                    if(data.code==0){
+                        location.href='{:U("index1")}';
+                    }
+                },'json');
+            });
+            //长按删除
+            $('#myul').on('longPress','.myimg',function(){
+                //删除该元素
+                $(this).closest('li').remove();
+            });
+            //上传
+            var myuploader = WebUploader.create({
+                auto: false,
+                swf: '__STATIC__/common/js/webuploader/Uploader.swf',
+                server: "{:U('/Doctor/Doctor/Upload/image')}",
+                pick: {id:'#uploader',multiple:false},
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,png',
+                    mimeTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+                },
+                fileNumLimit: 9,
+                fileSizeLimit: 45 * 1024 * 1024,
+                fileSingleSizeLimit: 6 * 1024 * 1024
+            });
+            // 文件上传成功
+            myuploader.on( 'uploadSuccess', function( file,data ) {
+                if(data.code==0){
+                    //追加到图片节点中
+                    var html = '<li><img src="{:UPLOADIFY_TEMP}'+data.msg+'" class="myimg"><input type="hidden" name="imgs[]" value="'+data.msg+'"></li>';
+                    $('.uploadPhoto').before(html);
+                }
+            });
+            // 文件上传失败
+            myuploader.on( 'uploadError', function( file ) {
+                layer_msg('上传错误,请稍后再试');
+            });
+            // 文件过大,过多,或类型不对
+            myuploader.on( 'error', function( type  ) {
+                layer_msg(getUploadError(type,9,6));
+            });
+            //加入队列时--检测数量
+            myuploader.on('fileQueued',function(file){
+                if($('.uploadPhoto').siblings().length<9){
+                    myuploader.upload();
+                }else{
+                    layer_msg('最多上传9张');
+                }
+            });
+            //触发上传
+            $('#myuploader').click(function(){
+                $('#uploader label').click();
+            });
+        });
+    </script>
+</block>

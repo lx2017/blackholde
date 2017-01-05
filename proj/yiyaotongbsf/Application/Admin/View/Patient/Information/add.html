@@ -1,0 +1,90 @@
+<include file="Public/base"/>
+<!--表单-->
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="submitForm">
+        <div class="row cl">
+            <label class="form-label col-3">资讯标题</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="title" value="{$title}" required id="title">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">图片</label>
+            <div class="formControls col-5">
+                <div class="upload_div">
+                    <input type='file' id="file_uploader" class="uploader"/>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3"></label>
+            <div class="formControls col-5">
+                <div class="upload_div">
+                    <div class="upload-img-box patent_image" <empty name="image">style="display: none"</empty>>
+                    <div class="upload-pre-item">
+                        <input type="hidden" name="image" class="p_image" value="{$image}">
+                        <img src="{$image}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3">内容</label>
+            <div class="formControls col-5">
+                <textarea name="content" id="content" style="margin: 0px; height: 66px; width: 341px;" required>{$content}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input type="hidden" name="id" id="id" value="{$id}">
+                <button class="btn btn-primary radius" id="submit" type="submit">确 定</button>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--引入js,css-->
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/add.js"></script>
+<link type="text/css" href="__STATIC__/common/css/image.css" rel="stylesheet"/>
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__STATIC__/form/additional/isMobile.js"></script>
+<script type="text/javascript">
+    //验证相关
+    var validate_rules = {};
+    var validate_messages = {};
+    $(function() {
+        //上传
+        var config = {
+            text:'上传',
+            multi:false,
+            size:'{$upload_conf.maxSize}B',
+            ext:'{$upload_conf.u_exts}',
+            handle:"{:U('/Admin/Common/Upload/image')}"
+        };
+        handleUpload('file_uploader',config,success_func);
+        //图片删除
+        $('.gallery').on('click','.delImg',function(){
+            $(this).closest('.upload-img-box').remove();
+        });
+    });
+    //上传成功处理函数
+    function success_func(data) {
+        //删除以前的文件
+        var yet = $('.p_image').val();
+        if(yet){
+            delete_file(yet);
+        }
+        $('.patent_image').show();
+        $('.patent_image .upload-pre-item img').attr('src', '{:UPLOADIFY_TEMP}' + data.msg);
+        $('.p_image').val(data.msg);
+    }
+    //删除上传的文件
+    function delete_file(path,type){
+        if(typeof type=='undefined') type=0;
+        if(!path) return false;
+        $.post('/index.php?s=/Admin/Common/Upload/delete',{type:type,path:path},function(){});
+    }
+</script>

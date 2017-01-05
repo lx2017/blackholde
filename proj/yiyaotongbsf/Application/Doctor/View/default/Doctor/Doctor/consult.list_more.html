@@ -1,0 +1,19 @@
+<volist name="list" id="vo">
+    <li data-pid="{$vo.hx_name}" data-name="{$vo.name}">
+        <div class="ov_h singleLine">
+            <span class="left c_333"><i class="c_orange">&#xe6c3;</i> {$vo.name}</span>
+            <eq name="vo.status" value="1">
+                <em class="right bg_blue reply myconsult">待回复</em>
+                <else />
+                <em class="right bg_blue reply myconsult">已回复</em>
+            </eq>
+        </div>
+        <!--<div>
+            <textarea disabled class="bg_blue">{$vo.content}</textarea>
+        </div>-->
+        <p class="time ov_h singleLine">
+            <span class="left">{$vo.date}</span>
+            <b class="right c_blue myconsult">沟通</b>
+        </p>
+    </li>
+</volist>

@@ -1,0 +1,35 @@
+.upload_div{
+    position: relative;
+    display: inline-block;
+}
+.uploader{
+    color: white;
+    text-align: center;
+}
+.upload-img-box {
+    width: 120px;
+    max-height: 120px;
+    float: left;
+    margin: 5px;
+    position: relative;
+}
+.upload-img-box .upload-pre-item {
+    padding: 1px;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid #ccc;
+    transition: all .3s linear;
+}
+.upload-img-box .upload-pre-item img {
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+}
+.delImg{
+    width: 16px!important;
+    height: 16px!important;
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+    top: 0;
+}

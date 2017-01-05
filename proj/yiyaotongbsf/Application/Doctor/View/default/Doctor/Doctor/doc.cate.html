@@ -1,0 +1,51 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_Header dataHead">
+        <div class="P_main">
+            <h2 class="P_title" style="width:12rem;">
+                <a href="{:U('disease',array('type'=>1))}" class="a1 <eq name='type' value='1'>current</eq>">科室分类</a>
+                <a href="{:U('disease',array('type'=>2))}" class="a2 <eq name='type' value='2'>current</eq>">典型人群</a>
+            </h2>
+            <span class="P_goBack"><a href="javascript:;" id="my_back_btn"><i>&#xe616;</i></a></span>
+        </div>
+    </div>
+    <div class="P_con database">
+        <div class="classLeft">
+            <ul>
+                <volist name="list" id="vo">
+                <li class="<eq name='i' value='1'>current</eq>">
+                    <p><em><i>&#xe607;</i></em><span>{$vo.type_name}</span></p>
+                    <dl>
+                        <volist name="vo['children']" id="voo">
+                        <dd onclick="location.href='{:U('diseasedetail',array('id'=>$voo['id']))}'">{$voo.disease_name}</dd>
+                        </volist>
+                    </dl>
+                </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</block>
+<block name="css">
+    <style>
+        html,body{ height:100%;}
+    </style>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            $(".classLeft ul li").click(function(){
+                $(this).addClass("current").siblings().removeClass("current");
+            });
+            $(".classLeft ul li dl dd").click(function(){
+                $(this).addClass("current").siblings().removeClass("current");
+            });
+            for(var n=0;n<10;n++){
+                $(".classLeft ul li:eq("+(2*n)+") em i").addClass("c_orange");
+                $(".classLeft ul li:eq("+(2*n+1)+") em i").addClass("c_blue");
+                $(".classLeft ul li:eq("+(2*n+2)+") em i").addClass("c_green");
+                $(".classLeft ul li:eq("+(2*n+3)+") em i").addClass("c_yellow");
+            }
+        })
+    </script>
+</block>

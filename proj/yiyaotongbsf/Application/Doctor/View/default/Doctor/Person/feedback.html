@@ -1,0 +1,40 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con">
+        <div class="P_main feedBack bg_f">
+            <p>问题与意见</p>
+            <textarea placeholder="请简要描述您的意见和建议" id="content"></textarea>
+            <div class="bBth blue"><a href="javascript:void(0)" id="sub">提交</a></div>
+        </div>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            var issend = false;
+           $('#sub').click(function(){
+               if(issend) return false;
+               issend = true;
+               var content = $('#content').val();
+               if(content){
+                   $.post(location.href,{content:content},function (data){
+                       issend = false;
+                       if(data.code==0){
+                           layer.open({
+                               content: '我们已经收到您的反馈'
+                               ,skin: 'msg'
+                               ,time: 2
+                               ,end: function () {
+                                   location.href='{:U("index")}';
+                               }
+                           });
+                       }
+                   },'json');
+               }else{
+                   issend = false;
+               }
+           });
+        });
+    </script>
+</block>

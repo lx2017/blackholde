@@ -1,0 +1,117 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="clinicdetail-head">
+		<div>
+		<img class="clinicimg"src="__IMG__/index.png">
+		<div class="clinicdetail-tit">
+            <input type="hidden" name="clinic_id" id="clinic_id" value="{$info.id}"/>
+            <input type="hidden" name="attention_id" id="attention_id" value="{$attention.id}"/>
+            <input type="hidden" name="status" id="flag" value="{$attention.status}"/>
+        <p><span class="cd-lp">{$info.clinic_name}</span><span><img class="cd-lits"src="__IMG__/starclick.png"></span><span class="me-fenshu"><span class="me-mydoc-p ">9</span><span>.3</span></span><span class="zhenduanliang"><span>诊断量</span><span class="zhenduannum">{$info.clinic_treatment_volume}</span></span></p>
+        <p>擅长：{$info.clinic_specialty}</p></div>
+		</div>
+		<div class="clnic-address">
+        <span>地址：{$info.clinic_address}<span class="clinicdetail-left">|</span><span><img src="__IMG__/tel.png">{$info.clinic_phone}</span></span>
+		</div>
+	</div>
+	<div class="cd-topb">
+		 <div class="index-absolute-relative"><img src="__IMG__/green.png" class="index-absolute-img"><span>诊所资质</span></div>
+		 <p class="zizhi">具有多年医疗从业资质</p>
+	</div>
+	<div class="cd-topb">
+		 <div class="index-absolute-relative" onclick="location.href='{:U('dignoise_brief',array('id'=>$info['id']))}'"><img src="__IMG__/green.png" class="index-absolute-img" ><span>简介</span></div>
+		 <p>{$info.clinic_introduction}</p>
+	</div>
+	<div class="cd-topbs">
+		 <div class="index-absolute-relative"><img src="__IMG__/green.png" class="index-absolute-img"><span>诊所医生</span></div>
+        <volist name="doctor" id="vo">
+            <div class="aui-row me-mydoc-bo">
+                <div class="aui-col-xs-2"><img src="{$vo.image}" onerror="this.src='__IMG__/head1.png'" class="me-mydoc-img"></div>
+                <div class="aui-col-xs-10  me-mydoc-left">
+                    <div class="aui-row">
+                        <div class="aui-col-xs-8"><span class="me-mydoc-p">{$vo.name}</span><span class="me-star"><img src="__IMG__/starclick.png"></span><span class="me-fenshu"><span class="me-mydoc-p">{$vo.score}</span></span></div>
+                        <div class="aui-col-xs-4"></div>
+                    </div>
+                    <p class="me-mydoc-sep">{$info.clinic_name}</p>
+                    <p class="me-mydoc-sep">擅长：{$vo.good}</p>
+                </div>
+            </div>
+        </volist>
+	</div>
+		<div class="cd-topbp">
+		 <div class="index-absolute-relative"><img src="__IMG__/green.png" class="index-absolute-img"><span>全部评价</span></div>
+		 <!--<div class="cd-gray-wrap">
+        <span class="cd-bord">全部评价</span><span class="cd-gray">诊疗</span><span class="cd-gray">问诊</span>
+		 </div>-->
+            <div class="cd-co" id="mycontain">
+                <volist name="list" id="vo">
+                <div class="cd-cob">
+                    <p>{$vo.disease}<span class="cd-cob-right">
+                               <eq name="vo.score" value="1"><img src="__IMG__/starclick.png"></eq>
+                                <eq name="vo.score" value="2"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"></eq>
+                                <eq name="vo.score" value="3"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"></eq>
+                                <eq name="vo.score" value="4"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"></eq>
+                                <eq name="vo.score" value="5"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"><img src="__IMG__/starclick.png"></eq>
+                       </span></p>
+                    <p>{$vo.intro}</p>
+                    <p>{$vo.name}<span class="cd-lp-b"></span><span class="cd-cob-right">{$vo.date}</span></p>
+                </div>
+                </volist>
+            </div>
+        </div>
+    <div class="shadeBox" style="display:none;">
+        <div class="shade"></div>
+        <div class="shadeCon">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <volist name="info['imgs']" id="img">
+                        <div class="swiper-slide"><img src="{$img}"></div>
+                    </volist>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="css">
+    <link type="text/css" rel="stylesheet" href="__CSS__/swiper.min.css" />
+    <style type="text/css">
+        .swiper-container{ height:100%;}
+        .swiper-container .swiper-slide{ width:100% !important;}
+    </style>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/swiper.min.js"></script>
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('clinic_detail_more',array('ids'=>$ids))}",
+            obj:'mycontain'
+        };
+        //图片
+        $(function(){
+            //图片
+            $(".zizhi").click(function(){
+                if($('.swiper-wrapper').children().length){
+                    $(".shadeBox").show();
+                    var swiper = new Swiper(".swiper-container",{
+                        pagination:".swiper-pagination",
+                        nextButton: '.swiper-button-next',
+                        prevButton: '.swiper-button-prev',
+                        paginationClickable :true,
+                        loop: true
+                    })
+                }
+            });
+            $(".shade").click(function(e){
+                if($(e.target).parent(".shadeCon").length==0){
+                    $(".shadeBox").hide();
+                }
+            });
+        })
+    </script>
+</block>

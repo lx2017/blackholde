@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <title>药品详情</title>
+        <script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+        <link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="__SALEMAN__/stylesheets/index.css">
+    </head>
+    <body>
+        <div class="medicine_info">
+            <header class = "all_header">
+                <a class = "h_back" href="/Home/Saleman/Saleman/orderMedicine"><img src="__SALEMAN__/images/back_icon.png" alt=""></a>
+                <span class = "h_title">药品详情</span>
+                <a class = "h_add" href="javascript:void(0)"></a>
+            </header>
+            <div class="medicine">
+                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__hd">
+                        <img class="weui-media-box__thumb" src="{$drugs['cover_img']}" alt="">
+                    </div>
+                    <div class="weui-media-box__bd">
+                        <h4 class="weui-media-box__title">{$drugs['name']}</h4>
+                        <div class="medicine_price">
+                            <p class="weui-media-box__desc">¥<span>{$drugs['price']}</span></p>
+                            <span class = "add_cart_btn add_drugs_cart" pos_title="确定加入购物车" pos_id="{$drugs['id']}">加入购物车</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="medicine_info_w">
+                <div class="info_list">
+                    <div class="info_name">
+                        <span class = "info_icon">|</span>
+                        <span>批准文号</span>
+                    </div>
+                    <div class="info_intro">
+                        {$drugs['approval_number']}
+                    </div>
+                </div>
+                <div class="info_list">
+                    <div class="info_name">
+                        <span class = "info_icon">|</span>
+                        <span>主要成分</span>
+                    </div>
+                    <div class="info_intro">
+                        {$drugs['ingredients']}
+                    </div>
+                </div>
+                <div class="info_list">
+                    <div class="info_name">
+                        <span class = "info_icon">|</span>
+                        <span>规格</span>
+                    </div>
+                    <div class="info_intro">
+                        {$drugs['specifications']}
+                    </div>
+                </div>
+                <div class="info_list">
+                    <div class="info_name">
+                        <span class = "info_icon">|</span>
+                        <span>生产厂家</span>
+                    </div>
+                    <div class="info_intro">
+                        {$drugs['anufacturer']}
+                    </div>
+                </div>
+                <div class="info_list">
+                    <div class="info_name">
+                        <span class = "info_icon">|</span>
+                        <span>经营企业</span>
+                    </div>
+                    <div class="info_intro">
+                        {$drugs['enterprise']}
+                    </div>
+                </div>
+                <div class="info_list">
+                    <div class="info_name">
+                        <span class = "info_icon">|</span>
+                        <span>功能主治</span>
+                    </div>
+                    <div class="info_intro">
+                        {$drugs['attending']}
+                    </div>
+                </div>
+                <div class="info_list">
+                    <div class="info_name">
+                        <span class = "info_icon">|</span>
+                        <span>用法用量</span>
+                    </div>
+                    <div class="info_intro">
+                        {$drugs['usage']}
+                    </div>
+                </div>
+                <div class="info_list">
+                    <div class="info_name">
+                        <span class = "info_icon">|</span>
+                        <span>产品类型</span>
+                    </div>
+                    <div class="info_intro">
+                        {$drugs['drugs_category']}
+                    </div>
+                </div>
+                <div class="info_list">
+                    <div class="info_name">
+                        <span class = "info_icon">|</span>
+                        <span>产品优势</span>
+                    </div>
+                    <div class="info_intro">
+                        {$drugs['advantage']}
+                    </div>
+                </div>
+            </div>
+        </div>
+    <include file="./Application/Home/View/default/Saleman/Public/popup.html"/>
+    <script>
+        $('.add_drugs_cart').on('click', function () {
+            var title = $(this).attr('pos_title');
+            $('.confir_content').html(title);
+            $("#iosDialog1").show(200);
+
+        });
+        $('.ok-btn').on('click', function () {
+            var drugs_id = $('.add_drugs_cart').attr('pos_id');
+            $.ajax({
+                url: "/Home/Saleman/Saleman/medicineInfo",
+                type: 'post',
+                data: {drugs_id: drugs_id, num: 1},
+                cache: false,
+                dataType: "json",
+                success: function (result) {
+                    $("#iosDialog1").hide(200);
+                    $('#iosDialog2').find('.sure-info').html(result['msg']);
+                    $('#iosDialog2').show(200);
+                    history.back();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>我的个人中心</title>
+    <link rel="stylesheet" href="__CSS__/UserCenter/mydate.css">
+    <link  type="text/css" href="__CSS__/UpImage/cropper.min.css" rel="stylesheet">
+    <link  type="text/css" href="__CSS__/UpImage/main.css" rel="stylesheet">
+    <script src="__JS__/jquery-2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="__JS__/UpImage/webuploader.html5only.min.js"></script>
+    <script type="text/javascript" src="__JS__/UpImage/uploadImg.js"></script>
+    <script type="text/javascript" src="__JS__/UpImage/diyUpload.js"></script>
+    <script type="text/javascript" src="__JS__/layer/layer.js"></script>
+    <script  type="text/javascript" src="__JS__/UpImage/bootstrap.min.js"></script>
+    <script  type="text/javascript" src="__JS__/UpImage/cropper.min.js"></script>
+    <script  type="text/javascript" src="__JS__/UpImage/main.js"></script>
+</head>
+<body class="mydata-body">
+<!-- 个人中心详情页 -->
+<div class="mydata-wrap">
+    <!-- top -->
+    <header class="g-header">
+        <a class="Header-back" href="#"><i class="ico-back"></i></a><h1>个人信息</h1>
+    </header>
+    <!-- top -->
+    <section class="mydata-infos">
+        <div class="infos-list">
+           <form action='' name=form1 method="post" enctype="multipart/form-data">
+           	头像:<input type='file' name='head_img'> 
+           	手机号:<input type='text' name='phone'> 
+           	姓名:<input type='text' name='real_name'>
+           	身份证:<input type='text' name='card_number'>
+           	年龄:<input type='text' name='age'>
+           	性别:<input type='text' name='sex'>
+           	<input type='submit' value='提交'> 
+           </form>
+        </div>
+    </section>
+    
+</div>
+<div id="UploadTxBox" style="display: none;">
+    <div class="container" id="crop-avatar">
+        <!-- Cropping modal -->
+        <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog"
+             tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form class="avatar-form" action="/Home/UserCenter/Imgcrop/cropwap" enctype="multipart/form-data" method="post">
+                        <div class="UploadTxBox-modal-body">
+                            <div class="avatar-body">
+                                <!-- Upload image and data -->
+                                <div class="avatar-upload">
+                                    <input class="avatar-src" name="avatar_src" type="hidden">
+                                    <input class="avatar-data" name="avatar_data" type="hidden">
+
+                                    <p><label for="avatarInput" class="btn btn-red avatar-uploadbtn">选择本地图片<input
+                                            class="avatar-input" id="avatarInput" name="avatar_file"
+                                            type="file"></label></p>
+
+                                    <p class="mt20 grey">支持JPG、JPEG、PNG格式、且大小不要超过2M</p>
+                                    <input class="x" name="x" type="hidden">
+                                    <input class="y" name="y" type="hidden">
+                                    <input class="width" name="width" type="hidden">
+                                    <input class="height" name="height" type="hidden">
+                                </div>
+
+                                <!-- Crop and preview -->
+                                <div class="UploadTxBox-view">
+                                    <div class="UploadTxBox-left">
+                                        <div class="avatar-wrapper"></div>
+                                    </div>
+                                    <div class="UploadTxBox-right">
+                                        <div class="avatar-preview preview-lg"></div>
+                                        <div class="avatar-preview preview-md"></div>
+                                    </div>
+                                </div>
+                                <div class="UploadTxBox-btnbox">
+                                    <button class="btn btn-red"  type="submit" id="submit_crop">提交</button>
+                                    <button class="btn btn-white mlt10 closeDialogbtn" type="button">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+</div>
+<script>
+    $(function () {
+        //上传头像
+        $(".showUploadTx").click(function () {
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-yuan', //样式类名
+                closeBtn: 1, //不显示关闭按钮
+                shadeClose: true, //开启遮罩关闭
+                shade: [0.5],
+                area: '680px',
+                title: "上传头像",
+                content: $('#UploadTxBox')
+            });
+        });
+        $(".closeDialogbtn").click(function () {
+            layer.closeAll();
+        })
+    })
+</script>
+
+</body>
+</html>

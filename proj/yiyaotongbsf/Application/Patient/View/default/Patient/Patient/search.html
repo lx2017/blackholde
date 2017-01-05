@@ -1,0 +1,89 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+		      <div class="index-noresult-head">
+        <div class="aui-row index-search-list">
+            <div class="aui-col-xs-10 index-no-select">
+                <div class="aui-row">
+                    <div class="aui-col-xs-9 index-select-input">
+                        <input type="text" id="name" value="{$name}" placeholder="搜索诊所、医生、疾病">
+                    </div>
+                </div>
+            </div>
+            <div class="aui-col-xs-2 index-select-cancel mysearch">搜索</div>
+        </div>
+    </div>
+    <div>
+        <if condition="$clinic">
+        <div class="index-search-content">
+            <div class="index-absolute-relative">
+                <img src="__IMG__/green.png" class="index-absolute-img">
+                <span>附近诊所</span>
+            </div>
+            <volist name="clinic" id="vo" offset="0" length='4'>
+            <div class="aui-row me-mydoc-bo index-border-none" onclick="location.href='{:U('clinic_detail',array('id'=>$vo['id']))}'">
+                <div class="aui-col-xs-3  me-moactiv-bo2"><img src="{$vo.clinic_pic}" onerror="this.src='__IMG__/clinic.png'"></div>
+                <div class="aui-col-xs-9 me-myclinic-left" >
+                    <p class="me-mydoc-p">{$vo.clinic_name}<span class="index-nearclick-km">{$vo.distance}km</span></p>
+                    <p><span class="me-stars"><img src="__IMG__/starclick.png"></span><span class="me-fenshu"><span class="me-mydoc-p">{$vo.clinic_score}</span></span><span class="me-myclinic-sep me-conclinc-left">诊断量</span><span class="me-myclinic-sep me-conclinc-leftlitt">{$vo.clinic_treatment_volume}</span></p>
+                    <p class="me-myclinic-sep">擅长：{$vo.clinic_specialty}</p>
+                </div>
+            </div>
+            </volist>
+       </div>
+        </if>
+        <if condition="$disease">
+       <div class="index-search-top index-search-content index-border-none">
+       <div class="index-absolute-relative">
+           <img src="__IMG__/green.png" class="index-absolute-img">
+           <span>常见疾病</span>
+       </div>
+        <div class="me-wrap-click">
+            <volist name="disease" id="vo">
+                <span class="me-pa-click me-noclick"  onclick="location.href='{:U('diseasedetail',array('id'=>$vo['id']))}'">{$vo.disease_name}</span>
+            </volist>
+        </div>
+       </div>
+        </if>
+        <if condition="$doctor">
+        <div class="index-search-top index-search-content">
+            <div class="index-absolute-relative">
+                <img src="__IMG__/green.png" class="index-absolute-img">
+                <span>附近医生</span>
+            </div>
+            <div class="aui-row me-mydoc-bo">
+            <volist name="doctor" id="vo">
+            <div class="aui-col-xs-2" onclick="location.href='{:U('doctor_main',array('id'=>$vo['id']))}'">
+                <img src="{$vo.image}" onerror="this.src='__IMG__/head1.png'" class="me-mydoc-img">
+            </div>
+            <div class="aui-col-xs-10  me-mydoc-left">
+                <div class="aui-row" >
+                    <div class="aui-col-xs-8"><span class="me-mydoc-p">{$vo.name}</span><span class="me-star"><img src="__IMG__/starclick.png"></span><span class="me-fenshu"><span class="me-mydoc-p">{$vo.score}</span></span></div>
+                    <div class="aui-col-xs-4"><span class="index-neardc">{$vo.distance}km</span></div>
+                </div>
+                <p class="me-mydoc-sep">{$vo.clinic}</p>
+                <p class="me-mydoc-sep">擅长：{$vo.good}</p>
+            </div>
+            </volist>
+        </div>
+       </div>
+         </if>
+    </div>
+
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //搜索
+            $('.mysearch').click(function () {
+                var name = $('#name').val();
+                location.href = ('{:U("search")}'+'?name='+name);
+            });
+            $('.mycancel').click(function () {
+                $(this).parents('input').val('');
+                $('#myul').empty();
+            });
+        });
+    </script>
+</block>

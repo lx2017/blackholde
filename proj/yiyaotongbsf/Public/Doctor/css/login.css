@@ -1,0 +1,28 @@
+/*70px 2.1875rem border-bottom:0.03125rem solid #ebebeb;
+padding:0 0.9375rem;
+border-radius:0.15625rem; 0.09375-3px
+height:2.1875rem; line-height: 2.1875rem; color:#999;
+line-height:1.25rem; 多行
+*/
+/*person*/
+
+.loginBody h1{ width:6.875rem; height:6.875rem; padding:3.4375rem 0 1.875rem; margin:0 auto;}
+.loginBody h1 img{ display:block; width:100%; height:100%;}
+.loginBody ul li{ overflow: hidden; height:2.6875rem; line-height:2.6875rem; border-bottom:0.03125rem solid #ebebeb;}
+.loginBody ul li span{ float:left; width:2.125rem; height:100%; background:url("../img/tel.png") no-repeat center center; background-size:auto 1.5rem;}
+.loginBody ul li.psd span{ background:url("../img/psd.png") no-repeat center center; background-size:auto 1.5rem;}
+.loginBody ul li input{ float:left; width:12.5rem; height:100%; color:#999;}
+.loginBody ul li em{ float:right; width:2.125rem; height:100%; background:url("../img/eye.png") no-repeat center center; background-size:auto 1.5rem;}
+.bBth.blue input{ display:block; width:100%; height:2.1875rem; line-height:2.1875rem; text-align:center; background:#28a0d4; color:#fff; border-radius:0.15625rem;}
+.loginBody .forget{ height:2.5rem; line-height:2.5rem; text-align:right; }
+
+.modify ul li{ height:2.1875rem; line-height:2.1875rem; margin-bottom:0.625rem;}
+.modify ul li input{ display:block; height:100%; width:100%; border:none; background:#fff; padding:0 0.625rem; box-sizing:border-box;}
+
+.forget ul li{ height:2.1875rem; line-height:2.1875rem; margin-bottom:0.625rem; background:#fff; }
+.forget ul li.code{ width:11rem; position:relative;}
+.forget ul li.code a{ position:absolute; right:-6.8rem; top:0; width:6.125rem; height:2.09375rem; text-align:center; border:0.03125rem solid #27a0d4; color:#27a0d4; border-radius:0.15625rem;}
+.forget ul li span{ float:left; width:2.125rem; height:100%; background:url("../img/tel.png") no-repeat center center; background-size:auto 1.5rem;}
+.forget ul li.code span{ background:url("../img/code.png") no-repeat center center; background-size:auto 1.5rem;}
+.forget ul li.psd span{ background:url("../img/psd.png") no-repeat center center; background-size:auto 1.5rem;}
+.forget ul li input{ float:left; width:8.5rem; height:100%; color:#999;}

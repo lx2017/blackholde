@@ -1,0 +1,59 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+		<div class="me-comment">
+    		<img src="__IMG__/green.png"><span class="me-com-com">个人习惯</span>
+		</div>
+		<div class="me-wrap-click habit">
+            <span class="me-pa-click <if condition="$habit eq '无'">  me-click <else />me-noclick </if>">无</span>
+            <span class="me-pa-click  <if condition="$habit eq '低头族'">  me-click <else />me-noclick </if>">低头族</span>
+            <span class="me-pa-click  <if condition="$habit eq '久坐'">  me-click <else />me-noclick </if>">久坐</span>
+            <span class="me-pa-click  <if condition="$habit eq '久站'">  me-click <else />me-noclick </if>">久站</span>
+            <span class="me-pa-click  <if condition="$habit eq '不喜欢喝水'">  me-click <else />me-noclick </if>">不喜欢喝水</span>
+            <span class="me-pa-click  <if condition="$habit eq '跷二郎腿'">  me-click <else />me-noclick </if>">跷二郎腿</span>
+            <span class="me-pa-click  <if condition="$habit eq '饭后睡觉'">  me-click <else />me-noclick </if>">饭后睡觉</span>
+            <span class="me-pa-click  <if condition="$habit eq '强忍大小便'">  me-click <else />me-noclick </if>">强忍大小便</span>
+            <span class="me-pa-click  <if condition="$habit eq '如厕玩手机'">  me-click <else />me-noclick </if>">如厕玩手机</span>
+            <span class="me-pa-click  <if condition="$habit eq '熬夜'">  me-click <else />me-noclick </if>">熬夜</span>
+            <span class="me-pa-click  <if condition="$habit eq '饮酒'">  me-click <else />me-noclick </if>">饮酒</span>
+            <span class="me-pa-click  <if condition="$habit eq '吸烟'">  me-click <else />me-noclick </if>">吸烟</span>
+		</div>
+		<div class="me-peac-text">
+     		<textarea rows="4" cols="50" name="other" id="other" placeholder="可补充您的个人习惯">{$other}</textarea>
+		</div>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(".me-pa-click").click(function(){
+            $(this).addClass("me-click");
+            $(this).siblings().removeClass("me-click");
+            $(this).siblings().addClass("me-noclick");
+        })
+
+        $(function(){
+            //保存事件
+            var issend = false;
+            $('#add').click(function(){
+                if(issend) return false;
+                issend = true;
+                var habit =$(".habit .me-click").text()
+                var other=$('#other').val();
+                if(other){
+                    var habit =habit+'、'+other;
+                }
+
+                $.post(location.href,{habit:habit},function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('保存信息成功',1,function(){
+                            location.href='{:U("person_info",array("id"=>I("id")))}';
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

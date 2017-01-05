@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>审批纪录</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/dropload.css">
+</head>
+<body>
+	<div class="approvalRecord">
+		<header class = "all_header">
+			<a class = "h_back_1 aproving" style='flex: 1;' data-role-id='{$myself.role_id}' href="javascript:void(0);"><img src="__SaleManager__/images/back_icon.png" alt="" style="width:30px;vertical-align: middle;"></a>
+			<span class = "h_title">审批纪录</span>
+			<a class = "h_add" href="/Home/SaleManager/County/appliceSupport.html">申请支持</a>
+		</header>
+		<div class="weui-tab">
+      <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on">
+            我发起的
+        </div>
+        <div class="weui-navbar__item">
+            待审批
+        </div>
+        <div class="weui-navbar__item" style = "margin:0 1px;">
+            已审批
+        </div>
+      </div>
+      <div class="weui-tab__panel">
+				<div class="record_list first" style = "display: block;">
+				<if condition="applyByMe neq ''">
+					<volist name='applyByMe' id='v'>
+      				<div class="record_w" data-apply-id="{$v.id}" data-role-id="{$myself.role_id}" data-apply-status="{$v.reply_status}" data-apply-applyuser="myself">
+						<div class="record_l">
+							<h4>{$v.ctype}</h4>
+							<p class = "record_people"><span>发起人：</span><span>{$v.apply_name}</span><span class = "approval_date">{$v.apply_time|date='Y-m-d',###}</span></p>
+						</div>
+						<switch name="v.reply_status">
+						
+						    <case value='1'>
+						    		<div class="record_r pre_approval">
+									{$v.apply_cstatus}
+								</div>
+						    </case>
+						    <case value="2">
+						    		<div class="record_r no_approval">
+									{$v.apply_cstatus}
+								</div>
+						    </case>
+						    <case value="0">
+						    			<div class="record_r next_approval">
+									{$v.apply_cstatus}
+								</div>
+							</case>
+						</switch>
+					</div>
+      			</volist>
+				<else/>
+					<div class="no_record">
+						<div class="no_img">
+							<img src="__SaleManager__/images/no_approve.png" alt="">
+						</div>
+						<div class="no_tips">
+							暂无审批纪录
+						</div>
+					</div>
+				</if>
+				</div>
+				
+				
+				<div class="record_list second">
+					<if condition="waitProve neq ''">
+					<volist name='waitProve' id='v'>
+      				<div class="record_w" data-apply-id="{$v.id}" data-role-id="{$myself.role_id}" data-apply-status="{$v.reply_status}" >
+						<div class="record_l">
+							<h4>{$v.ctype}</h4>
+							<p class = "record_people"><span>发起人：</span><span>{$v.apply_name}</span><span class = "approval_date">{$v.apply_time|date='Y-m-d',###}</span></p>
+						</div>
+						<switch name="v.reply_status">
+						
+						    <case value='1'>
+						    		<div class="record_r pre_approval">
+									{$v.apply_cstatus}
+								</div>
+						    </case>
+						    <case value="2">
+						    		<div class="record_r no_approval">
+									{$v.apply_cstatus}
+								</div>
+						    </case>
+						    <case value="0">
+						    			<div class="record_r next_approval">
+									{$v.apply_cstatus}
+								</div>
+							</case>
+						</switch>
+					</div>
+      			</volist>
+				<else/>
+					<div class="no_record">
+						<div class="no_img">
+							<img src="__SaleManager__/images/no_approve.png" alt="">
+						</div>
+						<div class="no_tips">
+							暂无审批纪录
+						</div>
+					</div>
+				</if>
+				</div>
+				<div class="record_list third">
+					<if condition="approved neq ''">
+					<volist name='approved' id='v'>
+      				<div class="record_w" data-apply-id="{$v.id}" data-role-id="{$myself.role_id}" data-apply-status="{$v.reply_status}">
+						<div class="record_l">
+							<h4>{$v.ctype}</h4>
+							<p class = "record_people"><span>发起人：</span><span>{$v.apply_name}</span><span class = "approval_date">{$v.apply_time|date='Y-m-d',###}</span></p>
+						</div>
+						<switch name="v.reply_status">
+						
+						    <case value='1'>
+						    		<div class="record_r pre_approval">
+									{$v.apply_cstatus}
+								</div>
+						    </case>
+						    <case value="2">
+						    		<div class="record_r no_approval">
+									{$v.apply_cstatus}
+								</div>
+						    </case>
+						    <case value="0">
+						    			<div class="record_r next_approval">
+									{$v.apply_cstatus}
+								</div>
+							</case>
+						</switch>
+					</div>
+      			</volist>
+				<else/>
+					<div class="no_record">
+						<div class="no_img">
+							<img src="__SaleManager__/images/no_approve.png" alt="">
+						</div>
+						<div class="no_tips">
+							暂无审批纪录
+						</div>
+					</div>
+				</if>
+				</div>
+      </div>
+    </div>
+	</div>
+	<script src = "__SaleManager__/js/index.js"></script>
+	<script src = "__SaleManager__/js/Common.js"></script>
+	<script src = "__SaleManager__/js/dropload.min.js"></script>
+</body>
+
+<script>
+//下拉刷新
+var LoadEnd = false;
+var itemIndex=0;
+// 每页展示10个
+var counter=0
+var firstcounter = 0;
+var secondcounter = 0;
+var thiirdcounter = 0;
+var num = 10;
+var firstpageStart = 0;
+var secondpageStart = 0;
+var thiirdpageStart = 0;
+var pageStart=0;
+var dropload =$('.approvalRecord').dropload({
+	scrollArea : window,
+	loadDownFn : function(me){
+		if(counter==0){
+			counter++;
+			firstcounter++;
+			secondcounter++;
+			thiirdcounter++;
+			firstpageStart = firstcounter*num;
+			secondpageStart = secondcounter*num;
+			thiirdpageStart = thiirdcounter*num;
+             me.resetload();
+			return false;
+		}
+		
+		if(itemIndex==0){
+			pageStart=firstpageStart;
+		}
+		if(itemIndex==1){
+			pageStart=secondpageStart;
+		}
+		if(itemIndex==2){
+			pageStart=thiirdpageStart;
+		}
+		// 锁定
+        me.lock();
+        $.ajax({
+            type: 'GET',
+            url: '',
+            data:{'pageStart':pageStart,'itemIndex':itemIndex},
+            dataType: 'json',
+            success: function(data){
+            		var vhtml='';
+            		if(itemIndex==0){
+            			firstpageStart = firstcounter*num+1;
+            			firstcounter++;
+            		}
+            		if(itemIndex==1){
+            			secondpageStart = secondcounter*num+1;
+            			secondcounter++;
+            		}
+            		if(itemIndex==2){
+            			thiirdpageStart = thiirdcounter*num+1;
+            			thiirdcounter++;
+            		}	
+            	 	LoadEnd=true;
+            	 	if(data.data==null ||data.data=='undefined'){
+            	 		 me.noData();
+            	 		 me.unlock()
+		                // 代码执行后必须重置
+		                 me.resetload();
+            	 		 return false;
+            	 	}
+            	 	$(data.data).each(function(i,val) { 
+					if(itemIndex==0){
+						vhtml+='<div class="record_w" data-apply-id="'+val.id+'" data-role-id="'+val.role_id+'" data-apply-status="'+val.reply_status+'" data-apply-applyuser="myself">';
+					}else{
+						vhtml+='<div class="record_w" data-apply-id="'+val.id+'" data-role-id="'+val.role_id+'" data-apply-status="'+val.reply_status+'" >';
+					}
+            	 		vhtml+='<div class="record_l">';
+            	 		vhtml+='<h4>'+val.ctype+'</h4>';
+            	 		vhtml+='<p class="record_people"><span>发起人：</span><span>'+val.apply_name+'</span><span class="approval_date">'+val.apply_time+'</span></p>';
+            	 		vhtml+='</div>';
+            	 		if(val.reply_status==0){  //待审批
+            	 			vhtml+='<div class="record_r next_approval">'+val.apply_cstatus+'</div></div>';
+            	 		}
+					if(val.reply_status==1){  //同意
+						vhtml+='<div class="record_r pre_approval">'+val.apply_cstatus+'</div></div>'; 	 			
+					            	 		}
+					if(val.reply_status==2){	//拒绝
+						vhtml+='<div class="record_r next_approval">'+val.apply_cstatus+'</div></div>';
+					}
+            	 														
+				}); 
+            	 	if(vhtml!=''){
+            	 		if(itemIndex==0){
+            	 			$('.first').append(vhtml);
+            	 		}
+					if(itemIndex==1){
+						$('.second').append(vhtml);       	 			
+					 }
+					if(itemIndex==2){
+						$('.third').append(vhtml);	
+					}
+            	 	}else{
+            	 		// 无数据
+                     me.noData();
+            	 	}
+            		me.unlock()
+                // 代码执行后必须重置
+                me.resetload();
+            },
+            error: function(xhr, type){
+            		me.unlock()
+                // 无数据
+                me.noData();
+                me.resetload();
+            }
+        });
+    }
+});
+
+$(".weui-navbar__item").on("click",function () {
+	var $that = $(this);
+	itemIndex = $that.index();
+});
+</script>
+</html>

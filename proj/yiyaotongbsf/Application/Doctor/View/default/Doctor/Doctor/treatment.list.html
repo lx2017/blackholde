@@ -1,0 +1,51 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_main P_con">
+        <div class="searchBox" style="margin-bottom:0;">
+            <div class="searchBox" style="margin-bottom:0;">
+                <span class="zoom left mysearch"><i>&#xe605;</i></span>
+                <input type="text" class="left" value="{$name}" placeholder="输入患者姓名"/>
+                <span class="cancel left mycancel"><i>&#xe61f;</i></span>
+            </div>
+        </div>
+    </div>
+    <div class="myPatient patientMag no_pad cureRecord myListshow">
+        <ul id="mycontain">
+            <volist name="list" id="vo">
+                <li>
+                    <a href="{:U('viewpatient',array('id'=>$vo['patient_id']))}">
+                    <div class="person">
+                        <span class="c_icon span1 headSpan"><img src="{$vo.p_image}"  onerror="this.src='__IMG__/head1.png'"></span>
+                        <span class="c_333 span2">{$vo.name}</span>
+                    </div>
+                    <div class="time">
+                        <span class="c_icon span1"><i class="c_orange">&#xe661;</i></span>
+                        <span class="span2">{$vo.treat_time}</span>
+                    </div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('treatmentlist_more')}",
+            obj:'mycontain'
+        };
+        //搜索患者
+        $('.mysearch').click(function () {
+            var name = $(this).siblings('input').val();
+            location.href = ('{:U("treatmentlist")}'+'?name='+name);
+        });
+        $('.mycancel').click(function () {
+            $(this).siblings('input').val('');
+        });
+    </script>
+</block>

@@ -1,0 +1,173 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content login">
+        <form id="registerForm">
+		<div class="aui-row">
+			<div class="login-content">
+			<div class="aui-col-xs-2">账号</div>
+			<div class="aui-col-xs-10"><input type="text"  name="mobile" id="mobile"  placeholder="输入手机号码" required class="input_text"></div>
+		</div>
+		</div>
+            <div class="aui-row">
+                <div class="login-content">
+                    <div class="aui-col-xs-2">验证码</div>
+                    <div class="aui-col-xs-10"><input type="text"  name="verifCode"  placeholder="输入图形验证码"  required class="input_text" >
+                        <img src="{:U('/Patient/LoginAndRegister/Login/verify')}" id="img"  onclick="this.src = '/index.php/Patient/LoginAndRegister/Login/verify/id/' + Math.random()" ></div>
+                </div>
+            </div>
+            <div class="aui-row">
+                <div class="login-content" style="border-bottom:none;">
+                    <div class="aui-col-xs-2">动态码</div>
+                    <div class="aui-col-xs-10"><input type="text" name="code" placeholder="输入动态密码"  required class="input_text">
+                    <span class="login-click">
+                            <a href="javascript:void(0)" class="sendCode" _href="{:U('/Patient/LoginAndRegister/Register/CheckUserYZM')}">点击获取</a></span></div>
+                    </div>
+                </div>
+            <div class="aui-row" style="border-bottom:none;">
+                <div class="login-content">
+                    <div class="aui-col-xs-2">密码</div>
+                    <div class="aui-col-xs-10"><input type="text" name="password" placeholder="请输入新密码" required class="input_text input_psd"></div>
+                </div>
+            </div>
+    </div>
+
+
+		<div class="login-up-btn">
+        <button class="aui-btn aui-btn-primary" id="submit">注册</button>
+        <p><img style="position:relative;top: 0.3rem;"src="__IMG__/yes.png">已阅读并同意<a href="{:U('/Patient/LoginAndRegister/Register/near_contract')}">《使用条款及隐私政策》</a></p>
+
+        </form>
+            </div>
+</block>
+<block name="js">
+    <script src="__JS__/func.js"></script>
+    <script src="__JS__/layer_mobile/layer.js"></script>
+    <script src="__STATIC__/form/jquery.validate.min.js"></script>
+    <script src="__STATIC__/form/localization/messages_zh.min.js"></script>
+    <script src="__STATIC__/form/additional/isMobile.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //发送验证码
+            $(document).on("click",".sendCode",function(){
+                var mobile=$("#mobile").val();
+                var url=$(".sendCode").attr('_href');
+                var test = /^1\d{10}$/;
+
+                if(mobile. length == 11 && test.test(mobile)){
+                    $.ajax({
+                        url: "/index.php/Patient/LoginAndRegister/Login/code",
+                        data: 'vcode=' + $('input[name="verifCode"]').val(),
+                        global:false,
+                        success: function(msg) {
+                            alert(msg.status);
+                            if (msg.status == "0000") {
+                                $.ajax({
+                                    type: 'post',
+                                    data: {mobile:mobile},
+                                    url: url,
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        if (data.code == 1002) {
+                                            //倒计时
+                                            $('.sendCode').attr('disabled', "disabled");
+                                            $('.sendCode').css({'color': '#cccccc','background-color': '#eee', 'cursor': 'not-allowed'});
+                                            $('.sendCode').html('重新获取(60)');
+                                            var count = 1;
+                                            $('.sendCode').unbind("click");
+                                            var i = setInterval(function () {
+                                                if (count == 60) {
+                                                    $('.sendCode').attr('disabled', false);
+                                                    $('.sendCode').html('发送动态密码');
+                                                    clearInterval(i);
+                                                    $('.sendCode').css({'color': '#fff', 'background-color': '#ff5b79', 'cursor': 'pointer'});
+                                                } else {
+                                                    $('.sendCode').html('重新获取' + '(' + parseInt(60 - count) + ')');
+                                                }
+                                                count++;
+                                            }, 1000);
+                                        } else {
+                                            layer.open({
+                                                content: data.msg
+                                                ,skin: 'msg'
+                                                ,time: 3 //2秒后自动关闭
+                                            });
+                                        }
+                                        issend = false;
+                                    },
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                        layer.open({
+                                            content:'网络繁忙, 请刷新页面'
+                                            ,skin: 'msg'
+                                            ,time: 3 //2秒后自动关闭
+                                        });
+
+                                        issend = false;
+                                    }
+                                });
+
+                            }if(data.code == 0100){
+                                layer.open({
+                                    content: '图形验证码错误'
+                                    ,skin: 'msg'
+                                    ,time: 3 //2秒后自动关闭
+                                });
+
+                            }
+                        }
+                    });
+
+                }
+
+                else{
+                    layer.open({
+                        content: '请正确填写您的手机号码'
+                        ,skin: 'msg'
+                        ,time: 3 //2秒后自动关闭
+                    });
+                }
+            });
+            $('#submit').click(function(){
+
+            $("#registerForm").validate({
+                rules:{
+                    mobile:{
+                        isMobile:true
+                    }
+                },
+                submitHandler: function(form){
+                    $.ajax({
+                        type: 'post',
+                        data: $("#registerForm").serialize(),
+                        url: location.href,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.code == 0) {
+                                location.assign(data.url);
+                                $('.shadeBox').show();
+                                // success_url =url;
+                            } else {
+                                layer.open({
+                                    content: data.msg
+                                    ,skin: 'msg'
+                                    ,time: 3 //2秒后自动关闭
+                                });
+                        }
+                            issend = false;
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            layer.open({
+                                content:'网络繁忙, 请刷新页面'
+                                ,skin: 'msg'
+                                ,time: 3 //3秒后自动关闭
+                            });
+
+                            issend = false;
+                        }
+                    });
+                    return false;
+                }
+            });
+            });
+        });
+    </script>
+    </block>

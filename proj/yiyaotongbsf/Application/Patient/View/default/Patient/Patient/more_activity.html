@@ -1,0 +1,26 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content" id="mycontain">
+        <volist name="list" id="vo">
+			<div class="aui-row me-moactiv-bo">
+			<div class="aui-col-xs-3"><img src="{$vo.image}" onerror="this.src='__IMG__/clinic.png'"></div>
+			<div class="aui-col-xs-9 me-moreactivi-left">
+    			<span class="me-mydoc-p">  <a href="{:U('activity_detail',array('id'=>$vo['id'],'distance'=>$vo['distance']))}">{$vo.activity_name}</a></span>
+    			<p class="index-mo-actop"><span class="index-neardc index-mo-ac">距离{$vo.distance}km</span><span class="index-nearclick-km index-mo-ac">{$vo.activity_time}</span></p>
+			</div>
+		</div>
+            </volist>
+        </div>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('more_activity_more')}",
+            obj:'mycontain'
+        };
+    </script>
+</block>

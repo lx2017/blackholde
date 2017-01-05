@@ -1,0 +1,68 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con clinicNopower doctorMag">
+        <div class="P_main">
+            <ul>
+                <volist name="doctors" id="doctor">
+                <li>
+                    <a href="{:U('view_doctor',array('id'=>$doctor['id']))}">
+                        <div class="pic"><img src="{$doctor.image}" onerror="this.src='__IMG__/head1.png'" /></div>
+                        <p class="ov_h info">
+                            <span class="left c_333">{$doctor.name}</span>
+                            <em class="right c_red delete" data-id="{$doctor.id}">删除</em>
+                        </p>
+                        <p class="ov_h c_666 starBox">
+                            <span class="left clinic">{$clinic_name}</span>
+                            <span class="right">
+                                <for start="0" end="floor($doctor['score']/2)">
+                                    <span class="star"></span>
+                                </for>
+                                <em class="c_red">{$doctor.score}</em>
+                            </span>
+                        </p>
+                        <p class="word c_999">{$doctor.good}</p>
+                    </a>
+                </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            var issend = false;
+           $('.delete').click(function(e){
+               e.preventDefault();
+               if(issend) return false;
+               issend = true;
+               var _this = this;
+               var id = $(this).data('id');
+               if(!id){
+                   issend = false;
+                   layer_msg('参数错误!');
+                   return false;
+               }
+               layer_confirm('确定删除该医生吗?',function(){
+                   //发送数据
+                   $.post("{:U('delete_doctor')}",{id:id},function (data){
+                       issend = false;
+                       if(data.code==0){
+                           if(data.code==0){
+                               layer_msg('删除成功',2,function(){
+                                   //删除该节点
+                                   $(_this).closest('li').remove();
+                               });
+                           }else{
+                               layer_msg(data.msg);
+                           }
+                       }
+                   },'json');
+               },function(){
+                   issend = false;
+               });
+           });
+        });
+    </script>
+</block>

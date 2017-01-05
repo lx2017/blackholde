@@ -1,0 +1,16 @@
+        <volist name="list" id="vo">
+		<div class="me-myadvice-content">
+            <div class="meadv-fp-bo"><span class="me-advice-fp">{$vo.name}</span><span class="me-advice-sp">医生</span><span class="me-advice-tp">{:$vo['status']==1?'待回复':'已回复'}</span></div>
+            <div>
+            	<p>{$vo.content}</p>
+            </div>
+            <div class="meadvice-date"> <span class="mead-date-sp"> {$vo.date}</span><span class="mead-date-tp">
+               <eq name="vo.status" value="3">
+                   已评价
+                   <else/>
+                 <a>去评价</a>
+               </eq>
+
+            </span></div>
+		</div>
+        </volist>

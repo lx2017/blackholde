@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>找回密码</title>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="__CSS__/LoginAndRegister/zc1.css">
+<script src="__JS__/jquery-2.0.0/jquery.min.js"></script>
+<script src="__JS__/UserCenter/zepto.min.js"></script>
+<script src="__JS__/UserCenter/zc.js"></script>
+<article class="M_main">
+    <header>
+        <div class="tou">
+            <a href="javascript:" onClick="history.back(-1);"class="goback"><i class="iconfont1">&#xe606;</i></a>
+            <p>设置新密码</p>
+        </div>
+    </header>
+    <div class="content">
+        <form action="{:U('/Home/LoginAndRegister/Login/UpPassword',array('x'=>'nosecret','f'=>'nojson','t'=>'wap'))}" method="post" onsubmit="return sz()">
+            <!-- 手机号输入 -->
+            <section>
+                <div class="phone-xg">
+                    <input type="text" id="number" _href="{:U('/Home/LoginAndRegister/Register/CheckMobile',array('x'=>'nosecret','f'=>'json'))}" name="mobile" maxlength="11" placeholder="请输入手机号" onkeydown="onlyNum();"/>
+                </div>
+            </section>
+            <!-- 手机号输入 -->
+            <!-- 验证码输入 -->
+            <section>
+                <div class="xg-code">
+                    <a id ="code" _href="{:U('/Home/LoginAndRegister/Login/SendYzm',array('x'=>'nosecret','f'=>'json'))}" onclick ="checkmobile()">获取验证码</a>
+                    <input type="text" id ="checkcode"  _href="{:U('/Home/LoginAndRegister/Register/CheckYzmwap',array('x'=>'nosecret','f'=>'json','t'=>'wap'))}"name="yzm" maxlength="11" placeholder="请输入验证码"/>
+                </div>
+            </section>
+            <!-- 验证码输入 -->
+            <!-- 新密码 -->
+            <section>
+                <div class="xin-code">
+                    <input type="password" name="password" maxlength="20" placeholder="新密码" id="password" class="mm" />
+                </div>
+            </section>
+            <!-- 新密码 -->
+            <!-- 确认新密码 -->
+            <section>
+                <div class="qr-code">
+                    <input type="password" name="repassword" maxlength="20" placeholder="确认新密码" id = "repassword" class="mm" />
+                </div>
+            </section>
+            <!-- 确认新密码 -->
+            <!-- 确定按钮 -->
+            <section>
+                <input type="submit" value="确定" class="qd-en">
+            </section>
+            <!-- 确定按钮 -->
+        </form>
+    </div>
+</article>
+
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="aui-content login login2">
+        <div class="aui-row">
+            <div class="login-content">
+                <div class="aui-col-xs-4 passwordleft modifypassleft">原密码</div>
+                <div class="aui-col-xs-8"><input id="pass" type="password" placeholder="输入原密码"></div>
+            </div>
+        </div>
+        <div class="aui-row">
+            <div class="login-content">
+                <div class="aui-col-xs-4 passwordleft modifypassleft">新密码</div>
+                <div class="aui-col-xs-8"><input id="newpass" type="password" placeholder="请输入新密码"></div>
+            </div>
+        </div>
+        <div class="aui-row">
+            <div class="login-content">
+                <div class="aui-col-xs-4 modifypassleft">确认新密码</div>
+                <div class="aui-col-xs-8"><input id="repass" type="password" placeholder="请再次输入新密码" style="width: 76% !important"></div>
+            </div>
+        </div>
+    </div>
+    <div class="login-up-btn">
+        <button class="aui-btn aui-btn-primary" id="submit">修改密码</button>
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__STATIC__/common/js/user.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //修改密码
+            $('#submit').click(function(){
+                //得到值
+                var pass = $.trim($('#pass').val());
+                var newpass = $.trim($('#newpass').val());
+                var repass = $.trim($('#repass').val());
+                //验证密码
+                var rst = check_password(newpass,repass);
+                if(rst.code==0){
+                    //提交信息
+                    $.post(location.href,{pass:pass,newpass:newpass},function(data){
+                        if(data.code==0){
+                            layer_msg('修改成功',2,function(){
+                                location.href = "{:U('/Patient/LoginAndRegister/Login/logout')}";//注销登录
+                            });
+                        }else{
+                            layer_msg(data.msg);
+                        }
+                    },'json');
+                }else{
+                    layer_msg(rst.msg);
+                }
+            });
+        });
+    </script>
+</block>

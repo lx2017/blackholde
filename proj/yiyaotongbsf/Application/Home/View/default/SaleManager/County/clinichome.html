@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>诊所主页</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+	<div class="clinic_home">
+    <header class = "all_header">
+      <a class = "h_back" href="javascript:void(0)"><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+      <span class = "h_title">诊所主页</span>
+      <a class = "h_add" href="javascript:void(0)"></a>
+    </header>
+		<div class="clinic_img">
+			<img src="__SaleManager__/images/demo.jpg" alt="">
+		</div>
+		<div class="weui-cells">
+      <div class="weui-cell">
+          <div class="weui-cell__bd">
+              <p>诊所负责人</p>
+          </div>
+          <div class="weui-cell__ft">{$clinic.manager_name}</div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>诊所名称</p>
+        </div>
+        <div class="weui-cell__ft">{$clinic.clinic_name}</div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>手机号</p>
+        </div>
+        <div class="weui-cell__ft"><a style = "color:#999" href="javascript:void(0);">{$clinic.manager_mobile}</a></div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>擅长</p>
+        </div>
+        <div class="weui-cell__ft intro_info">{$clinic.clinic_specialty}</div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd" style = "flex:3">
+          <p>诊所资质</p>
+          <p style = "color: #999;font-size: 14px;">{$clinic.clinic_licence}</p>
+        </div>
+        <div class="weui-cell__ft clinic_nature"><span></span></div>
+      </div>
+      <div class="weui-cell">
+      <if condition="$clinic.clinic_pic neq ''"><div class="weui-cell__hd"><img src="{$clinic.clinic_pic}" alt="" style="width:20px;margin-right:5px;display:block"></div>
+      <else/><div class="weui-cell__hd"><img src="__SaleManager__/images/address.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+      </if>
+        
+        <div class="weui-cell__bd">
+          <p>地址</p>
+        </div>
+        <div class="weui-cell__ft">{$clinic.clinic_address}</div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><img src="__SaleManager__/images/tel_btn.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+        <div class="weui-cell__bd">
+          <p>电话</p>
+        </div>
+        <div class="weui-cell__ft">{$clinic.clinic_phone}</div>
+      </div>
+      <div class="abstract">
+        <div>简介</div>
+        <div class="summary">{$clinic.clinic_introduction}</div>
+      </div>
+    </div>
+
+    <div class="weui-cells">
+    <volist name='doctorList' id='d' >
+    		<div class="weui-panel__bd">
+	        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+	          <div class="weui-media-box__hd">
+	           <if condition="$d.image neq ''"><img class="weui-media-box__thumb" src="{$d.image}" alt="">
+	      		<else/><img class="weui-media-box__thumb" src="__SaleManager__/images/clinic.png" alt="">
+	     	 </if>
+	          </div>
+	          <div class="weui-media-box__bd">
+	          	<div class = "clinic_doc">
+	          		<div class="doc_name">
+		            	<h4 class="weui-media-box__title">{$d.name}</h4>
+		            	<span class = "doc_adress">{$clinic.address}</span>
+	            	</div>
+	            	<div class="clinic_score">
+	            		<span class = "clinic_s">{$d.score}</span><span>分</span>
+	            	</div>
+	            </div>
+	            <div class="doc_cont">
+	            	<p class="weui-media-box__desc">{$d.good}</p>
+	            </div>
+	          </div>
+	        </a>
+      </div>
+     </volist>
+    </div>
+	</div>
+	<script src = "__SaleManager__/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<extend name="Common/common"/>
+<block name="main">
+
+    <div class="aui-content">
+        <div class="login-loimg">
+            <img src="__IMG__/logo.png">
+        </div>
+        <div class="login-lo-wrap">
+            <form id='submitForm' method="post">
+            <div class="login-input">
+                <div class="login-lg-bo"><input type="text" name="mobile" id="mobile"  placeholder="输入手机号" value="{$mobile}"></div>
+            </div>
+            <div class="login-input">
+                <div class="login-lg-bo">
+                    <input type="password" name="password" placeholder="密码为6-12位数字或者字母" value="{$password}" >
+                    <!--<span>|</span><span class="login-lg-le">发送验证码</span>-->
+                </div>
+            </div>
+            <div class="login-lg-img"><img src="__IMG__/lg-re.png" class='rember'>
+                <span class="loginclick none" id="insert"></span>
+                <img class="fp"src="__IMG__/lg-bd.png" style="float:right"></div>
+            <div>
+                <button class="aui-btn aui-btn-primary" id="submit">登录</button>
+            </div>
+            </form>
+            <div class="login-lo-yijian"  >
+                <button class="aui-btn aui-btn-primary rg-btn"  onclick="location.href='{:U('/Patient/LoginAndRegister/Register/register')}'"><a  style="color:#2cc07c">一键注册</a></button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</block>
+<block name="js">
+    <script src="__JS__/layer_mobile/layer.js"></script>
+    <script src="__STATIC__/form/jquery.validate.min.js"></script>
+    <script src="__STATIC__/form/localization/messages_zh.min.js"></script>
+    <script src="__STATIC__/form/additional/isMobile.js"></script>
+    <script type="text/javascript">
+        $(".fp").click(function(){
+            window.location.href="{:U('/Patient/LoginAndRegister/Login/back_password')}";
+        });
+        $(function(){
+            $('#submit').click(function(){
+                $("#submitForm").validate({
+                    rules:{
+                        mobile:{
+                            isMobile:true
+                        }
+                    },
+                    submitHandler: function(form){
+                        $.ajax({
+                            type: 'post',
+                            data: $("#submitForm").serialize(),
+                            url: location.href,
+                            dataType: 'json',
+                            success: function (data) {
+                                if (data.code == 0) {
+                                   location.assign(data.url);
+                                } else {
+                                    //提示
+                                    layer.open({
+                                        content: data.msg
+                                        ,skin: 'msg'
+                                        ,time: 3 //2秒后自动关闭
+                                    });
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                layer_msg('网络繁忙, 请刷新页面');
+                            }
+                        });
+                        return false;
+                    }
+                });
+            });
+        });
+    </script>
+</block>

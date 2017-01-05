@@ -1,0 +1,140 @@
+<include file="Public/base"/>
+<body>
+    <div class="page-container">
+        <form action="" method="post" class="form form-horizontal" id="commentFrom">
+            <input type="hidden" name="role_id" value="5">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">手机号：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text"  name="phone" id="phone" placeholder="" value="{$sale.phone}" class="input-text" >
+                </div>
+                <label class="form-label col-xs-4 col-sm-2">姓名：</label>
+                <div class="formControls col-xs-3 col-sm-4">
+                    <input type="text" name="real_name" id="" placeholder="" value="{$sale.real_name}" class="input-text">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">身份证：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" name="card_number" id="" placeholder="" value="{$sale.card_number}" class="input-text">
+                </div>
+
+                <label class="form-label col-xs-4 col-sm-2">性别：</label>
+                <div class="formControls col-xs-4 col-sm-4">
+                    <span class="select-box">
+                        <select class="select sex" size="1" name="sex">
+                            <option value="1">男</option>
+                            <option value="2">女</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">年龄：</label>
+
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" name="age" id="" placeholder="" value="{$sale.age}" class="input-text">
+                </div>
+                <label class="form-label col-xs-4 col-sm-2">状态：</label>
+                <div class="formControls col-xs-3 col-sm-4">
+                    <span class="select-box">
+                        <select class="select sex" size="1" name="status">
+                            <option value="0">启用</option>
+                            <option value="1">禁用</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">所属县：</label>
+                <div class="formControls col-xs-3 col-sm-4">
+                    <input type="text" name="manage_locations" id="" placeholder="" value="{$sale.manage_locations}" class="input-text">
+                </div>
+                <!-- <div id="province"></div> -->
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-2 col-sm-2">工作事项：</label>
+                <div class="formControls col-xs-9 col-sm-9">
+                    <input type="text" name="work_event" id="" placeholder="" value="{$sale.work_event}" class="input-text">
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-2 col-sm-2">直接上级：</label>
+                <div class="formControls col-xs-9 col-sm-9">
+                    <span class="select-box">
+                        <select class="select" size="1" name="superior_id">
+                            <volist name='supers' id='v'>
+                                <option value="{$v.id}">{$v.real_name}</option>
+                            </volist>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                    <button onClick="sub_save();" class="btn btn-secondary radius" type="button"> 提交</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+
+        function sub_save() {
+            if ($('input[name=phone]').val().length <= 0) {
+                layer.msg("手机号不能为空");
+                return;
+            }
+            if ($('input[name=real_name]').val().length <= 0) {
+                layer.msg("真实姓名不能为空");
+                return;
+            }
+            if ($('input[name=card_number]').val().length <= 0) {
+                layer.msg("身份证号码不能为空");
+                return;
+            }
+            if ($('input[name=age]').val().length <= 0) {
+                layer.msg("年纪不能为空");
+                return;
+            }
+            if ($('input[name=manage_locations]').val().length <= 0) {
+                layer.msg("所属县不能为空");
+                return;
+            }
+            if ($('input[name=work_event]').val().length <= 0) {
+                layer.msg("工作事项不能为空");
+                return;
+            }
+            var formData = new FormData($("#commentFrom")[0]);
+            //formData.append("manage_locations", county); 
+            // formData.append("province", $("#province select:eq(0)").val());
+            $.ajax({
+                url: "",
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (returndata) {
+                    obj = jQuery.parseJSON(returndata);
+                    if (obj.code == 1) {
+                        layer.msg(obj.msg);
+                        window.parent.location.reload();
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    } else {
+                        layer.msg(obj.msg);
+                    }
+                },
+                error: function (returndata) {
+                    alert(returndata);
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>

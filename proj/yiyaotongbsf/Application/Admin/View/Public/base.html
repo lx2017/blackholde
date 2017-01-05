@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <LINK rel="Bookmark" href="/favicon.ico">
+    <LINK rel="Shortcut Icon" href="/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="__STATIC__/html5.js"></script>
+    <script type="text/javascript" src="__STATIC__/respond.min.js"></script>
+    <script type="text/javascript" src="__JS__/PIE_IE678.js"></script>
+    <![endif]-->
+    <link href="__CSS__/manager/H-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="__CSS__/manager/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+    <link href="__CSS__/skin/default/skin.css" rel="stylesheet" type="text/css"/>
+    <link href="__CSS__/manager/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="__CSS__/common.css" rel="stylesheet" type="text/css"/>
+    <link href="__CSS__/application.css" rel="stylesheet" type="text/css"/>
+    <title>后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script type="text/javascript" src="__STATIC__/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/layer/layer.js"></script>
+    <script type="application/javascript" src="__STATIC__/form/jquery.validate.min.js"></script>
+    <script type="application/javascript" src="__STATIC__/form/localization/messages_zh.min.js"></script>
+    <script type="text/javascript" src="__JS__/H-ui.js"></script>
+    <script type="text/javascript" src="__JS__/H-ui.admin.js"></script>
+    <script type="text/javascript" src="__JS__/common.js"></script>
+    <script type="text/javascript" src="__JS__/jquery.raty.min.js"></script>
+    <script type="text/javascript" src="__JS__/timer.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //搜索功能
+            $("#search_layer").click(function () {
+                layer.closeAll();
+                layer.open({
+                    type: 2,
+                    title: 'id搜索工具',
+                    shadeClose: true,
+                    shade: false,
+                    maxmin: true, //开启最大化最小化按钮
+                    area: ['650px', '550px'],
+                    content: '{:U("/Admin/Doctor/NRDoctor/search")}'
+                });
+            });
+        })
+    </script>
+</head>

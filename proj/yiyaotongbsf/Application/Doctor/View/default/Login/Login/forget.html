@@ -1,0 +1,115 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con">
+        <div class="P_main forget">
+            <form id="myForm">
+                <ul>
+                    <li class="tel">
+                        <span></span>
+                        <input type="text" name="mobile" id="mobile" placeholder="输入手机号"/>
+                    </li>
+                    <li class="code">
+                        <span></span>
+                        <input type="text" name="code" id="code" placeholder="输入验证码"/>
+                        <a class="right sendCode" href="javascript:void(0)" _href="{:U('CheckYzm')}">发送验证码</a>
+                    </li>
+                    <li class="psd">
+                        <span></span>
+                        <input type="text" name="password" id="password" placeholder="输入新密码"/>
+                    </li>
+                </ul>
+                <div class="bBth blue"><input type="button" id="submit" value="修改密码" /></div>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="css"><link type="text/css" rel="stylesheet" href="__CSS__/login.css" /></block>
+<block name="js">
+    <script type="text/javascript" src="__STATIC__/common/js/user.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //发送验证码
+            $(document).on("click",".sendCode",function(){
+                var mobile=$("#mobile").val();
+                var url=$(".sendCode").attr('_href');
+                if(check_mobile(mobile)){
+                    $.ajax({
+                        type: 'post',
+                        data: {mobile:mobile},
+                        url: url,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.code == 1002) {
+                                //倒计时
+                                $('.sendCode').attr('disabled', "disabled");
+                                $('.sendCode').css({'color': '#cccccc','background-color': '#eee', 'cursor': 'not-allowed'});
+                                $('.sendCode').html('重新获取(60)');
+                                var count = 1;
+                                $('.sendCode').unbind("click");
+                                var i = setInterval(function () {
+                                    if (count == 60) {
+                                        $('.sendCode').attr('disabled', false);
+                                        $('.sendCode').html('发送动态密码');
+                                        clearInterval(i);
+                                        $('.sendCode').css({'color': '#fff', 'background-color': '#ff5b79', 'cursor': 'pointer'});
+                                    } else {
+                                        $('.sendCode').html('重新获取' + '(' + parseInt(60 - count) + ')');
+                                    }
+                                    count++;
+                                }, 1000);
+                            } else {
+                                layer_msg(data.msg);
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            layer_msg('网络繁忙,请稍后再试');
+                        }
+                    });
+                } else{
+                    layer_msg('请正确填写您的手机号码');
+                }
+            });
+
+            //保存信息
+            var issend = false;
+            $('#submit').click(function() {
+                if(issend) return false;
+                issend = true;
+                var mobile = $("#mobile").val();
+                var password = $("#password").val();
+                var code = $("#code").val();
+                //验证手机
+                if (check_mobile(mobile) == false) {
+                    issend = false;
+                    layer_msg('请正确填写您的手机号码');
+                    return false;
+                }
+                //验证密码
+                var tst = check_password(password);
+                if (tst.code != 0) {
+                    issend = false;
+                    layer_msg(tst.msg);
+                    return false;
+                }
+                $.ajax({
+                    type: 'post',
+                    data: $("#myForm").serialize(),
+                    url: location.href,
+                    dataType: 'json',
+                    success: function (data) {
+                        issend = false;
+                        if (data.code == 0) {
+                            location.assign(data.url);
+                        } else {
+                            layer_msg(data.msg);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        issend = false;
+                        layer_msg('网络繁忙,请稍后再试');
+                    }
+                });
+            });
+        });
+    </script>
+</block>

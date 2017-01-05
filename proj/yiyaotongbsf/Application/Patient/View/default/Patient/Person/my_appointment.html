@@ -1,0 +1,28 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="aui-content" id="mycontain">
+        <volist name="list" id="vo">
+        <div class="me-myadvice-content">
+            <div class="meadv-fp-bo"><span class="me-advice-fp">{$vo.name}</span><span class="me-advice-sp">医生</span><span class="me-advice-tp">{:$vo['status']==1?'待回复':'已回复'}</span></div>
+            <div class="myappoinet-p">
+                <p><span>预约患者</span><span class="myappoinet-left">{$userinfo.name}</span></p>
+                <p><span>预约时间</span><span class="myappoinet-left">{$vo.time}</span></p>
+                <p>{$vo.date}</p>
+            </div>
+            <!--<div class="meadvice-dateyu"> <span class="mead-date-sp"> {$vo.date}</span></div>-->
+        </div>
+        </volist>
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('my_appointment_more')}",
+            obj:'mycontain'
+        };
+    </script>
+</block>

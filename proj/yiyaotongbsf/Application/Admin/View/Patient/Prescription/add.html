@@ -1,0 +1,46 @@
+<include file="Public/base"/>
+<!--表单-->
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="submitForm">
+        <div class="row cl">
+            <label class="form-label col-3">处方名称</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="prescription_name" value="{$prescription_name}" required id="prescription_name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">处方类型</label>
+            <div class="formControls col-5">
+                <select name="prescription_type_id" class="input-text" id="prescription_type_id">
+                    <volist name="chufang" id="vo">
+                        <option value="{$vo.id}" <if condition="$vo.id eq $prescription_type_id">selected</if>>{$vo.prescription_type_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">处方详情</label>
+            <div class="formControls col-5">
+                <textarea name="prescription_desc" id="prescription_desc" style="margin: 0px; height: 66px; width: 341px;" required>{$prescription_desc}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input type="hidden" name="id" id="id" value="{$id}">
+                <button class="btn btn-primary radius" id="submit" type="submit">确 定</button>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--引入js,css-->
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/add.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/laydate/laydate.js"></script>
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+    //验证相关
+    var validate_rules = {};
+    var validate_messages = {};
+</script>

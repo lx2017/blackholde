@@ -1,0 +1,90 @@
+<extend name="Common/common"/>
+    <block name="main">
+	<div class="index-index-head">
+        <img src="__IMG__/index.png" class="indeximg-ix">
+		<div class="index-search"> <i class="aui-iconfont aui-icon-search mysearch" style="position:absolute;top:0.35rem;left:0.5rem;"></i></span>
+		<input type="text"  placeholder="搜索医生、诊所、疾病"></div>
+
+	</div>
+	<div class="index-intoduct">
+		<div class="aui-row">
+			<div class="aui-col-xs-6 index-index-one">
+				<p>
+					<a href="{:U('near_clinic')}" style="color:#000"><img style="width:40%"src="__IMG__/zhensuo.png"></a>
+				</p>
+				<p style="margin-top:2rem;"class="index-near-ix">
+					<a href="{:U('near_clinic')}" style="color:#000">附近诊所</a>
+				</p>
+				<p class="index-near-ix2">找到身边的好诊所</p>
+			</div>
+			<div class="aui-col-xs-6 index-index-two" style="height:13rem;">
+				<div class="aui-row index-index-three">
+					<p>
+						<a href="{:U('near_doctor')}"><img src="__IMG__/yis.png" style="width:20%"></a>
+					</p>
+					<p class="index-near-ix">
+						<a href="{:U('near_doctor')}" style="color:#000">咨询附近医生</a>
+					</p>
+					<p class="index-near-ix2">搜附近名医，轻松咨询</p>
+				</div>
+				<div class="aui-row">
+   				<div class="aui-col-xs-6 index-index-three index-noboder">
+   				<p><a href="{:U('disease_database')}"><img src="__IMG__/ji.png"></a></p>
+				<p class="index-near-ix"><a  href="{:U('disease_database')}" style="color:#000">疾病库</a></p>
+				<p class="index-near-ix2">内容丰富</p></div>
+				<div class="aui-col-xs-6 index-index-two index-index-three index-noboder" style="height:6.5rem;">
+   				<p><a href="{:U('prescription')}"><img src="__IMG__/f.png"></a></p>
+				<p class="index-near-ix"><a href="{:U('prescription')}" style="color:#000">名方验方</a></p>
+				<p class="index-near-ix2">对症下药</p></div>
+				</div>
+			</div>
+		</div>
+	</div>
+		 <div class="index-search-top index-search-content index-border-none">
+       <div class="index-absolute-relative"><img src="__IMG__/green.png" class="index-absolute-img"><span>常见疾病</span><span><a href="{:U('disease_database')}" style="color:#000"><img class="indexright"src="__IMG__/r.png"></a></span></div>
+            <div class="me-wrap-click">
+                <volist name="disease" id="vo">
+                    <span class="me-pa-click me-noclick"  onclick="location.href='{:U('diseasedetail',array('id'=>$vo['id']))}'">{$vo.disease_name}</span>
+                </volist>
+        </div>
+       </div>
+         <div class="index-search-top index-search-content index-border-none">
+       <div class="index-absolute-relative" style="border-bottom:none;"><img src="__IMG__/green.png" class="index-absolute-img"><span>附近活动</span><span><a href="{:U('more_activity')}"><img class="indexright"src="__IMG__/r.png"></a></span></div>
+             <volist name="activity" id="vo">
+             <div class="aui-row me-moactiv-bo"  onclick="location.href='{:U('activity_detail',array('id'=>$vo['id'],'distance'=>$vo['distance']))}'">
+			<div class="aui-col-xs-3"><img src="{$vo.image}" onerror="this.src='__IMG__/clinic.png'"></div>
+			<div class="aui-col-xs-9 me-moreactivi-left">
+    			<span class="me-mydoc-p"> {$vo.activity_name}</span>
+    			<p class="index-mo-actop"><span class="index-neardc index-mo-ac">{$vo.distance}km</span><span class="index-nearclick-km index-mo-ac">{$vo.activity_time}</span></p>
+			</div>
+		</div>
+                 </volist>
+        </div>
+         <div class="index-search-top index-search-content index-border-none">
+       <div class="index-absolute-relative" style="border-bottom:none;"><img src="__IMG__/green.png" class="index-absolute-img"><span>健康资讯</span><span><a href="{:U('more_info')}"><img class="indexright" src="__IMG__/r.png"></a></span></div>
+             <volist name="information" id="vo">
+             <div class="aui-row me-moactiv-bo" onclick="location.href='{:U('info_detail',array('id'=>$vo['id']))}'">
+			<div class="aui-col-xs-3"><img src="{$vo.image}"></div>
+			<div class="aui-col-xs-9 me-moreactivi-left">
+    			<span class="me-mydoc-p">{$vo.title}</span>
+    			<p class="index-mo-info">{$vo.content|msubstr=0,20}</p>
+			</div>
+		</div>
+                 </volist>
+   </div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //搜索
+            $('.mysearch').click(function () {
+                var name = $(this).siblings('input').val();
+                location.href = ('{:U("search")}'+'?name='+name);
+            });
+            $('.mycancel').click(function () {
+                $(this).siblings('input').val('');
+                $('#myul').empty();
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,15 @@
+.ztree *{
+    font-family: '微软雅黑';
+}
+.ztree li span.switch {
+    display: none;
+}
+
+.ztree li {
+    clear: left;
+}
+
+.ztree li ul.line {
+    border: none;
+}
+

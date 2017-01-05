@@ -1,0 +1,64 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con bg_f no_pad addPatient">
+        <form id="myForm">
+            <ul class="main_left_right nobdLi">
+                <li><a href="javascript:void(0)">患者<span class="txt_r">{$patient} <i>&#xe604;</i></span></a></li>
+                <li><a href="javascript:void(0)">就诊时间<span class="txt_r"><input type="text" id="treat_time" name="treat_time" placeholder="选择时间" value="{$name}"/></span></a></li>
+                <li><a href="javascript:void(0)">就诊诊所<span class="txt_r">{$userinfo.clinic_name}</span></a></li>
+                <li><a href="javascript:void(0)">病情症状<span><input type="text" name="symptom" placeholder="输入病情信息" value="{$name}"/></span></a></li>
+                <li><a href="javascript:void(0)">医生诊断<span><input type="text" name="treatment" placeholder="输入诊断信息" value="{$name}"/></span></a></li>
+                <li><a href="javascript:void(0)">医嘱<span><input type="text" name="advice" placeholder="输入医嘱" value="{$name}"/></span></a></li>
+                <li><a href="javascript:void(0)">用药及处方<span><input type="text" name="recipe" placeholder="输入用药及处方" value="{$name}"/></span></a></li>
+            </ul>
+            <input type="hidden" name="doctor_id" value="{:UID}">
+            <input type="hidden" name="patient_id" value="{:I('get.id')}">
+        </form>
+    </div>
+    <div class="P_fixFoot">
+        <a href="javascript:void(0)" id="save">保存</a>
+        <a href="javascript:void(0)" onclick="callmyclient(2,'{$hx_name}','{$patient}');">沟通</a>
+    </div>
+</block>
+<block name="css">
+    <link href="__JS__/mobiscroll/style/mobiscroll.2.13.2.css" rel="stylesheet" />
+</block>
+<block name="js">
+    <script src="__JS__/mobiscroll/script/mobiscroll.2.13.2.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //选择时间
+            var opt = {
+                theme: 'default',
+                display: 'bottom',
+                mode: 'scroller',
+                animate: 'pop',
+                dateFormat: 'yy-mm-dd',
+                dateOrder: 'yymmdd',
+                onSelect:function(valueText){
+                    //获取当前时间的数量
+                    $('#treat_time').val(valueText);
+                }
+            };
+            $('#treat_time').scroller().date(opt);
+            //保存信息
+            var issend = false;
+            $('#save').click(function(){
+               if(issend) return false;
+                issend = true;
+                var data = $('#myForm').serialize();
+                $.post(location.href,data,function(data){
+                    if(data.code==0){
+                        location.href = data.url;
+                    }else{
+                        layer.open({
+                            content: data.msg
+                            ,skin: 'msg'
+                            ,time: 2
+                        });
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

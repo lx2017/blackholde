@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <title>我的诊所</title>
+        <script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+        <link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="__SALEMAN__/stylesheets/index.css">
+    </head>
+    <body>
+        <div class="clinic">
+            <header class = "all_header">
+                <a class = "h_back" href="/Home/Saleman/Saleman/index"><img src="__SALEMAN__/images/back_icon.png" alt=""></a>
+                <span class = "h_title">我的诊所</span>
+                <a class = "h_add" href="javascript:void(0)"></a>
+            </header>
+            <div class="weui-panel__bd">
+                <notempty name="clinicList">
+                    <volist name="clinicList" id="clinicVo">
+                        <a href="/Home/Saleman/Saleman/clinicHome/id/{$clinicVo['id']}" class="weui-media-box weui-media-box_appmsg">
+                            <div class="weui-media-box__hd clinic_img">
+                                <img class="weui-media-box__thumb" src="{$clinicVo['clinic_pic']}" alt="">
+                            </div>
+                            <div class="weui-media-box__bd">
+                                <div class="cli_w_name">
+                                    <h4 class="weui-media-box__title">{$clinicVo['clinic_name']}</h4>
+                                    <div class="cli_del" style="z-index: 10;" pos_title="确定删除当前诊所？" pos_id="{$clinicVo['id']}"><img src="__SALEMAN__/images/del_btn.png" alt=""></div>
+                                </div>
+                                <div class="cli_w_num">
+                                    <span>预约量：<span>{$clinicVo['clinic_treatment_volume']}</span></span>
+                                    <span>评分：<span>{$clinicVo['clinic_score']}</span></span>
+                                </div>	
+                                <div class="weui-media-box__desc">
+                                    {$clinicVo['clinic_introduction']}
+                                </div>
+                            </div>
+                        </a>
+                    </volist>
+                    <else/>
+                    <div class="noClinic">
+                        <div class="no_img">
+                            <img src="__SALEMAN__/images/no_clinic.png" alt="">
+                        </div>
+                        <div class="no_tips">
+                            暂无诊所
+                        </div>
+                    </div>
+                </notempty>
+
+            </div>
+        </div>
+
+        <div class="js_dialog" id="iosDialog1" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">提示</strong></div>
+                <div class="weui-dialog__bd confir_content"></div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default cancel-btn">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary ok-btn">确定</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="js_dialog" id="iosDialog2" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__bd sure-info"></div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary sure-btn">知道了</a>
+                </div>
+            </div>
+        </div>
+
+        <script src = "__SALEMAN__/js/index.js"></script>
+        <script>
+            $('.cancel-btn').on('click', function () {
+                $("#iosDialog1").hide(200);
+            });
+            $('.ok-btn').on('click', function () {
+                var id = $(this).attr('pos_id');
+                $.ajax({
+                    url: "/Home/Saleman/Saleman/clinic/clinicid/" + id,
+                    type: 'get',
+                    cache: false,
+                    dataType: "json",
+                    success: function (result) {
+                        $('#iosDialog2').find('.sure-info').html(result['msg']);
+                        $('#iosDialog2').show(200);
+                        $("#iosDialog1").hide(200);
+                    }
+                });
+            });
+            $('.sure-btn').on('click', function () {
+                $('#iosDialog2').hide();
+                location.href = location.href;
+            })
+        </script>
+    </body>
+</html>

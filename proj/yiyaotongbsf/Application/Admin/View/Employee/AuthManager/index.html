@@ -1,0 +1,83 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <notempty name="actions">
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <if condition="isset($actions['AUTHCREATEGROUP'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius"
+                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHCREATEGROUP']['url'];echo U($str,array('key'=>$actions['AUTHCREATEGROUP']['key']))?>">新增</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['AUTHGROUPDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" id="deleteGroupBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHGROUPDELETE']['url'];echo U($str,array('key'=>$actions['AUTHGROUPDELETE']['key']))?>">删除</a>
+                 </span>
+            </if>
+        </div>
+    </notempty>
+    <!-- 数据列表 -->
+    <div class="mt-20">
+        <div class="data-table table-striped">
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">员工组</th>
+                    <th class="">描述</th>
+
+                    <th class="">授权</th>
+                    <th class="">状态</th>
+                    <th class="">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <notempty name="_list">
+                    <volist name="_list" id="vo">
+                        <tr class="text-c">
+                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id}"/></td>
+                            <td>{$vo.title}</td>
+                            <td><span>{:mb_strimwidth($vo['description'],0,60,"...","utf-8")}</span></td>
+                            <td>
+                                <if condition="isset($actions['AUTHACCESS'])">
+                                    <a href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHACCESS']['url'];echo U($str,array('key'=>$actions['AUTHACCESS']['key'],'group_id'=>$vo['id'])) ?>"
+                                       class="fontblue">访问授权</a>
+                                </if>
+                                <!--<if condition="isset($actions['AUTHCATEGORY'])">-->
+                                    <!--<a href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHCATEGORY']['url'];echo U($str,array('key'=>$actions['AUTHCATEGORY']['key'],'group_name'=>$vo['title'],'group_id'=>$vo['id'])) ?>"-->
+                                       <!--class="fontblue">分类授权</a>-->
+                                <!--</if>-->
+                                <if condition="isset($actions['AUTHEMPLOYEE'])">
+                                    <a href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHEMPLOYEE']['url'];echo U($str,array('key'=>$actions['AUTHEMPLOYEE']['key'],'group_id'=>$vo['id'])) ?>"
+                                       class="fontblue">成员授权
+                                    </a>
+                                </if>
+                            </td>
+                            <td>{$vo.status_text}</td>
+                            <td>
+                                <if condition="isset($actions['AUTHEDITGROUP'])">
+                                    <a class="ajaxget fontblue"
+                                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHEDITGROUP']['url'];echo U($str,array('key'=>$actions['AUTHEDITGROUP']['key'],'id'=>$vo['id']))?>">修改</a>
+                                </if>
+
+                                <if condition="isset($actions['AUTHGROUPDELETE'])">
+                                    <a class="ajaxget fontblue" href="javascript:" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHGROUPDELETE']['url'];echo U($str,array('key'=>$actions['AUTHGROUPDELETE']['key'],'id'=>$vo['id']))?>">删除</a>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="6" class="text-center"> aOh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="page">
+            {$_page}
+        </div>
+    </div>
+
+</div>
+<script type="application/javascript" src="__JS__/Employee/auth.js"></script>

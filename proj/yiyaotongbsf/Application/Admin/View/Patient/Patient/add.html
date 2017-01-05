@@ -1,0 +1,125 @@
+<include file="Public/base"/>
+<!--表单-->
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="submitForm">
+        <div class="row cl">
+            <label class="form-label col-3">患者姓名</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="name" value="{$name}" required id="name">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3">身份证号码</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="idcard" value="{$idcard}" required id="idcard">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">年龄</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="age" value="{$age}" required id="age">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">性别</label>
+            <div class="formControls col-5">
+                <input type="radio" name="sex" value="0" <if condition="$sex eq 0">checked="checked"</if> /> 女 &nbsp;
+                <input type="radio" name="sex" value="1" <if condition="$sex eq 1">checked="checked"</if> />  男
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">地址</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="address" value="{$address}" required id="address">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">手机号</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="mobile" value="{$mobile}" required id="mobile" _target="{:U($Think.ADMIN_PATH_NAME.'Patient/NRPatient/checkMobile')}">
+            </div>
+        </div>
+        <div class="row cl">
+        <label class="form-label col-3">婚孕史</label>
+        <div class="formControls col-5">
+            <input type="text" class="input-text" name="obsterical_history" value="{$obsterical_history}" >
+        </div>
+    </div>
+        <div class="row cl">
+            <label class="form-label col-3">手术和外伤</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="operation_trauma" value="{$operation_trauma}" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">家族病史</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="family_history" value="{$family_history}" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">药物过敏</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="drug_allergy" value="{$drug_allergy}" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">食物和接触性过敏</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="contact_allergy" value="{$contact_allergy}" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">个人习惯</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="habit" value="{$habit}" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">备注</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="remark" value="{$remark}">
+            </div>
+        </div>
+    <div class="row cl">
+    <div class="col-9 col-offset-3">
+        <input type="hidden" name="id" id="id" value="{$id}">
+        <button class="btn btn-primary radius" id="submit" type="submit">确 定</button>
+        <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+    </div>
+</div>
+</form>
+</div>
+<!--引入js,css-->
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/add.js"></script>
+<link type="text/css" href="__STATIC__/common/css/image.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/form/additional/isMobile.js"></script>
+<script type="text/javascript">
+    //验证相关
+    var validate_rules = {
+        mobile: {
+            isMobile: true,
+            remote: {
+                url: $("#mobile").attr('_target'),
+                type: "post",
+                dataType: "json",
+                data: {
+                    mobile: function(){
+                        return $("#mobile").val();
+                    },
+                    type: function(){
+                        return $("#id").val();
+                    }
+                }
+            }
+        }
+    };
+    var validate_messages = {
+        mobile: {
+            remote: "手机号码已经存在"
+        }
+    };
+
+</script>

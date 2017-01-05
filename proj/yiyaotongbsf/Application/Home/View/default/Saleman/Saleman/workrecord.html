@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <title>工作详情</title>
+        <link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="__SALEMAN__/stylesheets/index.css">
+        <link rel="stylesheet" href="__SALEMAN__/stylesheets/dropload.css">
+    </head>
+    <body>
+        <div class="work_argument">
+            
+            <div class="weui-tab">
+                <div class="weui-navbar">
+                   
+                    <div class="weui-navbar__item">
+                        工作详情
+                    </div>
+                </div>
+                <div class="weui-tab__panel">
+                    <!--今日完成工作-->
+                    <div class="weui-list cur_cont today_box" style = "display: block;">
+                        <notempty name="tripTodayList">
+                            <div class="weui-cells weui-cells_checkbox work_lists">
+                                <volist name="tripTodayList" id="tripTodayVo">
+                                    <label class="weui-cell weui-check__label" for="s11">
+                                        <div class="weui-cell__bd" style = "flex: 2">
+                                            <p class = "cur_intro"></p>
+                                        </div>
+                                        <div class="weui-cell__bd cur_date">
+                                            <p></p>
+                                        </div>
+                                    </label>
+                                </volist>
+                            </div>
+                            <else/>
+                            <div class="no_work today_no_work" style="display: block;">
+                              <if condition="($result eq NULL)">
+                                <div class="no_tips">
+                                    暂无工作日程
+                                </div>
+                              <else/>
+                                <div class="no_tips">
+                                <volist name="result" id="data">
+                                <label class="weui-cell weui-check__label" for="s1211">
+                                <div class="weui-cell__bd" style = "flex: 2">
+                                <p class = "pre_intro" style="float:left">{$data.content}</p>
+                                <p class = "pre_intro" style="float:right">{$data.add_time|date='Y-m-d H:i:s',###}</p>
+                                </div>
+                                
+                                </label>
+                                </volist>
+                                </div>
+                                </if>
+                            </div>
+                        </notempty>
+                        
+                    </div>
+                    <!--明日安排-->
+                    <div class="weui-list next_cont tomorrow_box">
+                        <notempty name="tripTomorrowList">
+                            <div class="weui-cells weui-cells_checkbox next_w_lists">
+                                <volist name="tripTomorrowList" id="tripTomorrowVo">
+                                    <label class="weui-cell weui-check__label" for="s1111">
+                                        <div class="weui-cell__bd" style = "flex: 2">
+                                            <p class = "next_intro">{$tripTomorrowVo['content']}</p>
+                                        </div>
+                                        <div class="weui-cell__bd cur_date">
+                                            <p>{$tripTomorrowVo['work_day']}</p>
+                                        </div>
+                                    </label>
+                                </volist>
+                            </div>
+                            <else/>
+                            <div class="no_work tomorrow_no_work" style="display: block;">
+                                
+                                <div class="no_tips">
+                                    暂无工作日程
+                                </div>
+                            </div>
+                        </notempty>
+                       
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!--已发送的今日完成工作记录-->
+                    <div class="weui-list pre_cont sendlog">
+                        <div class="weui-cells weui-cells_checkbox pre_w_lists">
+
+                        </div>
+                        <div class="pre_sel_w">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="__SALEMAN__/js/zepto.min.js"></script>
+
+
+    <include file="./Application/Home/View/default/Saleman/Public/popup.html"/>
+
+    <script src = "__SALEMAN__/js/index.js"></script>
+    <script src = "__SALEMAN__/js/dropload.min.js"></script>
+
+   
+</body>
+</html>

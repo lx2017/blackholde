@@ -1,0 +1,34 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con patientDet">
+        <ul class="main_left_right">
+            <li>姓名<span>{$patient.name|default='无'}</span></li>
+            <li>身份证<span>{$patient.idcard|default='无'}</span></li>
+            <li>性别<span>{:$patient['sex']?'男':'女'}</span></li>
+            <li>年龄<span>{$patient.age|default='20'}</span></li>
+            <li>地址<span>{$patient.address|default='无'}</span></li>
+            <li>手机号<span>{$patient.mobile|default='无'}</span></li>
+            <li>婚育史<span>{$patient.obsterical_history|default='无'}</span></li>
+            <li>
+                <a href="{:U('todetail',array('id'=>$patient['id'],'type'=>'operation_trauma'))}">手术和外伤<span><i>&#xe604;</i></span><span>{:mbSub($patient['operation_trauma'],0,10)?:'无'}</span></a>
+            </li>
+            <li>
+                <a href="{:U('todetail',array('id'=>$patient['id'],'type'=>'family_history'))}">家族病史<span><i>&#xe604;</i></span><span>{:mbSub($patient['family_history'],0,10)?:'无'}</span></a>
+            </li>
+            <li>
+                <a href="{:U('todetail',array('id'=>$patient['id'],'type'=>'drug_allergy'))}">药物过敏<span><i>&#xe604;</i></span><span>{:mbSub($patient['drug_allergy'],0,10)?:'无'}</span></a>
+            </li>
+            <li>
+                <a href="{:U('todetail',array('id'=>$patient['id'],'type'=>'contact_allergy'))}">食物和接触物过敏<span><i>&#xe604;</i></span><span>{:mbSub($patient['contact_allergy'],0,10)}</span></a>
+            </li>
+            <li>
+                <a href="{:U('todetail',array('id'=>$patient['id'],'type'=>'habit'))}">个人习惯<span><i>&#xe604;</i></span><span>{:mbSub($patient['habit'],0,10)?:'无'}</span></a>
+            </li>
+            <li>
+                <a href="{:U('todetail',array('id'=>$patient['id'],'type'=>'remark'))}">备注<span><i>&#xe604;</i></span><span>{:mbSub($patient['remark'],0,10)?:'无'}</span></a>
+            </li>
+        </ul>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js"></block>

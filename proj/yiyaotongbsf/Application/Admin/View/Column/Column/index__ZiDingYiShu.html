@@ -1,0 +1,183 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+
+            <if condition="isset($actions['EMPLOYEEADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius"
+                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEADD']['url'];echo U($str,array('key'=>$actions['EMPLOYEEADD']['key']))?>">新增</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['EMPLOYEERESUME'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius ajax-post " href="javascript:" id="enableAdminBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEERESUME']['url'];echo U($str,array('key'=>$actions['EMPLOYEERESUME']['key']))?>"
+                            >启用</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['EMPLOYEEFORBID'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius " href="javascript:" id="disableAdminBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEFORBID']['url'];echo U($str,array('key'=>$actions['EMPLOYEEFORBID']['key']))?>"
+                            >禁用</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['EMPLOYEEDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="javascript:"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEDELETE']['url'];echo U($str,array('key'=>$actions['EMPLOYEEDELETE']['key']))?>"
+                       id="deleteAdminBtn">删除</a>
+                 </span>
+            </if>
+
+        </notempty>
+        
+        
+        <if condition="isset($actions['COLUMNADD'])">
+                    <a class="ajaxget fontblue btn btn-primary radius"
+                    href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNADD']['url'];echo U($str,array('key'=>$actions['COLUMNADD']['key'],'id'=>$vo['column_id']))?>">添加栏目</a>
+        </if>
+        
+        <if condition="isset($actions['COLUMNVIEW'])">
+                    <a class="ajaxget fontblue btn btn-primary radius"
+                    href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNVIEW']['url'];echo U($str,array('key'=>$actions['COLUMNVIEW']['key'],'key1'=>$key))?>">生成静态文件</a>
+        </if>
+        <!-- 高级搜索 -->
+        
+        
+        <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="nickname" class="search-input" value="{:I('nickname')}"
+                       placeholder="请输入用户昵称或者ID">
+                <a class="sch-btn" href="javascript:" id="search"
+                   url="<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Employee/User/index',array('key'=>$key));?>"><i
+                        class="Hui-iconfont btn-search">&#xe665;</i></a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 数据列表 -->
+
+    <div class="mt-20">
+        <div class="data-table table-striped">
+
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead >
+                <tr class="text-c" pid=0>
+                	 <th width="60">展开或收缩</th>
+                    <th class="">昵称</th>
+                    <th class="">操作</th>
+                </tr>
+            	</thead>
+                <tbody>
+                <notempty name="data">
+                    <volist name="data" id="vo">
+                        <tr pid={$vo.column_pid}  cid={$vo.column_id} class="text-c toptr" column="{$vo.column_id}" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNAJAX']['url'];echo U($str,array('key'=>$actions['COLUMNAJAX']['key'],'id'=>$vo['column_id']))?>" >
+                            <td width="60" >
+	        					<a href="javascript:;" class="glyphicon glyphicon-plus click-btn1" style="width:20px;height:10px;"></a>
+	        				</td>
+                            <td>{$vo.column_title}</td>
+                           
+                            <td>
+
+							<if condition="isset($actions['COLUMNEDIT'])">
+                                    <a class="ajaxget fontblue"
+                                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNEDIT']['url'];echo U($str,array('key'=>$actions['COLUMNEDIT']['key'],'id'=>$vo['column_id']))?>">修改</a>
+                            </if>
+							<if condition="isset($actions['COLUMNDEL'])">
+                                    <a class="ajaxget fontblue" href="javascript:;" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNDEL']['url'];echo U($str,array('key'=>$actions['COLUMNDEL']['key'],'id'=>$vo['column_id']))?>">删除</a>
+                                </if>
+                                
+                            </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="text-center"> aOh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <link href="__CSS__/employee/employee.css" rel="stylesheet" type="text/css"/>
+
+<!--	<script src="__JS__/Column/tree.js"></script>
+-->
+    <script src="__JS__/Employee/user.js"></script>
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function () {
+            var url = $(this).attr('url');
+            var query = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+            query = query.replace(/^&/g, '');
+            if (url.indexOf('?') > 0) {
+                url += '&' + query;
+            } else {
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function (e) {
+            if (e.keyCode === 13) {
+                $("#search").click();
+                return false;
+            }
+        });
+
+    </script>
+    
+    <script type="text/javascript">
+    $(function(){
+    	var del="<?php $str = $Think.ADMIN_PATH_NAME.$actions['COLUMNDEL']['url'];echo U($str,array('key'=>$actions['COLUMNDEL']['key'],'id'=>$vo['column_id']))?>";
+		//所有子集都隐藏
+      	$("tr[pid!=0]").hide();
+      	
+      	$("a.click-btn1").toggle(function(){
+      		
+      		//点击成为减号--展开
+      		$(this).removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      		//展开
+      		var cid=$(this).parents("tr").attr("cid");
+      		if($('tr[pid='+cid+']').length==0){
+      			alert("没有子分类");
+      		}else{
+      			$('tr[pid='+cid+']').show();
+      		}
+      		
+      	},function(){
+      			//点击成为加号--收缩
+    			$(this).removeClass('glyphicon-minus').addClass('glyphicon-plus');
+    			var cid = $(this).parents('tr').attr('cid');
+    			//下一级子集收缩
+    			$('tr[pid='+cid+']').hide();
+    			
+    			//发送异步
+    			$.ajax({
+    				type:"get",
+    				url: $(this).parents('tr.toptr').attr('_href'),
+    				dataType:"json",
+    				data:{id:cid},
+    				success:function(pp){
+    					//循环php返回来的子集cid
+    					$.each(pp,function(k,v){
+    						$("tr[cid="+v.column_id+"]").hide();
+    					});
+    					
+    				}
+    			});
+    		
+      	})
+	
+    })
+    </script>
+    
+</div>

@@ -1,0 +1,98 @@
+<include file="Public/base"/>
+<!--表单-->
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="submitForm">
+        <div class="row cl">
+            <label class="form-label col-3">疾病名称</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="disease_name" value="{$disease_name}" required id="disease_name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">科室分类</label>
+            <div class="formControls col-5">
+                <select name="section_office_id" class="input-text" id="section_office_id">
+                    <volist name="keshi" id="vo">
+                        <option value="{$vo.id}" <if condition="$vo.id eq $section_office_id">selected</if>>{$vo.type_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">人群分类</label>
+            <div class="formControls col-5">
+                <select name="crowd_id" class="input-text" id="crowd_id">
+                    <volist name="renqun" id="vo">
+                        <option value="{$vo.id}" <if condition="$vo['id'] eq $crowd_id">selected</if>>{$vo.type_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">概述</label>
+            <div class="formControls col-5">
+                <textarea name="summary" id="summary" style="margin: 0px; height: 66px; width: 341px;" required>{$summary}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">病因</label>
+            <div class="formControls col-5">
+                <textarea name="disease_reason" id="disease_reason" style="margin: 0px; height: 66px; width: 341px;" required>{$disease_reason}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">临床表现</label>
+            <div class="formControls col-5">
+                <textarea name="clinical_manifestations" id="clinical_manifestations" style="margin: 0px; height: 66px; width: 341px;" required>{$clinical_manifestations}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">并发症</label>
+            <div class="formControls col-5">
+                <textarea name="complication" id="complication" style="margin: 0px; height: 66px; width: 341px;" required>{$complication}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+        <label class="form-label col-3">实验室检查</label>
+        <div class="formControls col-5">
+            <textarea name="laboratory_check" id="laboratory_check" style="margin: 0px; height: 66px; width: 341px;" required>{$laboratory_check}</textarea>
+        </div>
+    </div>
+        <div class="row cl">
+            <label class="form-label col-3">诊断</label>
+            <div class="formControls col-5">
+                <textarea name="diagnosis" id="diagnosis" style="margin: 0px; height: 66px; width: 341px;" required>{$diagnosis}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">治疗</label>
+            <div class="formControls col-5">
+                <textarea name="treatment" id="treatment" style="margin: 0px; height: 66px; width: 341px;" required>{$treatment}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">预防</label>
+            <div class="formControls col-5">
+                <textarea name="prophylaxis" id="prophylaxis" style="margin: 0px; height: 66px; width: 341px;" required>{$prophylaxis}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input type="hidden" name="id" id="id" value="{$id}">
+                <button class="btn btn-primary radius" id="submit" type="submit">确 定</button>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--引入js,css-->
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/add.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/laydate/laydate.js"></script>
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+    //验证相关
+    var validate_rules = {};
+    var validate_messages = {};
+</script>

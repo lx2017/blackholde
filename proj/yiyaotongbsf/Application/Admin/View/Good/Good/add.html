@@ -1,0 +1,336 @@
+<include file="Public/base"/>
+
+
+<!--    <script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+--> <!-- 配置文件 -->
+<script type="text/javascript" src="__STATIC__/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__STATIC__/ueditor/ueditor.all.js"></script>
+		    
+<!--<script type="text/javascript" src="__STATIC__/jquery-1.8.2.min.js"></script>-->
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+
+
+<script type="text/javascript">
+		//点击x删除图片
+		$(document).on('click','.del-img',function(){
+			var liObj = $(this).parents('li');
+			//找到父级li里面的地址
+			var path = liObj.attr('path');
+			var thumb = liObj.attr('thumb');
+			//发异步到服务器删除
+			$.ajax({
+				type:"post",
+				url:"{:U('Good/delImg')}",
+				data:{path:path,thumb:thumb},
+				success:function(data){
+					//移除图片
+					liObj.remove();
+				}
+				
+			});
+		})
+		
+		
+		/*$('.del-img1').live('click',function(){alert($(this).index());
+			var liObj = $(this).parents('span');
+			//找到父级li里面的地址
+			var path = liObj.attr('path');
+			//发异步到服务器删除
+			$.ajax({
+				type:"post",
+				url:"{|U:'delImg'}",
+				data:{path:path},
+				success:function(data){
+					//移除图片
+					liObj.remove();
+				}
+			});
+		})*/
+	</script>
+
+
+<div class="pd-20">
+    <form action="{$url}" method="post" class="form form-horizontal" id="addGoodForm">
+        <div class="row cl">
+            <label class="form-label col-3">商品编号</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="gid" value="" required minlength="2" maxlength="20"
+                       id="good_id" _target="{:U($Think.ADMIN_PATH_NAME.'Good/NRLable/checkLable')}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">商品名称</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="name" value="" required minlength="2" maxlength="20"
+                       id="good_name" _target="{:U($Think.ADMIN_PATH_NAME.'Good/NRLable/checkLable')}">
+            </div>
+        </div>
+        <div class="row cl  uploadBox">
+            <label class="form-label col-3">缩略图</label>
+            <span class="btn-upload form-group">
+                <!--<input class="input-text upload-url" type="text"  style="width:200px" value="上传"  >
+                    <a href="javascript:;" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i>
+                        上传商品图片</a>-->
+                    <input type="file" value="上传图片"   name="pic" class="input-file" id="file">
+            </span>
+            <ul>
+            	
+            </ul>
+             
+            
+        </div>
+        
+        <script type="text/javascript">
+	                $(function() {
+	                	
+	                    $('#file').uploadify({
+	                    	'formData'    : {'session_id':'<?php echo session_id();?>'},
+	                    	
+	                        'fileTypeDesc' : '上传文件',//上传描述
+	                        'fileTypeExts' : '*.jpg;*.png',
+	                        'swf'      : '__STATIC__/uploadify/uploadify.swf',
+	                        'uploader' :"<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODADDUPLOADIFY']['url'];echo U($str,array('key'=>$actions['GOODADDUPLOADIFY']['key']))?>",
+	                        'buttonText':'选择文件',
+	                        'fileSizeLimit' : '2000KB',
+	                        'uploadLimit' : 11,//上传文件数
+	                        'width':65,
+	                        'height':25,
+	                        'successTimeout':10,//等待服务器响应时间
+	                        'removeTimeout' : 2,//成功显示时间
+	                        'onUploadSuccess' : function(file, data, response) {
+	                            data=$.parseJSON(data);
+	                          //alert(data.thumb);
+	                            var imageUrl = data.name?data.url:'__STATIC__/uploadify/uploadify-cancel.png';
+	                            //alert(imageUrl);
+	                            //alert(imageUrl);==data.url--http://localhost/yuxiang/uploadify_demo/Upload/Content/15/06/89101435416575.jpg
+	                            var li="<li thumb='"+data.thumb+"' path='"+data.savepath+"' url='"+data.url+"'><img src='"+imageUrl+"' style='width:100px;heigth:100px;'/><a href='javascript:;' style='color:red' class='del-img'>X</a>";
+	                            //把地址放到隐藏域，这样可以提交到服务器了
+	                            /*$.each(data.tu,function(k,v){
+	                            	li+="<span><img src='"+v+"' style='width:100px;heigth:100px;'/><a href='javascript:;' style='color:red' class='del-img1'>X</a></span>"
+	                            })*/
+	                            
+	                            li += '<input type="hidden" name="thumb" value="'+data.thumb+'"/>';
+	                            li += '<input type="hidden"  name="image" value="'+data.url+'"/>';
+	                            li += '<input type="hidden"  name="pic" value="'+data.show+'"/>';
+	                            
+	                            li += '</li>';
+	                            $("div.uploadBox ul").prepend(li);
+	                            //alert($("input[name=pic]").val());
+	                        }
+	                    });
+	                });
+	                
+	            </script>
+        
+        <div class="row cl">
+            <label class="form-label col-3">价格</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="price" value="" required minlength="2" maxlength="20"
+                       id="good_price" _target="{:U($Think.ADMIN_PATH_NAME.'Good/NRLable/checkLable')}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">一级分类</label>
+            <div class="formControls col-5">
+                <select name="tid" id="select1">
+                	<option value=0>请选择</option>
+                	<volist name="top" id="vo">
+                		<option value="{$vo.id}">{$vo.classify}</option>
+                	</volist>
+                </select>
+            </div>
+            <script>
+            	$(function(){
+            		$("#select1").change(function(){
+            			//alert($("input.pic").length);return false;
+            			//alert($(this).val());
+            			if($(this).val()!=0){
+            				
+            				
+            				$.ajax({
+								type:'post',
+								data:{id:$(this).val()},
+								dataType:'json',
+								url:"<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODADDCLASSIFY']['url'];echo U($str,array('key'=>$actions['GOODADDCLASSIFY']['key']))?>",
+								success:function(p){
+									//alert(p);
+									if(p!='empty'){
+										$("#select2").css("display","block");
+										var html=''
+										$.each(p,function(k,v){
+											html+='<option value="'+v.id+'">'+v.classify+'</option>';
+										})
+										$("#select22").html('');
+										$("#select22").append(html);
+										//alert($("#select22").val());
+										$.ajax({
+											type:'post',
+											data:{id:$("#select22").val()},
+											dataType:'json',
+											url:"<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODADDCLASSIFY']['url'];echo U($str,array('key'=>$actions['GOODADDCLASSIFY']['key']))?>",
+											success:function(p){
+												//alert(p);
+												if(p!='empty'){
+													$("#select3").css("display","block");
+													var html=''
+													$.each(p,function(k,v){
+														html+='<option value="'+v.id+'">'+v.classify+'</option>';
+													})
+													$("#select33").html('');
+													$("#select33").append(html);
+													//alert($("#select22").val());
+												}else{
+													$("#select33").val(0);
+													$("#select3").css("display","none");
+												}
+												//window.location.reload();
+											}
+										});
+									}else{
+										$("#select22").val(0);
+										$("#select2").css("display","none");
+									}
+									//window.location.reload();
+								}
+							});
+            			}else{
+            				$("#select33").val(0);
+            				$("#select22").val(0);
+            				$("#select2").css("display","none");
+            				$("#select3").css("display","none");
+            			}
+            		})
+            		//alert($("#select33").val());
+            		$("#select22").change(function(){
+            			//alert($(this).val());
+            			if($(this).val()!=0){
+            				$.ajax({
+								type:'post',
+								data:{id:$(this).val()},
+								dataType:'json',
+								url:"<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODADDCLASSIFY']['url'];echo U($str,array('key'=>$actions['GOODADDCLASSIFY']['key']))?>",
+								success:function(p){
+									//alert(p);
+									if(p!='empty'){
+										$("#select3").css("display","block");
+										var html=''
+										$.each(p,function(k,v){
+											html+='<option value="'+v.id+'">'+v.classify+'</option>';
+										})
+										$("#select33").html('');
+										$("#select33").append(html);
+										
+									}else{
+										$("#select33").val(0);
+										$("#select3").css("display","none");
+									}
+									//window.location.reload();
+								}
+							});
+            			}else{
+            				$("#select33").val(0);
+            				$("#select3").css("display","none");
+            			}
+            		})
+            		
+            	})
+            </script>
+        </div>
+        <div class="row cl" id="select2" style="display:none;">
+             <label class="form-label col-3">二级分类</label>
+            <div class="formControls col-5">
+                <select name="tid" id="select22">
+                	<!--<option value="0">请选择</option>
+                	<volist name="top" id="vo">
+                		<option value="{$vo.id}">{$vo.classify}</option>
+                	</volist>-->
+                </select>
+            </div>
+        </div>
+        <div class="row cl" id="select3" style="display:none;">
+             <label class="form-label col-3">三级分类</label>
+            <div class="formControls col-5">
+                <select name="tid" id="select33">
+                	<!--<option value="0">请选择</option>
+                	<volist name="top" id="vo">
+                		<option value="{$vo.id}">{$vo.classify}</option>
+                	</volist>-->
+                </select>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">标签</label>
+            <div class="formControls col-5">
+               <volist name="lableData" id="vo">
+            		
+                	<input type="checkbox"  class="lable" value="{$vo.id}" <in name="vo.id" value="$yuanLable">checked</in> />
+                	{$vo.name}
+                	&nbsp;&nbsp;
+                </volist>
+            </div>
+        </div>
+        <div class="row cl" style="">
+        	 <label class="form-label col-3">内容</label>
+            <div class="formControls col-5">
+                <!-- 加载编辑器的容器 -->
+			    <script id="container" name="content" type="text/plain">
+			        这里写你的初始化内容
+			    </script>
+			   <!-- 实例化编辑器 -->
+			    <script type="text/javascript">
+			        var ue = UE.getEditor('container');
+			    </script>
+            </div>
+	        
+   		</div>
+         </form>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <button class="btn btn-primary radius" id="submit" type="submit">确 定
+                </button>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        
+        
+</div>
+
+<script>
+	$(function(){
+		
+		
+		$("#submit").click(function(){
+			//alert($("input[name=pic]").val());return false;
+			//alert(ue.getContent());return false;
+			var gid=$("input[name=gid]").val();
+			var name=$("input[name=name]").val();
+			var price=$("input[name=price]").val();
+			var s1= $("#select1").val();
+			var s2= $("#select22").val();
+			var s3= $("#select33").val();
+			var content=ue.getContent();
+			var pic=$("input[name=pic]").val();
+			var arr=[];
+			for(var i=0;i<$("input.lable:checked").length;i++){
+				arr[i]=$("input.lable:checked").eq(i).val();
+			}
+			$.ajax({
+				type:'post',
+				dataType:'json',
+				data:{pic:pic,content:content,gid:gid,name:name,price:price,s1:s1,lable:arr,s2:s2,s3},
+				url:"<?php $str = $Think.ADMIN_PATH_NAME.$actions['GOODADDTRUE']['url'];echo U($str,array('key'=>$actions['GOODADDTRUE']['key']))?>",
+				success:function(p){
+					if(p=='ok'){
+						alert(p);
+						window.location.reload();
+					}
+					
+				}
+			})
+			
+			
+		})
+	})
+</script>
+
+<!--<script src="__JS__/Good/lable.js"></script>-->

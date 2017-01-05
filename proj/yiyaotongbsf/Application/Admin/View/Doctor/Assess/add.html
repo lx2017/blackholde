@@ -1,0 +1,73 @@
+<include file="Public/base"/>
+<!--表单-->
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="submitForm">
+        <div class="row cl">
+            <label class="form-label col-3">医生id</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="doctor_id" value="{$doctor_id}" required id="doctor_id">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">患者id</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="patient_id" value="{$patient_id}" required id="patient_id">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">评价时间</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="date" value="{$date}" required readonly id="date" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">评价星级</label>
+            <div class="formControls col-5">
+                <div id="half" data-rating="{$score}">
+                </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">评价内容</label>
+            <div class="formControls col-5">
+                <textarea name="intro" id="intro" style="margin: 0px; height: 66px; width: 341px;" required>{$intro}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input type="hidden" name="id" id="id" value="{$id}">
+                <button class="btn btn-primary radius" id="submit" type="submit">确 定</button>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--引入js,css-->
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/add.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/laydate/laydate.js"></script>
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+    //验证相关
+    var validate_rules = {};
+    var validate_messages = {};
+
+    $(function() {
+        var score= $("#half").attr("data-rating");
+        $('#half').raty({
+            half  : false, //只是控制是否允许选择小数值而已。 不设置此参也可以有初始的小数分
+            path      : '__IMG__',
+            score :score,
+            click: function(score, readOnly){
+                if ( $('#half').raty.readOnly === true ){
+                    alert("您已评价过了！");
+                    return;
+                }
+                var args={
+                    score:score,
+                    id: $(this).attr("id")
+                };
+            }
+        });
+    });
+</script>

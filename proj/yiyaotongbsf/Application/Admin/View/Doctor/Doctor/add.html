@@ -1,0 +1,129 @@
+<include file="Public/base"/>
+<!--表单-->
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="submitForm">
+        <div class="row cl">
+            <label class="form-label col-3">医生名称</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="name" value="{$name}" required id="name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">手机号</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="mobile" value="{$mobile}" required id="mobile" _target="{:U($Think.ADMIN_PATH_NAME.'Doctor/NRDoctor/checkMobile')}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">诊所id</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="clinic_id" value="{$clinic_id}" required id="clinic_id">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">营业资质</label>
+            <div class="formControls col-5">
+                <div class="upload_div">
+                    <input type='file' id="file_uploader" class="uploader"/>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3"></label>
+            <div class="formControls col-5">
+                <div class="upload_div gallery">
+                    <notempty name="imgs">
+                    <volist name="imgs" id="img">
+                        <div class="upload-img-box file_image">
+                            <div class="upload-pre-item">
+                                <input type="hidden" name="licence[]" class="p_image" value="{$img}">
+                                <img src="{$img}">
+                                <img src='__IMG__/x.png' class='delImg'>
+                            </div>
+                        </div>
+                    </volist>
+                    </notempty>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">擅长</label>
+            <div class="formControls col-5">
+                <textarea name="good" id="good" style="margin: 0px; height: 66px; width: 341px;" required>{$good}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">简介</label>
+            <div class="formControls col-5">
+                <textarea name="intro" id="intro" style="margin: 0px; height: 66px; width: 341px;" required>{$intro}</textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input type="hidden" name="id" id="id" value="{$id}">
+                <button class="btn btn-primary radius" id="submit" type="submit">确 定</button>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--引入js,css-->
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/add.js"></script>
+<link type="text/css" href="__STATIC__/common/css/image.css" rel="stylesheet"/>
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__STATIC__/form/additional/isMobile.js"></script>
+<script type="text/javascript">
+    //验证相关
+    var validate_rules = {
+        mobile: {
+            isMobile: true,
+            remote: {
+                url: $("#mobile").attr('_target'),
+                type: "post",
+                dataType: "json",
+                data: {
+                    mobile: function(){
+                        return $("#mobile").val();
+                    },
+                    type: function(){
+                        return $("#id").val();
+                    }
+                }
+            }
+        }
+    };
+    var validate_messages = {
+        mobile: {
+            remote: "手机号码已经存在"
+        }
+    };
+    $(function () {
+        //上传
+        var config = {
+            text:'上传',
+            multi:false,
+            size:'{$upload_conf.maxSize}B',
+            ext:'{$upload_conf.u_exts}',
+            handle:"{:U('/Admin/Common/Upload/image')}"
+        };
+        handleUpload('file_uploader',config,success_func);
+        //图片删除
+        $('.gallery').on('click','.delImg',function(){
+            $(this).closest('.upload-img-box').remove();
+        });
+    });
+    //上传成功处理函数
+    function success_func(data) {
+        var html = '<div class="upload-img-box file_image">\
+                <div class="upload-pre-item">\
+                <input type="hidden" name="licence[]" class="p_image" value="'+data.msg+'">\
+                <img src="{:UPLOADIFY_TEMP}'+data.msg+'">\
+                <img src="__IMG__/x.png" class="delImg">\
+                </div>\
+                </div>';
+        //显示图片
+        $('.gallery').append(html);
+    }
+</script>

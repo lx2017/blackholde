@@ -1,0 +1,55 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con doctor no_pad">
+        <div class="title">
+            <div class="pic"><a href="{:U('/Doctor/Doctor/Person/index1')}"><img src="{$userinfo.image}" onerror="this.src='__IMG__/head1.png'" /></a></div>
+            <p class="name">{$userinfo['name']}</p>
+        </div>
+        <div class="nav bg_f txt_align">
+            <dl>
+                <a href="{:U('patientlist')}">
+                    <dt><i class="c_blue">&#xe689;</i></dt>
+                    <dd>我要看病</dd>
+                </a>
+            </dl>
+            <dl>
+                <a href="{:U('appointlist')}">
+                    <dt><i class="c_blue">&#xe633;</i><notempty name="appoint_num"><em>{$appoint_num}</em></notempty></dt>
+                    <dd>预约我的</dd>
+                </a>
+            </dl>
+            <dl>
+                <a href="{:U('consultlist')}">
+                    <dt><i class="c_orange">&#xe82f;</i><notempty name="consult_num"><em>{$consult_num}</em></notempty></dt>
+                    <dd>咨询我的</dd>
+                </a>
+            </dl>
+        </div>
+        <ul class="main_left_right">
+            <li><a href="{:U('patients')}"><em><i class="c_green">&#xe695;</i></em>我的患者<span><i>&#xe604;</i></span></a></li>
+            <li><a href="{:U('treatmentlist')}"><em><i class="c_orange">&#xe624;</i></em>我的诊疗记录<span><i>&#xe604;</i></span></a></li>
+            <li><a href="{:U('assesslist')}"><em><i>&#xe67e;</i></em>患者评价<span><i>&#xe604;</i></span></a></li>
+        </ul>
+        <ul class="main_left_right">
+            <li><a href="javascript:void(0)"><em><i class="c_green">&#xecfa;</i></em>消息推送<span><i>&#xe604;</i></span></a></li>
+        </ul>
+        <ul class="main_left_right">
+            <li><a href="{:U('disease')}"><em><i class="c_green">&#xe609;</i></em>疾病库<span><i>&#xe604;</i></span></a></li>
+            <li><a href="{:U('recipe')}"><em><i class="c_orange">&#xe679;</i></em>名方验方<span><i>&#xe604;</i></span></a></li>
+        </ul>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //调用登录--延迟2s
+            setTimeout(function(){
+                var myid='{$Think.UID}';
+                if(myid){
+                    callmyclient(1,myid);
+                }
+            },2000);
+        });
+    </script>
+</block>

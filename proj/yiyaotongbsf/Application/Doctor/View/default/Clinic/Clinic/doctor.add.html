@@ -1,0 +1,55 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con addDoctor">
+        <div class="P_main bg_f">
+            <dl>
+                <dt>手机号</dt>
+                <dd><input type="text" placeholder="输入手机号" id="mobile"/></dd>
+            </dl>
+            <dl>
+                <dt>姓名</dt>
+                <dd><input type="text" placeholder="输入医生名" id="name"/></dd>
+            </dl>
+            <div class="bBth blue"><a href="javascript:void(0)" id="sub">添加</a></div>
+        </div>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript" src="__STATIC__/common/js/user.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var issend = false;
+            $('#sub').click(function(){
+                if(issend) return false;
+                issend = true;
+                var mobile = $('#mobile').val();
+                var name = $.trim($('#name').val());
+                //验证密码
+                var rst = check_mobile(mobile);
+                if(rst==false){
+                    issend = false;
+                    layer_msg('手机号格式错误');
+                    return false;
+                }
+                //验证名字
+                if(!name){
+                    issend = false;
+                    layer_msg('请填写医生名');
+                    return false;
+                }
+                //提交数据
+                $.post(location.href,{mobile:mobile,name:name},function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('添加成功',2,function(){
+                            location.href = data.url;
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

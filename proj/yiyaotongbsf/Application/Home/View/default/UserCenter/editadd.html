@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>添加地址详情</title>
+    <link rel="stylesheet" href="__CSS__/UserCenter/mydate.css">
+    <script src="__JS__/jquery-2.0.0/jquery.min.js"></script>
+    <script src="_JS__/UserCenter/mydata.js" type="text/javascript"></script>
+    <script class="resources library" src="__JS__/area.js" type="text/javascript"></script>
+</head>
+<style>
+    .address-body-edit .w-bar-control{
+        height:38px;
+        line-height:38px;
+    }
+</style>
+<body class="address-body-edit">
+<!-- 个人中心详情页 -->
+<main class="mydata-wrap">
+    <!-- top -->
+    <header class="g-header">
+        <a class="Header-back" href="javascript:history.go(-1);"><i class="ico-back"></i></a><h1>添加详情地址</h1>
+
+    </header>
+    <!-- top -->
+    <form class="m-user-addrAdd" action="/Home/UserCenter/UserCenter/Upaddress" method="post" id="form_addr">
+        <div class="m-user-bar">
+            <div class="w-inputBar w-bar">
+                <label for="" class="w-bar-label">省份</label>
+                <div class="w-bar-control" id="provinceId">
+                    <select class="w-bar-inputs blank" id="s_province" name="s_province"></select> 
+                </div>
+            </div>
+            <div class="w-inputBar w-bar">
+                <label for="" class="w-bar-label">城市</label>
+                <div class="w-bar-control" id="cityId">
+                    <select class="w-bar-inputs blank" id="s_city" name="s_city" ></select> 
+                </div>
+            </div>
+            <div class="w-inputBar w-bar">
+                <label for="" class="w-bar-label">地区</label>
+                <div class="w-bar-control" id="districtId">
+                    <select class="w-bar-inputs blank" id="s_county" name="s_county"></select>
+                </div>
+            </div>
+            <script type="text/javascript">_init_area();</script>
+            <div id="show"></div>
+            <div class="w-inputBar w-bar">
+                <label class="w-bar-label">详细地址</label>
+                <div class="w-bar-control">
+                    <textarea name="address" class="w-bar-input" id="address-info" placeholder="请输入详细地址"></textarea>
+                </div>
+            </div>
+            <div class="show-warning" id="dom_error_wrap"></div>
+        </div>
+        <div class="bottom-btns2">
+            <input class="w-button2" type="submit" value="保存" id="btn_save_addr">
+        </div>
+        <input type="hidden" name="userid" value="{$userid}">
+    </form>
+</main>
+
+<script type="text/javascript">
+    var Gid  = document.getElementById ;
+    var showArea = function(){
+        Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+        Gid('s_city').value + " - 县/区" +
+        Gid('s_county').value + "</h3>"
+    };
+    Gid('s_county').setAttribute('onchange','showArea()');
+</script>
+</body>
+</html>

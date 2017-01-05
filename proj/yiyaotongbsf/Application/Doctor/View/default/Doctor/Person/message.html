@@ -1,0 +1,83 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con">
+        <div class="P_main newsNotice bg_f no_pad">
+            <div class=" ov_h">
+                <span class="left">接收新消息通知</span>
+                <span class="right">
+                    <input type="checkbox" id="myinput" class="aui-switch" <eq name="is_allow" value="0">checked</eq>>
+                </span>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="css">
+    <style type="text/css">
+        .aui-switch {
+            width: 2.3rem;
+            height: 1.3rem;
+            position: relative;
+            vertical-align: top;
+            border: 1px solid #dddddd;
+            background-color: #dddddd;
+            border-radius: 0.6rem;
+            background-clip: content-box;
+            display: inline-block;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+        .aui-switch:before {
+            width: 1.1rem;
+            height: 1.1rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 0.6rem;
+            background-color: #fff;
+            content: '';
+            -webkit-transition: left 0.2s;
+            transition: left 0.2s;
+        }
+        .aui-switch:checked {
+            border-color: #2cc07c;
+            background-color: #2cc07c;
+        }
+        .aui-switch:checked:before {
+            left: 1.1rem;
+        }
+    </style>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //修改状态
+            $('#myinput').change(function(){
+                //得到当前值
+                var value = $(this).attr('checked');
+                if(value=='checked'){
+                    value = 0;
+                }else{
+                    value = 1;
+                }
+                //提交信息
+                $.post(location.href,{value:value},function(data){
+                    if(data.code==0){
+
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+
+            });
+        });
+    </script>
+</block>

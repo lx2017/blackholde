@@ -1,0 +1,22 @@
+<volist name="list" id="vo">
+    <li>
+        <a href="{:U('viewtreatment',array('id'=>$vo['id']))}">
+            <span class="time left">{$vo.month}<br/> {$vo.year}</span>
+            <div class="right info">
+                <div class="hospital ov_h">
+                    <span class="c_icon span1"><i class="c_blue">&#xe661;</i></span>
+                    <span class="span2">{$vo.clinic}</span>
+                </div>
+                <ol>
+                    <li class="c_333">{:mbSub($vo['symptom'],0,15)}</li>
+                    <li>
+                        <em>病情症状</em><span>{:mbSub($vo['symptom'],0,13)}</span>
+                    </li>
+                    <li>
+                        <em>诊断结果</em><span>{:mbSub($vo['treatment'],0,13)}</span>
+                    </li>
+                </ol>
+            </div>
+        </a>
+    </li>
+</volist>

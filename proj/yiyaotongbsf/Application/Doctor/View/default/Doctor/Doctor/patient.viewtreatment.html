@@ -1,0 +1,18 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con cureDet">
+        <div class="bg_f">
+            <ul class="main_left_right">
+                <li>就诊时间<span>{$treat_time}</span></li>
+                <li>就诊诊所<span>{$clinic}</span></li>
+                <li>医生姓名<span>{$doctor}</span></li>
+                <li><a href="{:U('todetail',array('id'=>$id,'type'=>1))}">病情症状<span><i>&#xe604;</i></span><span>{:mbSub($symptom,0,10)}</span></a></li>
+                <li><a href="{:U('todetail',array('id'=>$id,'type'=>3))}">医生诊断<span><i>&#xe604;</i></span><span>{:mbSub($treatment,0,10)}</span></a></li>
+                <li><a href="{:U('todetail',array('id'=>$id,'type'=>2))}">医嘱<span><i>&#xe604;</i></span><span>{:mbSub($advice,0,10)}</span></a></li>
+                <li><a href="{:U('todetail',array('id'=>$id,'type'=>4))}">用药及处方<span><i>&#xe604;</i></span><span>{:mbSub($recipe,0,10)}</span></a></li>
+            </ul>
+        </div>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js"></block>

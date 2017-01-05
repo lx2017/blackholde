@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/index.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/edit.js"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
+<script src="js/Sortable.js"></script>
+<title>编辑表单</title>
+</head>
+<body>
+<!---头部---->
+<div class="pub_head">
+	<div class="pub_top">
+		<img class="pub_img1" src="images/logo.png"/>
+		<div class="pub_left">
+			<span>猿码头</span>
+			<p>助力于中小企业的发展</p>
+		</div>
+		<div class="pub_right">
+			<a href="" class="pub_name">hi,猿码头<i></i></a>
+			<a href=""><img class="pub_img2" src="images/pho.png"/></a>
+		</div>
+	</div>
+</div>
+<!------end-------->
+<div class="pub_mid">
+	<div class="pub_md">
+		<a href="javascript:;" class="data cur">编辑</a>
+		<a href="javascript:;" class="data">设置</a>
+		<a href="javascript:;" class="data">发布</a>
+		<a href="javascript:;" class="data">数据</a>
+		<a href="javascript:;" class="data_fb">一键发布</a>
+	</div>
+</div>
+<div class="pub_bottom">
+	<div class="pub_bot">
+		<div class="pub_kk edit_all">
+			<div class="edit_top">猿码头问卷调查</div>
+			<div>
+				<script id="editor" type="text/plain" style="width:648px;height:150px;padding:0 10px;"></script>
+			</div>
+			<div class="clear4"></div>
+			<div class="container">
+				<div data-force="30" class="layer block" style="width:100%">
+					<ul id="foo" class="block__list block__list_words">
+				
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="edit_right">
+			<div class="edit_zd">
+				<a class="add ss1" href="javascript:;">添加字段</a>
+				<a class="ss2" href="javascript:;">编辑字段</a>
+			</div>
+			<div class="ed_hk1">
+				<div class="edit_bq">
+					<span class="edit_com">通用字段<s></s></span>
+					<div class="clear6"></div>
+					<a href="javascript:;" class="ed_left k1"><i class="ico_1"></i>单行文字</a>
+					<a href="javascript:;" class="ed_right k2"><i class="ico_2"></i>多行文字</a>
+					<a href="javascript:;" class="ed_left k3"><i class="ico_3"></i>单项选择</a>
+					<a href="javascript:;" class="ed_right k4"><i class="ico_4"></i>多项选择</a>
+					<a href="javascript:;" class="ed_left k5"><i class="ico_5"></i>下拉框</a>
+					<a href="javascript:;" class="ed_right k6"><i class="ico_6"></i>日期</a>
+					<a href="javascript:;" class="ed_left k7"><i class="ico_7"></i>数字</a>
+					<a href="javascript:;" class="ed_right k8"><i class="ico_8"></i>上传</a>
+				</div>
+				<div class="edit_bq">
+					<span class="edit_com">联系信息字段<s></s></span>
+					<div class="clear6"></div>
+					<a href="javascript:;" class="ed_left k9"><i class="ico_9"></i>姓名</a>
+					<a href="javascript:;" class="ed_right k10"><i class="ico_10"></i>手机</a>
+					<a href="javascript:;" class="ed_left k11"><i class="ico_11"></i>邮箱</a>
+				</div>
+				<div class="ed_botton">
+					<a href="">保存表单</a>
+				</div>
+			</div>
+			<!---->
+			<div class="ed_hk2">
+				<div class="ed_wzi">单行文字<a href="" class="ed_b1"></a></div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>默认值</span>
+					<div class="clear6"></div>
+					<input type="text"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>不能和已有数据重复</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最少填</p><input type="text"/><p>个字符</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最多填</p><input type="text"/><p>个字符</p><i></i>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk3">
+				<div class="ed_wzi">单项选择<a href="" class="ed_b1"></a></div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2">选项</span>
+					<div class="clear6"></div>
+					<li class="ed_ty">
+						<input type="radio" class="ty_radio" name="ty_name1"/><input type="text" class="ty_xx" value="选项"/>
+						<p class="ty_add"></p>
+						<p class="ty_ajj"></p>
+						<p class="ty_bs"></p>
+					</li>
+					<li class="ed_ty">
+						<input type="radio" class="ty_radio" name="ty_name1"/><input type="text" class="ty_xx" value="选项"/>
+						<p class="ty_add"></p>
+						<p class="ty_ajj"></p>
+						<p class="ty_bs"></p>
+					</li>
+					<li class="ed_ty">
+						<input type="radio" class="ty_radio" name="ty_name1"/><input type="text" class="ty_xx" value="选项"/>
+						<p class="ty_add"></p>
+						<p class="ty_ajj"></p>
+						<p class="ty_bs"></p>
+					</li>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf1" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk4">
+				<div class="ed_wzi">多行文字<a href="" class="ed_b1"></a></div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>默认值</span>
+					<div class="clear6"></div>
+					<input type="text"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf2" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最少填</p><input type="text"/><p>个字符</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最多填</p><input type="text"/><p>个字符</p><i></i>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk5">
+				<div class="ed_wzi">多项选择<a href="" class="ed_b1"></a></div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1 ty_oo">
+					<span class="ed_mm2">选项</span>
+					<div class="clear6"></div>
+					<li class="ed_ty">
+						<input type="radio" class="ty_radio" name="ty_name1"/><input type="text" class="ty_xx" value="选项"/>
+						<p class="ty_add" onclick="m1(this)"></p>
+						<p class="ty_ajj" onclick="m2(this)"></p>
+						<p class="ty_bs"></p>
+					</li>
+					<li class="ed_ty">
+						<input type="radio" class="ty_radio" name="ty_name1"/><input type="text" class="ty_xx" value="选项"/>
+						<p class="ty_add"></p>
+						<p class="ty_ajj"></p>
+						<p class="ty_bs"></p>
+					</li>
+					<li class="ed_ty">
+						<input type="radio" class="ty_radio" name="ty_name1"/><input type="text" class="ty_xx" value="选项"/>
+						<p class="ty_add"></p>
+						<p class="ty_ajj"></p>
+						<p class="ty_bs"></p>
+					</li>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf3" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最少填</p><input type="text"/><p>个字符</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最多填</p><input type="text"/><p>个字符</p><i></i>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk6">
+				<div class="ed_wzi">日期</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>默认值</span>
+					<div class="clear6"></div>
+					<select class="ty_select"><option>特定日</option></select>
+					<div class="ty_seled"><p class="ed_y3 ty_dd"></p><input type="text" class="ed_d1 dt1 ty_tptp"></div>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf4" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>起始日期</p><i></i>
+						<div class="clear6"></div>
+						<select class="ty_select"><option>特定日</option></select>
+						<div class="ty_seled"><p class="ed_y3 ty_dd"></p><input type="text" class="ed_d1 dt1 ty_tptp"></div>
+					</li>
+					<li class="ed_li">
+						<span></span><p>结束日期</p><i></i>
+						<div class="clear6"></div>
+						<select class="ty_select"><option>特定日</option></select>
+						<div class="ty_seled"><p class="ed_y3 ty_dd"></p><input type="text" class="ed_d1 dt1 ty_tptp"></div>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk7">
+				<div class="ed_wzi">手机</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>默认值</span>
+					<div class="clear6"></div>
+					<input type="text"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf5" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>不能和已有数据重复</p><i></i>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk8">
+				<div class="ed_wzi">数字</div>
+				<div class="ty_shzi">最多支持15位数字,如需要用作”身份证号码”填写,请选用”单行文字”.</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>默认值</span>
+					<div class="clear6"></div>
+					<input type="text"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf6" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最少填</p><i></i><input type="text"/>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最多填</p><i></i><input type="text"/>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk9">
+				<div class="ed_wzi">下拉框<a href="" class="ed_b1"></a></div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2">选项</span>
+					<div class="clear6"></div>
+					<li class="ed_ty">
+						<input type="radio" class="ty_radio" name="ty_name1"/><input type="text" class="ty_xx" value="选项"/>
+						<p class="ty_add"></p>
+						<p class="ty_ajj"></p>
+						<p class="ty_bs"></p>
+					</li>
+					<li class="ed_ty">
+						<input type="radio" class="ty_radio" name="ty_name1"/><input type="text" class="ty_xx" value="选项"/>
+						<p class="ty_add"></p>
+						<p class="ty_ajj"></p>
+						<p class="ty_bs"></p>
+					</li>
+					<li class="ed_ty">
+						<input type="radio" class="ty_radio" name="ty_name1"/><input type="text" class="ty_xx" value="选项"/>
+						<p class="ty_add"></p>
+						<p class="ty_ajj"></p>
+						<p class="ty_bs"></p>
+					</li>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf7" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk10">
+				<div class="ed_wzi">姓名<a href="" class="ed_b1"></a></div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>默认值</span>
+					<div class="clear6"></div>
+					<input type="text"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf8" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>不能和已有数据重复</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最少填</p><input type="text"/><p>个字符</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>最多填</p><input type="text"/><p>个字符</p><i></i>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk11">
+				<div class="ed_wzi">邮箱<a href="" class="ed_b1"></a></div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="未命名"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>默认值</span>
+					<div class="clear6"></div>
+					<input type="text"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf9" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<li class="ed_li">
+						<span></span><p>不能和已有数据重复</p><i></i>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+			
+			<div class="ed_hk12">
+				<div class="ed_wzi">上传文件</div>
+				<div class="ty_shzi">上传文件的大小限制在20MB以内</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>标题</span>
+					<div class="clear6"></div>
+					<input type="text" value="附件"/>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>最大文件数量</span>
+					<div class="clear6"></div>
+					<select class="ty_hkk"><option>1</option></select>
+				</div>
+				<div class="ed_mm1">
+					<span class="ed_mm2"><i></i>提示</span>
+					<div class="clear6"></div>
+					<div>
+						<script id="edf10" type="text/plain" style="width:300;height:150px;"></script>
+					</div>
+				</div>
+				<div class="ed_wzi">校验<a href="" class="ed_b2"></a></div>
+				<div class="ed_mm1">
+					<li class="ed_li">
+						<span></span><p>必须填</p><i></i>
+					</li>
+					<div class="clear5"></div>
+				</div>
+				<div class="ed_dds">
+					<a href="" class="ed_adc">添加字段</a>
+					<a href="" class="ed_save">保存表单</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-----底部------->
+<div class="clear5"></div>
+<div class="con_bottom">
+	<div class="con_hed">
+		<img class="pub_img1" src="images/logo.png"/>
+		<div class="pub_left">
+			<a href="javascript:;" class="bum">首页</a>
+			<a href="javascript:;" class="bum">产品中心</a>
+			<a href="javascript:;" class="bum">发布需求</a>
+			<a href="javascript:;" class="bum">开发者入口</a>
+			<a href="javascript:;" class="bum">成功案例</a>
+			<a href="javascript:;" class="bum">关于我们</a>
+			<p class="con_bb">Copyright © 京ICP备14013455号-</p>
+		</div>
+	</div>
+</div>
+<!------end------>
+<script type="text/javascript">
+
+    //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+	var ue = UE.getEditor('edf');
+	var ue = UE.getEditor('edf1');
+    var ue = UE.getEditor('edf2');
+	var ue = UE.getEditor('edf3');
+	var ue = UE.getEditor('edf4');
+	var ue = UE.getEditor('edf5');
+	var ue = UE.getEditor('edf6');
+	var ue = UE.getEditor('edf7');
+	var ue = UE.getEditor('edf8');
+	var ue = UE.getEditor('edf9');
+	var ue = UE.getEditor('edf10');
+</script>
+	<script>
+		(function (){
+			var console = window.console;
+
+			if( !console.log ){
+				console.log = function (){
+					alert([].join.apply(arguments, ' '));
+				};
+			}
+
+
+			window.x = new Sortable(foo, {
+				group: "words",
+				store: {
+					get: function (sortable) {
+						var order = localStorage.getItem(sortable.options.group);
+						return order ? order.split('|') : [];
+					},
+					set: function (sortable) {
+						var order = sortable.toArray();
+						localStorage.setItem(sortable.options.group, order.join('|'));
+					}
+				},
+				onAdd: function (evt){ console.log('onAdd.foo:', evt.item); },
+				onUpdate: function (evt){ console.log('onUpdate.foo:', evt.item); },
+				onRemove: function (evt){ console.log('onRemove.foo:', evt.item); },
+				onStart:function(evt){ console.log('onStart.foo:',evt.item);},
+				onEnd: function(evt){ console.log('onEnd.foo:', evt.item);}
+			});
+
+
+			new Sortable(bar, {
+				group: "words",
+				onAdd: function (evt){ console.log('onAdd.bar:', evt.item); },
+				onUpdate: function (evt){ console.log('onUpdate.bar:', evt.item); },
+				onRemove: function (evt){ console.log('onRemove.bar:', evt.item); },
+				onStart:function(evt){ console.log('onStart.foo:', evt.item);},
+				onEnd: function(evt){ console.log('onEnd.foo:', evt.item);}
+			});
+
+
+			new Sortable(multi, {
+				draggable: '.tile',
+				handle: '.tile__name'
+			});
+
+
+			[].forEach.call(multi.getElementsByClassName('tile__list'), function (el){
+				new Sortable(el, { group: 'photo' });
+			});
+		})();
+
+
+
+		// Background
+		document.addEventListener( "DOMContentLoaded", function (){
+			function setNoiseBackground(el, width, height, opacity){
+				var canvas = document.createElement("canvas");
+				var context = canvas.getContext("2d");
+
+				canvas.width = width;
+				canvas.height = height;
+
+				for( var i = 0; i < width; i++ ){
+					for( var j = 0; j < height; j++ ){
+						var val = Math.floor(Math.random() * 255);
+						context.fillStyle = "rgba(" + val + "," + val + "," + val + "," + opacity + ")";
+						context.fillRect(i, j, 1, 1);
+					}
+				}
+
+				el.style.background = "url(" + canvas.toDataURL("image/png") + ")";
+			}
+
+			setNoiseBackground(document.getElementsByTagName('body')[0], 50, 50, 0.02);
+		}, false );
+	</script>
+</body>

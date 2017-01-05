@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/index.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<title>设置表单</title>
+</head>
+<body>
+<!---头部---->
+<div class="pub_head">
+	<div class="pub_top">
+		<img class="pub_img1" src="images/logo.png"/>
+		<div class="pub_left">
+			<span>猿码头</span>
+			<p>助力于中小企业的发展</p>
+		</div>
+		<div class="pub_right">
+			<a href="" class="pub_name">hi,猿码头<i></i></a>
+			<a href=""><img class="pub_img2" src="images/pho.png"/></a>
+		</div>
+	</div>
+</div>
+<!------end-------->
+<div class="pub_mid">
+	<div class="pub_md">
+		<a href="javascript:;" class="cur">编辑</a>
+		<a href="javascript:;">设置</a>
+		<a href="javascript:;">发布</a>
+		<a href="javascript:;">数据</a>
+	</div>
+</div>
+<div class="pub_bottom">
+	<div class="pub_bot">
+		<div class="pub_kk">
+			<div class="bot_top">猿码头问卷调查</div>
+			<div class="set_xx">
+				<span class="bot_name">表单分页设置</span>
+				<div class="clear1"></div>
+				<p class="bot_bm">可以通过设置分页来提高阅读效果。</p>
+				<div class="set_no"><span class="set_radio curr"></span>不分页</div>
+				<div class="set_no"><span class="set_radio"></span>5个选项一页</div>
+				<div class="set_no"><span class="set_radio"></span>10个选项一页</div>
+				<div class="set_no"><span class="set_radio"></span>15个选项一页</div>
+				<div class="set_no"><span class="set_radio"></span>20个选项一页</div>
+				<div class="set_no"><span class="set_radio"></span>设置自己的分页</div>
+				<div class="set_no"><input type="text"/></div>
+				<div class="set_nn"><a class="bot_dy" href="">保存设置</a></div>
+			</div>
+			<div class="set_xx">
+				<span class="bot_name">填写着权限与设置</span>
+				<div class="clear1"></div>
+				<p class="bot_bm">您可以通过设置来获取高质量的数据.</p>
+				<div class="set_no"><span class="set_radio curr"></span>不做限制</div>
+				<div class="set_no"><span class="set_radio"></span>每台电脑/手机限填一次</div>
+				<div class="set_no"><span class="set_radio"></span>每个IP地址限填一次 (公司、学校等机构内网所有电脑的对外IP是相同，请谨慎选择此限制)</div>
+				<div class="set_nn"><a class="bot_dy" href="">保存设置</a></div>
+			</div>
+			<div class="set_xx">
+				<span class="bot_name">表单开始/停止</span>
+				<div class="clear1"></div>
+				<div class="set_no">
+					<div id="div1" class="open1">
+						<div id="div2" class="open2"></div>
+					</div>
+					<span class="set_open">已开启</span>
+				</div>
+				<div class="set_no"><span class="set_ing">已开启,正在收集...</div>
+				<div class="set_no">
+				   <span class="set_in"></span><span class="set_time">设定开启/停止时间</span><i class="set_i"></i>
+				</div>
+				<div class="set_no">
+				  <div class="set_left">
+					<span class="set_start">开始时间</span>
+					<input type="text" class="set_kl"/>
+					<select><option>00:00</option></select>
+					<select><option>00:00</option></select>
+				  </div>
+				  <div class="set_left">
+					<span class="set_start">停止时间</span>
+					<input type="text" class="set_kl"/>
+					<select><option>00:00</option></select>
+					<select><option>00:00</option></select>
+				  </div>  
+				</div>
+				<div class="set_no">
+				   <span class="set_in"></span><span class="set_time">设定数据量上限</span><i class="set_i"></i>
+				</div>
+				<div class="set_no">
+					<div class="set_vv">最多接受<input type="text"/>&nbsp;条数据</div>
+				</div>
+				<div class="set_no">
+				   <span class="set_in"></span><span class="set_time">设定每日开启时段</span><i class="set_i"></i>
+				</div>
+				<div class="set_sg">
+					<div class="set_no">
+					  <div class="set_left">
+						<select><option>00:00</option></select><i>:</i>
+						<select><option>00:00</option></select>
+					  </div>
+					  <span class="set_att">至</span>
+					  <div class="set_left">
+						<select><option>00:00</option></select><i>:</i>
+						<select><option>00:00</option></select>
+					  </div>  
+					  <span class="set_add"></span>
+					</div>
+				</div>
+				<div class="set_nn"><a class="bot_dy" href="">保存设置</a></div>
+			</div>
+			<div class="set_xx">
+				<span class="bot_name">填写者填完表单后</span>
+				<div class="clear1"></div>
+				<p class="bot_bm">展示提示文字</p>	
+				<textarea  id="content" name="content"></textarea>
+				<span class="set_shuru" id="contentwordage"></span>
+				<div class="set_nn"><a class="bot_dy" href="">保存设置</a></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-----底部------->
+<div class="clear5"></div>
+<div class="con_bottom">
+	<div class="con_hed">
+		<img class="pub_img1" src="images/logo.png"/>
+		<div class="pub_left">
+			<a href="javascript:;" class="bum">首页</a>
+			<a href="javascript:;" class="bum">产品中心</a>
+			<a href="javascript:;" class="bum">发布需求</a>
+			<a href="javascript:;" class="bum">开发者入口</a>
+			<a href="javascript:;" class="bum">成功案例</a>
+			<a href="javascript:;" class="bum">关于我们</a>
+			<p class="con_bb">Copyright © 京ICP备14013455号-</p>
+		</div>
+	</div>
+</div>
+<!------end------>
+<script>
+	$(".pub_md a").click(function(){
+		$(".pub_md a").removeClass("cur");
+		$(this).addClass("cur");
+	})
+	
+	$(".set_radio").click(function(){
+		$(".set_radio").removeClass("curr");
+		$(this).addClass("curr");
+	})
+	
+	//按钮
+	window.onload=function(){
+        var div2=document.getElementById("div2");
+        var div1=document.getElementById("div1");
+        div2.onclick=function(){
+          div1.className=(div1.className=="close1")?"open1":"close1";
+          div2.className=(div2.className=="close2")?"open2":"close2";
+        }
+    }
+	
+	//字数统计
+    var limitNum = 500;
+    var pattern = '还可以输入' + limitNum + '字符';
+    $('#contentwordage').html(pattern);
+    $('#content').keyup(
+    function(){
+        var remain = $(this).val().length;
+        if(remain > 500){
+                pattern = "字数超过限制！";
+            }else{
+                var result = limitNum - remain;
+                pattern = '还可以输入' + result + '字符';
+            }
+            $('#contentwordage').html(pattern);
+        }
+    )
+	
+	//添加日期
+	$(".set_add").click(function(){
+		$(".set_sg").append('<div class="set_no"><div class="set_left"><select><option>00:00</option></select><i>:</i><select><option>00:00</option></select>\
+					       </div><span class="set_att">至</span><div class="set_left"><select><option>00:00</option></select><i>:</i><select><option>00:00</option></select></div></div>')
+	})
+	
+</script>
+</body>

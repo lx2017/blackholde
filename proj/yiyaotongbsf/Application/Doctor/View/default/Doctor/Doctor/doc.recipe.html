@@ -1,0 +1,44 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con mfyf">
+        <div class="P_main">
+            <div class="searchBox">
+                <span class="zoom left mysearch"><i>&#xe605;</i></span>
+                <input type="text" class="left" value="{$name}" placeholder="输入病名"/>
+                <span class="cancel left mycancel"><i>&#xe61f;</i></span>
+            </div>
+        </div>
+        <notempty name="list">
+        <div class="P_main bg_f">
+            <ul id="mycontain">
+                <volist name="list" id="vo">
+                    <li><a href="{:U('recipedetail',array('id'=>$vo['id']))}">{$vo.prescription_name}：<span>{:mbSub($vo['prescription_desc'],0,16)}</span></a></li>
+                </volist>
+            </ul>
+        </div>
+        </notempty>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //设置分页信息
+            myobj = {
+                total:'{$count}',
+                step:'{$size}',
+                url:"{:U('recipe_more',array('name',$name))}",
+                obj:'mycontain'
+            };
+            //搜索名方
+            $('.mysearch').click(function () {
+                var name = $(this).siblings('input').val();
+                location.href = ('{:U("recipe")}'+'?name='+name);
+            });
+            $('.mycancel').click(function () {
+                $(this).siblings('input').val('');
+            });
+        });
+    </script>
+</block>

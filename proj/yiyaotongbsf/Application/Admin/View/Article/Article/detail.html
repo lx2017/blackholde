@@ -1,0 +1,72 @@
+<include file="Public/base"/>
+
+
+	
+<!-- 文章新增和编辑页面 -->
+
+<div class="pd-20">
+    <form action="" method="POST"   class="form form-horizontal"
+          id="editGroupForm">
+        <div class="row cl">
+            <label for="auth-title" class="form-label col-3">文章所属栏目：</label>
+							
+            
+            <div class="col-4">{$dataOne['column_title']}</div>
+        </div>
+        <div class="row cl">
+            <label for="auth-title" class="form-label col-3">文章标题：</label>
+
+            <div class="formControls col-5">{$dataOne['title']}
+                
+            </div>
+            <div class="col-4"></div>
+        </div>
+         <div class="row cl">
+            <label for="auth-title" class="form-label col-3">作者：</label>
+
+            <div class="formControls col-5">{$dataOne['author']}
+                
+            </div>
+            <div class="col-4"></div>
+        </div>
+        
+        <div class="row cl">
+            <label class="form-label col-3">文章摘要：</label>
+            <div class="formControls col-5">{$dataOne['summary']}
+               </div>
+            <div class="col-4"></div>
+        </div>
+        
+        <div class="row cl">
+            <label class="form-label col-3">缩略图：</label>
+            <div class="formControls col-5">
+                <img src="{$dataOne['picture']}" alt="" />   
+	        </div>
+        
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">文章内容：</label>
+
+            <div class="formControls col-5">
+            	{$dataOne['content']}
+                
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <input type="hidden" name='id' value="{$dataOne['id']}" />
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+               <!-- <input class="btn btn-primary radius" type="submit" value="确定">-->
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+
+            </div>
+        </div>
+    </form>
+</div>
+<script type="application/javascript" src="__JS__/Employee/auth.js"></script>
+<!--<script>
+	$(".btn-primary").click(function(){
+		alert( $("#editGroupForm").serialize());
+	})
+</script>-->

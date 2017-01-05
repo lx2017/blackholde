@@ -1,0 +1,199 @@
+
+<include file="Public/base"/>
+<div class="pd-20">
+    <form action="{$url}" method="post" class="form form-horizontal" id="addGoodForm">
+        <div class="row cl">
+            <label class="form-label col-3">一级分类</label>
+            <div class="formControls col-5">
+            	<span class="select-box ">
+					<select name="yiid" size="1" class="select">
+						<option selected="" value=0>请选择</option>
+						<volist name='top' id='vo'>
+							<option value="{$vo.id}">{$vo.classify}</option>
+						</volist>
+						
+						
+						
+					</select>
+					<script>	
+							$(function(){
+								//控制顶级及其下面的子集显示
+								$("select[name=yiid] ").change(function(){
+									//$("select[name=yiid] ").val(0);
+									$("select[name=miid] ").val(0);
+									$("select[name=boid] ").val(0);
+									
+									//alert($(this).val());
+									if($(this).val()!=0){
+										$("div#select2").css("display","none");
+										$("div#select3").css("display","none");
+										$.ajax({
+											type:"post",
+											url:"<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYADDBOTTOMAJAX']['url'];echo U($str,array('key'=>$actions['CLASSIFYADDBOTTOMAJAX']['key']))?>",//"{:U('/Admin/Classify/gotBottom',array('key'=>$actions['CLASSIFYADDBOTTOMAJAX']['key']))}",
+											data:{id:$(this).val()},
+											success:function(data){
+												// data=$.parseJSON(data);
+												//alert(data);
+												if(data){
+													$("div#select2").css("display","block");
+													var html='';
+													//html+='<select name="miid" size="1" class="select">';
+													$.each(data,function(k,v){
+														html+='<option value="'+v.id+'">'+v.classify+'</option>'
+													})
+													$("select[name=miid]").html('');
+													$("select[name=miid]").append(html);
+													//alert($("select[name=miid]").val());
+													if($("select[name=miid]").val()){
+														$.ajax({
+															type:"post",
+															url:"<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYADDBOTTOMAJAX']['url'];echo U($str,array('key'=>$actions['CLASSIFYADDBOTTOMAJAX']['key']))?>",//"{:U('/Admin/Classify/gotBottom',array('key'=>$actions['CLASSIFYADDBOTTOMAJAX']['key']))}",
+															data:{id:$("select[name=miid]").val()},
+															success:function(data2){
+																	// data=$.parseJSON(data);
+																if(data2){
+																	$("div#select3").css("display","block");
+																	var html2='';
+																		//html+='<select name="miid" size="1" class="select">';
+																	$.each(data2,function(k,v){
+																		html2+='<option value="'+v.id+'">'+v.classify+'</option>'
+																	})
+																	$("select[name=boid]").html('');
+																	$("select[name=boid]").append(html2);
+																	//alert($("select[name=miid]").val());
+																}
+															}
+															
+														});
+													}
+													
+													
+												}
+												
+												
+												
+												
+											}
+											
+										});
+										
+									}else{
+										$("div#select2").css("display","none");
+										$("div#select3").css("display","none");
+									}
+								})
+								
+								//控制二级及其下面的子集显示
+								$("select[name=miid] ").change(function(){
+									$("select[name=boid] ").val(0);
+									
+									//alert($(this).val());
+									$("div#select3").css("display","none");
+									$.ajax({
+										type:"post",
+										url:"<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYADDBOTTOMAJAX']['url'];echo U($str,array('key'=>$actions['CLASSIFYADDBOTTOMAJAX']['key']))?>",//"{:U('/Admin/Classify/gotBottom',array('key'=>$actions['CLASSIFYADDBOTTOMAJAX']['key']))}",
+										data:{id:$(this).val()},
+										success:function(data3){
+																	
+											if(data3){
+												$("div#select3").css("display","block");
+												var html3='';
+																			//html+='<select name="miid" size="1" class="select">';
+												$.each(data3,function(k,v){
+													html3+='<option value="'+v.id+'">'+v.classify+'</option>'
+												})
+												$("select[name=boid]").html('');
+												$("select[name=boid]").append(html3);
+											}
+										}
+															
+									});
+								})
+								
+								
+							})
+						</script>
+				</span>
+            </div>
+        </div>
+        <div class="row cl" id="select2" style="display:none;">
+            <label class="form-label col-3">二级分类</label>
+            <div class="formControls col-5">
+            	<span class="select-box ">
+					<select name="miid" size="1" class="select">
+						<!--<option selected="" value="">圆角select效果</option>
+						<option value="1">菜单一</option>
+						<option value="2">菜单二</option>
+						<option value="3">菜单三</option>-->
+					</select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl" id="select3" style="display:none;">
+            <label class="form-label col-3">三级分类</label>
+            <div class="formControls col-5">
+            	<span class="select-box ">
+					<select name="boid" size="1" class="select">
+						<!--<option selected="" value="">圆角select效果</option>
+						<option value="1">菜单一</option>
+						<option value="2">菜单二</option>
+						<option value="3">菜单三</option>-->
+					</select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">请输入分类名称</label>
+            <div class="formControls col-5">
+            	
+					<input type="text" name="classify" value="" />
+				
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <span class="btn btn-primary radius" id="submit2" >确 定
+                </span>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+	$(function(){
+		$("#submit2").click(function(){
+			$("#addGoodForm").submit(function(){
+				return false;
+			})
+			var pid=0;
+			//alert($("select[name=yiid]").val());
+			//alert($("select[name=miid]").val());
+			//alert($("select[name=boid]").val());
+			/*if($("select[name=boid]").val()){
+				pid=$("select[name=boid]").val();
+			}*/
+			if( $("select[name=miid]").val()){
+				pid=$("select[name=miid]").val();
+			}
+			if(!($("select[name=boid]").val())  && !($("select[name=miid]").val()) && $("select[name=yiid]").val()){
+				pid=$("select[name=yiid]").val();
+			}
+			if(!($("select[name=boid]").val())  && !($("select[name=miid]").val()) && !($("select[name=yiid]").val())){
+				pid=0;
+			}
+			//alert(pid);
+			$.ajax({
+				type:"post",
+				url:"<?php $str = $Think.ADMIN_PATH_NAME.$actions['CLASSIFYADDAJAX']['url'];echo U($str,array('key'=>$actions['CLASSIFYADDAJAX']['key']))?>",
+				data:{id:pid,classify:$("input[name=classify]").val()},
+				success:function(data){
+					alert(data);
+					window.location.reload();
+				}
+				
+			});
+		})
+	})
+</script>
+
+

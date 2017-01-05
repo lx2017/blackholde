@@ -1,0 +1,50 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+		<div class="feedback-content">
+    		  <div class="index-absolute-relative"><img src="__IMG__/green.png" class="index-absolute-img"><span>问题与意见</span></div>
+		<div>
+     		<textarea rows="4" cols="50"  placeholder="请简要描述您的意见和建议" id="content"></textarea>
+		</div>
+		</div>
+		<!--<div class="feedback-content index-search-top">-->
+    		  <!--<div class="index-absolute-relative"><img src="../img/green.png" class="index-absolute-img"><span>联系方式</span></div>-->
+		<!--<div>-->
+     		<!--<textarea rows="4" cols="50" placeholder="请留下您的联系方式以方便我们联系您"></textarea>-->
+		<!--</div>-->
+		<!--</div>-->
+	</div>
+		<div class="feedback-btn">
+        <button class="aui-btn aui-btn-primary" id="sub">提交</button>
+    </div>
+
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            var issend = false;
+            $('#sub').click(function(){
+                if(issend) return false;
+                issend = true;
+                var content = $('#content').val();
+                if(content){
+                    $.post(location.href,{content:content},function (data){
+                        issend = false;
+                        if(data.code==0){
+                            layer.open({
+                                content: '我们已经收到您的反馈'
+                                ,skin: 'msg'
+                                ,time: 2
+                                ,end: function () {
+                                    location.href='{:U("mine")}';
+                                }
+                            });
+                        }
+                    },'json');
+                }else{
+                    issend = false;
+                }
+            });
+        });
+    </script>
+</block>

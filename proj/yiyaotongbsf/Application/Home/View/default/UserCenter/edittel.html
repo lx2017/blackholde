@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>我的个人中心修改绑定手机</title>
+    <link rel="stylesheet" href="__CSS__/UserCenter/mydate.css">
+    <script src="__JS__/jquery-2.0.0/jquery.min.js"></script>
+    <script src="__JS__/UserCenter/mydata.js" type="text/javascript"></script>
+</head>
+<body class="tel-body-edit">
+<!-- 个人中心详情页 -->
+<main class="mydata-wrap">
+    <!-- top -->
+    <header class="g-header">
+        <a class="Header-back" href="javascript:history.go(-1)"><i class="ico-back"></i></a><h1>修改绑定手机</h1>
+
+    </header>
+    <!-- top -->
+    <form class="m-user-edit" action="{:U('/Home/UserCenter/UserCenter/UpnewMobile',array('x'=>'secrect','f'=>'json','t'=>'wap'))}" method="post" id="form_tel" novalidate="novalidate">
+        <div class="m-user-inputBar">
+            <div class="m-bar">
+                <div class="w-inputBar">
+                    <div class="w-bar-control">
+                        <input minlength="2" maxlength="11" class="w-bar-input" name="mobile" type="text" placeholder="输入手机号码" id="i_mobile" _href="{:U('/Home/UserCenter/UserCenter/CheckisMobile',array('x'=>'nosecrect','f'=>'json','id'=>$userid))}">
+                    </div>
+                    <div class="w-bar-control clearborder">
+                        <div class="left-input">
+                            <input class="w-bar-input no-spin" name="smsCode" type="text" placeholder="输入验证码" id="i_smsCode" minlength="2" maxlength="6">
+                        </div>
+                        <div class="w-bar-mobile-btn">
+                            <input name="userid" value="{$userid}" type="hidden">
+                            <input type="hidden" id="sendyzm" _href="{:U('/Home/LoginAndRegister/Register/SendYzm',array('x'=>'nosecret','f'=>'json','t'=>'wap'))}" name ="oldmobile" value="{$mobile}">
+                            <button type="button" class="ui-btn" id="btn_get_sms" _href ="{:U('/Home/LoginAndRegister/Register/CheckYzm',array('x'=>'nosecret','f'=>'json','t'=>'wap'))}">获取验证码<!-- 59秒后重发 --></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="show-warning"  id="dom_error_wrap"></div>
+            </div>
+        </div>
+        <div class="m-pay-order-submit">
+            <button class="w-button" type="button" id="btn_modify_mobile" data-enabled="1">保存</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

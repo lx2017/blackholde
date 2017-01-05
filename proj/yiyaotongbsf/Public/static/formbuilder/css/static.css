@@ -1,0 +1,35 @@
+body{}
+
+
+
+.ali-container{
+    overflow:hidden;
+	padding:5px;
+}
+
+.ali-container ul{
+	width:60%;
+	border-color:rgba(255, 210, 239, 0.1);
+    margin:auto auto;
+	overflow:hidden;
+	padding:10px;
+	padding-top:5px;
+	box-shadow:1px 1px 5px #e5e5e5;
+}
+
+.ali-container ul p{
+	margin-top:3px;
+}
+
+.ali-container ul h3{
+	border-bottom: 1px dashed lightgray;
+	margin-bottom:10px;
+}
+
+.ali-container ul .right{
+	float:right;
+}
+
+.ali-container ul p:hover{
+	border-bottom:1px solid #DDD;
+}

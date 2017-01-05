@@ -1,0 +1,106 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <!--头部按钮-->
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+            <!--批量删除-->
+            <if condition="isset($actions['APPOINTDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" id="delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['APPOINTDELETE']['url'];echo U($str,array('key'=>$actions['APPOINTDELETE']['key']))?>">删除</a>
+                 </span>
+            </if>
+            <!--新增-->
+            <if condition="isset($actions['APPOINTADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['APPOINTADD']['url'];echo U($str,array('key'=>$actions['APPOINTADD']['key']))?>">新增</a>
+                 </span>
+            </if>
+            <!--excel导入-->
+            <if condition="!isset($actions['APPOINTADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="/Uploads/Excel/doctor.xlsx">excel模板下载</a>
+                 </span>
+                <span class="l mr-10">
+                    <input type='file' id="excel_uploader" class="uploader"/>
+                 </span>
+            </if>
+        </notempty>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf" style="margin-left: 600px">
+            <div class="sleft">
+                <!--<input type="text" name="name" id="name" value="{:I('name')}" class="search-input" placeholder="请输入医生名">&nbsp;-->
+                <!--<a class="sch-btn" href="javascript:;" id="search"><i class="Hui-iconfont btn-search">&#xe665;</i></a>-->
+            </div>
+        </div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="mt-20">
+        <div class="data-table table-striped">
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                    <tr class="text-c">
+                        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                        <th class="">id</th>
+                        <th class="">医生</th>
+                        <th class="">患者</th>
+                        <th class="">预约看病时间</th>
+                        <th class="">预约状态</th>
+                        <th class="">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <notempty name="list">
+                    <volist name="list" id="vo">
+                        <tr class="text-c">
+                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id}" data-other="{$vo.user_id}"/></td>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.doctor}</td>
+                            <td>{$vo.patient}</td>
+                            <td>{$vo.time}</td>
+                            <td>{$vo['status']==1?'未回复':'已回复'}</td>
+                            <td>
+                                <if condition="isset($actions['APPOINTEDIT'])">
+                                    <a class="btn btn-link" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['APPOINTEDIT']['url'];echo U($str,array('key'=>$actions['APPOINTEDIT']['key'],'id'=>$vo['id']))?>">编辑</a>
+                                </if>
+                                <if condition="isset($actions['APPOINTDELETE'])">
+                                    <a class="btn btn-link delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['APPOINTDELETE']['url'];echo U($str,array('key'=>$actions['APPOINTDELETE']['key'],'id'=>$vo['id']))?>">删除</a>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                <else/>
+                    <td colspan="14" class="text-center"> Oh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$page}
+    </div>
+</div>
+<!--引入js,css-->
+<link type="text/css" href="__STATIC__/uploadify/uploadify.css" rel="stylesheet"/>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/index.js"></script>
+<script type="text/javascript">
+    var search_obj = {name:'name'};
+    var search_url = "{:U('',array('key'=>'APPOINTLIST'))}";
+    $(function () {
+        //上传excel
+        var config = {
+            text:'excel导入',
+            multi:false,
+            size:'{$upload_conf.maxSize}B',
+            ext:'{$upload_conf.u_exts}',
+            handle:"{:U('/Admin/Common/Upload/excel')}",
+            formData:{handle1:'Doctor',handle2:'DoctorAppoint',method:'excel'}
+        };
+//        handleUpload('excel_uploader',config,success_func);
+    });
+    //上传成功处理函数
+    function success_func() {
+        layer_success('添加成功',1500,location.reload());
+    }
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <title>订单列表</title>
+    <script src="__PUBLIC__/Home/SaleManager/js/zepto.min.js"></script>
+    <link href="__PUBLIC__/Home/SaleManager/css/stylesheets/weui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/Home/SaleManager/css/stylesheets/index.css">
+</head>
+<body>
+<div class="order_listo_w">
+    <header class = "all_header">
+        <a class = "h_back" href="javascript:history.back();"><img src="__PUBLIC__/Home/SaleManager/images/back_icon.png" alt=""></a>
+        <span class = "h_title">订单列表</span>
+        <a class = "h_add" href="javascript:void(0)"></a>
+    </header>
+    <volist name="orders" id="order">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd">
+            <div class="order_num_c">
+                <span>订单号</span>
+                <span>{$order.id}</span>
+            </div>
+            <div class="order_status">
+                {$order.status}
+            </div>
+        </div>
+        <div class="weui-panel__bd">
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd" style = "width:120px;height: 80px;">
+                    <img class="weui-media-box__thumb" src="__PUBLIC__/Home/SaleManager/images/demo.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title order_name"><span>{$order.saleman_name}</span></h4>
+                    <div class="weui-media-box__desc" style = "margin:5px 0 10px 0;">
+                        <div class = "order_date">{$order.add_date}</div>
+                    </div>
+                    <div class = "order_price_c">
+                        <span class = "order_p_n">总价：</span>
+                        <span class = "order_price">{$order.total_price}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    </volist>
+</div>
+<script src = "__PUBLIC__/Home/SaleManager/js/index.js"></script>
+</body>
+</html>

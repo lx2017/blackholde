@@ -1,0 +1,41 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con Mypatient patientMag no_pad divRBox myListshow">
+        <p>共<span>{$count}</span>位患者</p>
+        <ul id="mycontain">
+            <volist name="list" id="vo">
+            <li>
+                <div class="person">
+                    <span class="c_icon span1 headSpan"><img src="{$vo.p_image}"  onerror="this.src='__IMG__/head1.png'"></span>
+                    <span class="c_333 span2">{$vo.name}</span>
+                </div>
+                <div class="time">
+                    <span class="c_icon span1"><i class="c_orange">&#xe661;</i></span>
+                    <span class="span2">{$vo.treat_time}</span>
+                </div>
+                <div class="divR">
+                    <a href="{:U('patient',array('id'=>$vo['patient_id']))}">患者详情</a>
+                    <a href="{:U('patient_treatmentlist',array('id'=>$vo['patient_id']))}" class="a2">诊疗记录</a>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+</block>
+<block name="css">
+    <style type="text/css">
+        .patientMag ul > li{ padding-bottom:2.2rem;}
+    </style>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('patients_more')}",
+            obj:'mycontain'
+        };
+    </script>
+</block>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <title>工作汇总</title>
+    <script src="__PUBLIC__/Home/SaleManager/js/zepto.min.js"></script>
+    <link href="__PUBLIC__/Home/SaleManager/css/stylesheets/weui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/Home/SaleManager/css/stylesheets/index.css">
+</head>
+<body>
+<div class="workSummary">
+    <header class = "all_header">
+        <a class = "h_back" href="javascript:history.back();"><img src="__PUBLIC__/Home/SaleManager/images/back_icon.png" alt=""></a>
+        <span class = "h_title">工作汇总</span>
+        <a class = "h_add" href="javascript:void(0)">
+            <form id="form">
+            <select class="weui-select" name="year" onchange="getLists(this)">
+            
+            <volist name='year_data' id="data">
+
+                <option value="<?php echo $data;?>" <if condition="$year == $data">selected</if>>{$data}</option>
+            </volist>
+            </select>
+            </form>
+        </a>
+    </header>
+    <div class="weui-cells">
+        <if condition="$role === 4">
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/salelist',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>业务员数量</p>
+            </div>
+            <div class="">
+                <span class = "work_num">{$salemanNum}</span>
+                <span>个</span>
+            </div>
+        </a>
+        </if>
+        <if condition="$role === 3">
+            <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/countrylist',array('sale_id'=>$sale_id,'year'=>$year))}">
+                <div class="weui-cell__bd">
+                    <p>县总数量</p>
+                </div>
+                <div class="">
+                    <span class = "work_num">{$countryCount}</span>
+                    <span>个</span>
+                </div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/salelist',array('sale_id'=>$sale_id,'year'=>$year))}">
+                <div class="weui-cell__bd">
+                    <p>业务员数量</p>
+                </div>
+                <div class="">
+                    <span class = "work_num">{$salemanNum}</span>
+                    <span>个</span>
+                </div>
+            </a>
+        </if>
+        <if condition="$role === 2">
+            <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/arealist',array('sale_id'=>$sale_id,'year'=>$year))}">
+                <div class="weui-cell__bd">
+                    <p>地总数量</p>
+                </div>
+                <div class="">
+                    <span class = "work_num">{$areaCount}</span>
+                    <span>个</span>
+                </div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/countrylist',array('sale_id'=>$sale_id,'year'=>$year))}">
+                <div class="weui-cell__bd">
+                    <p>县总数量</p>
+                </div>
+                <div class="">
+                    <span class = "work_num">{$countryCount}</span>
+                    <span>个</span>
+                </div>
+            </a>
+        </if>
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/clinicsum',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>目标诊所数量统计</p>
+            </div>
+            <div class="">
+                <span class = "work_num">{$clinicSumNum}</span>
+                <span>个</span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/allclinic',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>诊所数量</p>
+            </div>
+            <div class="">
+                <span class = "work_num">{$clinicNum}</span>
+                <span>个</span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/alldoctor',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>医生数量</p>
+            </div>
+            <div class="">
+                <span class = "work_num">{$doctorNum}</span>
+                <span>个</span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/visitalltimes',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>拜访次数</p>
+            </div>
+            <div class="">
+                <span class = "work_num">{$salmanVisitNum}</span>
+                <span>次</span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/applicatemeet',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>申请统计</p>
+            </div>
+            <div class="">
+                <span class = "work_num">{$salemanApplyNum}</span>
+                <span>次</span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/salesumary',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>销售统计</p>
+            </div>
+            <div class="">
+                <span class = "work_num">{$salemanOrderNum}</span>
+                <span>元</span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/orderlist',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>订货统计</p>
+            </div>
+            <div class="">
+                <span class = "work_num">{$salemanPrice}</span>
+                <span>元</span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/quitsale',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>退货统计</p>
+            </div>
+            <div class="">
+                <span class = "work_num">{$quitePrice}</span>
+                <span>元</span>
+            </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="{:U('/Home/WorkSummary/SaleSummary/salemap',array('sale_id'=>$sale_id,'year'=>$year))}">
+            <div class="weui-cell__bd">
+                <p>区域诊所分布地图</p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+        </a>
+    </div>
+</div>
+<script>
+    function getLists(obj)
+    {
+        var val = $(obj).val();
+        $("#form").submit();
+    }
+</script>
+</body>
+</html>

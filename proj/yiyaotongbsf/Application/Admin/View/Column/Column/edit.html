@@ -1,0 +1,52 @@
+<include file="Public/base"/>
+<!-- 栏目新增和编辑页面 -->
+<div class="pd-20">
+    <form action="" method="POST" class="form form-horizontal"
+          id="editGroupForm">
+        <div class="row cl">
+            <label for="auth-title" class="form-label col-3">栏目所属分类</label>
+							
+            <div class="formControls col-5">
+				<select id="auth-title" type="text" name="column_pid" class="input-text" value="" 
+										required
+					                   minlength="0"
+				                       maxlength="20">
+				    <option value="{$vo.column_id}" <if condition="$fatherData">selected </if>  >
+					    	{$fatherData.column_title}
+					</option>    
+					<option value="0" <if condition="!$fatherData">selected </if>  >
+					    	<?php echo "这是顶级栏目"; ?>
+					</option>
+				    <volist name="data" id="vo"  >
+				    	
+					   <option value="{$vo.column_id}"  >
+					    <?php echo str_pad("",$vo['deep']*3, "-",STR_PAD_RIGHT); ?>
+					    		{$vo.column_title}
+					   </option>
+					</volist>
+				    
+				
+				</select>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">栏目名称</label>
+
+            <div class="formControls col-5">
+                <textarea class="textarea" name="column_title" maxlength="200">{$dataOne.column_title}</textarea>
+            	<input type="hidden" name="column_id" value="{$dataOne.column_id}" />
+					
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="确定">
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+
+            </div>
+        </div>
+    </form>
+</div>
+<script type="application/javascript" src="__JS__/Employee/auth.js"></script>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>审批意见</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+	<div class="approveOpion">
+    <header class = "all_header">
+      <a class = "h_back" href="javascript:void(0)"><img src="__SaleManager__/images/back_icon.png" alt=""></a>
+      <span class = "h_title">审批意见</span>
+      <a class = "h_add" href="javascript:void(0)"></a>
+    </header>
+		<div class="weui-panel__bd">
+      <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+        <div class="weui-media-box__hd">
+          <img class="weui-media-box__thumb" src="__SaleManager__/images/people.png" alt="">
+        </div>
+        <div class="weui-media-box__bd">
+          <h4 class="weui-media-box__title">{$appinfo.apply_name}</h4>
+          <p class="weui-media-box__desc">{$appinfo.reply_time|date='Y-m-d H:i:s',###}</p>
+        </div>
+        <div class="next_approval"><span>{$appinfo.apply_cstatus}</span></div>
+      </a>
+    </div>
+    <div class="approve_opion_w">
+    	<div class="weui-panel__hd">{$appinfo.ctype}</div>
+    	<div class = "approval_cont">{$appinfo.apply_content}</div>	
+    	<div class="weui-panel__hd">选择交接人</div>
+    	<div class="weui-cell weui-cell_select" style = "padding: 0 15px;border:1px solid #d9d9d9;">
+        <div class="weui-cell__bd">
+          <select class="weui-select" name="select1" id='change_user'>
+          <volist name='lists' id='v'>
+            <option value="{$v.id}">{$v.real_name}</option>
+            </volist>
+          </select>
+        </div>
+      </div>
+    </div>
+    <include file="./Application/Home/View/default/SaleManager/layer/popup.html"/>
+    <if condition="($appinfo.saleman_ids neq $myself.id) AND $appinfo.apply_cstatus neq '已通过'">
+	    <div class="approval_btn_w">
+	    	<a href="javascript:;" class="weui-btn weui-btn_primary changesaleman" data-apply-userid='{$appinfo.saleman_ids}' data-apply-id='{$appinfo.ids}' data-status='1'>同意</a>
+	    	<a href="javascript:;" class="weui-btn weui-btn_warn changesaleman" data-apply-userid='{$appinfo.saleman_ids}' data-apply-id='{$appinfo.ids}' data-status='2'>不同意</a>
+	    </div>
+     </if>
+	</div>
+</body>
+<script type="text/javascript">
+var sessioncode;
+var nosesstion_url;
+$(document).on("click",".changesaleman",function(){
+	
+	$.ajax({
+        url: "/Home/SaleManager/County/approveOpinion",
+        type: 'POST',
+        data: {'reply_status':$(this).attr('data-status'),'applyId':$(this).attr('data-apply-id'),'origin_user':$(this).attr('data-apply-userid'),'change_apply':$('#change_user').val()},
+        async: false,
+        cache: false,
+       	dataType:"json",
+        success: function (returndata) {
+       	 	//session失效
+       	 	if(returndata.code==2028){
+       	 		sessioncode=2028;
+       	 		nosesstion_url=returndata.data;
+	       	 	$('.weui-dialog__bd').html(returndata.msg);
+	     		$('#confirm_dialog').css('display','block');
+       	 	}else{
+	       	 	$('.weui-dialog__bd').html(returndata.msg);
+	     		$('#confirm_dialog').css('display','block');
+       	 	}
+        		
+        },
+        error: function (returndata) {
+        		$('.weui-dialog__bd').html(returndata.msg);
+     		$('#confirm_dialog').css('display','block');
+        }
+    });
+})
+
+$(document).on('click','.weui-dialog__btn_primary',function(){
+	if(sessioncode==2028){
+		window.location.href=nosesstion_url;
+	}else{
+		window.location.href='../../approvalRecord.html';
+	}
+	
+})
+
+$(document).on('click','.h_back',function(){
+	location.href=document.referrer;
+})
+</script>
+</html>

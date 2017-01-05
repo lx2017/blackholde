@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>申请支持</title>
+	<script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="__SaleManager__/stylesheets/index.css">
+</head>
+<body>
+	<div class="appliceSupport">
+    <header class = "all_header">
+      <a class = "h_back_1 applicesupport" style='flex: 1;' data-role-id='{$myself.role_id}' href="javascript:void(0);"><img src="__SaleManager__/images/back_icon.png" alt="" style="width:30px;vertical-align: middle;"></a>
+      <span class = "h_title">申请支持</span>
+      <a class = "h_add" href="javascript:void(0)"></a>
+    </header>
+    <form action='' id='apply_form' name="apply_form" method='post'></form>
+		<div class="weui-cells__title">选择申请的类别</div>
+		<div class="weui-cell weui-cell_select" style = "padding: 0 15px">
+      <div class="weui-cell__bd">
+        <select class="weui-select" name="type" id='type'>
+        <volist name='app_type' id='v'  key="k">
+        		<option  value="{$k}">{$v}</option>
+        </volist>
+        </select>
+      </div>
+    </div>
+    <div class="weui-cells__title">申请内容</div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <textarea class="weui-textarea appli_ipt" name='apply_content' id='apply_content' placeholder="请输入文本" rows="5"></textarea>
+          <!-- <div class="weui-textarea-counter"><span>0</span>/200</div> -->
+        </div>
+      </div>
+    </div>
+     <div class="js_dialog" id="confirm_dialog" style="display: none;">
+      <div class="weui-mask"></div>
+      <div class="weui-dialog">
+        <div class="weui-dialog__bd"></div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确 定</a>
+        </div>
+      </div>
+    </div>
+    <div class="weui-btn-area">
+      <a class="weui-btn weui-btn_plain-disabled appli_confirm" href="javascript:">确定</a>
+    </div>
+	</div>
+	<script src = "__SaleManager__/js/index.js"></script>
+	<script src = "__SaleManager__/js/Common.js"></script>
+	<script>
+/* 	$(document).on("click",".appli_confirm",function(){
+		$.ajax({
+            url: "",
+            type: 'POST',
+            data:{'apply_content':$('#apply_content').val(),'type':$('#type').val()},
+            async: false,
+            cache: false,
+           /*  contentType: false, */
+           /*  processData: false,  */
+          /* 	dataType:"json",
+            success: function (returndata) {
+            	console.log(returndata);
+            	　$('.weui-dialog__bd').html(returndata.msg);
+          		 $('#confirm_dialog').css('display','block');;
+            },
+            error: function (returndata) {
+                alert(returndata);
+            }
+        });
+	}) */ 
+	
+	var sessioncode;
+	var nosesstion_url;
+		$(document).on("click",".appli_confirm",function(){
+			$.ajax({
+                url: "",
+                type: 'POST',
+                data:{'apply_content':$('#apply_content').val(),'type':$('#type').val()},
+                async: false,
+                cache: false,
+               	dataType:"json",
+                success: function (returndata) {
+                	//session失效
+               	 	if(returndata.code==2028){
+               	 		sessioncode=2028;
+               	 		nosesstion_url=returndata.data;
+	        	       	 	$('.weui-dialog__bd').html(returndata.msg);
+	        	     		$('#confirm_dialog').css('display','block');
+               	 	}else{
+	               	 	$('.weui-dialog__bd').html('申请成功');
+	             		$('#confirm_dialog').css('display','block');
+               	 	}
+                },
+                error: function (returndata) {
+                		$('.weui-dialog__bd').html(returndata.msg);
+             		$('#confirm_dialog').css('display','block');
+                }
+            });
+			$(document).on('click','.weui-dialog__btn_primary',function(){
+				if(sessioncode==2028){
+					window.location.href=nosesstion_url;
+				}else{
+					location.href=document.referrer;
+				}
+			})
+		})
+</script>
+	
+</body>
+</html>

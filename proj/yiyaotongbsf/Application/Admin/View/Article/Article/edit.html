@@ -1,0 +1,194 @@
+<include file="Public/base"/>
+
+<script type="text/javascript">
+		//点击x删除图片
+		$('.del-img').live('click',function(){
+			var liObj = $(this).parents('li');
+			//找到父级li里面的地址
+			var path = liObj.attr('path');
+			var thumb = liObj.attr('thumb');
+			//alert($("#hiddenajax").val());
+			//alert(path);
+			//发异步到服务器删除
+			$.ajax({
+				type:"post",
+				url:$("#hiddenajax").val(),
+				data:{path:path,thumb:thumb},
+				success:function(data){
+					//移除图片
+					liObj.remove();
+				}
+				
+			});
+		})
+		
+		
+		/*$('.del-img1').live('click',function(){alert($(this).index());
+			var liObj = $(this).parents('span');
+			//找到父级li里面的地址
+			var path = liObj.attr('path');
+			//发异步到服务器删除
+			$.ajax({
+				type:"post",
+				url:"{|U:'delImg'}",
+				data:{path:path},
+				success:function(data){
+					//移除图片
+					liObj.remove();
+				}
+			});
+		})*/
+	</script>
+	
+<!-- 文章新增和编辑页面 -->
+
+<div class="pd-20">
+    <form action="" method="POST"   class="form form-horizontal"
+          id="editGroupForm">
+        <div class="row cl">
+            <label for="auth-title" class="form-label col-3">文章所属栏目</label>
+							
+            <div class="formControls col-5">
+				<select id="auth-title" type="text" name="category_id" class="input-text" value="{$auth_group.title}" 
+										required
+					                   minlength="0"
+				                       maxlength="20">
+				    
+				    <volist name="data" id="vo"  >
+				    	
+					   <option value="{$vo.column_id}" <eq name="vo.column_id" value="$cid">selected</eq> >
+					    <?php echo str_pad("",$vo['deep']*3, "-",STR_PAD_RIGHT); ?>
+					    		{$vo.column_title}
+					   </option>
+					</volist>
+				    
+				
+				</select>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+            <label for="auth-title" class="form-label col-3">文章标题</label>
+
+            <div class="formControls col-5">
+                <input id="auth-title" type="text" name="title" class="input-text" value="{$dataOne['title']}" required minlength="0"
+                       maxlength="20"/>
+            </div>
+            <div class="col-4"></div>
+        </div>
+         <div class="row cl">
+            <label for="auth-title" class="form-label col-3">作者</label>
+
+            <div class="formControls col-5">
+                <input id="auth-title" type="text" name="author" class="input-text" value="{$dataOne['author']}" required minlength="0"
+                       maxlength="20"/>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        
+        <div class="row cl">
+            <label class="form-label col-3">文章摘要</label>
+
+            <div class="formControls col-5">
+                <textarea class="textarea" name="summary" maxlength="200">{$dataOne['summary']}</textarea>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+        	
+            <label class="form-label col-3">缩略图</label>
+			
+            <div class="formControls col-5">
+            	
+                <!--<input type="file" name='thumb'  />-->
+                  <!--上传开始 start-->
+               <div lab="uploadFile">
+               	<input type="hidden" id="hiddenajax" value="<?php $str = $Think.ADMIN_PATH_NAME.$actions['ARTICLEDELIMG']['url'];echo U($str,array('key'=>$actions['ARTICLEDELIMG']['key']))?>"  />
+	            
+               	<input type="hidden" id="hidden" value="<?php $str = $Think.ADMIN_PATH_NAME.$actions['ARTICLEAJAX']['url'];echo U($str,array('key'=>$actions['ARTICLEAJAX']['key']))?>"  />
+	            <input id="file" type="file" multiple="true" name='thumb'>
+	            <span>类型: *.jpg,*.png 大小: 2000KB 数量: 10</span>
+	            <script type="text/javascript">
+	                $(function() {
+	                	//alert($("#hidden").val());
+	                    $('#file').uploadify({
+	                        'formData'     :111, /*{//POST数据
+	                             "<?php echo session_name();?>" : "<?php echo session_id();?>"
+	                            
+	                        }*/
+	                        'fileTypeDesc' : '上传文件',//上传描述
+	                        'fileTypeExts' : '*.jpg;*.png',
+	                        'swf'      : '__STATIC__/uploadify/uploadify.swf',
+	                        'uploader' :$("#hidden").val(),//"{:U('uploadify')}"
+	                        'buttonText':'选择文件',
+	                        'fileSizeLimit' : '20000KB',
+	                        'uploadLimit' : 1,//上传文件数
+	                        'width':65,
+	                        'height':25,
+	                        'successTimeout':10,//等待服务器响应时间
+	                        'removeTimeout' : 0.2,//成功显示时间
+	                        'onUploadSuccess' : function(file, data, response) {
+	                        	//编辑上传新图片时，原来的图片删除
+	                        	$("#before").remove();
+	                            data=$.parseJSON(data);
+	                          
+	                            var imageUrl = data.name?data.url:'__STATIC__/uploadify/uploadify-cancel.png';
+	                            //alert(imageUrl);==data.url--http://localhost/yuxiang/uploadify_demo/Upload/Content/15/06/89101435416575.jpg
+	                            var li="<li thumb='"+data.thumb+"' path='"+data.savepath+"' url='"+data.url+"'><img src='"+imageUrl+"' style='width:100px;heigth:100px;'/><a href='javascript:;' style='color:red' class='del-img'>X</a>";
+	                            //把地址放到隐藏域，这样可以提交到服务器了
+	                            /*$.each(data.tu,function(k,v){
+	                            	li+="<span><img src='"+v+"' style='width:100px;heigth:100px;'/><a href='javascript:;' style='color:red' class='del-img1'>X</a></span>"
+	                            })*/
+	                            
+	                            li += '<input type="hidden" name="thumb" value="'+data.thumb+'"/>';
+	                            li += '<input type="hidden" name="picture" value="'+data.url+'"/>';
+	                            li += '</li>';
+	                            $("#uploadList ul").prepend(li);
+	                        }
+	                    });
+	                });
+	            </script>
+	            <div id="uploadList">
+	                <ul>
+	 				<li id="before" thumb="{$dataOne['thumb']}" path="live" url="{$dataOne['picture']}"><img src="{$dataOne['thumb']}" /><a href='javascript:;' style='color:red' class='del-img'>X</a>
+	                </ul>
+	            </div>
+	            
+	        </div>
+               <!--上传结束 end-->
+               
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">文章内容</label>
+
+            <div class="formControls col-5">
+<!--                <textarea class="textarea" name="content" maxlength="200">{$dataOne['content']}</textarea>
+-->            	<!-- 加载编辑器的容器 -->
+       			<script id="container" name="content" type="text/plain">
+			       	 {$dataOne['content']}
+			    </script>
+			    <!-- 实例化编辑器 -->
+			    <script type="text/javascript">
+			        var ue = UE.getEditor('container');
+			    </script>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <input type="hidden" name='id' value="{$dataOne['id']}" />
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="确定">
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+
+            </div>
+        </div>
+    </form>
+</div>
+<script type="application/javascript" src="__JS__/Employee/auth.js"></script>
+<!--<script>
+	$(".btn-primary").click(function(){
+		alert( $("#editGroupForm").serialize());
+	})
+</script>-->

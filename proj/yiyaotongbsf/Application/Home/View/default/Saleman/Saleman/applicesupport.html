@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <title>申请支持</title>
+        <script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+        <link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="__SALEMAN__/stylesheets/index.css">
+    </head>
+    <body>
+        <div class="appliceSupport">
+            <header class = "all_header">
+                <a class = "h_back" href="javascript:history.back(-1)"><img src="__SALEMAN__/images/back_icon.png" alt=""></a>
+                <span class = "h_title">申请支持</span>
+                <a class = "h_add" href="javascript:void(0)"></a>
+            </header>
+            <div class="weui-cells__title">选择申请的类别</div>
+            <div class="weui-cell weui-cell_select" style = "padding: 0 15px">
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="type">
+                        <volist name="applyCateList" id="applyCateVo">
+                            <option value="{$key}">{$applyCateVo}</option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cells__title">申请内容</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea appli_ipt" placeholder="请输入文本" rows="5" name="apply_content"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_plain-disabled appli_confirm" href="javascript:" pos_title="确定添加次申请？">确定</a>
+            </div>
+        </div>
+
+
+
+    <include file="./Application/Home/View/default/Saleman/Public/popup.html"/>
+
+    <script src = "__SALEMAN__/js/index.js"></script>
+    <script>
+        $('.ok-btn').on('click', function () {
+            var type = $('select[name=type]').val();
+            var apply_content = $("textarea[name=apply_content]").val();
+            $.ajax({
+                url: "/Home/Saleman/Saleman/appliceSupport",
+                type: 'post',
+                data: {type: type, apply_content: apply_content},
+                cache: false,
+                dataType: "json",
+                success: function (result) {
+                    $("#iosDialog1").hide(200);
+                    $('#iosDialog2').find('.sure-info').html(result['msg']);
+                    $('#iosDialog2').show(200);
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

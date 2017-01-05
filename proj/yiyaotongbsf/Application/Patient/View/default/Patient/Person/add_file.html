@@ -1,0 +1,113 @@
+<extend name="Common/common"/>
+<block name="main">
+     <div class="aui-content aui-margin-b-15">
+    <form id="myForm">
+    <ul class="aui-list">
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner">
+                    姓名<span class="me-diagde-span">
+                     <input type="text" class="input-text" name="name" required id="name">
+                </span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner">
+                    身份证<span class="me-diagde-span">
+                    <input type="text" class="input-text" name="idcard" required id="idcard"></span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner">
+                    性别
+              <span  class="me-diagde-span">
+                             <input type="radio" name="sex" value="0" checked="checked" /> 女 &nbsp;
+                <input type="radio" name="sex" value="1"  />  男
+                        </span>
+                    </a>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner">
+                    年龄<span class="me-diagde-span">  <input type="text" class="input-text" name="age" required id="age"></span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner">
+                    地址<span class="me-diagde-span">
+                    <input type="text" class="input-text" name="address" required id="address"></span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner">
+                    手机号<span class="me-diagde-span">
+                    <input type="text" class="input-text" name="mobile" required id="mobile" _target="{:U($Think.ADMIN_PATH_NAME.'Patient/NRPatient/checkMobile')}"></span>
+                </div>
+            </li>
+        </ul>
+        </form>
+    </div>
+</block>
+<block name="js">
+    <!--引入js,css-->
+    <script src="__STATIC__/form/jquery.validate.min.js"></script>
+    <script src="__STATIC__/form/localization/messages_zh.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/common/js/user.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+            var issend = false;
+            //保存事件
+            $('#add').click(function(){
+                if(issend) return false;
+                issend = true;
+                //验证手机
+                var mobile = $.trim($('#mobile').val());
+                if(check_mobile(mobile)==false){
+                    layer_msg('请输入正确的手机号');
+                    issend = false;
+                    return false;
+                }
+                //验证年龄
+                var age = $.trim($('#age').val());
+                if(/^\d{1,3}$/.test(age)==false){
+                    layer_msg('年龄不合法');
+                    issend = false;
+                    return false;
+                }
+                //验证姓名
+                var name = $.trim($('#name').val());
+                if(!name){
+                    layer_msg('请填写姓名');
+                    issend = false;
+                    return false;
+                }
+                if(name.length>10){
+                    layer_msg('姓名超过最大字符');
+                    issend = false;
+                    return false;
+                }
+                //验证身份证
+                var idcard = $.trim($('#idcard').val());
+                if(/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/.test(idcard)==false){
+                    layer_msg('身份证号码不正确');
+                    issend = false;
+                    return false;
+                }
+                var mydata = $('#myForm').serialize();
+                $.post(location.href,mydata,function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('保存成功',2,function () {
+                            location.href='{:U("family_list")}';
+                        });
+                    }else if(data.code==101){
+                        layer_msg('该手机号已注册');
+                    }else{
+                        layer_msg('保存失败，请稍候再试！');
+                    }
+                },'json');
+            });
+        });
+
+    </script>
+</block>

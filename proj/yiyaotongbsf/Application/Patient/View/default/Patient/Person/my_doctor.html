@@ -1,0 +1,42 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content" id="mycontain">
+        <volist  name="list" id="vo">
+		<div class="aui-row me-mydoc-bo">
+			<div class="aui-col-xs-2"><img src="{$vo.image}" onerror="this.src='__IMG__/head1.png'" class="me-mydoc-img"></div>
+			<div class="aui-col-xs-10  me-mydoc-left">
+    			<div class="aui-row">
+    				<div class="aui-col-xs-6"><span class="me-mydoc-p">{$vo.name}</span><span class="me-star"><img src="__IMG__/starclick.png"></span><span class="me-fenshu"><span class="me-mydoc-p">{$vo.score}</span></span></div>
+    				<div class="aui-col-xs-6 rightword">
+						<span class="me-mydc-yuyue delte" data-id="{$vo.id}">删除</span>
+					</div>
+    			</div>
+    			<p class="me-mydoc-sep">{$vo.clinic_name}</p>
+    			<p class="me-mydoc-sep">擅长：{$vo.good}</p>
+			</div>
+		</div>
+        </volist>
+		</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+		$(function(){
+			//删除
+			var issend = false;
+			$('.delte').click(function(){
+				if(issend) return false;
+				issend = true;
+				var id=$(this).data('id');
+				var _this = this;
+				$.post(location.href,{id:id},function(data){
+					issend = false;
+					if(data.code==0){
+						$(_this).closest('.me-mydoc-bo').remove();
+					}else{
+						layer.msg('data.msg');
+					}
+				},'json');
+			});
+		});
+    </script>
+</block>

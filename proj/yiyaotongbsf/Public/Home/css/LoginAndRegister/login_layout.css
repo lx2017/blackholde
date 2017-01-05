@@ -1,0 +1,231 @@
+html,body,div,span,h1,h2,h3,h4,h5,h6,p,pre,a,code,em,img,small,strong,sub,sup,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label{
+	margin:0; 
+	padding:0; 
+	border:0; 
+}
+body{
+	margin:0; 
+	padding:0;
+	background-color:#e9e9e9;
+	font-family:"Helvetica Neue",Helvetica,Tahoma,sans-serif;
+}
+a{
+	text-decoration:none;
+}
+.cl{
+	clear:both;
+}
+.header{
+	display:block;
+	position:relative;
+	text-align:center;
+	height:.88rem;
+	line-height:.88rem;
+	background-color:white;
+	color:#333333;
+	font-size:.35rem;
+	margin:0 auto;
+}
+.goback{
+	width:.25rem;
+	height:.44rem;
+	position:absolute;
+	left:.3rem;
+	top:.22rem;
+	background-image:url(/public/Home/images/LoginAndRegister/arrow.png);
+	background-repeat:no-repeat;
+	background-size:.25rem .44rem;
+	cursor:pointer;
+}
+#input_container{
+	overflow:hidden;
+	margin:0 auto;
+	margin-top:.34rem;
+	max-width:7.5rem;
+}
+.inner_box{
+	overflow:hidden;
+	height:2.15rem;
+	background-color:white;
+}
+.content_one,.content_two{
+	height:1.07rem;
+	overflow:hidden;
+}
+.img_one{
+	display:block;
+	height:.42rem;
+	width:.27rem;
+	float:left;
+	margin:.33rem 0 0 .46rem;
+}
+.img_two{
+	display:block;
+	height:.42rem;
+	width:.43rem;
+	float:left;
+	margin:.33rem 0 0 .37rem;
+}
+.user_wrapper,.code_wrapper{
+	margin:0 0 0 1.04rem;
+	height:1.07rem;
+}
+#user_name,#code{
+	display:block;
+	height:1.07rem;
+	line-height:1.07rem;
+	width:100%;
+	border:none;
+	font-size:.3rem;
+	outline:none;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+	-webkit-appearance: none;
+}
+.long_line{
+	position: relative;
+}
+.long_line:after {
+    content:'';
+    display:block;
+    position:absolute;
+    width:6.47rem;
+    right:0;
+    bottom:0;
+    height:1px;
+    background-color:#c8c7cc;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+}
+#login_btn{
+	appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+	display:block;
+	border:none;
+	color:white;
+	font-size:.33rem;
+	width:6.9rem;
+	height:0.92rem;
+	background-color:#15b227;
+	margin:0 auto;
+	margin-top:0.38rem;
+	padding:0;
+	border-radius:0.08rem;
+	-webkit-border-radius:0.08rem;
+	-moz-border-radius:0.08rem;
+	cursor:pointer;
+}
+.quick_nav{
+	overflow:hidden;
+	width:6.86rem;
+	margin:0 auto;
+	margin-top:.41rem;
+}
+.forget{
+	float:left;
+	font-size:.3rem;
+	color:#333333;
+}
+.register{
+	float:right;
+	color:#15b227;
+	font-size:.3rem;	
+}
+.footer_box{	
+	width:5.1rem;
+	height:3.01rem;
+	overflow:hidden;
+	margin:0 auto;
+	margin-top:.26rem;
+	position:relative;
+}
+.quick_login{
+	overflow:hidden;
+	width:5.02rem;
+	margin:0 auto;
+	margin-top:.52rem;
+}
+#qq{
+	float:left;
+	display:block;
+	height:1.25rem;
+	width:1.25rem;
+	background-image:url(/public/Home/images/LoginAndRegister/QQ.png);
+	background-repeat:no-repeat;
+	background-size:100% auto;
+}
+#wechat{
+	float:left;
+	display:block;
+	height:1.25rem;
+	width:1.25rem;
+	background-image:url(/public/Home/images/LoginAndRegister/weixin.png);
+	background-repeat:no-repeat;
+	background-size:100% auto;
+	margin-left:.63rem;
+}
+#sina{
+	float:left;
+	display:block;
+	height:1.25rem;
+	width:1.25rem;
+	background-image:url(/public/Home/images/LoginAndRegister/weibo.png);
+	background-repeat:no-repeat;
+	background-size:100% auto;
+	margin-left:.64rem;
+}
+#error_part{
+	display:none;
+	width:5.1rem;
+	height:3.01rem;
+	overflow:hidden;
+	border-radius:.4rem;
+	background-color:white;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:10;
+}
+.error_notice{
+	padding-top:.25rem;
+	height:1.64rem;
+	text-align:center;
+	font-size:.3rem;
+	color:#333333;
+	line-height:.65rem;
+}
+.error_notice span{
+	display:block;
+	margin:0;
+	padding:0;
+}
+.error_line{
+	position: relative;
+}
+.error_line:after {
+    content:'';
+    display:block;
+    position:absolute;
+    width:5.1rem;
+    right:0;
+    bottom:0;
+    height:1px;
+    background-color:#929292;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+}
+.knew{
+	display:block;
+	color:#0259bb;
+	height:1.11rem;
+	line-height:1.11rem;
+	text-align:center;
+	font-size:.47rem;
+}
+@media screen and (min-width: 900px){
+    #footer{
+        margin-bottom:1rem;
+    }
+}

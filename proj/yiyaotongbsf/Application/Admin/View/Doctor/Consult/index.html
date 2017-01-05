@@ -1,0 +1,71 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <!--头部按钮-->
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+            <!--批量删除-->
+            <if condition="isset($actions['CONSULTDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" id="delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CONSULTDELETE']['url'];echo U($str,array('key'=>$actions['CONSULTDELETE']['key']))?>">删除</a>
+                 </span>
+            </if>
+            <!--新增-->
+            <if condition="isset($actions['CONSULTADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CONSULTADD']['url'];echo U($str,array('key'=>$actions['CONSULTADD']['key']))?>">新增</a>
+                 </span>
+            </if>
+        </notempty>
+    </div>
+    <!-- 数据列表 -->
+    <div class="mt-20">
+        <div class="data-table table-striped">
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                    <tr class="text-c">
+                        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                        <th class="">id</th>
+                        <th class="">医生</th>
+                        <th class="">患者</th>
+                        <!--<th class="">咨询内容</th>-->
+                        <th class="">咨询时间</th>
+                        <th class="">咨询状态</th>
+                        <th class="">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <notempty name="list">
+                    <volist name="list" id="vo">
+                        <tr class="text-c">
+                            <td><input class="ids" type="checkbox" name="id" value="{$vo.id}" data-other="{$vo.user_id}"/></td>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.doctor}</td>
+                            <td>{$vo.patient}</td>
+                            <!--<td>{$vo.content}</td>-->
+                            <td>{$vo.date}</td>
+                            <td>{$vo['status']==1?'未回复':($vo['status']==2?'已回复':'已评价')}</td>
+                            <td>
+                                <if condition="isset($actions['CONSULTEDIT'])">
+                                    <a class="btn btn-link" href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CONSULTEDIT']['url'];echo U($str,array('key'=>$actions['CONSULTEDIT']['key'],'id'=>$vo['id']))?>">编辑</a>
+                                </if>
+                                <if condition="isset($actions['CONSULTDELETE'])">
+                                    <a class="btn btn-link delete" href="javascript:;" _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['CONSULTDELETE']['url'];echo U($str,array('key'=>$actions['CONSULTDELETE']['key'],'id'=>$vo['id']))?>">删除</a>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                <else/>
+                    <td colspan="14" class="text-center"> Oh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$page}
+    </div>
+</div>
+<!--引入js,css-->
+<script type="text/javascript" src="__STATIC__/common/js/func.js"></script>
+<script type="text/javascript" src="__STATIC__/common/js/index.js"></script>
+<script type="text/javascript"></script>

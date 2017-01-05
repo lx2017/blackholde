@@ -1,0 +1,19 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con no_pad bg_f">
+        <ul class="main_left_right">
+            <li><a href="javascript:void(0)">患者<span>{$patient}</span></a></li>
+            <li><a href="javascript:void(0)">就诊时间<span>{$treatment.treat_time}</span></a></li>
+            <li><a href="javascript:void(0)">就诊诊所<span>{$userinfo.clinic_name}</span></a></li>
+            <li><a href="{:U('todetail',array('id'=>$treatment['id'],'type'=>1))}">病情症状<span><i>&#xe604;</i></span><span>{:mbSub($treatment['symptom'],0,10)}</span></a></li>
+            <li><a href="{:U('todetail',array('id'=>$treatment['id'],'type'=>3))}">医生诊断<span><i>&#xe604;</i></span><span>{:mbSub($treatment['treatment'],0,10)}</span></a></li>
+            <li><a href="{:U('todetail',array('id'=>$treatment['id'],'type'=>2))}">医嘱<span><i>&#xe604;</i></span><span>{:mbSub($treatment['advice'],0,10)}</span></a></li>
+            <li><a href="{:U('todetail',array('id'=>$treatment['id'],'type'=>4))}">用药及处方<span><i>&#xe604;</i></span><span>{:mbSub($treatment['recipe'],0,10)}</span></a></li>
+        </ul>
+    </div>
+    <div class="pad_l_r">
+        <div class="bBth blue"><a href="javascript:void(0)" onclick="callmyclient(2,'{$hx_name}','{$patient}');">沟通</a></div>
+    </div>
+</block>
+<block name="css"></block>
+<block name="js"></block>

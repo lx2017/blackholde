@@ -1,0 +1,27 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <form action="{$url}" method="post" class="form form-horizontal" id="editLableForm">
+        <div class="row cl hidden" >
+            <label class="form-label col-3" hidden>id</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="id" value="{$result.id}" required minlength="2" maxlength="20"
+                       id="id">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3">标签名称</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="lable_name" value="{$result.lable_name}" required minlength="2" maxlength="20"
+                       id="lable_name">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <button class="btn btn-primary radius" id="submit" type="submit">确 定
+                </button>
+                <button class="btn btn-warning radius" onclick="history.back(-1);return false;">返 回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__JS__/Good/lable.js"></script>

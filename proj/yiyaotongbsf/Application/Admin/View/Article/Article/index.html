@@ -1,0 +1,202 @@
+<include file="Public/base"/>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <notempty name="actions">
+
+            <if condition="isset($actions['EMPLOYEEADD'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius"
+                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEADD']['url'];echo U($str,array('key'=>$actions['EMPLOYEEADD']['key']))?>">新增</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['EMPLOYEERESUME'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius ajax-post " href="javascript:" id="enableAdminBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEERESUME']['url'];echo U($str,array('key'=>$actions['EMPLOYEERESUME']['key']))?>"
+                            >启用</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['EMPLOYEEFORBID'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius " href="javascript:" id="disableAdminBtn"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEFORBID']['url'];echo U($str,array('key'=>$actions['EMPLOYEEFORBID']['key']))?>"
+                            >禁用</a>
+                 </span>
+            </if>
+            <if condition="isset($actions['EMPLOYEEDELETE'])">
+                <span class="l mr-10">
+                    <a class="btn btn-primary radius" href="javascript:"
+                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['EMPLOYEEDELETE']['url'];echo U($str,array('key'=>$actions['EMPLOYEEDELETE']['key']))?>"
+                       id="deleteAdminBtn">删除</a>
+                 </span>
+            </if>
+
+        </notempty>
+        
+        
+        
+        <!--<if condition="isset($actions['ARTICLEVIEW'])">
+                    <a class="ajaxget fontblue btn btn-primary radius"
+                    href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['ARTICLEVIEW']['url'];echo U($str,array('key'=>$actions['ARTICLEVIEW']['key'],'key1'=>$key))?>">生成静态文件</a>
+        </if>-->
+        
+        <div class="formControls col-5">
+				<select id="auth-title" type="text" name="column_pid" class="input-text" value="" 
+										required
+					                   minlength="0"
+				                       maxlength="20">
+				    
+					<!--<option value="top"  >
+					    	<?php echo "这是顶级栏目"; ?>
+					</option>-->
+				    <volist name="dataColumn" id="vo"  >
+				    	
+					   <option name="option" value="{$vo.column_id}"  <eq name="vo.column_id" value="$cid">selected</eq>  >
+					    <?php echo str_pad("",$vo['deep']*3, "-",STR_PAD_RIGHT); ?>
+					    		{$vo.column_title}
+					   </option>
+					</volist>
+				  <script>
+				  	$(function(){
+				  		$("select#auth-title").change(function(){
+				  			//alert($(this).val());
+				  			//发送异步进行搜索
+				  			$.ajax({
+				    				type:"get",
+				    				url: "<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Article/Article/index',array('key'=>$key));?>",
+				    				dataType:"json",
+				    				data:{cid:$(this).val()},
+				    				success:function(pp){
+				    					//alert(pp);
+				    					window.location.href ="<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Article/Article/index',array('key'=>$key));?>" +"&id="+pp+"&select=select";
+				    					
+				    				}
+				    			});
+				  		})
+				  	})
+				  </script>  
+				
+				</select>
+            </div>
+        <!-- 高级搜索 -->
+        
+        
+        <div class="search-form fr cf">
+            <div class="sleft">
+            		<input type="text" name="title" class="search-input" value=""
+                       placeholder="请输入搜索内容">
+                	<a class="sch-btn" href="javascript:" id="search"
+                   	url="<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Article/Article/index',array('key'=>$key));?>"><i
+                        class="Hui-iconfont btn-search">&#xe665;</i></a>
+                    
+                    <script>
+                    	$(function(){
+                    		$("#search").click(function(){
+                    			//alert($("input[name=title]").val());
+                    			$.ajax({
+				    				type:"get",
+				    				url: "<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Article/Article/index',array('key'=>$key));?>",
+				    				dataType:"json",
+				    				data:{title:$("input[name=title]").val()},
+				    				success:function(pp){
+				    					window.location.href ="<?php $key = I('request.key');echo U($Think.ADMIN_PATH_NAME.'Article/Article/index',array('key'=>$key));?>" +"&data=comeHere";
+				    					
+				    				}
+				    			});
+                    		})
+                    	})
+                    </script>
+                    
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 数据列表 -->
+
+    <div class="mt-20">
+        <div class="data-table table-striped">
+
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c" style="height:25px;" >
+                    <th class="">文章标题</th>
+                    <th class="">缩略图</th>
+                    <th class="">作者</th>
+                    <th class="" style="width:300px;">摘要</th>
+                    <th class="">时间</th>
+                    <th class="">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                	
+                <notempty name="data">
+                	
+                    <volist name="data" id="vo">
+                    	
+                        <tr  class="text-c" >
+                            <td><a class="ajaxget fontblue" style="text-decoration: none;color:black;"
+                      href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['ARTICLEDETAIL']['url'];echo U($str,array('key'=>$actions['ARTICLEDETAIL']['key'],'id'=>$vo['id']))?>"> {$vo.title}</a>
+                           </td>
+                            <td> <img src="{$vo.thumb}"/> </td>
+                            <td>{$vo.author}</td>
+                            <td><div style="height:20px; overflow:hidden"> {$vo.summary}</div></td>
+                            <td>{$vo.add_time}</td>
+                            <td>
+
+							<if condition="isset($actions['ARTICLEEDIT'])">
+                                    <a class="ajaxget fontblue"
+                                       href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['ARTICLEEDIT']['url'];echo U($str,array('key'=>$actions['ARTICLEEDIT']['key'],'id'=>$vo['id']))?>">修改</a>
+                            </if>
+							<if condition="isset($actions['ARTICLEDEL'])">
+                                    <a class="ajaxget fontblue" href="javascript:;" refresh="true"
+                                       _href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['ARTICLEDEL']['url'];echo U($str,array('key'=>$actions['ARTICLEDEL']['key'],'id'=>$vo['id']))?>">删除</a>
+                            </if>
+                                
+                            </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="text-center"> aOh! 暂时还没有内容!</td>
+                </notempty>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+    <link href="__CSS__/employee/employee.css" rel="stylesheet" type="text/css"/>
+
+<!--	<script src="__JS__/Column/tree.js"></script>
+-->
+    <script src="__JS__/Employee/user.js"></script>
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+        //搜索功能
+        /*$("#search").click(function () {
+            var url = $(this).attr('url');
+            var query = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+            query = query.replace(/^&/g, '');
+            if (url.indexOf('?') > 0) {
+                url += '&' + query;
+            } else {
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });*/
+        //回车搜索
+        $(".search-input").keyup(function (e) {
+            if (e.keyCode === 13) {
+                $("#search").click();
+                return false;
+            }
+        });
+
+    </script>
+    
+   
+    
+</div>

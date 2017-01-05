@@ -1,0 +1,82 @@
+<!-- 成员授权编辑页面 -->
+<include file="Public/base"/>
+<div class="pd-20">
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <if condition="isset($actions['AUTHACCESS'])">
+                <li>
+                    <a href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHACCESS']['url'];echo U($str,array('key'=>$actions['AUTHACCESS']['key'],'group_name'=>I('group_name'),'group_id'=>I('group_id'))) ?>">访问授权</a>
+                </li>
+            </if>
+            <li class="current"><a href="javascript:">成员授权</a></li>
+            <noempty name="authGroups">
+                <li class="fr">
+                    <select name="group">
+                        <volist name="authGroups" id="vo">
+                            <option value="{:U('',array('key'=>I('key'),'group_id'=>$vo['id']))}"
+                            <if condition="$vo['id'] eq (int)I('group_id')">selected</if>
+                            >{$vo.title}
+                            </option>
+                        </volist>
+                    </select>
+                </li>
+            </noempty>
+        </ul>
+        <!-- 数据列表 -->
+        <div class="mt-20">
+            <div class="data-table table-striped">
+                <table class="table table-border table-bordered table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <th class="">UID</th>
+                        <th class="">昵称</th>
+                        <th class="">最后登录时间</th>
+                        <th class="">最后登录IP</th>
+                        <th class="">状态</th>
+                        <th class="">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="_list" id="vo">
+                        <tr class="text-c">
+                            <td>{$vo.uid}</td>
+                            <td>{$vo.nickname}</td>
+                            <td><span>{$vo.last_login_time|time_format}</span></td>
+                            <td><span>{$vo.last_login_ip|long2ip}</span></td>
+                            <td>{$vo.status_text}</td>
+                            <td>
+                                <if condition="isset($actions['AUTHREMOVEFROMGROUP'])">
+                                    <a href="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHREMOVEFROMGROUP']['url'];echo U($str,array('key'=>$actions['AUTHREMOVEFROMGROUP']['key'],'group_id'=>I('group_id'),'uid'=>$vo['uid'])) ?>"
+                                       class="fontblue ajax-get">解除授权</a>
+                                </if>
+
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="mt-10">
+            <div class="page_nav fl">
+                {$_page}
+            </div>
+            <if condition="isset($actions['AUTHADDTOGROUP'])">
+                <div id="add-to-group" class="tools fr">
+                    <form class="add-user"
+                          action="<?php $str = $Think.ADMIN_PATH_NAME.$actions['AUTHADDTOGROUP']['url'];echo U($str,array('key'=>$actions['AUTHADDTOGROUP']['key'],'group_id'=>I('group_id'))) ?>"
+                          method="post" id="addToGroupForm">
+                        <input class="input-text" type="text" name="uid" placeholder="请输入uid,多个用英文逗号分隔"
+                               style="width:250px;" required>
+                        <button type="submit" class="btn btn-primary radius" target-form="add-user">新 增</button>
+                    </form>
+                </div>
+            </if>
+        </div>
+
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="__CSS__/tab.css" media="all">
+<script type="application/javascript" src="__STATIC__/qtip/jquery.qtip.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__STATIC__/qtip/jquery.qtip.min.css" media="all">
+<script type="application/javascript" src="__JS__/Employee/auth.js"></script>

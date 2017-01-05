@@ -1,0 +1,36 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content index-brief">
+    <span>预约时间</span>
+        <input type='text' placeholder="请输入日期" class="laydate-icon" name="time" id="time"
+               onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-#{%d+1}'})" />
+	</div>
+	 <div class="index-brief-btn">
+        <button class="aui-btn aui-btn-primary" id="brief">提交</button>
+    </div>
+</block>
+
+<block name="js">
+    <script type="text/javascript" src="__JS__/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript">
+        var issend = false;
+        //提交预约
+        $('#brief').click(function(){
+            if(issend) return false;
+            issend = true;
+            var time = $('#time').val();
+            $.post(location.href,{time:time},function (data){
+                issend = false;
+                if(data.code==0){
+                    layer_msg('预约成功',1,function(){
+                        location.href='{:U("/Patient/Patient/Person/person_info")}';
+                    });
+                }else{
+                    layer_msg(data.msg);
+                }
+            },'json');
+
+        });
+    </script>
+</block>
+

@@ -1,0 +1,201 @@
+﻿/*70px 2.1875rem border-bottom:0.03125rem solid #ebebeb;
+padding:0 0.9375rem; --30px
+border-radius:0.15625rem; 0.09375--3px  0.15625--5px
+height:2.1875rem; line-height: 2.1875rem; 
+color:#999;
+line-height:1.25rem; 多行
+*/
+
+/*clinic*/
+.clinic ul li{ background:#fff; padding:0.9375rem 0.9375rem 0;margin-bottom:0.625rem;}
+.clinic ul li .pic{ width:4.25rem; height:4.25rem; border-radius:0.15625rem;}
+.clinic ul li .pic img{ display:block; width:100%; height:100%;}
+.clinic ul li .info{ width:9rem; height:4.25rem; padding:0 0.64rem;} 
+.clinic ul li .info .c_333{ font-size:1rem; height:1.25rem; overflow:hidden;}
+.clinic ul li .info .c_999{ height:2rem; line-height: 2rem; }
+.clinic ul li .del{ height:4.25rem; line-height:4.25rem; width:2.6875rem; text-align:center; font-size:1rem;}
+.clinic ul li .p1{ height:2.1875rem; line-height: 2.1875rem; border-top:0.03125rem solid #ebebeb; margin-top:0.64rem; overflow:hidden; color:#999;}
+
+/*clinicHome*/
+.clinicHome .floor1{ padding-top:0.64rem; margin-bottom:0.64rem;}
+.clinicHome .pic{ width:4.25rem; height:4.25rem; border-radius:0.15625rem;}
+.clinicHome .pic img{ display:block; width:100%; height:100%;}
+.clinicHome .info{  height:4.25rem; padding-left:4.89rem;} 
+.clinicHome .info .c_333{ font-size:1rem; height:1.5rem;line-height:1.5rem; overflow:hidden;}
+.clinicHome .info .starBox{ height:1.5rem;line-height:1.5rem; }
+.clinicHome .info .p1{height:1.5rem;line-height:1.5rem; overflow:hidden;}
+.clinicHome .dlBox{ padding-top:1.25rem; overflow:hidden; border-top:0.03125rem solid #ebebeb; margin-top:0.64rem;}
+.clinicHome .dlBox a{ float:left; width:33.333%; text-align:center; color:#333; font-size:0.9rem; }
+/*.clinicHome .dlBox dl:nth-of-type(1){ width:10%;}
+.clinicHome .dlBox dl:nth-last-of-type(1){ width:10%;}*/
+.clinicHome .dlBox dl dt,.assessNum .titBox .dlBox dl dd{ height:1.255rem; line-height:1.5rem;}
+.clinicHome .floor2 li i{display:inline;}
+
+/*clinicNopower*/
+.clinicNopower ul li{ padding:0.64rem ; padding-left:4.0625rem; position:relative; margin-bottom:0.64rem; background:#fff; border-radius:0.15625rem;}
+.clinicNopower ul li .info .left{font-size:1rem; }
+.clinicNopower ul li .info .right em{ margin-left:0.32rem; font-size:1rem;}
+.clinicNopower ul li .word{ height:1.25rem; line-height:1.25rem; overflow:hidden; }
+.clinicNopower ul li .pic{ position:absolute; left:0.64rem; top:0.8rem; width:2.96875rem; height:2.96875rem;}
+.clinicNopower ul li .pic img{ display:block; width:100%; height:100%;}
+
+/*patientMag*/
+.patientMag{ color:#999; }
+.patientMag p{ height:2.1875rem; line-height:2.1875rem; padding:0 0.9375rem;}
+.patientMag ul{ background:#fff; padding:0 0.9375rem; }
+.patientMag ul>li{ border-bottom:0.03125rem solid #ebebeb; line-height:2rem; padding-bottom:0.64rem; padding-top:0.64rem;}
+.patientMag ul>li div{ overflow:hidden; }
+.patientMag ul>li .span1{ width:2rem; float:left;}
+.patientMag ul>li .span2{ width:8rem; float:left;}
+.patientMag ul>li .span3{ width:8rem; float:right; text-align:right;}
+.patientMag ul li ol{ padding-left:2.1875rem; line-height:1.5rem;}
+.patientMag ul li ol li span{ color:#333; margin-left:0.64rem;}
+
+/*orderDet*/
+.orderDet .floor1{ margin-bottom:0.64rem;}
+.orderDet .floor1 .address{ font-size:1rem;}
+.tableBox li{ text-align:center; height:2.1875rem; line-height: 2.1875rem; overflow:hidden; color: #333;}
+.tableBox li.c_red{ color:#FF0000;}
+.tableBox li.c_999{ color:#999;}
+.tableBox .tableTit li{ color:#999;}
+.li_5{ width:5%;}
+.li_10{ width:10%;}
+.li_15{ width:15%;}
+.li_20{ width:20%;}
+.li_25{ width:25%;}
+.orderDet .totalMoney{ border-top:0.03125rem solid #ebebeb; border-bottom:0.03125rem solid #ebebeb;}
+.orderDet .totalMoney em{ float:right; height:100%；}
+.orderDet .submitOrder{ position:fixed; bottom:0; left:0; width:100%; height:2.1875rem; border-top:0.03125rem solid #ccc; line-height:2.1875rem; text-align:center; font-size:1rem;}
+.orderDet .submitOrder span{float:left; width:60%; height:100%;}
+.orderDet .submitOrder input{float:left; width:40%; height:100%; background:#28a0d4; color:#fff;}
+
+/*clinicOrder*/
+.clinicOrder .orderNav{ margin-bottom:0.64rem; padding-bottom:0;}
+.clinicOrder .orderNav li{ float:left; width:20%;  height:2.03125rem; line-height:2.03125rem;}
+.clinicOrder .orderNav li:nth-of-type(3){ text-align:right;}
+.clinicOrder .orderNav li:nth-of-type(2){ width:60%; text-align:center;}
+clinicOrder .orderNav li a{ display:inline-block; height:100%; border-bottom:0.125rem solid #fff; box-sizing:border-box;}
+.clinicOrder .orderNav li.current a{ border-bottom:0.125rem solid #28a0d4;} 
+.clinicOrder .orderLists li{ padding:0.64rem ; padding-left:4.5625rem; position:relative; margin-bottom:0.64rem; background:#fff; }
+.clinicOrder .orderLists li .info .left{font-size:1rem; }
+.clinicOrder .orderLists li .c_red{ font-size:1rem; }
+.clinicOrder .orderLists li .pic{ position:absolute; left:0.64rem; top:0.8rem; width:3.3125rem; height:3.3125rem;}
+.clinicOrder .orderLists li .pic img{ display:block; width:100%; height:100%;}
+.clinicOrder .orderLists li .state{ position:absolute; right:0.64rem; bottom:0.64rem; background:#969696; height:1.5625rem; line-height:1.5625rem; width:3.3125rem; text-align:center; color:#fff; border-radius:0.15625rem;}
+.clinicOrder .orderLists li .state.blue{ background:#28a0d4;}
+
+/*drugOrder*/
+.drugOrder ul{ overflow:hidden;}
+.drugOrder ul li{ float:left; width:5.46875rem; margin:0 0.625rem 0.625rem 0; }
+.drugOrder ul li:nth-of-type(3n){ margin-right:0;}
+.drugOrder ul li .pic{ height:5.46875rem; margin-bottom:0.3rem;}
+.drugOrder ul li .pic img{ display:block; height:100%; width:100%;}
+.drugOrder ul li p{ height:1.09375rem; line-height:1.09375rem;}
+.drugOrder ul li .ov_h em{ float:right;}
+.drugOrder .submitOrder{ position:fixed; bottom:0; left:0; width:100%; height:2.1875rem; border-top:0.03125rem solid #ccc; line-height:2.1875rem; text-align:center; font-size:1rem; z-index:9;}
+.drugOrder .submitOrder span{float:left; width:60%; height:100%; padding-left: 2.6875rem; box-sizing:border-box;}
+.drugOrder .submitOrder input{float:left; width:40%; height:100%; background:#28a0d4; color:#fff;}
+.drugOrder .shopCar{ position:fixed; bottom:0; left:0; height:2.6875rem; background:#f8aa02; width:2.6875rem; z-index:10; line-height:2.6875rem; text-align:center;}
+.drugOrder .shopCar span{ display:block; width:100%; height:100%; }
+.drugOrder .shopCar span i{ color:#fff; font-size:1.2rem;}
+.drugOrder .shopCar em{ position:absolute; width:1.125rem; height:1.125rem; line-height:1.125rem; background:#e13838; color:#fff; border-radius:50%; color:#fff; right:-0.5625rem; top:-0.5625rem;}
+
+/*drugDet*/
+.P_banner{ padding:0.64rem 0;}
+.swiper-container{ height:15rem; overflow:hidden;}
+.swiper-container .swiper-slide{ width:100%;}
+.swiper-container .swiper-slide img{ display:block; max-width:100%; height:auto; margin:0 auto;}
+.drugDet{ font-size:1rem; }
+.drugDet .subTit{ text-align:center; margin-bottom:0.64rem;}
+.drugDet .subTit p{ background:#fff; padding:0 0.64rem; display:inline-block; }
+.drugDet .subTit span{ display:block; height:0; border-top:0.03125rem solid #ebebeb; margin-top:-1rem;}
+.drugDet .shuoming{ width:90%; margin:0 auto;}
+.drugDet .shuoming img{ display:block; width:100%; height:auto;}
+
+ /*patientSay*/
+.patientSay .orderNav{ margin-bottom:0.64rem; padding-bottom:0;}
+.patientSay .orderNav li{ float:left; width:16.666%;  height:2.03125rem; line-height:2.03125rem; text-align:center;}
+.patientSay .orderNav li a{ display:inline-block; height:100%; border-bottom:0.125rem solid #fff; box-sizing:border-box;}
+.patientSay .orderNav li.current a{ border-bottom:0.125rem solid #28a0d4;} 
+.patientSay ul.floor3{ margin-bottom:0.625rem;}
+.patientSay ul.floor3 li{ padding:0.64rem 0 0.64rem 2.25rem; position:relative; border-bottom:0.03125rem solid #ebebeb;}
+.patientSay ul.floor3 li:nth-last-of-type(1){ border-bottom:none;}
+.patientSay ul.floor3 li .info .left{font-size:1rem; }
+.patientSay ul.floor3 li p{ overflow:hidden; height: 2.1875rem;} 
+.patientSay ul.floor3 li p .name{ color:#333; width:40%; float:left;}
+.patientSay ul.floor3 li p em{ float:right; text-align:right; width:60%;}
+.patientSay ul.floor3 li .starBox{ margin-bottom:0.625rem;}
+.patientSay ul.floor3 li .starBox .left a{display:inline-block; padding:0 0.5rem; height:1.1rem; line-height:1.1rem;  color:#28a0d4; margin-right:0.9rem; border-radius:0.09375rem; border:0.09375rem solid #28a0d4; letter-spacing:0;}
+.patientSay ul.floor3 li .starBox .left a.orange{ border:0.09375rem solid #f79e00; color:#f79e00;}
+.patientSay ul.floor3 li .word{ height:2.5rem; line-height:1.25rem; overflow:hidden; }
+.patientSay ul.floor3 li .pic{ position:absolute; left:0; top:0.8rem; width:1.40625rem; height:1.40625rem;}
+.patientSay ul.floor3 li .pic img{ display:block; width:100%; height:100%;}
+
+/*assessNum*/
+.assessNum .titBox{ padding:1rem 0.9375rem 0.64rem; background:#28a0d4; }
+.assessNum .titBox p{ border-bottom:0.01rem solid #ebebeb; font-size:1rem; color:#fff;}
+.assessNum .titBox p em{ font-size:1.3rem;}
+.assessNum .titBox .dlBox{ padding-top:0.64rem; overflow:hidden;}
+.assessNum .titBox .dlBox dl{ float:left; width:26.6666%; text-align:center; color:#fff; font-size:0.9rem; }
+.assessNum .titBox .dlBox dl:nth-of-type(1){ width:10%;}
+.assessNum .titBox .dlBox dl:nth-last-of-type(1){ width:10%;}
+.assessNum .titBox .dlBox dl dt,.assessNum .titBox .dlBox dl dd{ height:1.255rem; line-height:1.5rem;}
+.assessNum .time{ border-bottom:0.03125rem solid #ebebeb; padding-top:0.64rem; margin-bottom:0.64rem;}
+.assessNum .typeBox{ margin-top:0.64rem;}
+.assessNum .typeBox ul{ overflow:hidden;}
+.assessNum .typeBox ul li{ height:1.40625rem; line-height:1.40625rem; float:left; overflow:hidden;}
+.assessNum .typeBox ul li:nth-of-type(1){ width:20%;}
+.assessNum .typeBox ul li:nth-of-type(2){ width:60%;}
+.assessNum .typeBox ul li:nth-of-type(3){ width:20%; color:#27a0d4; text-align:right;}
+
+/*doctorMag*/
+.clinicNopower.doctorMag ul li .info em{ font-size:1rem;}
+.clinicNopower.doctorMag ul li .starBox{height:2rem; line-height: 2rem;}
+.clinicNopower.doctorMag ul li .starBox .left{ font-size:0.7rem;}
+.clinicNopower.doctorMag ul li .starBox .right em{ margin-left:0.32rem; font-size:1rem;}
+
+/*addDoctor*/
+.addDoctor dl{ overflow:hidden; height:2.1875rem; line-height:2.1875rem; }
+.addDoctor dl dt{ float:left; width:30%; height:100%; overflow:hidden; color:#333;}
+.addDoctor dl dd{ float:left; width:70%; height:100%;}
+.addDoctor dl dd input{ height:100%; border-bottom:0.03125rem solid #ebebeb; box-sizing:border-box; display:block; width:100%;}
+
+/*doctorPage*/
+.homePageDc{ color:#999;}
+.homePageDc .floor1{ margin-bottom:0.625rem;}
+.homePageDc .floor1 .headLogo{ width:3.4375rem; height:3.4375rem; padding:0.9375rem 0; margin:auto; position:relative;}
+.homePageDc .floor1 .headLogo img{ display:block; width:100%; height:100%; border-radius:50%;} 
+.homePageDc .floor1 .headLogo span{width:1.875rem; height:0.9375rem; text-align:center; line-height:0.9375rem; background:#28a0d4; color:#fff;  position:absolute; bottom:0.6rem; left:50%; margin-left:-0.9375rem; border-radius:0.09375rem; font-size:0.5rem; letter-spacing:0px;}
+.homePageDc .floor1 .doctor,.homePageDc .floor1 .hospital,.homePageDc .floor1 .address,.homePageDc .floor1 .tel{ height:2rem; line-height:2rem; text-align:center; font-size:1rem;}
+.homePageDc .floor1 .address i{ display:inline-block;}
+.homePageDc .floor1 .dlBox{ overflow:hidden; margin:0.625rem 0; border-bottom:0.03125rem solid #ebebeb; padding-bottom:0.2rem;}
+.homePageDc .floor1 .dlBox dl{ float:left; width:33.3333%; text-align:center;}
+.homePageDc .floor1 .dlBox dl dt,.homePageDc .floor1 .dlBox dl dd{ height:1.25rem; line-height:1.25rem;} 
+.homePageDc .floor1 .zizhi{ height:2.1875rem; line-height:2.1875rem; border-top:0.03125rem solid #ebebeb; border-bottom:0.03125rem solid #ebebeb;}
+.homePageDc .floor1 .introduce p{ height:2.1875rem; line-height: 2.1875rem;}
+.homePageDc .floor1 .introduce div{ text-indent:2em; line-height:1rem;}
+.homePageDc .floor2 h4{ height:1.25rem; line-height:1.25rem; color:#999; border-left:0.15625rem solid #27a0d4; padding-left:0.46875rem; margin:0.46875rem 0;}
+.homePageDc .floor2 ul li{ padding:0.9375rem 0 0.625rem; position:relative; border-bottom:0.03125rem solid #ebebeb;}
+.homePageDc .floor2 ul li p,.homePageDc .floor2 ul li .word{ padding-left: 2.25rem;}
+.homePageDc .floor2 ul li p{height:2.1875rem; overflow:hidden;}
+.homePageDc .floor2 ul li .word{ height:3.75rem;line-height:1.25rem; overflow:hidden;}
+.homePageDc .floor2 ul li p .name{ float:left; width:40%; color:#333;}
+.homePageDc .floor2 ul li p em{ float:right; width:60%; text-align:right;}
+.homePageDc .floor2 ul li .pic{ position:absolute; left:0; top:0.9375rem; width:1.40625rem; height:1.40625rem;}
+.homePageDc .floor2 ul li .pic img{ display:block; width:100%; height:100%;}
+.doctorPage .photo em{ display:inline-block; width:2.8125rem; height:2.8125rem; margin-right:0.625rem;}
+.doctorPage .photo em img{ display:block; width:100%; height:100%; border-radius:0.15625rem;}
+
+/*cureDet*/
+.cureDet .bg_f{ padding-bottom:0;}
+ul.main_left_right li span i{display:inline;}
+
+/*cureNum*/
+.assessNum.cureNum .titBox{ padding-bottom:0;}
+.assessNum.cureNum .titBox p{ border-bottom:0;}
+.cureNum .num{ height:5.5rem; line-height:5.5rem; text-align:center;}
+.cureNum .num .c_blue{ font-size:2rem;}
+
+/*cureRecord*/
+.cureRecord ul>li{position: relative;}
+.cureRecord ul>li .doctor{ position:absolute; right:0; bottom:0.64rem; line-height:1.5rem;}

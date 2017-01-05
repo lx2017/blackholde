@@ -1,0 +1,148 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="aui-content">
+    	  <div class="index-search-content ">
+        <div class="aui-row me-mydoc-bo index-border-none">
+            <div class="aui-col-xs-2"><img src="{$doctor.image}" onerror="this.src='__IMG__/head1.png'" class="me-mydoc-img"></div>
+            <div class="aui-col-xs-10  me-mydoc-left">
+                <div class="aui-row">
+                    <div class="aui-col-xs-8"><span class="me-mydoc-p">{$doctor.name}</span><span class="me-star"><img src="__IMG__/starclick.png"></span>
+                        <span class="me-fenshu">
+                            <span class="me-mydoc-p">{$doctor.score}</span>
+                        </span></div>
+                    <div class="aui-col-xs-4"><span class="index-neardc">{$distance}km</span></div>
+                </div>
+                <p class="me-mydoc-sep">{$clinic.clinic_name}</p>
+                <p class="me-mydoc-sep">擅长：{$doctor_good}</p>
+            </div>
+        </div>
+       </div>
+    <div>
+       <div class="index-main-ptitle index-search-top index-search-content">
+        <div class="index-absolute-relative"><img src="__IMG__/green.png" class="index-absolute-img"><span>企业资质</span></div>
+      <p class="zizhi">{$doctor.permit|default='具有医疗机构执业许可证'}</p>
+       </div>
+       <div class="index-main-ptitle index-search-top index-search-content index-border-none">
+       <div class="index-absolute-relative"><img src="__IMG__/green.png" class="index-absolute-img"><span>简介</span></div>
+           <p>{$doctor.intro}</p>
+       </div>
+       <div >
+       	 <div class="index-absolute-relative"><img src="__IMG__/green.png" class="index-absolute-img"><span>患者评价</span></div>
+           <volist name="list" id="vo">
+           <div class="me-family">
+       <div class="aui-row ">
+            <div class="aui-col-xs-2"><img src="__IMG__/head.png"></div>
+            <div class="aui-col-xs-10 index-fp-main">
+            	<p>{$vo.name}</p>
+            	<p><span class="index-main-span"></span><span class="index-main-span me-main-left">{$vo.date}</span></p>
+            	</div>
+        </div>
+        <div>{$vo.intro}</div>
+		</div>
+</volist>
+    </div>
+    </div>
+        </div>
+    <footer class="index-domain-foot aui-bar-tab">
+    	<div class="aui-row height">
+<div class="aui-col-xs-4 height rightborder">
+    <div class="index-mian-foot">
+        <input type="hidden" name="doctor_id" id="doctor_id" value="{$doctor.id}"/>
+        <input type="hidden" name="attention_id" id="attention_id" value="{$attention.id}"/>
+        <input type="hidden" name="distance" id="distance" value="{$distance}"/>
+        <empty name="attention">
+            <img id="click"  src="__IMG__/guanzhu.png"><span class="imgleft">关注</span>
+        <else />
+            <img id="click"  src="__IMG__/sca.png"><span class="imgleft">取消关注</span>
+        </empty>
+    </div>
+</div>
+ <div class="aui-col-xs-4 height rightborder">
+     <div class="index-mian-foot" onclick="location.href='{:U('brief',array('id'=>$doctor['id']))}'"><img src="__IMG__/m1.png">
+         <span class="imgleft" >预约</span>
+     </div>
+ </div>
+<div class="aui-col-xs-4 height">
+    <div class="index-mian-foot" onclick="callmyclient(2,'{$hx_name}','{$doctor.name}')"><img src="__IMG__/m2.png" style="width:25%">
+        <input type="hidden" id="doctor" value="{$doctor['id']}">
+        <span class="imgleft" id="consult">咨询</span>
+    </div>
+</div>
+
+    	</div>
+        <div class="shadeBox" style="display:none;">
+            <div class="shade"></div>
+            <div class="shadeCon">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <volist name="doctor['imgs']" id="img">
+                            <div class="swiper-slide"><img src="{$img}"></div>
+                        </volist>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+</block>
+<block name="css">
+    <link type="text/css" rel="stylesheet" href="__CSS__/swiper.min.css" />
+    <style type="text/css">
+        .swiper-container{ height:100%;}
+        .swiper-container .swiper-slide{ width:100% !important;}
+    </style>
+</block>
+<block name="js">
+    <script type="text/javascript" src="__JS__/swiper.min.js"></script>
+    <script type="text/javascript" src="__JS__/getmore.js"></script>
+    <script type="text/javascript">
+        //设置分页信息
+        myobj = {
+            total:'{$count}',
+            step:'{$size}',
+            url:"{:U('doctor_main_more',array('id'=>$doctor['id']))}",
+            obj:'mycontain'
+        };
+        //图片
+        $(function(){
+            //图片
+            $(".zizhi").click(function(){
+                if($('.swiper-wrapper').children().length){
+                    $(".shadeBox").show();
+                    var swiper = new Swiper(".swiper-container",{
+                        pagination:".swiper-pagination",
+                        nextButton: '.swiper-button-next',
+                        prevButton: '.swiper-button-prev',
+                        paginationClickable :true,
+                        loop: true
+                    })
+                }
+            });
+            $(".shade").click(function(e){
+                if($(e.target).parent(".shadeCon").length==0){
+                    $(".shadeBox").hide();
+                }
+            });
+
+            //关注-取消关注
+            var issend = false;
+            $('#click').click(function(){
+                if(issend) return false;
+                issend = true;
+                //获得数据
+                var doctor_id=$("#doctor_id").val();
+                var id=$("#attention_id").val();
+                var url="{:U('attention')}";
+                var distance=$("#distance").val();
+                $.post(url,{doctor_id:doctor_id,id:id},function (data){
+                    issend = false;
+                    if(data.code==0){
+                        location.href="/Patient/Patient/Patient/doctor_main/id/"+doctor_id+"/distance/"+distance;
+                    }else{
+                        layer_msg('失败，请稍候再试！');
+                    }
+                },'json');
+            });
+        })
+    </script>
+</block>

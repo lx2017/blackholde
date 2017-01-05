@@ -1,0 +1,68 @@
+<extend name="Common/common"/>
+<block name="main">
+	<div class="aui-content">
+ <div class="aui-row me-mydoc-bo index-activity-detail">
+            <div class="aui-col-xs-2"><img src="{$clinic_pic}" onerror="this.src='__IMG__/head.png'" class="me-mydoc-img"></div>
+            <div class="aui-col-xs-10  me-mydoc-left">
+                <div class="aui-row">
+                    <div class="aui-col-xs-8">
+                        <!--<span class="me-mydoc-p"></span>-->
+                        <span class="me-star"><img src="__IMG__/starclick.png"></span>
+                        <span class="me-fenshu"><span class="me-mydoc-p">{$clinic_score}</span></span>
+                    </div>
+                    <div class="aui-col-xs-4"><span class="index-neardc">{$distance}km</span></div>
+                </div>
+                <p class="me-mydoc-sep">{$clinic}</p>
+                <p class="me-mydoc-sep">地址：{$address}</p>
+            </div>
+        </div>
+		<div class="index-acti-detitle">
+    		<p>{$activity_name}</p>
+		</div>	
+		<ul class="index-acd-address">
+        	<li>活动地点：{$activity_place}</li>
+        	<li>活动要求：{$activity_require}</li>
+        	<li>活动时间：{$activity_time}</li>
+        	<li>限额：{$activity_limit}</li>
+		</ul>
+		 <div class="index-acd-addact">
+
+            <if condition="$status">
+                <button class="aui-btn aui-btn-primary">已参加</button>
+                <else />
+                <button class="aui-btn aui-btn-primary attend">我要参加 </button>
+            <input type="hidden"name="id" id="active" value="{$id}">
+            </if>
+
+    </div>
+	</div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            //保存事件
+            var issend = false;
+            $('.attend').click(function(){
+                if(issend) return false;
+                issend = true;
+                var id = $('#active').val();
+
+                $.post(location.href,{id:id},function (data){
+                    issend = false;
+                    if(data.code==0){
+                        layer_msg('保存信息成功',1,function(){
+                            location.href='{:U("more_activity")}';
+                        });
+                    }else if(data.code==-1){
+                        layer_confirm('请先登录',function(){
+                            $.post('{:U("setCookie")}',{url:location.href});
+                            location.href = "{:U('/Patient/LoginAndRegister/Login/login')}";
+                        });
+                    }else{
+                        layer_msg(data.msg);
+                    }
+                },'json');
+            });
+        });
+    </script>
+</block>

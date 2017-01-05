@@ -1,0 +1,46 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="P_con">
+        <div class="P_main modify">
+            <ul>
+                <li><input type="password" id="pass" placeholder="输入原密码"/></li>
+                <li><input type="password" id="newpass" placeholder="输入新密码"/></li>
+                <li><input type="password" id="repass" placeholder="再次输入新密码"/></li>
+            </ul>
+            <div class="bBth blue"><input type="button" id="submit" value="修改密码" /></div>
+        </div>
+    </div>
+</block>
+<block name="css">
+    <link type="text/css" rel="stylesheet" href="__CSS__/login.css" />
+</block>
+<block name="js">
+    <script type="text/javascript" src="__STATIC__/common/js/user.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //修改密码
+            $('#submit').click(function(){
+                //得到值
+                var pass = $.trim($('#pass').val());
+                var newpass = $.trim($('#newpass').val());
+                var repass = $.trim($('#repass').val());
+                //验证密码
+                var rst = check_password(newpass,repass);
+                if(rst.code==0){
+                    //提交信息
+                    $.post(location.href,{pass:pass,newpass:newpass},function(data){
+                        if(data.code==0){
+                            layer_msg('修改成功',2,function(){
+                                location.href = "{:U('/Doctor/Login/Login/logout')}";//注销登录
+                            });
+                        }else{
+                            layer_msg(data.msg);
+                        }
+                    },'json');
+                }else{
+                    layer_msg(rst.msg);
+                }
+            });
+        });
+    </script>
+</block>

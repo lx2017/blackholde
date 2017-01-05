@@ -1,0 +1,26 @@
+<div class="g-head">
+    <div class="wrap">
+        <h1 class="g-name">
+            <p class="big-name">猿码头</p>
+            <p class="litter-name">助力于中小企业的发展</p>
+        </h1>
+        <h2 class="logo">
+            <img src="__IMG__/UserCenter/logo.png" width="61" height="61" />
+        </h2>
+        <!-- 登陆状态 -->
+
+        <div class="logined-wrap">
+            <i class="pic"><img src="__IMG__/UserCenter/userlogo.jpg" width="44" height="44" /></i>
+            <span class="welcome"><if condition="$userinfo.nickname neq ''">{$userinfo.nickname}<else/>{$userinfo.mobile}</if></span>
+            <span class="square"></span>
+            <div class="use-info">
+                <ul>
+                    <li><a href="{:U('/Home/UserCenter/UserCenter/Personal',array('x'=>'nosecrect','f'=>'nojson','t'=>'pc'))}">个人中心</a></li>
+                    <li><a href="{:U('/Home/UserCenter/UserCenter/exitlogin')}">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 登陆状态 -->
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<extend name="Common/common"/>
+<block name="main">
+    <div class="aui-content aui-margin-b-15">
+    <ul class="aui-list">
+            <li class="aui-list-item digdetail-li notopbottom">
+                <div class="aui-list-item-inner">
+                    就诊时间<span class="me-diagde-span">{$treat_time}</span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner">
+                    就诊诊所<span class="me-diagde-span">{$clinic}</span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner">
+                    医生姓名<span class="me-diagde-span">{$doctor}</span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner  aui-list-item-arrow">
+                    病情症状
+                    <span class="me-diagde-span">
+                        <a style="color:#959595" href="{:U('diagnosis',array('id'=>$id,'field'=>'symptom'))}">{$symptom|mbSub=###,0,10}</a>
+                    </span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner">
+                    医生诊断
+                    <span class="me-diagde-span">
+                        <a style="color:#959595" href="{:U('diagnosis',array('id'=>$id,'field'=>'treatment'))}">{$treatment|mbSub=###,0,10}</a>
+                    </span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li">
+                <div class="aui-list-item-inner  aui-list-item-arrow">
+                    医嘱
+                    <span class="me-diagde-span">
+                        <a style="color:#959595" href="{:U('diagnosis',array('id'=>$id,'field'=>'advice'))}">{$advice|mbSub=###,0,10}</a>
+                    </span>
+                </div>
+            </li>
+            <li class="aui-list-item digdetail-li" style="border-bottom:none;">
+                <div class="aui-list-item-inner">
+                    用药及处方
+                    <span class="me-diagde-span">
+                        <a style="color:#959595" href="{:U('diagnosis',array('id'=>$id,'field'=>'recipe'))}">{$recipe|mbSub=###,0,10}</a>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="digdetail-a">
+    	<a href="{:U('/Patient/Patient/Patient/assess',array('id'=>$id,'did'=>$doctor_id,'pid'=>$patient_id,'type'=>2))}">去评价</a>
+    </div>
+</block>

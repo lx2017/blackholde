@@ -1,0 +1,10 @@
+        <volist name="list" id="vo">
+        <div class="me-myadvice-content">
+            <div class="meadv-fp-bo"><span class="me-advice-fp">{$vo.name}</span><span class="me-advice-sp">医生</span><span class="me-advice-tp">{:$vo['status']==1?'待回复':'已回复'}</span></div>
+            <div class="myappoinet-p">
+                <p><span>预约患者</span><span class="myappoinet-left">{$userinfo.name}</span></p>
+                <p><span>预约时间</span><span class="myappoinet-left">{$vo.time}</span></p>
+            </div>
+            <div class="meadvice-dateyu"> <span class="mead-date-sp"> {$vo.date}</span></div>
+        </div>
+        </volist>

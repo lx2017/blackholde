@@ -1,0 +1,275 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <title>签到拜访</title>
+        <script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+        <link href="http://cdn.bootcss.com/weui/1.0.2/style/weui.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/Public/Home/Saleman/stylesheets/index.css">
+    </head>
+    <body>
+        <div class="sign_w">
+            <header class = "all_header">
+                <a class = "h_back" href="javascript:history.back(-1);"><img src="/Public/Home/Saleman/images/back_icon.png" alt=""></a>
+                <span class = "h_title">签到拜访</span>
+                <a class = "h_add" href="javascript:void(0)"></a>
+            </header>
+            <div class="weui-tab">
+                <div class="weui-navbar">
+                    <div class="weui-navbar__item weui-bar__item_on">
+                        可签到
+                    </div>
+                    <div class="weui-navbar__item">
+                        附近的
+                    </div>
+                    <div class="weui-navbar__item">
+                        已签到
+                    </div>
+                </div>
+                <div class="weui-tab__panel">
+                    <div class="sign_list" style = "display: block;">
+                        <div class="weui-panel__bd cansign-box">
+
+                        </div>
+                    </div>
+                    <div class="sign_list nearbysign-box">
+                    </div>
+                    <div class="sign_list alreadysign-box">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" class="userkey" value="签到#<?php echo ($userId); ?>" />
+        <input type="hidden" class="lng" value="104.153645" />
+        <input type="hidden" class="lat" value="30.6313" />
+    <div class="js_dialog" id="iosDialog1" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__hd"><strong class="weui-dialog__title">提示</strong></div>
+        <div class="weui-dialog__bd confir_content"></div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default cancel-btn">取消</a>
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary ok-btn">确定</a>
+        </div>
+    </div>
+</div>
+
+<div class="js_dialog" id="iosDialog2" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__bd sure-info"></div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary sure-btn" pos_url="location.href">知道了</a>
+        </div>
+    </div>
+</div>
+<script>
+    $('.cancel-btn').on('click', function () {
+        $('#iosDialog1').hide(200);
+    });
+    $('.sure-btn').on('click', function () {
+        $('#iosDialog2').hide(200);
+
+        var pos_url = $(this).attr('pos_url');
+
+        if (pos_url != "") {
+            location.href = location.href;
+        }
+
+
+    });
+</script>
+    <script>
+        var locationTime = setTimeout(checkLocation, 100);
+        function checkLocation() {
+            var checkKey = $('.userkey').val();
+            if (checkKey) {
+                window.BSFWebView.showInfoFromJs(checkKey);
+            }
+        }
+
+        function setCoordinate(lng, lat) {
+            if (lng) {
+                alert("经度：" + lng);
+                $('.lng').val(lng);
+            }
+            if (lat) {
+                alert("纬度：" + lat);
+                $('.lat').val(lat);
+            }
+        }
+        
+        var clinicTime = false;
+        var itemIndex = 0;
+        var autoTime = setTimeout(getClinic, 500);
+        $(".weui-navbar__item").on("click", function () {
+            var $this = $(this);
+            itemIndex = $this.index();
+            if (itemIndex == '0' || itemIndex == '1') {
+                alert(clinicTime);
+                if (!clinicTime) {
+                    clinicTime = setInterval(getClinic, 4000);
+                }
+            } else {
+                getClinic();
+            }
+        });
+
+
+        function getClinic() {
+            var lat = $('.lat').val();
+            var lng = $('.lng').val();
+            if (!lat) {
+                $('#iosDialog2').find('.sure-info').html("定位失败");
+                $('#iosDialog2').show(200);
+                return;
+            }
+            if (!lng) {
+                $('#iosDialog2').find('.sure-info').html("定位失败");
+                $('#iosDialog2').show(200);
+                return;
+            }
+            if (itemIndex == '0') {
+                $.ajax({
+                    url: "/Home/Saleman/Saleman/sign/op/cansign",
+                    type: 'post',
+                    data: {lng: lng, lat: lat},
+                    cache: false,
+                    dataType: "json",
+                    async: false,
+                    success: function (result) {
+                        if (autoTime) {
+                            clearTimeout(autoTime);
+                        }
+                        if (clinicTime) {
+                            clearInterval(clinicTime);
+                        }
+
+                        if (result['code'] != 1) {
+                            $('#iosDialog2').find('.sure-info').html(result['msg']);
+                            $('#iosDialog2').find('.sure-btn').attr('pos_url', '');
+                            $('#iosDialog2').show(200);
+                            return;
+                        }
+                        var data = result['data'];
+                        var str = '';
+                        for (var i = 0; i < data.length; i++) {
+                            str += '<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">';
+                            str += '<div class="weui-media-box__hd">';
+                            str += '<img class="weui-media-box__thumb" src="' + data[i]['clinic_pic'] + '" alt="">';
+                            str += '</div>';
+                            str += '<div class="weui-media-box__bd">';
+                            str += '<div class="sign_w_name">';
+                            str += '<h4 class="weui-media-box__title">' + data[i]['clinic_name'] + '</h4>';
+                            str += '<div class="sign_btn" onclick="checkLocation();">签到</div>';
+                            str += '</div>';
+                            str += '<div class="sign_w_num">';
+                            str += '<span>预约量：<span>' + data[i]['clinic_treatment_volume'] + '</span></span>';
+                            str += '<span>评分：<span>' + data[i]['clinic_score'] + '</span></span>';
+                            str += '</div>';
+                            str += '<div class="weui-media-box__desc">' + data[i]['clinic_introduction'] + '</div>';
+                            str += '</div>';
+                            str += '</a>';
+                        }
+                        $(".cansign-box").html('').append(str);
+                    }
+                });
+            } else if (itemIndex == '1') {
+                $.ajax({
+                    url: "/Home/Saleman/Saleman/sign/op/nearby",
+                    type: 'post',
+                    data: {lng: lng, lat: lat},
+                    cache: false,
+                    dataType: "json",
+                    async: false,
+                    success: function (result) {
+                        if (autoTime) {
+                            clearTimeout(autoTime);
+                        }
+                        if (clinicTime) {
+                            clearInterval(clinicTime);
+                        }
+                        if (result['code'] != 1) {
+                            $('#iosDialog2').find('.sure-info').html(result['msg']);
+                            $('#iosDialog2').find('.sure-btn').attr('pos_url', '');
+                            $('#iosDialog2').show(200);
+                            return;
+                        }
+                        var data = result['data'];
+                        var str = '';
+                        for (var i = 0; i < data.length; i++) {
+                            str += '<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">';
+                            str += '<div class="weui-media-box__hd">';
+                            str += '<img class="weui-media-box__thumb" src="' + data[i]['clinic_pic'] + '" alt="">';
+                            str += '</div>';
+                            str += '<div class="weui-media-box__bd">';
+                            str += '<div class="sign_w_name">';
+                            str += '<h4 class="weui-media-box__title">' + data[i]['clinic_name'] + '</h4>';
+                            str += '<div class="sign_btn">无法签到</div>';
+                            str += '</div>';
+                            str += '<div class="sign_w_num">';
+                            str += '<span>预约量：<span>' + data[i]['clinic_treatment_volume'] + '</span></span>';
+                            str += '<span>评分：<span>' + data[i]['clinic_score'] + '</span></span>';
+                            str += '</div>';
+                            str += '<div class="weui-media-box__desc">' + data[i]['clinic_introduction'] + '</div>';
+                            str += '</div>';
+                            str += '</a>';
+                        }
+                        $(".nearbysign-box").html('').append(str);
+                    }
+                });
+            } else if (itemIndex == '2') {
+                if (autoTime) {
+                    clearTimeout(autoTime);
+                }
+                if (clinicTime) {
+                    clearInterval(clinicTime);
+                }
+                $.ajax({
+                    url: "/Home/Saleman/Saleman/sign/op/alreadysign",
+                    type: 'post',
+                    cache: false,
+                    dataType: "json",
+                    success: function (result) {
+
+                        if (result['code'] != 1) {
+                            $('#iosDialog2').find('.sure-info').html(result['msg']);
+                            $('#iosDialog2').find('.sure-btn').attr('pos_url', '');
+                            $('#iosDialog2').show(200);
+                            return;
+                        }
+                        var data = result['data'];
+                        var str = '';
+                        for (var i = 0; i < data.length; i++) {
+
+                            str += '<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">';
+                            str += '<div class="weui-media-box__hd">';
+                            str += '<img class="weui-media-box__thumb" src="' + data[i]['clinic_pic'] + '" alt="">';
+                            str += '</div>';
+                            str += '<div class="weui-media-box__bd">';
+                            str += '<div class="sign_w_name">';
+                            str += '<h4 class="weui-media-box__title">' + data[i]['clinic_name'] + '</h4>';
+                            str += '<div class="sign_btn alread_sign">已签到</div>';
+                            str += '</div>';
+                            str += '<div class="sign_w_num">';
+                            str += '<span>预约量：<span>' + data[i]['clinic_treatment_volume'] + '</span></span>';
+                            str += '<span>评分：<span>' + data[i]['clinic_score'] + '</span></span>';
+                            str += '</div>	';
+                            str += '<div class="weui-media-box__desc">' + data[i]['clinic_introduction'] + '</div>';
+                            str += '</div>';
+                            str += '</a>';
+                        }
+                        $(".alreadysign-box").html('').append(str);
+
+                    }
+                });
+            }
+        }
+    </script>
+
+    <script src = "/Public/Home/Saleman/js/index.js"></script>
+</body>
+</html>

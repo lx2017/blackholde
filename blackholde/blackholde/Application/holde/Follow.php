@@ -137,7 +137,6 @@ class Follow
 
              $fun_obj = ($Controller==$Query_url)?"index":array_slice(explode("/",$Query_url),-1)[0];
              if($fun_obj==$Controller) $fun_obj = "index";
-             $_SERVER['function'] = $fun_obj;
              self::invokeAction($Controller,$fun_obj);
           }
 
@@ -205,25 +204,7 @@ class Follow
          }
 	   static public  function autoload($class)
 	   {
-	   	   try
-         {
-             if(empty($class) || !is_string($class))
-             {
-                  throw new Exception("实例化类名错误");
-             }
-            
-             if(file_exists(LIBRARY_PATH."/".ucwords($class).".php") && $file = LIBRARY_PATH."/".ucwords($class).".php")
-             {
-                 include_once($file);
-             }
-             if(!file_exists(LIBRARY_PATH."/".ucwords($class).".php"))
-             {
-                  throw new Exception("核心文件加载失败");
-             }
-         }catch(Exception $e)
-         {
-                echo $e->getMessage();
-         }
+	   	  echo $class;
 	   }
        
 	   static public function getModule($var,$layer=NULL,$Default_Url=NULL)

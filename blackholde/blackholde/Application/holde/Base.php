@@ -10,24 +10,10 @@
            @access protected
        */
        protected $param = array();
-       /*
-       式图解析类
-       */
-  	   protected static $view = NULL;
+  	  
   	   /*
           获取客户端POST,GET数据
   	   */
-
-       /*
-        基础类的构造函数
-       */
-       public function __construct()
-       {
-          
-             if(self::$view==NULL){
-                 self::$view = new view();
-            }
-       }
   	   private  function param($name,$type="get")
   	   {
   	   	  
@@ -116,26 +102,6 @@
 
           }
        }
-       /*
-           框架模板分配变量
-       */
-        public function assign($name=NULL,$value=NULL)
-        {
-           
-            self::$view->assign($name,$value);
-        }
-        public function __set($name=NULL,$value=NULL)
-        {
-            $this->assign($name,$value);
-        }
-        /*
-            现实模板
-        */
-        public function display($templateFile="",$cache=FALSE,$dir="")
-       {
-          // $templateFile = ($templateFile=="")?get_class($this):$templateFile;
-          
-           self::$view->display($templateFile,$dir="",$action=get_class($this),$cache=FALSE);
-       }
+      
   }
 ?>

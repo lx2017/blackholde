@@ -1,5 +1,5 @@
 <?php
-class Index extends Base
+class Index
 {
       public  $a;
      
@@ -11,9 +11,7 @@ class Index extends Base
 	 
 	  public function delete()
 	  {
-            $this->assign('name','hello');
-            $this->assign('age',20);
-            $this->display("a");
+
 	  }
 	 
 	  

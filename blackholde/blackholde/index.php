@@ -14,11 +14,8 @@
  */
  	   die('require PHP > 5.3.0 !');
 }
-//项目的跟目录
-define("__ROOT__",$_SERVER['CONTEXT_DOCUMENT_ROOT']);
 //定义核心文件库,黑洞内核代码放在Application文件夹目录下
-define("__CORE__",__ROOT__."/Application");
-define("__LIBRARY__",__ROOT__."/Application/Library");
+define("__CORE__","./Application");
 //定义项目公共文件目录
 define("__PUBLIC__","./Public");
 

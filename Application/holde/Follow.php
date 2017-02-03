@@ -21,7 +21,8 @@ class Follow
 	   static  public function Start()
 	   {
 	   	   spl_autoload_register('Follow::autoload');
-
+         $Journal = new Journal();
+        
            self::$Client_Object = self::$Instance_Object->get_fun('Data');
            /*
                如果HTTP 域名扩展不存在的话就使用默认
@@ -132,14 +133,16 @@ class Follow
           }
          
           $Controller = self::getController($_SERVER['Project_Module'],$Query_url);
+          
           if(FALSE!==$Controller)
           {
-
+            
              $fun_obj = ($Controller==$Query_url)?"index":array_slice(explode("/",$Query_url),-1)[0];
              if($fun_obj==$Controller) $fun_obj = "index";
              $_SERVER['function'] = $fun_obj;
              self::invokeAction($Controller,$fun_obj);
           }
+          $Journal->Create_Module();
 
 	   }
 	   public static function invokeAction($module,$action)
@@ -149,6 +152,7 @@ class Follow
                 if(!preg_match('/^[A-Za-z](\w)*$/',$action)){
                     throw new Exception("控制器异常");
                 }
+
                 $method =   new ReflectionMethod($module, $action);
                 if($method->isPublic() && !$method->isStatic())
                 {
@@ -186,7 +190,7 @@ class Follow
             $Action_url = BLACK_PATH.$Project."/Action";
            
             $Action_Module=(!strpos($Query_url,"/")|| strcasecmp($Project,$Query_url)==0)?"Index":current(array_slice(explode("/",$Query_url),1));
-
+            $_SERVER['Module'] = $Action_Module;
             if(defined('Action_pop') && Action_pop!=NULL)
             {
               $Text = Action_pop;
@@ -199,6 +203,7 @@ class Follow
             unset($Text);
             if(is_file($Module_url) && is_readable($Module_url) && file_exists($Module_url) && require_once($Module_url))
             {
+
             	return $Action_Module;
             }
                 return FALSE;
@@ -295,6 +300,7 @@ class Follow
               }
             }
 	   }
+
 }
 
 ?>

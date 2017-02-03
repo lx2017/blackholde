@@ -134,7 +134,7 @@
         public function display($templateFile="",$cache=FALSE,$dir="")
        {
           // $templateFile = ($templateFile=="")?get_class($this):$templateFile;
-          
+         
            self::$view->display($templateFile,$dir="",$action=get_class($this),$cache=FALSE);
        }
   }

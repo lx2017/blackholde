@@ -47,6 +47,7 @@ final class Start
                {
                 try{
                  require_once(INIT_PATH.$filename);
+
                  $Config_object = new ReflectionClass($init_filename);
                  $instance = $Config_object->newInstanceArgs();
                  if(TRUE==$Config_object->hasMethod('Get_Map')  && TRUE==$Config_object->hasMethod('Start'))
@@ -58,9 +59,7 @@ final class Start
                       }
 
                  }else{
-
-                  throw new Exception("xxxxxx");
-                  //异常类暂定
+                   $instance->Start();
                  }
                 }catch(Exception $e)
                 {

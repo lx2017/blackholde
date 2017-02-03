@@ -1,4 +1,5 @@
 <?php
+
 class View
 {
 	  //模板分配的变量
@@ -13,6 +14,9 @@ class View
     public $type = FALSE;
     //监听事件
     public $hook_object = NULL;
+    //模板输出的类型
+    public $contenttype = 'text/html';
+
 	  public function __construct()
 	  {
         if($this->hook_object == NULL)
@@ -72,30 +76,46 @@ class View
                     die();
                }
               $message_file = pathInfo($template_file);
-              
+              $file_dir=__LIBRARY__."/Template";
               ob_start();
               ob_implicit_flush(0);
+
               /*
                 如果模板后缀PHP结尾的话表示支持PHP原始
               */
-              if(strtolower($message_file['extension'])=='php' || $this->type==TRUE)
+              if(strtolower($message_file['extension'])=='html' || $this->type==TRUE)
               {
+                    if(is_dir($file_dir))
+                    {
+                        $handler =  opendir($file_dir);
+                        while(($filename = readdir($handler))!==FALSE)
+                        {
+                            if($filename!="." && $filename!="..")
+                            {
+                                include_once($file_dir."/".$filename);
+                            }
+                        }
+                    }
+                    
                     extract($this->_tVal, EXTR_OVERWRITE);
-
+               
                     include_once($template_file);
+                    $content = ob_get_clean();
+                    
               }
-              /*
-                表示不支持PHP 原生
-              */
-              else if($this->type==FALSE || strtolower($message_file['extension'])!='php')
-              {
-                Hook::listen('hello');
-              }
+
               
             }catch(Exception $e)
             {
                echo $e->getMessage();
             }
+            /*
+                 开始输出模板内容
+            */
+           
+            header('Cache-control: max-age=300');  // 页面缓存控制
+            header('X-Powered-By:blackholde');
+            echo $content;
        }
        /*
           定位模板的位置

@@ -9,6 +9,10 @@ class Hook
             用于 存在相应的插件
 	*/
 	static private $tags = array();
+  static public function add()
+  {
+
+  }
 	/*
       导入相应的插件信息
       @param:$tags=>插件名称
@@ -23,8 +27,10 @@ class Hook
           //
           if(!isset(self::$tags[guid($tags)]) || empty(self::$tags[guid($tags)]))
           {
-
+               
+               
                include_once(__LIBRARY__."/".$tags.".php");
+               
                self::$tags[guid($tags)] = new $tags($resvie);
           }
        }catch(Exception $e)
@@ -41,11 +47,14 @@ class Hook
 	*/
     static function listen($tag,$param=NULL)
     {
-           if(!isset(self::$tags[guid($tag)]))
-           {
-              self::import('Template',$param);
-           }
-           //return self::$tags[guid($tag)];
+
+         $obj=self::import($tag,$param);
+         if(FALSE==$obj)
+         {
+             return NULL;
+         }
+         
+         return $obj;
     }
 }
 ?>

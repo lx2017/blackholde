@@ -17,13 +17,15 @@
       */
       'Default_Url'=>array(
              'Project'=>'Home',
-             'Module'=>'Index'
+             'Module'=>'index'
              ),
       //'Url_Filter'=>':get_path_info'
       'Url_Intercept'=>array(
            'Home/a'=>'Member/Index/obj',
-           'Member'=>'Home/Member',
-           'Home/Index/index'=>'Home/Member/index'
+           'Member'=>'Home/Member/obj',
+           'Home/Index/index'=>'Home/Member/index',
+           'Member/test'=>'Home/Member/test',
+           'Member/Index'=>'Member/Index/test'
       	),
        'URL_MODULE_MAP' => array(
               'hm'=>'Home'

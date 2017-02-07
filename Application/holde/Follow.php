@@ -142,7 +142,7 @@ class Follow
              $_SERVER['function'] = $fun_obj;
              self::invokeAction($Controller,$fun_obj);
           }
-          $Journal->Create_Module();
+          $Journal->Record();
 
 	   }
 	   public static function invokeAction($module,$action)
